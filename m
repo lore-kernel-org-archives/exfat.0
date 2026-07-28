@@ -1,105 +1,71 @@
-Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6BEA3A3E78
-	for <exfat@lists.linux.dev>; Tue, 28 Jul 2026 04:29:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.243.244.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7552836165E
+	for <exfat@lists.linux.dev>; Tue, 28 Jul 2026 04:54:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785213001; cv=none; b=Z2rGbFqp9zzeDVlGMGr6pratbYKLLvYQbfDTYKiyGCe5LEehPHCOxLCwzFChfHQo4aHcRmJEvUv81grcKOrrBAOBP3TyRIyqIfwSCiWeHLBdaDiXa+Qn88iKDrbQyCnjjhMaBU9RHbCh1sQqvM026MK/gqbDBbFgiI3+6HId/Yk=
+	t=1785214467; cv=none; b=tGZ1oK+sf1ZFz1YfUImbLKvwKdt30re5SHXKn8b4BbfFyovC86LThhumeFukU6/yQWVLn1TqZS0xValtcT8Bu6mNNKOue6BXId80tLhTRvNui1kI55brU0rb4Fbjp8CO4iG9fMh6ixr0hvi7fZhz6djKLIKcwadwFTB6UPkSUq0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785213001; c=relaxed/simple;
-	bh=Ty/53crtZAVP4JiHRc2hkVfTG1X0f6nKt79lbpIIyVU=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=SlYo2eU6b9ApCAbK/py8XUYIHyMMUAclxt+pXVCIwK3JLV/neqR0pnLdbQESXriJET95jJTYl/N4+EJLYsV4blw7FJYoCMb23Gv/8RtycbOE3WIO1i8JTEBlC4cR8kRlbgvvM9WQbXo6qPaXt5SLyqigIam5C18OzEln7nGyTcU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=FYT4WbBn; arc=none smtp.client-ip=54.243.244.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+	s=arc-20240116; t=1785214467; c=relaxed/simple;
+	bh=aFZV6nAnm55DWaIdiryS1otFD3kzKWVKf+GOfKCz8YA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=p7VbQX6joYV3QnFEGDKFcFrwENpnzOblIHgc48yNETWAvf5OMu8ZWriIu6bjaVqzJIgAnCCmUx8mktc58rfGCbo57gXAI7F1g0tKaqN/m1iGhhVAYV0BGqoNTecKY481jo0DUKMFVCHq3jG0k3Jih8nPCTFzJdltsByhABDRobo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cbi+akbD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="FYT4WbBn"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1785212983;
-	bh=P3FLd0gZ4oSbDCtZOiLi2cfEZVT9J4MJIEchpy9yzog=;
-	h=From:To:Subject:Date:Message-Id:MIME-Version;
-	b=FYT4WbBnVPkQRIXIpuPG0lUQWUJvFWsYR0SB/OWSOpvhS3EaXdry/efUSXWkFh+wb
-	 4RycP6wrmbMN7Kvgmiir3Dly/Sf5vG4VSGVPMk0tNCnuz4yzdCIii792NP2X9cbiS/
-	 WezW/fRtpWC6QtX7j6ZdOdCgaW12eiXNaQfuagbQ=
-X-QQ-mid: esmtpgz11t1785212966t38c9a5c2
-X-QQ-Originating-IP: 9YkLHireBl8VfaKeoMJ+k+fBfljNy2pO1p1quT6ejXc=
-Received: from uniontech.com ( [113.57.152.160])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Tue, 28 Jul 2026 12:29:25 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 6979517978552794633
-EX-QQ-RecipientCnt: 6
-From: Yichong Chen <chenyichong@uniontech.com>
-To: linkinjeon@kernel.org,
-	sj1557.seo@samsung.com
-Cc: yuezhang.mo@sony.com,
-	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Yichong Chen <chenyichong@uniontech.com>
-Subject: [PATCH] exfat: free new directory cluster if zeroing fails
-Date: Tue, 28 Jul 2026 12:29:23 +0800
-Message-Id: <20260728042923.408237-1-chenyichong@uniontech.com>
-X-Mailer: git-send-email 2.20.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cbi+akbD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 549AD1F00A3A
+	for <exfat@lists.linux.dev>; Tue, 28 Jul 2026 04:54:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785214466;
+	bh=PtaM9/Rs932i5WOKotuJxL4LLAvGh2JvS1+sB5x8LjQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Cbi+akbDTFQVZQLvz2tXxbpCdQkA6vRh+h2C0N10/bCAGE1I+iN4LjhS0V1aMwrdC
+	 Br1fF53b76F3BZRAg15Si8Ius2mTf8auyL3zO9iidtc39FmPkI8cpKDIZwXYK1k/rT
+	 gBU1ghHSQieWMnwPQTIVZAf49RjLHHW6vXrp40j9N+oapP9u/9nf9VZ8VU5562dnp2
+	 mtfgOKUzGGcNyd8zFhK4KLpdbWw7Y+J2gN8DCjnZNNYyUAYwB4fu9HlSXR6DS5ntR2
+	 +/bICSFySkmRW6U3/40Xqru27krtuoLHhk2bwZJ49HnUVAOkR6wE/bg1jBhUBED8Sz
+	 vn3F8pLg36B1A==
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c169ae1cb26so93819666b.1
+        for <exfat@lists.linux.dev>; Mon, 27 Jul 2026 21:54:26 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqbBy8XpwcbwkEkZDG8tMyppdBA8o5DdQhifdlDo4LfMAku26D+4b5/mMVe1+Qwud3UY8oGNQ==@lists.linux.dev
+X-Gm-Message-State: AOJu0YynGjRw60S/R9h/ncHm56bAfRcT64oML5Dv6KaDaQjeu0KkFq+g
+	BA1TJRmtWU1Kd2ibjRxwJUNGEHPRu0PLwPhDQQwLWZb5+d7PRoU3z85hoQ7hPvLZTUwunGgRVVu
+	6V/W9kA4D/A8lzQMoheMXWHfSTF+zNfY=
+X-Received: by 2002:a17:906:f58d:b0:c16:64e3:945a with SMTP id
+ a640c23a62f3a-c1f71e74cefmr29323166b.25.1785214464969; Mon, 27 Jul 2026
+ 21:54:24 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpgz:uniontech.com:qybglogicsvrgz:qybglogicsvrgz3a-0
-X-QQ-XMAILINFO: M5aCtjAndv5OwcANG6NBvvpwF4Z2Y5WumARVvcUk5UQF9nYedDFFifpC
-	53uB9eGHkcet9gu6nh7j28GkbNBPJ4KFOJUucv2PiZ6kcF1g+0/dj57cuOu71vSrM97KF5o
-	esW0SBbM/bq19od0QANQBS1KBPvKioJ6oRy403+564qtegFSU+xYmjJCkhdEdtatx6HLRf9
-	QcRhrbfcJmFL5QOMxdEQQC0XOsw6UlJfCp1WdKtQuCvu/FQ//IZXdQi/cAm32Uxs0y63fgD
-	j/xg+ZWz66UKDam9zGu1EMPlWgSdUnR3ty6M1eAL+j1KRtsTjSMvK+H12vbVhPrLRFw1+eh
-	59NC1nqVCXKZE9Q0Tj+E22Eto4Lo8T3wotNpF2m0/2SCIjtO4JLbEIXSPkurcwPg4/6b4GD
-	VuEUF81sLzrj7s0zUf3bkxHL1JxyzRSvnTM5UmIu8OjRyC8l4L38U+OMubpRVhl4HdXyyGR
-	aiSU34qdDb39yvwUVMFnomR9b2Bhc60MOEic2D0Rkv8D8HCg8l+r2grD7DCFt/Gh54YeHYJ
-	Ty2w+COLZkaM19A+qfMA6nz08odLvTELLhvFe8gEQ6KmSUN5Cza4xnOAHwnI68nVyPmEuRi
-	Inkubknt1wRVhAQrLX8IiUQeg+bke5LWIb3m+gC+W9NzOm9WJzMszOWA+SRe4oPhHJDqgRy
-	C5My0I1AAAiCAdJQkVxwm5PKbdxic1dsz82dmiHtkLT/ibYxiEl2Fi+F+/JR8ZBWxOZI0Ik
-	hHQZSgtileO4BJqUl7Jc7WOj4XAe2Y/A09ofvNab3Mr8oq5pdQzw8ZWt8H2Um/FeFFAQd7t
-	9p+m/tuVy3o8F/u7gQB09z0WXNwdqbUChDwrwLhqL6hs3NZUXI/H16KW2r79/UEVlm3CepJ
-	HY46eKUH/XiCr/e+j3ePqI7M3g2efFGZexLebwoCALYOhjkcda9C3vRHQihyzg9NHtm0NbY
-	7/CPkJgF4WbW56PxsA3NbjcibX6C1u/DVsjF5lNDqyH794081N1HEbXKpj4WbNps/Po+tvL
-	mO19dXWwVXb+vKhzeq0q9SIuJtOieqpIV4l2ptmA==
-X-QQ-XMRINFO: MPJ6Tf5t3I/ylTmHUqvI8+Wpn+Gzalws3A==
-X-QQ-RECHKSPAM: 0
+References: <20260727091214.355917-1-chenyichong@uniontech.com>
+In-Reply-To: <20260727091214.355917-1-chenyichong@uniontech.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Tue, 28 Jul 2026 13:54:10 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8QB0MPxKsSh4aE2GF-kzqNgi4mFJ0QX+pPEKqmsZF3Rg@mail.gmail.com>
+X-Gm-Features: AUfX_mxM9rqKBrxjNUAQqqyDjWuEnHGkg0QCgylwjeV71tj1Mry_hOuz8e-wNJQ
+Message-ID: <CAKYAXd8QB0MPxKsSh4aE2GF-kzqNgi4mFJ0QX+pPEKqmsZF3Rg@mail.gmail.com>
+Subject: Re: [PATCH] exfat: write moved entry before removing source
+To: Yichong Chen <chenyichong@uniontech.com>
+Cc: sj1557.seo@samsung.com, yuezhang.mo@sony.com, exfat@lists.linux.dev, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-exfat_alloc_new_dir() allocates a cluster for a new directory before
-zeroing it.  If exfat_zeroed_cluster() fails, the function returns the
-error but leaves the allocated cluster in use.
-
-Free the newly allocated cluster before returning the zeroing error.
-
-Signed-off-by: Yichong Chen <chenyichong@uniontech.com>
----
- fs/exfat/dir.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/fs/exfat/dir.c b/fs/exfat/dir.c
-index 4fd4ec52b8c0..8d2ae6e33cbf 100644
---- a/fs/exfat/dir.c
-+++ b/fs/exfat/dir.c
-@@ -299,7 +299,13 @@ int exfat_alloc_new_dir(struct inode *inode, struct exfat_chain *clu)
- 	if (ret)
- 		return ret;
- 
--	return exfat_zeroed_cluster(inode, clu->dir);
-+	ret = exfat_zeroed_cluster(inode, clu->dir);
-+	if (ret) {
-+		exfat_free_cluster(inode, clu);
-+		return ret;
-+	}
-+
-+	return 0;
- }
- 
- int exfat_calc_num_entries(struct exfat_uni_name *p_uniname)
--- 
-2.51.0
-
+On Mon, Jul 27, 2026 at 6:12=E2=80=AFPM Yichong Chen <chenyichong@uniontech=
+.com> wrote:
+>
+> exfat_move_file() removes the old directory entry before the new entry
+> has been written.  If writing the new entry fails, rename returns an
+> error after the source entry has already been marked deleted.
+>
+> Write the new entry first, then remove the old entry and update the
+> cached inode location.  This keeps the source entry intact if creating
+> the destination entry fails.
+>
+> Signed-off-by: Yichong Chen <chenyichong@uniontech.com>
+Applied it to #dev.
+Thanks!
