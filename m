@@ -1,86 +1,80 @@
-Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D05D32941A
-	for <exfat@lists.linux.dev>; Sat,  8 Aug 2026 07:05:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D42EE2E737E
+	for <exfat@lists.linux.dev>; Sat,  8 Aug 2026 11:36:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786172749; cv=none; b=bUaFVk5CCd0cgkpWO5dE4ABtC0BpaohIcnXevnbAKqpUnpOPuQUNqi0+3hkLu/uwlYrMPinvSsFK7skGV60yWuYQ/KFKqWMBMDkzHvoIDVVtPzKJNINMPsH8WWWqEO8kgxnWPijxRgVX6OXEFmfHw8I/lO2X2J3FyhXvejv+CcM=
+	t=1786188983; cv=none; b=EySSUwBUV8W7zr07EJUcvu2Rt1pNy/o86H2T9T131l3RBO/mCmkj1lcKmLhFKj9MgwecnUfHyM3UToXWs3ilEO2v7HINevIxNCFp0h+48F44n01VZrYy83iMzQLUcOqS2PUWwj0je0AUqIFSj0+Ow4EuyCzwA5lNnnnLqFmnpU0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786172749; c=relaxed/simple;
-	bh=FZ4p+jWVA5hbqs6tej6lneNNujM4PP1tbpjrVWAuKk8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cmuVjLZ9FM5Vks84mVoLZZbiw1J/aA+nTTPh0EtgPkQHTww7X8A/xTVRrJh6pkOWwRSbmBtez6gJUJzTObGye1HZkv8cjpbpdzjDkcziEfCCiSLV9gsDGG0a2Uw36NwX5RrwJRLojbImoipjGGpW3ZO8LaBHnddNnQmqdZXkxgw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=TCfomSZt; arc=none smtp.client-ip=54.252.183.203
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
+	s=arc-20240116; t=1786188983; c=relaxed/simple;
+	bh=dJFjfYJEFiECDsz2HhwAyZJQ7xQkZoKEyDTcxNuhyao=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=PyIiJdc2EunTARCxHZNZSyhH8peGR0YzMyVPb0PwpAhdktWcQ3EY87/IoGp704j03FSWp0MJvSYkMxiA4GqqT/gCdToJnna720gXQfx58tJ76KruSqzuqwXKepY+fH3hmYtQVA3H34mHzmfTLaSWFHfuWK3owgaHwvfPpI1ytMg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k7FpOc0u; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="TCfomSZt"
-Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id D2FF49180;
-	Sat,  8 Aug 2026 06:58:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me D2FF49180
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1786172309; bh=FZ4p+jWVA5hbqs6tej6lneNNujM4PP1tbpjrVWAuKk8=;
-	h=From:To:Cc:Subject:Date:From;
-	b=TCfomSZtlLTXBEE6Do4vNQLZ6DTaE+ovcn9/KTrwNbSImZn38Vew+yFbgQGOXaqyP
-	 ZmNYjt4tTE9fE50JuopK38V+7LLp/QK4CTezHjf5YkYafnpMlTlz0R6tVqTmxMFiP7
-	 VjS7eaRYo7Xvny2EEvxpVyGVNopp1vGB8oItGguQ=
-Received: from maya.d.snart.me ([182.226.25.243])
-	by embla.dev.snart.me with ESMTPSA
-	id VZFqIJTTdmpp2QMA8KYfjw
-	(envelope-from <dxdt@dev.snart.me>); Sat, 08 Aug 2026 06:58:28 +0000
-From: David Timber <dxdt@dev.snart.me>
-To: Hyunchul Lee <hyc.lee@gmail.com>,
-	Namjae Jeon <linkinjeon@kernel.org>
-Cc: exfat@lists.linux.dev,
-	Yang Wen <anmuxixixi@gmail.com>,
-	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH] libexfat: fix return value of exfat_check_written_data()
-Date: Sat,  8 Aug 2026 15:58:06 +0900
-Message-ID: <20260808065806.34730-1-dxdt@dev.snart.me>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k7FpOc0u"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B07C81F00A3E
+	for <exfat@lists.linux.dev>; Sat,  8 Aug 2026 11:36:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786188982;
+	bh=dJFjfYJEFiECDsz2HhwAyZJQ7xQkZoKEyDTcxNuhyao=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=k7FpOc0uS/OxoJWQlfN909RDoJ0UuFRd/EZjhzkmp5bFjPSBRcruIgzM6FPX916D9
+	 YRllb0cLAZCYwsRvH6XOL/L59ekRCYjUJHJ19JT+DXYz+tRbTprDiqGc1gj0f6k5IQ
+	 iKqTZLt8uDUJDDPsww1uT3UMnLvxRmCiEYivIsryP3iBa0zxn/aA49EBGef3pHY7Nd
+	 uZFVAThGr+SfXz9fu5c96fpJ/dQjJc9jVxw7qGa+39fB/hhfo1eSXur7hTCabLRG6n
+	 nab0iFrs9TkDUYdEQgOImN5taX9gV9fsd41MhFPnTfeH/F3FRx6ipRLcDo1sm2dQQu
+	 2PVQ03zrCpYIQ==
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-c197e7e4e94so51658966b.2
+        for <exfat@lists.linux.dev>; Sat, 08 Aug 2026 04:36:22 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rq7iflIx8eAG2gNvY9D+CtUDOqWhUmCFVohQsWS5O412GAq98eMk5TVxXOk8HmhNPnX3SstRQ==@lists.linux.dev
+X-Gm-Message-State: AOJu0Yz4hVWX6nhkn4x7hevoHRci5191FMQJzWdNb8wEwrftXfAt3oNT
+	DByz21VKmspeh2gt4MX5HCTKxRwnJGOrtCUaI6qUSlq6pfLKlpU2KIr09cUcdCoC88Av7Qeqc57
+	kwtvdbpJzmhI5U/FwpkGyYfLwpWIcQL8=
+X-Received: by 2002:a17:906:6a21:b0:c1c:4a80:30c4 with SMTP id
+ a640c23a62f3a-c20873b2dffmr359149366b.11.1786188981275; Sat, 08 Aug 2026
+ 04:36:21 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260808065806.34730-1-dxdt@dev.snart.me>
+In-Reply-To: <20260808065806.34730-1-dxdt@dev.snart.me>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Sat, 8 Aug 2026 20:36:08 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9oqN28RASa1pewk-i5FFdjX68Q1zuwgKkdUWgz_ryyew@mail.gmail.com>
+X-Gm-Features: AUfX_mw33lwMWIcau42dXMAdXm9VmQV5vNRTVTwawLiZBZGxFBld1dTlsV5PXD0
+Message-ID: <CAKYAXd9oqN28RASa1pewk-i5FFdjX68Q1zuwgKkdUWgz_ryyew@mail.gmail.com>
+Subject: Re: [PATCH] libexfat: fix return value of exfat_check_written_data()
+To: David Timber <dxdt@dev.snart.me>
+Cc: Hyunchul Lee <hyc.lee@gmail.com>, exfat@lists.linux.dev, 
+	Yang Wen <anmuxixixi@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-In exfat_check_written_data(), the return value of posix_memalign() is
-only used to check if the memory allocation failed and the errno is
-returned from the function. However, according to posix_memalign(3),
-errno shouldn't be set by posix_memalign() at all.
-
-Overflows and invalid allocation lengths are already checked with
-assert() beforehand. Therefore, EINVAL should never be returned from
-posix_memalign(). So, always return -ENOMEM if allocation fails.
-
-Note that currently, this patch doesn't really fix any issue because
-with all the current Linux libc implementations(glibc and musl), errno
-is set for ENOMEM cases in posix_memalign() anyway. This patch is only
-to fix potential undefined behaviour on other POSIX platforms in the
-future.
-
-Fixes: 78e398e37ba5 ("exfatprogs: Fix and improve verify written zeros (memory optimisations)")
-Signed-off-by: David Timber <dxdt@dev.snart.me>
----
- lib/libexfat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/libexfat.c b/lib/libexfat.c
-index 8e23aca..6eda5dd 100644
---- a/lib/libexfat.c
-+++ b/lib/libexfat.c
-@@ -1209,7 +1209,7 @@ int exfat_check_written_data(struct exfat_blk_dev *bd,
- 	assert(aligned_len > 0 && aligned_len >= (off_t)len);
- 
- 	if (posix_memalign(&verify, sector, (size_t)aligned_len))
--		return -errno;
-+		return -ENOMEM;
- 	memset(verify, 0, (size_t)aligned_len);
- 
- 	if (buf == NULL) {
--- 
-2.55.0
-
+On Sat, Aug 8, 2026 at 3:58=E2=80=AFPM David Timber <dxdt@dev.snart.me> wro=
+te:
+>
+> In exfat_check_written_data(), the return value of posix_memalign() is
+> only used to check if the memory allocation failed and the errno is
+> returned from the function. However, according to posix_memalign(3),
+> errno shouldn't be set by posix_memalign() at all.
+>
+> Overflows and invalid allocation lengths are already checked with
+> assert() beforehand. Therefore, EINVAL should never be returned from
+> posix_memalign(). So, always return -ENOMEM if allocation fails.
+>
+> Note that currently, this patch doesn't really fix any issue because
+> with all the current Linux libc implementations(glibc and musl), errno
+> is set for ENOMEM cases in posix_memalign() anyway. This patch is only
+> to fix potential undefined behaviour on other POSIX platforms in the
+> future.
+>
+> Fixes: 78e398e37ba5 ("exfatprogs: Fix and improve verify written zeros (m=
+emory optimisations)")
+> Signed-off-by: David Timber <dxdt@dev.snart.me>
+Applied it to #exfat-next.
+Thanks!
