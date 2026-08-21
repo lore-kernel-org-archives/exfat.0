@@ -1,83 +1,97 @@
-Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75A1543CE5D
-	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 08:30:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CAEB39B954
+	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 10:06:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787301015; cv=none; b=PCNyHcoD44XyRYfgvK0/9KF12QNYkoLpCGT0WAA6yc8XsDvxp2zuQA9D2BL9XB6yntUIVRZzIIwjZCTtVm673ZXQUQ2mE6qH64Zkn2bKSQ0HLq2N0r3+93sONjjZkvrCtPi9nRJKkWX2LTS/KzXBhdc082W1+USZJyRmoFV5A5w=
+	t=1787306779; cv=none; b=lAInSKLEQOfGgpjAlMbnQe/Kb/WuypXUgwU5pJ5aNd96fy+LhDFyCMt6eH4CD3fYEZRWSurZLNAWl+HSpwWvxzjljmG48YJxFEjmzqRRwwH07tuvbGHix6hm4z5tlaSbd8To+Rj0zzQmvjsNU7kPkHs4YAqbX43Ky+8R+0Y6pyI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787301015; c=relaxed/simple;
-	bh=Lxpvf9h5ni3400KQnHBqA6AtOtS1X2fpIDmtre4qdSA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qWWijCOfWJxxsbtY5Mhp0QMJwthGJN1MDxE7e3odtlp2Nb8dvJgr5LydHQruAGg89jVkoNeLsquH2V8laTd3BGoULQDQiUc3PB1/Il203CK7ecr4XaaZva8EQST5ORhhxERknISBSDpyd0nyQbaJtYdCUewTUfUWL+7TP3d+lvc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=tp4dlHJT; arc=none smtp.client-ip=54.252.183.203
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
+	s=arc-20240116; t=1787306779; c=relaxed/simple;
+	bh=VlYmAMAi/xPlzst7Nc4OZ9kb62wGsySceWS4p+6Dxow=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=WtlBBVLlgL/CcFW3vGil5QEVNB5KtgVdaKAyiJ7EGIH+j22KmIhx4leX3/tVWRwYWTWHTsoV5jWLnBNcjhiQjpIiFxwNQcQkkS0xQkB7dNLJhdTPlCmev42755qg0FOMG8WxdZec6bK2G1DSiOuTBnggjRZy1iPIXO9zI/6b5M8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Rsj4NfW9; arc=none smtp.client-ip=220.197.31.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="tp4dlHJT"
-Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id AFABD1D455;
-	Fri, 21 Aug 2026 08:30:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me AFABD1D455
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1787301010; bh=Lxpvf9h5ni3400KQnHBqA6AtOtS1X2fpIDmtre4qdSA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=tp4dlHJTrKClOjOeg9RGXRRGrbNqa8Xw1heewhm+jzLX2AAXrvNd3ZvQX4oJRcpg+
-	 RgSEpRyYFqSUROdhLYfghaNAcRXzn98IBQK2qsiJAyI0ApWQuAiIsWA11jkgHEpp/B
-	 A/5dJKTnWvuXWVVrFNhgpcQ5dCCpjCDM+Zbudzks=
-Received: from [192.168.1.18] ([182.226.25.243])
-	by embla.dev.snart.me with ESMTPSA
-	id 38SNF5EMiGoIUwAA8KYfjw
-	(envelope-from <dxdt@dev.snart.me>); Fri, 21 Aug 2026 08:30:09 +0000
-Message-ID: <c4af577a-4f65-4f1b-a7cd-f28ab9d3a7ac@dev.snart.me>
-Date: Fri, 21 Aug 2026 17:30:06 +0900
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Rsj4NfW9"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=+X
+	WjbaraU/0TASAxInfKizYTBTS4rybQwLzEQECHPk8=; b=Rsj4NfW9gmKMBa4CtY
+	sNWHJkxi5MTMOJ24Hl1x8aIUt+09ssZLQliUmtd7Fo6f3GiNHxPc0Agt0nEbB23x
+	HHrOCu3vx9fY6UX9P57vOlulHX1uU+oDdJv5Kt3Mp9kzwGYA09O/mKMomEGtrChr
+	1xx+9Q9evYv+CiTX4SdooCd0g=
+Received: from czl-pc (unknown [])
+	by gzga-smtp-mtada-g0-4 (Coremail) with SMTP id _____wCX0Fr7Iohq8umKRA--.44781S2;
+	Fri, 21 Aug 2026 18:05:48 +0800 (CST)
+From: Chi Zhiling <chizhiling@163.com>
+To: exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [RFC PATCH 0/6] exfat: take s_lock in read mode for iomap mapping paths
+Date: Fri, 21 Aug 2026 18:05:25 +0800
+Message-ID: <20260821100531.998196-1-chizhiling@163.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v0 0/1] mkfs: set MAP_NORESERVE to force overcommit in
- exfat_map_blankmem()
-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Hyunchul Lee <hyc.lee@gmail.com>, exfat@lists.linux.dev
-References: <20260821082454.9976-1-dxdt@dev.snart.me>
-From: David Timber <dxdt@dev.snart.me>
-Content-Language: en-US, ko
-Autocrypt: addr=dxdt@dev.snart.me; keydata=
- xjMEYmJg1hYJKwYBBAHaRw8BAQdAf5E+ri1XLtjqYbZdHOyc8oS+1/XJ5bSlbx5WHXmVBZzN
- IERhdmlkIFRpbWJlciA8ZHhkdEBkZXYuc25hcnQubWU+wpQEExYKADwWIQQn/Jn96EMUaIoF
- X+T/ldyyrZpWaAUCYmJg1gIbAwULCQgHAgMiAgEGFQoJCAsCBBYCAwECHgcCF4AACgkQ/5Xc
- sq2aVmjJZwD8COjPlUwccrlRvbNQ6f87DWchtYO0o8W2DNRM3RLps0EA/jEhIbRV6AsyC8jr
- 30Ut3aJ3/mO/6G4sLj7OvkEEBH0MzjgEYmJg1hIKKwYBBAGXVQEFAQEHQFpgtIgaByv9lIEY
- EmpavMO0pYjtu7TMJynwdnGYkN9LAwEIB8J4BBgWCgAgFiEEJ/yZ/ehDFGiKBV/k/5Xcsq2a
- VmgFAmJiYNYCGwwACgkQ/5Xcsq2aVmhFCwEA0kM9VyYB4bLCM7+SuXUUH+5Ec99Nj4RXxFad
- Key9GuwA/2BZK6bNyrLSfEk2JDRoskqf7OIL0wa6JOD5SrBnMe8E
-In-Reply-To: <20260821082454.9976-1-dxdt@dev.snart.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wCX0Fr7Iohq8umKRA--.44781S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KryUJFy8ur45Kw13CF1fXrb_yoW8ZFW3pF
+	W3Gw43Xr4UXa43Xrn3Cr4jqa45Ca1fKay7Xw13tw1xZws8Ar1S9FW8tF18tFyUJ348WF1a
+	qF4YvryUWFsxur7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jnzVbUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2x2EImqIIv3BIQAA39
 
-On 8/21/26 17:24, David Timber wrote:
-> This is taken out of GH PR #380. I though it didn't belong there and
-> I'd like to sit on the PR for a little while longer than I anticipated.
->
-> The patch doesn't really fix anything, especially with modern beefy
-> hardware. It just prevents mkfs from munching on RAM on embedded
-> systems. That is the behaviour I intended in the first place.
->
-> Thanks,
->
-> David Timber (1):
->   mkfs: set MAP_NORESERVE to force overcommit in exfat_map_blankmem()
->
->  include/libexfat.h | 10 +++++++---
->  lib/libexfat.c     |  4 ++--
->  2 files changed, 9 insertions(+), 5 deletions(-)
->
-Oh, and, I think you should add
+From: Chi Zhiling <chizhiling@kylinos.cn>
 
-Reviewed-by: Hyunchul Lee <hyc.lee@gmail.com>
+The iomap mapping paths currently serialize all inode mappings on the
+sbi->s_lock mutex. This series converts it to an rw_semaphore and takes
+it in read mode on the mapping paths so that mappings of distinct inodes
+proceed in parallel. The preceding patches make the paths safe to run
+concurrently: bitmap_lock covers the allocation state, atomic bit ops
+cover the volume dirty flag, and the FAT2 mirror copy is serialized
+against writeback.
 
-(from GH PR)
+Same-inode access stays serialized by the exclusive inode_lock; writeback
+does not hold it but is safe because truncate flushes and truncates the
+page cache first and cannot run concurrently with writeback. The lock
+ordering (inode_lock -> s_lock -> bitmap_lock) is unchanged, so no new
+deadlock scenarios are introduced.
+
+A per-inode read-write lock was also considered, but its implementation
+turned out to be considerably more complex, so this series relaxes the
+existing s_lock instead. Any suggestions on that approach are welcome.
+
+The series passes the xfstests exfat suite. In Unixbench, the fstime-w
+score improved from 3977196.8 to 4746349.6 (~+19%). Any comments and
+suggestions are welcome.
+
+Chi Zhiling (6):
+  exfat: remove dead hint_bmap updates in I/O and truncate paths
+  exfat: take bitmap_lock at the start of exfat_alloc_cluster()
+  exfat: use atomic bit ops for volume dirty flag
+  exfat: lock FAT2 buffer while copying mirrored FAT entries
+  exfat: convert s_lock mutex to rw_semaphore using write lock
+  exfat: take s_lock in read mode for iomap mapping paths
+
+ fs/exfat/dir.c       | 14 +++++++-------
+ fs/exfat/exfat_fs.h  |  5 ++---
+ fs/exfat/exfat_raw.h |  4 ++--
+ fs/exfat/fatent.c    | 20 +++++++++++++-------
+ fs/exfat/file.c      |  8 ++------
+ fs/exfat/inode.c     | 15 +++++----------
+ fs/exfat/iomap.c     |  4 ++--
+ fs/exfat/namei.c     | 26 +++++++++++++-------------
+ fs/exfat/super.c     | 42 +++++++++++++++++++++---------------------
+ 9 files changed, 67 insertions(+), 71 deletions(-)
+
+-- 
+2.53.0
+
