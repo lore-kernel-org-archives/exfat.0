@@ -1,43 +1,42 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFEC739E9BD
-	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 10:06:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CD5A47605D
+	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 10:38:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787306790; cv=none; b=ZUGDduWhi5irhxfVBKHlYlPgalgmUwgFzck4uiEYIvEyFdaJdhAv5fAS0v+7A6c+TetIowPsDDTPwroJqVmC169twdNg1MXJb7KM75Q4hjFEP2+MuLs6IhUO3HgRmWwrp/CYH8uGNYg6Gwaeamrz6csbhOjhsxwQgQgbeoJyTq8=
+	t=1787308724; cv=none; b=HlAIxUUBOOEG6DxnK4v/ehgFSFm3bRL3Hx/ik6sYB++XHkwMOn3KJKOFC7BFnNV/z1Ni4sVF6x8ARD1CF4i7Kx5+jLZEJrZLSCLzQP6I5OrGCk5q9YIUPAnhqdDms/ZMaa77SNlPniHYp63j3WskpPf2YbuhMTwjQYhywc/iQEc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787306790; c=relaxed/simple;
-	bh=cnASTI9NNDIyMBrS9UbkW6KwsdVmhRG/vfKSuXvT0Dk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=e37jGB5TflafewQSSC4w06ubKyzarCeOEfbYtgWajfOT+SbHJnQDJxW+gF2qZ48b1H66sA9lpxXtuG78NYg06+zctMNd8b9MMqtn+PpO5Q8rp9PT5hPKDO7BLIl5Ux1tIFZwKlxGQTdR/+dWksX6z+wSHH22E4y/nNGs2Lb4WF8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=kNt/gR5x; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1787308724; c=relaxed/simple;
+	bh=s2kAY4lLhZGqfYIoxQ37v54dQyPOE3oP5+LGiH63LzY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Fvv9IKlgZnamUByBpsGbhvYqSSFeLRxjOMAWqCH1RTxLo2a+Qb7K5hGWxA8vAjioeT9y7Mgcr/xRCqX1Sn8egvwvMS6Le2zYR/KE0KCjXg4pfRa+MjVw+sak2j+TYH9Ae+J7OcqyZr9yhUMb3nqCOuIwCrB2NKoJjM8LS77c1qA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=hX00KdvP; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="kNt/gR5x"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=gs
-	BZVl/kxpcbYTSjyC0Bseh+Wstyc+ghmPRTAJECPVE=; b=kNt/gR5xfQIMueqH48
-	l0/r8PrXjr/2XK/JhguJKudv2jJpMFfG3NwmO/rwkOknO6raOBMsFLLKZYd+6Kb3
-	hZZSIDZHuZGxA+f67V0ZjaQKaGWmZ2YFaevuN4lMX0zz0ycOLBPCKIQ2QoYw1XaC
-	8pOvIqcPVIqK1v49zAn1gmZAU=
-Received: from czl-pc (unknown [])
-	by gzga-smtp-mtada-g0-4 (Coremail) with SMTP id _____wCX0Fr7Iohq8umKRA--.44781S4;
-	Fri, 21 Aug 2026 18:05:49 +0800 (CST)
-From: Chi Zhiling <chizhiling@163.com>
-To: exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Cc: Namjae Jeon <linkinjeon@kernel.org>,
-	Sungjong Seo <sj1557.seo@samsung.com>,
-	Yuezhang Mo <yuezhang.mo@sony.com>,
-	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [RFC PATCH v1 2/6] exfat: take bitmap_lock at the start of exfat_alloc_cluster()
-Date: Fri, 21 Aug 2026 18:05:27 +0800
-Message-ID: <20260821100531.998196-3-chizhiling@163.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260821100531.998196-1-chizhiling@163.com>
-References: <20260821100531.998196-1-chizhiling@163.com>
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="hX00KdvP"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id B32F11D455;
+	Fri, 21 Aug 2026 10:38:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me B32F11D455
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1787308711; bh=s2kAY4lLhZGqfYIoxQ37v54dQyPOE3oP5+LGiH63LzY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=hX00KdvPbGUX5AjguL/eQp6BQD29KZ2yEtYujStXbe/iXkvgG232XKTBrGKJUmvEo
+	 bhPb9yRAqG9W2Ubb24fTDVD0wS9UXdcBCV993smMI49IG0kQ/ZkNiZxQL8UmUvScEA
+	 rynFgij3oF9fwAnG4kOun7mEvk/SIbd6FNGjiA/0=
+Received: from maya.d.snart.me ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id /jNMGKYqiGo1WwAA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Fri, 21 Aug 2026 10:38:30 +0000
+From: David Timber <dxdt@dev.snart.me>
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: exfat@lists.linux.dev,
+	David Timber <dxdt@dev.snart.me>
+Subject: [PATCH 0/1] Github Actions: cache util-linux tarball
+Date: Fri, 21 Aug 2026 19:38:20 +0900
+Message-ID: <20260821103821.52224-1-dxdt@dev.snart.me>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -45,68 +44,23 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wCX0Fr7Iohq8umKRA--.44781S4
-X-Coremail-Antispam: 1Uf129KBjvJXoW7tFyftF15ZFWrXrWkWr18Grg_yoW8Wry7pr
-	47Ca45GrZ5Xan7WF4UKrn5Zr1ruw4kWw45JrW3J3WjyFn0yrsY9r9FqF15Za1jkw4xJanF
-	qryYgw4ruanFka7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jDtxfUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2x2EImqIIv3BLwAA3z
 
-From: Chi Zhiling <chizhiling@kylinos.cn>
+Hopefully, this should reduce CI failures.
 
-Acquire sbi->bitmap_lock at the top of exfat_alloc_cluster() so the
-used_clusters/clu_srch_ptr validation and updates are covered by the
-lock, removing a window where the early checks raced with concurrent
-allocations.
+Test run(miss): https://github.com/dxdxdt/exfatprogs/actions/runs/32472392955
 
-Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
----
- fs/exfat/fatent.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+  Retrieve -> Download -> Save -> Build libblkid ...
 
-diff --git a/fs/exfat/fatent.c b/fs/exfat/fatent.c
-index a8b11e2ce43f..2db959669563 100644
---- a/fs/exfat/fatent.c
-+++ b/fs/exfat/fatent.c
-@@ -427,19 +427,22 @@ int exfat_alloc_cluster(struct inode *inode, unsigned int num_alloc,
- 	struct super_block *sb = inode->i_sb;
- 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
- 
-+	mutex_lock(&sbi->bitmap_lock);
-+
- 	total_cnt = EXFAT_DATA_CLUSTER_COUNT(sbi);
- 
- 	if (unlikely(total_cnt < sbi->used_clusters)) {
- 		exfat_fs_error_ratelimit(sb,
- 			"%s: invalid used clusters(t:%u,u:%u)\n",
- 			__func__, total_cnt, sbi->used_clusters);
--		return -EIO;
-+		ret = -EIO;
-+		goto unlock;
- 	}
- 
--	if (num_alloc > total_cnt - sbi->used_clusters)
--		return -ENOSPC;
--
--	mutex_lock(&sbi->bitmap_lock);
-+	if (num_alloc > total_cnt - sbi->used_clusters) {
-+		ret = -ENOSPC;
-+		goto unlock;
-+	}
- 
- 	hint_clu = p_chain->dir;
- 	/* find new cluster */
-@@ -516,8 +519,8 @@ int exfat_alloc_cluster(struct inode *inode, unsigned int num_alloc,
- done:
- 			sbi->clu_srch_ptr = hint_clu;
- 			sbi->used_clusters += p_chain->size;
--			mutex_unlock(&sbi->bitmap_lock);
--			return 0;
-+			ret = 0;
-+			goto unlock;
- 		}
- 
- 		hint_clu = new_clu + 1;
+Test run(hit): https://github.com/dxdxdt/exfatprogs/actions/runs/32472776879
+
+  Retrieve -> (skipped) -> (skipped) -> Build libblkid ...
+
+David Timber (1):
+  Github Actions: cache util-linux tarball
+
+ .github/workflows/c-cpp.yml | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
+
 -- 
-2.53.0
+2.55.0
 
