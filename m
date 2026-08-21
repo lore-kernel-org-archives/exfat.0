@@ -1,43 +1,44 @@
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D396376A0C
-	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 06:08:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B404376A0C
+	for <exfat@lists.linux.dev>; Fri, 21 Aug 2026 06:08:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787292492; cv=none; b=Y2Xx7V6yxoaLZAcX4PYnuMlgJPzRbEkOhwvIcqBuVaAFMOzv+4LRNBGfIihGDOPZht1Runeq7/xSHvnY0Gt6zz9hj0tx75HG7DwXoedMe/hnwMSOe5LWb+BSTcmXyGMxxlYKXAkOhmtlDkdbpJfFPktpluggsUN9Sx4ngfTlQZw=
+	t=1787292494; cv=none; b=kLV8ZbJaCJ/7Yy+w8D8H7TlkfRzVAitla5uLQODpPRe2jQitajc0uWDHo8ox9xV1XeZZskxaH2xv2tHb4Y7ha1dENcIlECRkzWbNh44+M1MXj/6sZus6dWEgs64ubmVB1yFSAPe7TOIWoQ7/FGXOcIl2bVQj6LeEIWurjefZPD8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787292492; c=relaxed/simple;
-	bh=5rVdSxyqbmS2gwRTU5TLaS9XAytFQz3w3mFuy//ky8U=;
+	s=arc-20240116; t=1787292494; c=relaxed/simple;
+	bh=bbC4f2VUGbYb825YI28KGn2/H/NXh2T+RFuomrfjm74=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=QJOENi9IOpWwW3iRxXitZCGI1p6NWF+6ZqnJ66gs3LvWFH7jJb45r+tdmtpduPQ8/2m0BhwpuMe4cz4s70ioxvClzFQH5eqQgvhRisSnIy3Keu+kaYzNT9mYJYSn7nwyWK2GPHZiV+XRtlrITcr3KDRrvssUiTRks+C5+oNj9Co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=BVQuhYVs; arc=none smtp.client-ip=54.252.183.203
+	 MIME-Version; b=NyxMcIK57T2TxCpnVeHWPhUic4RbAvfU5ZFTO38UqJXrBZAloFkNkn81iNXwVdOM6wSqmlSKhSnLwhm6Vn/Bq1U3XYbUkOsORhCJ3Cs1JXwr9ltC8Qny6L/txW8KPMBooSl2nIwwGXm5lU77C1p7CsEFn/FQmDQawg7kaeIXGV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=Ed86w+aX; arc=none smtp.client-ip=54.252.183.203
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="BVQuhYVs"
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="Ed86w+aX"
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 8FC5D1D45A;
-	Fri, 21 Aug 2026 06:08:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 8FC5D1D45A
+	by embla.dev.snart.me (Postfix) with ESMTP id D0DA91D45F;
+	Fri, 21 Aug 2026 06:08:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me D0DA91D45F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1787292484; bh=5rVdSxyqbmS2gwRTU5TLaS9XAytFQz3w3mFuy//ky8U=;
+	t=1787292485; bh=bbC4f2VUGbYb825YI28KGn2/H/NXh2T+RFuomrfjm74=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BVQuhYVs/wsROvOjTjUvD6JO10mAxFMAguJN1sVQwxJphDSUMdASZwC2W3vm3BFbw
-	 7/WvH6v7SLyp1t2koGEzCgn9gNVgcSvhq0P/+jUFsCfUiUJQev286w1JV09HVSgjLS
-	 6mRseMqKjwHClDsnML6kc8Encs72XK4gxA6lrqo0=
+	b=Ed86w+aXHgKbZbyuzPfenZU/GoKYnB7A0mr0yFMcfkgs7L2oShrGymx2Gr3RMjoCM
+	 lotXo+F3GZspvFS6Dou7PMcwQrLleuJO8KD6rYCcNrYRyewvUlphaO2FJ0YW0d31B4
+	 JB/IawlzYNPndJE6orcPknGxyw0hXga2FFSjPVMk=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id xh2MOkHrh2puSgAA8KYfjw:T2
-	(envelope-from <dxdt@dev.snart.me>); Fri, 21 Aug 2026 06:08:03 +0000
+	id xh2MOkHrh2puSgAA8KYfjw:T3
+	(envelope-from <dxdt@dev.snart.me>); Fri, 21 Aug 2026 06:08:04 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>
 Cc: Hyunchul Lee <hyc.lee@gmail.com>,
 	exfat@lists.linux.dev,
-	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH v2 1/2] libexfat: remove use of sscanf()
-Date: Fri, 21 Aug 2026 15:07:40 +0900
-Message-ID: <20260821060741.92772-2-dxdt@dev.snart.me>
+	David Timber <dxdt@dev.snart.me>,
+	Sam James <sam@gentoo.org>
+Subject: [PATCH v2 2/2] treewide: run internal library tests in "make check"
+Date: Fri, 21 Aug 2026 15:07:41 +0900
+Message-ID: <20260821060741.92772-3-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260821060741.92772-1-dxdt@dev.snart.me>
 References: <20260821060741.92772-1-dxdt@dev.snart.me>
@@ -49,362 +50,95 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Due to a bug inherent in the C programming language itself, the *scanf()
-functions are unsafe because they exhibit undefined behaviour in error
-cases. The recent patches introduced functions that use sscanf(),
-leading to some input sanitisation issues.
+The library tests were intended to be used internally for dev purposes,
+but users have suggested that they should be run when "make check" is
+run.
 
-Remove the use of sscanf() by replacing it with strto*() functions. Add
-additional exfat_parse_*() functions using macros. exfat_parse_*()
-functions including exfat_parse_ulong() do not modify errno on success.
+Hook up the test programs to the TESTS target. "./configure
+--enable-tests" now only hooks up the test programs to the
+noinst_PROGRAMS target. "./configure --enable-tests" is not required to
+run the test programs using "make check".
 
-Add tests to refactor exfat_cmp_kernel_ver().
+Fix stray "enable_tests=yes" output in ./configure script due to a
+missing comma.
 
-The environment variables that take boolean values are now properly
-validated before use. The boolean environment variables now accept
-non-decimal(%d) integer values.
+Run make check in the "Test building exfatprogs on arbitrary directory"
+step in the Github Actions CI pipelines.
 
-Link: https://github.com/exfatprogs/exfatprogs/pull/380#discussion_r3671267926
-Suggested-by: Hyunchul Lee <hyc.lee@gmail.com>
-Fixes: 5ab91a8d949b ("Do not run on pre-2.6 Linux kernel")
+Please do not close #391 as the fsck test cases should be run as well.
+This is not an easy fix and further work is being done to achieve this.
+
+Link: https://github.com/exfatprogs/exfatprogs/issues/391
+Suggested-by: Sam James <sam@gentoo.org>
 Signed-off-by: David Timber <dxdt@dev.snart.me>
 ---
- include/libexfat.h          |  41 ++++++++++++-
- lib/Makefile.am             |   5 +-
- lib/libexfat.c              | 117 ++++++++++++++++++++++++------------
- lib/tests/suite0001-parse.c | 101 +++++++++++++++++++++++++++++++
- 4 files changed, 222 insertions(+), 42 deletions(-)
- create mode 100644 lib/tests/suite0001-parse.c
+ .github/workflows/c-cpp.yml | 2 +-
+ configure.ac                | 2 +-
+ lib/Makefile.am             | 7 ++++---
+ lib/tests/run-all.sh        | 3 +++
+ 4 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/include/libexfat.h b/include/libexfat.h
-index b343621..effa13b 100644
---- a/include/libexfat.h
-+++ b/include/libexfat.h
-@@ -317,7 +317,46 @@ int exfat_o2c(struct exfat *exfat, off_t device_offset,
- bool exfat_heap_clus(struct exfat *exfat, clus_t clus);
- int exfat_root_clus_count(struct exfat *exfat);
- int read_boot_sect(struct exfat_blk_dev *bdev, struct pbr **bs);
--int exfat_parse_ulong(const char *s, unsigned long *out);
-+
-+#define DECLARE_PARSE_NUM(OUT_T, NAME) int NAME(const char *s, OUT_T *out)
-+DECLARE_PARSE_NUM(unsigned long, exfat_parse_ulong);
-+DECLARE_PARSE_NUM(unsigned long long, exfat_parse_ulonglong);
-+DECLARE_PARSE_NUM(long, exfat_parse_long);
-+DECLARE_PARSE_NUM(long long, exfat_parse_longlong);
-+#undef DECLARE_PARSE_NUM
-+
-+/*
-+ * Parse a software version string
-+ *
-+ * Process a string until it encounters an invalid character. If at least one
-+ * valid version number is parsed, output with the numbers parsed. Otherwise,
-+ * return -1 and errno is set to EINVAL.
-+ *
-+ * Note that the function was originally implemented to parse Linux kernel
-+ * version strings, which can be followed by an arbitrary user-supplied string
-+ * (aka. CONFIG_LOCALVERSION). Therefore, the function stops processing when it
-+ * encounters the trailing garbage(local version) in the string.
-+ *
-+ * For example, following strings are all valid:
-+ *
-+ *   "6.1.157-android14-11-gbd23337e42e7-ab14791245":	6.1.157
-+ *   "6.6.77-8.el10.altarch.aarch64+64k":		6.6.77
-+ *   "7.0.8-200.fc44.x86_64":				7.0.8
-+ *   "6.17.0-1019-aws":					6.17.0
-+ *
-+ * And including(although confusingly):
-+ *
-+ *   "2foo.6":		2.0.0
-+ *   "2.6foo.3":	2.6.0
-+ *   "2.":		2.0.0
-+ *   "2.6.":		2.6.0
-+ *
-+ * The Linux kernel versions are always in 3 numbers. However, the function also
-+ * accepts version strings with 1 and 2 numbers for future use and correctness.
-+ */
-+int exfat_parse_swver(const char *in, unsigned short *out);
-+int exfat_cmp_swver(const unsigned short *a, const unsigned short *b);
-+
- int exfat_check_name(__le16 *utf16_name, int len);
- /*
-  * Read back from the target device to confirm the successful write.
+diff --git a/.github/workflows/c-cpp.yml b/.github/workflows/c-cpp.yml
+index d332f04..a95f420 100644
+--- a/.github/workflows/c-cpp.yml
++++ b/.github/workflows/c-cpp.yml
+@@ -220,7 +220,7 @@ jobs:
+         BUILD_DIR="$(pwd)"
+         "${CONFIG_SCRIPT}"
+         make -j$((`nproc`+1))
+-        sudo make install
++        sudo make check install
+         popd
+ 
+         rm -rf "$BUILD_DIR"
+diff --git a/configure.ac b/configure.ac
+index ab6fb5d..99bad24 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -52,7 +52,7 @@ PKG_CHECK_MODULES([BLKID], [blkid >= 2.20], [AC_DEFINE([HAVE_BLKID], [1], [Defin
+ 	[PKG_CHECK_MODULES([EXT2_BLKID], [blkid], [AC_DEFINE([HAVE_EXT2_BLKID], [1], [Define if libblkid is from libext2])])])
+ 
+ AC_ARG_ENABLE([tests],
+-	AS_HELP_STRING([--enable-tests], [build internal test programs])
++	AS_HELP_STRING([--enable-tests], [always build internal test programs (not just for "make check")]),
+ 	[enable_tests=yes]
+ )
+ AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = xyes])
 diff --git a/lib/Makefile.am b/lib/Makefile.am
-index cdef6ef..90c09c1 100644
+index 90c09c1..4e9a183 100644
 --- a/lib/Makefile.am
 +++ b/lib/Makefile.am
-@@ -5,9 +5,12 @@ libexfat_a_SOURCES = libexfat.c exfat_fs.c exfat_dir.c utils.c
+@@ -3,9 +3,8 @@ noinst_LIBRARIES = libexfat.a
  
- if ENABLE_TESTS
+ libexfat_a_SOURCES = libexfat.c exfat_fs.c exfat_dir.c utils.c
  
--noinst_PROGRAMS = tests/suite0000-bitmap
-+noinst_PROGRAMS = tests/suite0000-bitmap tests/suite0001-parse
+-if ENABLE_TESTS
+-
+-noinst_PROGRAMS = tests/suite0000-bitmap tests/suite0001-parse
++check_PROGRAMS = tests/suite0000-bitmap tests/suite0001-parse
++TESTS = tests/suite0000-bitmap tests/suite0001-parse
  
  tests_suite0000_bitmap_SOURCES = tests/suite0000-bitmap.c
  tests_suite0000_bitmap_LDADD = libexfat.a
+@@ -13,4 +12,6 @@ tests_suite0000_bitmap_LDADD = libexfat.a
+ tests_suite0001_parse_SOURCES = tests/suite0001-parse.c
+ tests_suite0001_parse_LDADD = libexfat.a
  
-+tests_suite0001_parse_SOURCES = tests/suite0001-parse.c
-+tests_suite0001_parse_LDADD = libexfat.a
-+
++if ENABLE_TESTS
++noinst_PROGRAMS = $(check_PROGRAMS)
  endif
-diff --git a/lib/libexfat.c b/lib/libexfat.c
-index ff0b25b..9cbb17f 100644
---- a/lib/libexfat.c
-+++ b/lib/libexfat.c
-@@ -167,9 +167,9 @@ static int get_intbool_envvar(const char *name)
- 	const char *env = getenv(name);
+diff --git a/lib/tests/run-all.sh b/lib/tests/run-all.sh
+index 86e08da..332199a 100755
+--- a/lib/tests/run-all.sh
++++ b/lib/tests/run-all.sh
+@@ -1,4 +1,7 @@
+ #!/bin/sh
++# Note: this is only a convenience script for running test suites with Valgrind.
++# This is used in the CI pipelines(Github Actions). For normal cases, the tests
++# may be run with `make check` as well.
  
- 	if (env != NULL) {
--		int v = -1;
-+		long v = -1;
- 
--		if (sscanf(env, "%d", &v) == 1)
-+		if (exfat_parse_long(env, &v) == 0)
- 			return v != 0;
- 	}
- 
-@@ -466,39 +466,16 @@ static bool exfat_dir_has_child(const int at, const char *path)
- static int exfat_cmp_kernel_ver(const unsigned short *req)
+ main()
  {
- 	struct utsname uts;
--	unsigned short v[3] = { 0, };
--	unsigned long long nreq = 0, nhost = 0;
-+	unsigned short parsed[3];
- 	int ret;
- 
--	ret = uname(&uts);
--	if (ret)
--		return -1;
--
--	switch (count_dots(uts.release, 65)) {
--	case 0:
--		ret = sscanf(uts.release, "%hu", v) != 1;
--		break;
--	case 1:
--		ret = sscanf(uts.release, "%hu.%hu", v + 0, v + 1) != 2;
--		break;
--	default:
--		ret = sscanf(uts.release, "%hu.%hu.%hu", v + 0, v + 1, v + 2) != 3;
--	}
--	if (ret) {
--		errno = EINVAL;
-+	if (uname(&uts) || exfat_parse_swver(uts.release, parsed))
- 		return -1;
--	}
--
--	exfat_debug("Kernel version: %hu.%hu.%hu\n", v[0], v[1], v[2]);
- 
--	nreq  |= (unsigned long long)req[0] << 32;
--	nreq  |= (unsigned long long)req[1] << 16;
--	nreq  |= (unsigned long long)req[2];
--	nhost |= (unsigned long long)v[0]   << 32;
--	nhost |= (unsigned long long)v[1]   << 16;
--	nhost |= (unsigned long long)v[2];
-+	exfat_debug("Kernel version: %u.%u.%u\n", parsed[0], parsed[1], parsed[2]);
- 
--	return nreq > nhost ? 1 : 0;
-+	ret = exfat_cmp_swver(req, parsed);
-+	return ret > 0 ? 1 : 0;
- }
- 
- int exfat_get_blk_dev_info(struct exfat_user_input *ui,
-@@ -1959,20 +1936,80 @@ err:
- 	return err;
- }
- 
--int exfat_parse_ulong(const char *s, unsigned long *out)
--{
--	char *endptr;
--
--	errno = 0;
-+/* Abstraction for exfat_parse_*() */
-+#define DEFINE_PARSE_NUM(OUT_T, NAME, STRTO_F)		\
-+	int NAME(const char *s, OUT_T *out)		\
-+	{						\
-+		const int saved_errno = errno;		\
-+		int ret = 0;				\
-+		char *endptr = NULL;			\
-+							\
-+		errno = 0;				\
-+		*out = STRTO_F(s, &endptr, 0);		\
-+		if (errno)				\
-+			ret = -errno;			\
-+		if (s == endptr || *endptr != '\0')	\
-+			ret = -EINVAL;			\
-+							\
-+		errno = saved_errno;			\
-+		return ret;				\
-+	}
-+
-+DEFINE_PARSE_NUM(unsigned long, exfat_parse_ulong, strtoul)
-+DEFINE_PARSE_NUM(unsigned long long, exfat_parse_ulonglong, strtoull)
-+DEFINE_PARSE_NUM(long, exfat_parse_long, strtol)
-+DEFINE_PARSE_NUM(long long, exfat_parse_longlong, strtoll)
-+
-+#undef DEFINE_PARSE_NUM
-+
-+int exfat_parse_swver(const char *in, unsigned short *out)
-+{
-+	const int saved_errno = errno;
-+	char *endptr = NULL;
-+	unsigned long v;
-+	unsigned short ret[3] = {0};
-+
-+	if (*in == 0)
-+		goto inval;
-+
-+	for (size_t i = 0; i < 3 && *in != 0; i++) {
-+		errno = 0;
-+		v = strtoul(in, &endptr, 10);
-+		if (errno != 0 || in == endptr || v > UINT16_MAX)
-+			goto inval;
-+		ret[i] = (unsigned short)v;
-+
-+		if (*endptr == '.')
-+			in = endptr + 1;
-+		else
-+			break;
-+	}
- 
--	*out = strtoul(s, &endptr, 0);
-+	out[0] = ret[0];
-+	out[1] = ret[1];
-+	out[2] = ret[2];
-+	errno = saved_errno;
-+	return 0;
-+inval:
-+	errno = EINVAL;
-+	return -1;
-+}
- 
--	if (errno)
--		return -errno;
-+int exfat_cmp_swver(const unsigned short *in_a, const unsigned short *in_b)
-+{
-+	uint64_t a = 0, b = 0;
- 
--	if (s == endptr || *endptr != '\0')
--		return -EINVAL;
-+	a |= (uint64_t)in_a[0] << 32;
-+	a |= (uint64_t)in_a[1] << 16;
-+	a |= (uint64_t)in_a[2];
-+	b |= (uint64_t)in_b[0] << 32;
-+	b |= (uint64_t)in_b[1] << 16;
-+	b |= (uint64_t)in_b[2];
- 
-+	if (a < b)
-+		return -1;
-+	else if (a > b)
-+		return 1;
- 	return 0;
- }
- 
-diff --git a/lib/tests/suite0001-parse.c b/lib/tests/suite0001-parse.c
-new file mode 100644
-index 0000000..26cb906
---- /dev/null
-+++ b/lib/tests/suite0001-parse.c
-@@ -0,0 +1,101 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+#include "exfat_ondisk.h"
-+#include "libexfat.h"
-+
-+#include <assert.h>
-+
-+#define SET_SWVER(o, a, b, c)		\
-+	do {				\
-+		(o)[0] = (a);		\
-+		(o)[1] = (b);		\
-+		(o)[2] = (c);		\
-+	} while (0)
-+
-+static void test_swver_cmp(void)
-+{
-+	unsigned short first[3], second[3];
-+#define CMP_VER(a, b, c, CMP, d, e, f)\
-+	do {								\
-+		SET_SWVER(first, (a), (b), (c));			\
-+		SET_SWVER(second, (d), (e), (f));			\
-+		assert(exfat_cmp_swver(first, second) CMP 0);		\
-+	} while (0)
-+
-+	CMP_VER(0, 0, 0, ==, 0, 0, 0);
-+	CMP_VER(2, 6, 0, ==, 2, 6, 0);
-+	CMP_VER(1, 2, 3, ==, 1, 2, 3);
-+
-+	CMP_VER(2, 6, 0, >, 2, 0, 0);
-+	CMP_VER(2, 6, 0, >, 2, 4, 0);
-+	CMP_VER(2, 6, 0, >, 2, 4, 999);
-+
-+	CMP_VER(0, 0, 1, <, 65535, 65535, 65535);
-+	CMP_VER(2, 6, 0, <, 2, 6, 1);
-+	CMP_VER(2, 6, 0, <, 3, 0, 0);
-+	CMP_VER(2, 6, 0, <, 7, 0, 0);
-+	CMP_VER(2, 6, 0, <, 7, 2, 0);
-+	CMP_VER(2, 6, 0, <, 7, 1, 8);
-+	CMP_VER(2, 6, 0, <, 6, 18, 44);
-+	CMP_VER(2, 6, 0, <, 6, 12, 103);
-+	CMP_VER(2, 6, 0, <, 6, 6, 151);
-+	CMP_VER(2, 6, 0, <, 6, 1, 182);
-+	CMP_VER(2, 6, 0, <, 5, 15, 215);
-+	CMP_VER(2, 6, 0, <, 5, 10, 0);
-+}
-+
-+static void test_swver_parse(void)
-+{
-+	unsigned short ver[3];
-+	int ret;
-+#define EXPECT_VER(s, a, b, c)\
-+	do {									\
-+		ret = exfat_parse_swver((s), ver);				\
-+		assert(ret == 0);						\
-+		assert((a) == ver[0] && (b) == ver[1] && (c) == ver[2]);	\
-+	} while (0)
-+
-+	assert(exfat_parse_swver("", ver));
-+	assert(exfat_parse_swver("asd", ver));
-+	assert(exfat_parse_swver("asd-1.2.3", ver));
-+	assert(exfat_parse_swver("0.0.0", ver) == 0);
-+	assert(exfat_parse_swver("7.1.8-200.fc44.x86_64", ver) == 0);
-+	assert(exfat_parse_swver("2.6.0", ver) == 0);
-+	assert(exfat_parse_swver("2.6.0aaaa", ver) == 0);
-+
-+	EXPECT_VER("6.1.157-android14-11-gbd23337e42e7-ab14791245", 6, 1, 157);
-+	EXPECT_VER("5.4.242-32179049-abG990EXXSNHZF5", 5, 4, 242);
-+	EXPECT_VER("6.6.77-8.el10.altarch.aarch64+64k", 6, 6, 77);
-+	EXPECT_VER("7.1.8-200.fc44.x86_64", 7, 1, 8);
-+	EXPECT_VER("7.0.8-200.fc44.x86_64", 7, 0, 8);
-+	EXPECT_VER("6.17.0-1019-aws", 6, 17, 0);
-+	EXPECT_VER("6.18.39-0-virt", 6, 18, 39);
-+	EXPECT_VER("0.18.39-0-virt", 0, 18, 39);
-+	EXPECT_VER("6.0.39-0-virt", 6, 0, 39);
-+	EXPECT_VER("2foo.6", 2, 0, 0);
-+	EXPECT_VER("2.6foo.3", 2, 6, 0);
-+	EXPECT_VER("2.", 2, 0, 0);
-+	EXPECT_VER("2.6.", 2, 6, 0);
-+	EXPECT_VER("0", 0, 0, 0);
-+	EXPECT_VER("42", 42, 0, 0);
-+
-+	/*
-+	 * Note that the following case doesn't happen on Linux because the
-+	 * Linux kernel always returns a version in three numbers:
-+	 *
-+	 *   "7.0.0" not "7" (although the tarball would be named "7.0")
-+	 *   "7.1.0" not "7.1" (although the tarball would be named "7.1")
-+	 *
-+	 * The following test is only for correctness in implementation so that
-+	 * there's no confusion in the future with values from other software.
-+	 */
-+	EXPECT_VER("6.77-8.el10.altarch.aarch64+64k", 6, 77, 0);
-+#undef EXPECT_VER
-+}
-+
-+int main(void)
-+{
-+	test_swver_cmp();
-+	test_swver_parse();
-+
-+	return 0;
-+}
 -- 
 2.55.0
 
