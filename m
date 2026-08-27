@@ -1,43 +1,43 @@
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC5B0385D6A
-	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 20:41:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6A8C3911C9
+	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 20:41:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787863320; cv=none; b=ddHkKX5oGmGOG4c7TRivrIPy0UMhe+jHyfh/ZlOg7tVtjqPhBweL3QvNm/5A6NRmJBoilMBNqwtvALjGv2f4IE1xHBk3B+jxaavw6UlNcmlsy8QExI+JyaHoi6h09Nvci0hxPsvEDB+xUohVvt5yTinC/rs8lGoCsnICPR6G7fY=
+	t=1787863320; cv=none; b=nWqOxIKJv7mKkqsCD0KcGVMU8b76CinKpbeUZ7paYIyHJ9TpWhhNi3bokESrvXUdka1u34eV/W/M7YTpzdo+xhhtESuhZZMSBySH7atPSjB7wyTdBBvtOzxQNyeJIaS4GWdjjVlPEHknaqsS2zpzjkhm18QCWZC6Tn8XAy0FIMY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1787863320; c=relaxed/simple;
-	bh=QXcrRku7MjDn1264OY5o2ugt2l6IOHyNgUibjWA7WvM=;
+	bh=C4D0FZEd8gtYPchm9Fdkd51EJ/4hQwkWGHjaeRl7HIg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LF/imqV+ilykHwlpKbmG/CeBCRFziOkNkV6kGJN9YOhvIr31NWs91xAIKfdx0PjW3/t/KUPdAyYAJ8ALcS+e0IaBKKBu4lRvVUTdY/cuPuQ/OxHoS5Tc3qNeKQcJQ1vzNxJI0VBsAhf/FYgySdm+PmW1qoXj9+Gu+DVIHo933UM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=YRjx/ZRq; arc=none smtp.client-ip=54.252.183.203
+	 MIME-Version; b=o4nenvWhNjBeFBAvjoDel6msEENue3YuxGDP8v8YpwvwVojZciYJK2EWFFP5Axh0p+fhyZK//82lbP6LJFAPezXKuWBiGwGnzEfiBJhJQFmNC4uveVN4kL6wtL4UYct9NqgSvxwk1FBTGYCsVLhXpgN2+N6usIbaDv5epmTB6+w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=YoK4UJig; arc=none smtp.client-ip=54.252.183.203
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="YRjx/ZRq"
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="YoK4UJig"
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 1AC8727B37;
-	Thu, 27 Aug 2026 20:41:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 1AC8727B37
+	by embla.dev.snart.me (Postfix) with ESMTP id 8FAE127B35;
+	Thu, 27 Aug 2026 20:41:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 8FAE127B35
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1787863303; bh=QXcrRku7MjDn1264OY5o2ugt2l6IOHyNgUibjWA7WvM=;
+	t=1787863300; bh=C4D0FZEd8gtYPchm9Fdkd51EJ/4hQwkWGHjaeRl7HIg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YRjx/ZRqOFZaMAQBwfmwbgi4KqL0X0tdFKmSSZT8SKjNYEZvB+50HQ5OcFpyeoUkn
-	 6MUMFX32iNla52EvJjdpwLFyi7Q5SBOHyiXEQp/9/SRu74dRHMm29G5iZ9tBRLYkAX
-	 x33vzjzBgvRU9fD6/JmlYowprlC88HNIVmdYRBU8=
+	b=YoK4UJigVvAsJqLZkq2Pt0aE2EP5w6KC+cA7c5AbfVOHUIBze2KYWDebjchJwHIFZ
+	 xUYesuKQJDWudw1WquWnxEY+/c1+2JXhjtxSC4lQeYpfdwi+IX7DSgHLUR4flDtXmA
+	 QkFkEfFXfdRk7JflSiUUoXklU7amvC6tIdJV4xjY=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id rDNIOvygkGosiAIA8KYfjw:T8
-	(envelope-from <dxdt@dev.snart.me>); Thu, 27 Aug 2026 20:41:41 +0000
+	id rDNIOvygkGosiAIA8KYfjw:T6
+	(envelope-from <dxdt@dev.snart.me>); Thu, 27 Aug 2026 20:41:39 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Hyunchul Lee <hyc.lee@gmail.com>
 Cc: exfat@lists.linux.dev,
 	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH v0 7/8] mkfs: use BLKZEROOUT for disk zeroing out
-Date: Fri, 28 Aug 2026 05:39:53 +0900
-Message-ID: <20260827204056.222099-8-dxdt@dev.snart.me>
+Subject: [PATCH v0 5/8] libexfat: add exfat_secerase_blocks() and exfat_zeroout_blocks()
+Date: Fri, 28 Aug 2026 05:39:51 +0900
+Message-ID: <20260827204056.222099-6-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260827204056.222099-1-dxdt@dev.snart.me>
 References: <20260827204056.222099-1-dxdt@dev.snart.me>
@@ -47,281 +47,207 @@ List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-To prevent meaningless buffer copy from userspace to kernel for zeroing
-out the entire disk, use BLKZEROOUT ioctl.
+Add the wrapper functions for BLKSECDISCARD and BLKZEROOUT. In IO stats,
+BLKSECDISCARD and BLKDISCARD are accounted using the same variables
+because, in practice, only either one of them will be used in a single
+program run. As a way of determining which one is used, the bit
+EXFAT_IOSTAT_SECURE is set in io_stat.err to save memory.
 
-If the underlying transport protocol has efficient method of conveying
-zeros such as SCSI WRITE_SAME and NVME Write Zeroes, the underlying
-kernel driver should be able to use the command to zero out the regions
-of the storage device. If not, the kernel should fallback to issuing
-write command with buffer filled with zeroes which is still a win since
-no significant amount of data is copied between the user and kernel
-space.
+Do not require BLKDISCARD at compile time to support libc from kernel
+version 2.6.x era.
 
-Abstract the existing stepping algorithm as the new function
-iterate_over_disk() for BLKDISCARD and BLKZEROOUT. Select the write size
-using a crude linear algorithm based on the size of the target device.
-The possible values are generally much larger than the previous fixed
-value(cluster size) for greater efficiency.
-
-If run with the option -q, be quiet. If the option -v is used more than
-once, interpret that as raising the print level to and above
-EXFAT_TRACE0. In order to trace the progress of BLKDISCARD and
-BLKZEROOUT of the entire disk, run `mkfs.exfat -vv ...`
+No functional change in the utils as of yet.
 
 Signed-off-by: David Timber <dxdt@dev.snart.me>
 ---
- mkfs/mkfs.c | 165 ++++++++++++++++++++++++++++++++++++----------------
- mkfs/mkfs.h |   1 +
- 2 files changed, 115 insertions(+), 51 deletions(-)
+ include/libexfat.h |  9 +++++
+ lib/libexfat.c     | 94 ++++++++++++++++++++++++++++++++++++++--------
+ 2 files changed, 87 insertions(+), 16 deletions(-)
 
-diff --git a/mkfs/mkfs.c b/mkfs/mkfs.c
-index 58f8ace..ea67bf5 100644
---- a/mkfs/mkfs.c
-+++ b/mkfs/mkfs.c
-@@ -1135,29 +1135,124 @@ static int exfat_build_mkfs_info(struct exfat_blk_dev *bd, struct exfat_user_inp
+diff --git a/include/libexfat.h b/include/libexfat.h
+index 554b03d..9dc1542 100644
+--- a/include/libexfat.h
++++ b/include/libexfat.h
+@@ -299,7 +299,16 @@ bool exfat_write_full(int fd, const void *buf, size_t size, off_t offset);
+ int exfat_write_zero(int fd, off_t size, off_t offset);
+ int exfat_write_zero2(int fd, off_t size, off_t offset, size_t bs);
+ int exfat_fsync(int fd);
++/* BLKDISCARD wrapper */
+ int exfat_discard_blocks(int fd, uint64_t start, uint64_t len);
++/*
++ * BLKSECDISCARD wrapper (for sdcards that support it)
++ *
++ * Link: https://lwn.net/Articles/395147/
++ */
++int exfat_secerase_blocks(int fd, uint64_t start, uint64_t len);
++/* BLKZEROOUT wrapper (for devices that support it) */
++int exfat_zeroout_blocks(int fd, uint64_t start, uint64_t len);
+ 
+ size_t exfat_utf16_len(const __le16 *str, size_t max_size);
+ ssize_t exfat_utf16_enc(const char *in_str, __u16 *out_str, size_t out_size);
+diff --git a/lib/libexfat.c b/lib/libexfat.c
+index 0fe989f..9cba484 100644
+--- a/lib/libexfat.c
++++ b/lib/libexfat.c
+@@ -99,6 +99,10 @@ const char *dummy_bootcode_msg = DEFAULT_DUMMY_BOOTCODE_MSG;
+ #define EXFAT_IOSTAT_WRITE	(0x02)
+ #define EXFAT_IOSTAT_DISCARD	(0x04)
+ #define EXFAT_IOSTAT_SYNC	(0x08)
++#define EXFAT_IOSTAT_ERRMASK	(0x0F)
++#define EXFAT_IOSTAT_ZEROOUT	(0x10)
++/* When set in err, BLKSECDISCARD was involved in discard stats */
++#define EXFAT_IOSTAT_SECURE	(0x20)
+ 
+ static struct {
+ 	/* --- cacheline #1 --- */
+@@ -116,6 +120,10 @@ static struct {
+ 		off_t len;
+ 		struct timespec time;
+ 	} discard;
++	struct {
++		off_t len;
++		struct timespec time;
++	} zero;
+ 	int err;
+ 	int ovf;
+ } io_stat;
+@@ -864,7 +872,7 @@ int exfat_fsync(int fd)
+ 	return ret;
+ }
+ 
+-int exfat_discard_blocks(int fd, uint64_t start, uint64_t len)
++static int issue_blockrange_ioctl(int fd, int cmd, uint64_t start, uint64_t len)
+ {
+ 	uint64_t range[2] = { start, len };
+ #if !EXFAT_NO_IOSTATS
+@@ -872,19 +880,66 @@ int exfat_discard_blocks(int fd, uint64_t start, uint64_t len)
+ 
+ 	exfat_getts(&ts_a);
+ #endif
+-	if (ioctl(fd, BLKDISCARD, &range) < 0)
++	if (ioctl(fd, cmd, &range) < 0)
+ 		return errno;
+ #if !EXFAT_NO_IOSTATS
+ 	exfat_getts(&ts_b);
+-
+ 	exfat_tssub(&ts_b, &ts_a, &ts_b);
+-	exfat_tsadd(&ts_b, &io_stat.discard.time, &io_stat.discard.time);
+-	io_stat.discard.len = exfat_iostat_ofsadd(io_stat.discard.len, len, EXFAT_IOSTAT_DISCARD);
++
++#if defined(BLKSECDISCARD) && defined(BLKDISCARD)
++	if (cmd == BLKSECDISCARD) {
++		io_stat.err |= EXFAT_IOSTAT_SECURE;
++		cmd = BLKDISCARD;
++	}
++#endif
++	switch (cmd) {
++#ifdef BLKDISCARD
++	case BLKDISCARD:
++		exfat_tsadd(&ts_b, &io_stat.discard.time, &io_stat.discard.time);
++		io_stat.discard.len = exfat_iostat_ofsadd(io_stat.discard.len,
++							  len, EXFAT_IOSTAT_DISCARD);
++		break;
++#endif
++#ifdef BLKZEROOUT
++	case BLKZEROOUT:
++		exfat_tsadd(&ts_b, &io_stat.zero.time, &io_stat.zero.time);
++		io_stat.zero.len = exfat_iostat_ofsadd(io_stat.zero.len, len,
++						       EXFAT_IOSTAT_ZEROOUT);
++		break;
++#endif
++	}
+ #endif
+ 
  	return 0;
  }
  
-+/*
-+ * The block discarding/zeroing happens in smaller batches so it can be
-+ * interrupted prematurely
-+ */
-+static int iterate_over_disk(int fd, uint64_t len, const uint64_t step,
-+		int (*foreach_step)(int fd, uint64_t start, uint64_t len),
-+		const char *human_name, const char *api_name)
++int exfat_discard_blocks(int fd, uint64_t start, uint64_t len)
 +{
-+	uint64_t offset = 0;
-+	uint64_t tmp_step;
-+	int err;
-+
-+	/* The same check seen in the kernel */
-+	assert(step && (step & 511) == 0);
-+
-+	while (offset < len) {
-+		tmp_step = len - offset;
-+		if (step < tmp_step)
-+			tmp_step = step;
-+
-+		err = foreach_step(fd, offset, tmp_step);
-+		/*
-+		 * We intentionally ignore errors from the ioctl. It is not
-+		 * necessary for the mkfs functionality but just an
-+		 * optimization. However we should stop on error.
-+		 */
-+		if (err == 0) {
-+			if (offset == 0) {
-+				if (human_name != NULL)
-+					exfat_info("%s blocks: ", human_name);
-+				exfat_debug("%s: ", api_name);
-+			}
-+			exfat_trace(0, "%"PRIu64"-%"PRIu64"\n", offset, offset + tmp_step);
-+			fflush(stdout);
-+		} else {
-+			exfat_debug("%s: %s\n", api_name, strerror(err));
-+			if (offset > 0 && human_name != NULL)
-+				exfat_info("\n");
-+			return err;
-+		}
-+
-+		offset += tmp_step;
-+	}
-+	if (offset > 0 && human_name != NULL)
-+		exfat_info("done\n");
-+
-+	return 0;
++#ifdef BLKDISCARD
++	return issue_blockrange_ioctl(fd, BLKDISCARD, start, len);
++#else
++	return ENOSYS;
++#endif
 +}
 +
- static int exfat_zero_out_disk(struct exfat_blk_dev *bd,
--		struct exfat_user_input *ui)
-+		struct exfat_user_input *ui, const bool quiet)
- {
- 	int ret = 0;
- 	bool mapped = false;
- 	const void *zm = NULL;
--	const size_t iosize = ui->cluster_size;
-+	size_t iosize;
- 	unsigned long long target_zerolen;
- 
--	assert(iosize > 0);
-+	assert(ui->cluster_size > 0);
- 
- 	if (ui->quick)
- 		target_zerolen = MIN(bd->size, EXFAT_HEAD_ZERO_OUT);
- 	else
- 		target_zerolen = bd->size;
- 
--	exfat_info("Zeroing out %llu bytes: ", target_zerolen);
--	fflush(stdout);
-+	if (!quiet) {
-+		exfat_info("Zeroing out %llu bytes: ", target_zerolen);
-+		fflush(stdout);
-+	}
- 
-+	if (bd->isblk) {
-+/*
-+ * When mmap() fails, the memory will be calloc()'d so we can't be so generous
-+ * here.
-+ *
-+ * The write speed of SSDs goes up to few TB's. 32MB may seem so small, but
-+ * that's still 32K syscalls/NVME commands per second, which is not that much on
-+ * modern systems.
-+ *
-+ * Can't go over 64MB because modern consumer HDDs are still stuck at ~100MB/s.
-+ */
-+		if (bd->size >= 1024ULL * GB)
-+			/* >= 1TB: 32MB */
-+			iosize = 32 * MB;
-+		else if (bd->size >= 256ULL * GB)
-+			/* >= 256GB: 16MB */
-+			iosize = 16 * MB;
-+		else if (bd->size >= 64ULL * GB)
-+			/* >= 64GB: 8MB */
-+			iosize = 8 * MB;
-+		else
-+			/* 1MB("legacy" devices) */
-+			iosize = 1 * MB;
++int exfat_secerase_blocks(int fd, uint64_t start, uint64_t len)
++{
++#ifdef BLKSECDISCARD
++	return issue_blockrange_ioctl(fd, BLKSECDISCARD, start, len);
++#else
++	return ENOSYS;
++#endif
++}
 +
-+/*
-+ * Notes on cache coherency issues with BLKZEROOUT ioctl
-+ *
-+ * Historically, it seems that the Linux kernel suffered from cache coherency
-+ * issues with BLKZEROOUT. However, it shouldn't affect mkfs.exfat because mkfs
-+ * doesn't read the existing data on the target device after performing foreign
-+ * filesystem detection. Except for the case of -C option, mkfs only writes to
-+ * the device. For -C option, mkfs accesses the device via O_DIRECT so it's not
-+ * affected by the cache coherency issue.
-+ *
-+ * Link: https://lwn.net/Articles/702632/
-+ */
-+		ret = iterate_over_disk(bd->dev_fd, target_zerolen, iosize,
-+				exfat_zeroout_blocks, NULL, "BLKZEROOUT");
-+		if (ret == 0)
-+			goto done;
-+	}
++int exfat_zeroout_blocks(int fd, uint64_t start, uint64_t len)
++{
++#ifdef BLKZEROOUT
++	return issue_blockrange_ioctl(fd, BLKZEROOUT, start, len);
++#else
++	return ENOSYS;
++#endif
++}
 +
-+	/* File and ENOTTY fallback: this is buffered I/O */
-+	iosize = ui->cluster_size;
- 	ret = exfat_write_zero2(bd->dev_fd, target_zerolen, 0, iosize);
- 	if (ret)
- 		goto out;
--
-+done:
- 	if (ui->verify) {
- 		off_t ofs = 0, rem = target_zerolen;
- 
-@@ -1185,7 +1280,8 @@ out:
- 	if (ret)
- 		exfat_err("write failed(errno : %d)\n", errno);
- 	else {
--		exfat_info("done\n");
-+		if (!quiet)
-+			exfat_info("done\n");
- 		exfat_debug("zero out written size : %llu\n", target_zerolen);
- 	}
- 
-@@ -1270,53 +1366,17 @@ alloc_err:
- }
- 
- static void exfat_discard_dev(struct exfat_blk_dev *bd,
--		struct exfat_user_input *ui)
-+		struct exfat_user_input *ui, const bool quiet)
+ size_t exfat_utf16_len(const __le16 *str, size_t max_size)
  {
--	uint64_t offset = 0;
--	uint64_t tmp_step;
--	int err;
--	/* Discard the device 2G at a time */
--	const uint64_t step = 2ULL << 30;
--	const uint64_t count = bd->num_sectors * bd->sector_size;
--
- 	if (!ui->discard || !bd->isblk) {
- 		exfat_debug("no-discard requested or the device is a file\n");
+ 	size_t i = 0;
+@@ -2234,36 +2289,43 @@ void exfat_print_iostat(void)
+ 	if (get_intbool_envvar("EXFAT_PRINT_IOSTAT") <= 0)
  		return;
- 	}
  
--	/*
--	 * The block discarding happens in smaller batches so it can be
--	 * interrupted prematurely
--	 */
--	while (offset < count) {
--		tmp_step = count - offset;
--		if (step < tmp_step)
--			tmp_step = step;
--
--		err = exfat_discard_blocks(bd->dev_fd, offset, tmp_step);
--		/*
--		 * We intentionally ignore errors from the discard ioctl. It is
--		 * not necessary for the mkfs functionality but just an
--		 * optimization. However we should stop on error.
--		 */
--		if (err == 0) {
--			if (offset == 0) {
--				exfat_info("Discarding blocks: ");
--				exfat_debug("BLKDISCARD: ");
--			}
--			exfat_debug("%"PRIu64"-%"PRIu64" ", offset, offset + tmp_step);
--			fflush(stdout);
--		} else {
--			exfat_debug("BLKDISCARD: %s\n", strerror(err));
--			if (offset > 0)
--				exfat_info("\n");
--			return;
--		}
--
--		offset += tmp_step;
--	}
--	if (offset > 0)
--		exfat_info("done\n");
-+	/* Discard the device 2G at a time */
-+	iterate_over_disk(bd->dev_fd, bd->size, 2ULL << 30,
-+			exfat_discard_blocks, quiet ? NULL : "Discarding",
-+			"BLKDISCARD");
- }
+-	invalid = io_stat.err | io_stat.ovf;
++	invalid = (io_stat.err & EXFAT_IOSTAT_ERRMASK) | io_stat.ovf;
+ 	exfat_tsadd(&total, &io_stat.time.read, &total);
+ 	exfat_tsadd(&total, &io_stat.time.write, &total);
+ 	exfat_tsadd(&total, &io_stat.time.sync, &total);
+ 	exfat_tsadd(&total, &io_stat.discard.time, &total);
++	exfat_tsadd(&total, &io_stat.zero.time, &total);
  
- static int make_exfat(struct exfat_blk_dev *bd, struct exfat_user_input *ui)
-@@ -1560,7 +1620,10 @@ int main(int argc, char *argv[])
- 			quiet = true;
- 			break;
- 		case 'v':
--			print_level = EXFAT_DEBUG;
-+			if (print_level < EXFAT_DEBUG)
-+				print_level = EXFAT_DEBUG;
-+			else
-+				print_level++;
- 			break;
- 		case '?':
- 		case 'h':
-@@ -1652,13 +1715,13 @@ int main(int argc, char *argv[])
- 	if (ret)
- 		goto out;
- 
--	exfat_discard_dev(&bd, &ui);
-+	exfat_discard_dev(&bd, &ui, quiet);
- 	/*
- 	 * Zeroing out still needs to be conducted as per JESD84-B51 6.6.9:
- 	 * "content of an explicitly erased memory range shall be ‘0’ or ‘1’
- 	 * depending on different memory technology,"
- 	 */
--	ret = exfat_zero_out_disk(&bd, &ui);
-+	ret = exfat_zero_out_disk(&bd, &ui, quiet);
- 	if (ret)
- 		goto out;
- 
-diff --git a/mkfs/mkfs.h b/mkfs/mkfs.h
-index ffebf82..c93685d 100644
---- a/mkfs/mkfs.h
-+++ b/mkfs/mkfs.h
-@@ -10,6 +10,7 @@
- 
- #define MIN_NUM_SECTOR			(2048)
- #define EXFAT_MAX_CLUSTER_SIZE		(32*1024*1024)
-+/* MUST be multiple of 512 */
- #define EXFAT_HEAD_ZERO_OUT		(0x10000)
- 
- #define EXFAT_GPT_ENTRY_SIZE		(128UL)
+ 	fprintf(stderr, "IO stats:\n"
+-			"  read:    %ld.%06lds %lld %s%s\n"
+-			"  write:   %ld.%06lds %lld %s%s\n"
+-			"  discard: %ld.%06lds %lld %s\n"
+-			"  sync:    %ld.%06lds %s\n"
++			"  read:    %ld.%06lds %lld%s%s\n"
++			"  write:   %ld.%06lds %lld%s%s\n"
++			"  discard: %ld.%06lds %lld%s%s\n"
++			"  zero:    %ld.%06lds %lld%s\n"
++			"  sync:    %ld.%06lds%s\n"
+ 			"  total:   %ld.%06lds\n"
+ 			"  valid:   %s\n",
+ 			(long)io_stat.time.read.tv_sec,
+ 			(long)io_stat.time.read.tv_nsec / 1000,
+ 			(long long)io_stat.len.read,
+-			io_stat.err & EXFAT_IOSTAT_READ ? "ERR" : "",
+-			io_stat.ovf & EXFAT_IOSTAT_READ ? "OVF" : "",
++			io_stat.err & EXFAT_IOSTAT_READ ? " ERR" : "",
++			io_stat.ovf & EXFAT_IOSTAT_READ ? " OVF" : "",
+ 			(long)io_stat.time.write.tv_sec,
+ 			(long)io_stat.time.write.tv_nsec / 1000,
+ 			(long long)io_stat.len.write,
+-			io_stat.err & EXFAT_IOSTAT_WRITE ? "ERR" : "",
+-			io_stat.ovf & EXFAT_IOSTAT_WRITE ? "OVF" : "",
++			io_stat.err & EXFAT_IOSTAT_WRITE ? " ERR" : "",
++			io_stat.ovf & EXFAT_IOSTAT_WRITE ? " OVF" : "",
+ 			(long)io_stat.discard.time.tv_sec,
+ 			(long)io_stat.discard.time.tv_nsec / 1000,
+ 			(long long)io_stat.discard.len,
+-			io_stat.ovf & EXFAT_IOSTAT_DISCARD ? "OVF" : "",
++			io_stat.err & EXFAT_IOSTAT_SECURE ? " SEC" : "",
++			io_stat.ovf & EXFAT_IOSTAT_DISCARD ? " OVF" : "",
++			(long)io_stat.zero.time.tv_sec,
++			(long)io_stat.zero.time.tv_nsec / 1000,
++			(long long)io_stat.zero.len,
++			io_stat.ovf & EXFAT_IOSTAT_ZEROOUT ? " OVF" : "",
+ 			(long)io_stat.time.sync.tv_sec,
+ 			(long)io_stat.time.sync.tv_nsec / 1000,
+-			io_stat.err & EXFAT_IOSTAT_SYNC ? "ERR" : "",
++			io_stat.err & EXFAT_IOSTAT_SYNC ? " ERR" : "",
+ 			(long)total.tv_sec,
+ 			(long)total.tv_nsec / 1000,
+ 			invalid ? "false" : "true");
 -- 
 2.55.0
 
