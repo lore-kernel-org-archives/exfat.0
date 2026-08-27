@@ -1,90 +1,90 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 042F126158B
-	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 06:55:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69D593FD12A
+	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 14:51:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787813704; cv=none; b=XfjEc+YwkVEmySOSYY222WFfPd/uSLLDPpc4dzZ6cEqmgihsZRwm9dZqEbbw2x/no+mwMBXu9IC/C0Nts6g9i/5q+qPcMmwUK3Xe1N+ayrTUTOkPsj/+tGCLhmIypcUyv0U1mSeK16KqpJTpXRLgW0Jtz+xpduTOKQh65wEWykw=
+	t=1787842299; cv=none; b=bzxPIkmNDn+MbaJE0M7je3YCv0gHUodjqCkBi7rrCFUSmUtO2GN8QIL/eCrx9u7mxXgj5gXF9YFLNKX5vX/fiErtk6PYy0ChNHXFhghrR+1n/Rj8xfM2NS4W8tO4fSLQLHQ7/S7e/t8DF0cWmX4gMP14bCmpBfNzuLnP6qVr9ns=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787813704; c=relaxed/simple;
-	bh=4v0wsZQBgOoxIfhCPkKxsnwpzY7s7D5GN09eNeSOc2I=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=n5KazrfK81q/QaK6w0z2aoF9MblM5oYkdRZGkdoOcEixyxRRs4YEzwRwDSQ03d5OfTfPx/NupYbBEBfxfFNG2KdXgwdW3uhwInAnAgP1C41y/yVpll09psijBSCvxUJkdSaRq0KfquLAZXg5MWnJlIfRf1eTZ/VGxN+ZsawAI98=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YvjNQCdO; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787842299; c=relaxed/simple;
+	bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=C8IZkOMXlSSzO9OitWFaWJss7prcC1RX9IL5Me5REyzUTU+Xd79HyhcUse8o+23CDfTnBwOSwljOWzXj4vxXFR+AiWU1AHEyUkl09fuqBQ437T64HN8iHnnyiHAMlRNpBG5UQvKNgnQIN1q6YziAui80fhlzfbmyyiV9oLM6Qo0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aqNJl1tf; arc=none smtp.client-ip=209.85.214.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YvjNQCdO"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7028D1F00A3A
-	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 06:55:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787813702;
-	bh=r/roSa9GGsZfdTA9/z5YLVUXMOK4nzv/ktueYonYa78=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=YvjNQCdOsCrehbUOr44HypB45KQO2nXQTp7XZq4KLZZeZGtpGeszID9FXWIUrqbCQ
-	 Zcom/xgZ7IwR/6KvmWZinrBI+CIrwZZGMT5d8u2pPh/ODgVDvv1WIuTsnEADi0tAFu
-	 Eu76vnPhEqGaItV5sSub/tay7JuVvRbUp6LDDf+/QrOic3zKc+VK4Yk63Sdfrx1lv+
-	 BwO43f8dGCkpnA0EWrW69M849Fy5KMpsiLUhnfgNwSf3xGh5XXvFiVTM7K410V5un3
-	 A8xPxp7oPT+4ZxInSKj2VjMfzk6tRxRoIp+7klvH5zrYoVHsCL1+lwPy4ZwrOXhiO+
-	 PktjHf5e/V8VA==
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c25344a8c6cso116190066b.0
-        for <exfat@lists.linux.dev>; Wed, 26 Aug 2026 23:55:02 -0700 (PDT)
-X-Gm-Message-State: AFuF++ntcnU4ElFCmRid6D/RCfetCc/X+dV615WkwYa7EZ0x6JI2nJ8q
-	X0SfPQ65YGi4TNoUZ0DSI1cEhY07Gb16/9D2jru730ezf2hLsdv4PX6vZgK2VqulfVXDnRCiD77
-	b0fF2t0Xlb2qCgIeqC7o+eYYqgQveE5g=
-X-Received: by 2002:a17:907:6d27:b0:c20:3679:a2e6 with SMTP id
- a640c23a62f3a-c250bbda55cmr1288946666b.10.1787813701063; Wed, 26 Aug 2026
- 23:55:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aqNJl1tf"
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2caed617615so24291545ad.3
+        for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 07:51:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787842289; x=1788447089; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
+        b=aqNJl1tf/pb+HPj645ym29Z50jWgfSbKkQTh6+jukDakmo3VfszzA5gtfQqZnJxpwN
+         mND2ttPy+IIhJOm38SeAsBKpThLGLHpmyZjEaq//hEhWiEEq+5cLUoS8+HRZnfIDRXro
+         lFg9KkHmC5ZfaPcgInDJ22EdoFM3o3L99XwTAaaHJjLbub2vVFNxSsZeufOtyIJCKmLY
+         zEiOr0W1Mn+SVohK+Cw2F0zgBztJzAaw5HFq9em98ylMl4S/+v1Z5Q88zPEyhXBQF3eY
+         GA7I/F2v6xJtRImKQH8b4+y2T/MdUn7MNy1vnfRFzn1Z2XrOKPVPSob+/UXt6CI+U/9g
+         hGOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787842289; x=1788447089;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
+        b=kYB11Mx0ODu5aNSR/bRznJStu9DXF6EFqB+tjkhxNlTuR9RzZTWi7rUJmGQabBrGw1
+         yF/LBQYB34v1At44P6kizookJ+94PzfSgY3V1pCl2XzQG8D3PiuCuFrtbf7fV0TRqKNw
+         cDJoOX/Mlmhn+ojH2Fnt/N79xrjAY9/NMINVyrN1Y43hrgI/ZDO3Nc14Bm2wTs0/bogY
+         zVAWWxnEezSiNxrJMLDvZzkB/d1ok0+KALgJSMK2+2A8LjjQ31YVyf4bvhYdKKz7Ip9k
+         T4j5oa0emkqAtrKy24CW0VH+hDQUxyId+75+oLxvlaNUhwnQQsLUZHhOCXUuz33C+fbq
+         9BpA==
+X-Gm-Message-State: AFuF++m74UAECo5lcYUdBkaw78fosp1EZ25FPth6k+oKZt7/fZmbj1Qv
+	v+UqiHA5DgcHl8X5QcnyEG5HyZ/vVhCweKhsrkbdpvQg+/mxVrnrjrqC
+X-Gm-Gg: AR+sD12yHCcIG8J7fWnMosKSN7pdVUkCZp5Uy2GEaQDGHKhYjAZ/O+joTsXBjATuuF1
+	zEyz3l/cXHJNYOHxEDCgmA6tkwbpC7THK8GJ8iOFNtpW+buOBQCH2o7tFTD9Pp/+pn9IbBGgP/J
+	+JAQUbyReL8jkARFzq0+mNLOgzDvN41DhvxAmCGNNQZkxMDBmstpb/LAcPYPZp/ynXNRy6X8f9H
+	FD2924VHzQ7vbP9ZT5o5p7XiKgXP/KKvjMAl6VzLk0pBVw6/5psidhOUJ1VMEgxPMix8v9AjFiy
+	JaEuHQ/T9Gar+6SRT8fYWA5KJAOVlArx35KMXPdfT1o9Q0MUIMJ7uQoSESWtTDWFSHGDeI4WLwp
+	rWMJOh+WgM52zHjcFy/fS7b8ZTLeEusLVCCwITSBAmn0M3xxzL7KXWvwNGsjRADR3+NXqqqaJrq
+	AOL+6Tx0pG5M2WS/gmsz3tgbW+bPKrSgCuldEdkSwZhrJIY6eysz74SDrj5U7Km7YtuKsnZr/E8
+	Q==
+X-Received: by 2002:a17:902:e54f:b0:2c0:a555:80d6 with SMTP id d9443c01a7336-2d707a2f08bmr279793485ad.2.1787842288946;
+        Thu, 27 Aug 2026 07:51:28 -0700 (PDT)
+Received: from localhost.localdomain ([47.100.192.162])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d704bfb684sm18063645ad.62.2026.08.27.07.51.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Aug 2026 07:51:28 -0700 (PDT)
+From: Yang Wen <anmuxixixi@gmail.com>
+To: anmuxixixi@gmail.com
+Cc: exfat@lists.linux.dev,
+	linkinjeon@kernel.org,
+	linux-kernel@vger.kernel.org,
+	sj1557.seo@samsung.com,
+	yuezhang.mo@sony.com
+Subject: Re: [PATCH] exfat: validate vendor allocation directory entries
+Date: Thu, 27 Aug 2026 22:51:08 +0800
+Message-Id: <20260827145108.979738-1-anmuxixixi@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260820150508.736275-1-anmuxixixi@gmail.com>
+References: <20260820150508.736275-1-anmuxixixi@gmail.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260821100531.998196-1-chizhiling@163.com> <20260821100531.998196-7-chizhiling@163.com>
- <CAKYAXd_MxctBGgP6_daddk1q9Dwr0ZMAQchXqvEZME_Yo6xSuA@mail.gmail.com> <de355170-d57d-4247-93ba-521080ca30eb@163.com>
-In-Reply-To: <de355170-d57d-4247-93ba-521080ca30eb@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Thu, 27 Aug 2026 15:54:47 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd95S7zNP3nJw-2FMp3P8J4y7HkGvjHzNU-zCw+vSLrv3w@mail.gmail.com>
-X-Gm-Features: AcwNN1V9Lrpw180WYKXpeLn743AE4E1hRl13AqqsRJ9W9uzLtiq2NXhDfH6Uxcs
-Message-ID: <CAKYAXd95S7zNP3nJw-2FMp3P8J4y7HkGvjHzNU-zCw+vSLrv3w@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 6/6] exfat: take s_lock in read mode for iomap
- mapping paths
-To: Chi Zhiling <chizhiling@163.com>
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 27, 2026 at 11:22=E2=80=AFAM Chi Zhiling <chizhiling@163.com> w=
-rote:
->
-> On 8/27/26 9:08 AM, Namjae Jeon wrote:
-> >> @@ -68,7 +68,7 @@ static int __exfat_iomap_begin(struct inode *inode, =
-loff_t offset, loff_t length
-> >>          num_clusters =3D exfat_bytes_to_cluster_round_up(sbi,
-> >>                          offset + length) - exfat_bytes_to_cluster(sbi=
-, offset);
-> >>
-> >> -       down_write(&sbi->s_lock);
-> >> +       down_read(&sbi->s_lock);
-> > If may_alloc is true, Should we use down_write() ?
->
-> IMO, there is no need for down_write(); the block mapping of an inode is
-> protected by the inode lock, not s_lock. see exfat_fallocate(), where we
-> don't hold s_lock.
-Okay.
->
-> If may_alloc is true, we need to allocate clusters and append them to
-> the file's FAT chain. The allocation is protected by bitmap_lock, while
-> the FAT chain is protected by the inode lock, since we hold the inode
-> write lock in exfat_file_write_iter(), exfat_fallocate() and
-> exfat_truncate(), there is no race when modifying the FAT chain.
-Okay.
->
-> Besides, I'm trying to remove s_lock in the next version and am
-> considering adding a per-inode lock to exfat_inode_info, since the inode
-> lock has a relatively large scope.
-Okay, Sounds great!
+Hi,
+
+A gentle ping on this patch.
+
+When you have time, I’d appreciate any review or feedback.
+
 Thanks!
