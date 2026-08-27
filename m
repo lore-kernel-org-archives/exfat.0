@@ -1,90 +1,155 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69D593FD12A
-	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 14:51:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C28E43939BF
+	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 20:41:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787842299; cv=none; b=bzxPIkmNDn+MbaJE0M7je3YCv0gHUodjqCkBi7rrCFUSmUtO2GN8QIL/eCrx9u7mxXgj5gXF9YFLNKX5vX/fiErtk6PYy0ChNHXFhghrR+1n/Rj8xfM2NS4W8tO4fSLQLHQ7/S7e/t8DF0cWmX4gMP14bCmpBfNzuLnP6qVr9ns=
+	t=1787863312; cv=none; b=bw9Zs1/f/ZZc/HdKrqtRHFvkll6Ynk+Y5Vm8O2IkWpIX81IP9VTKvco62D07P85R86+9SL2i/3whm4AL9UET1+7tfza9FYTUqUIqG+f0nDuKLiFJuoTC1LRJUV1p8rzKwuMQaI2fOvqlBZYmxUj4c+P3vwXW+AaKfV+kzLaUr/g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787842299; c=relaxed/simple;
-	bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=C8IZkOMXlSSzO9OitWFaWJss7prcC1RX9IL5Me5REyzUTU+Xd79HyhcUse8o+23CDfTnBwOSwljOWzXj4vxXFR+AiWU1AHEyUkl09fuqBQ437T64HN8iHnnyiHAMlRNpBG5UQvKNgnQIN1q6YziAui80fhlzfbmyyiV9oLM6Qo0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aqNJl1tf; arc=none smtp.client-ip=209.85.214.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1787863312; c=relaxed/simple;
+	bh=vVni0rmQWSmVyA1RKxa8YhABalBmO0xWSiIALBoM3DA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Dz8y0caMCI5CqBnRDiX7tJisgJ+JXn4HNPQYQSZznDf4P+oipLycKcIvYw/y0hgCu4ARjPEuwPj2D15MowilDDzzFHSL6BMbwR11TJNc+UktNpHmJ5fK2UU6SYQ0+DnTtcdmNtGki82/7GrlTGz9kposIiVKr2ifsbjw5wmXfn0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=jv93YuY1; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aqNJl1tf"
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2caed617615so24291545ad.3
-        for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 07:51:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787842289; x=1788447089; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
-        b=aqNJl1tf/pb+HPj645ym29Z50jWgfSbKkQTh6+jukDakmo3VfszzA5gtfQqZnJxpwN
-         mND2ttPy+IIhJOm38SeAsBKpThLGLHpmyZjEaq//hEhWiEEq+5cLUoS8+HRZnfIDRXro
-         lFg9KkHmC5ZfaPcgInDJ22EdoFM3o3L99XwTAaaHJjLbub2vVFNxSsZeufOtyIJCKmLY
-         zEiOr0W1Mn+SVohK+Cw2F0zgBztJzAaw5HFq9em98ylMl4S/+v1Z5Q88zPEyhXBQF3eY
-         GA7I/F2v6xJtRImKQH8b4+y2T/MdUn7MNy1vnfRFzn1Z2XrOKPVPSob+/UXt6CI+U/9g
-         hGOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787842289; x=1788447089;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AS+pIe3ozPZ3Vw0ac5MFTRpJosHOxYPCnu8rsmbBlmg=;
-        b=kYB11Mx0ODu5aNSR/bRznJStu9DXF6EFqB+tjkhxNlTuR9RzZTWi7rUJmGQabBrGw1
-         yF/LBQYB34v1At44P6kizookJ+94PzfSgY3V1pCl2XzQG8D3PiuCuFrtbf7fV0TRqKNw
-         cDJoOX/Mlmhn+ojH2Fnt/N79xrjAY9/NMINVyrN1Y43hrgI/ZDO3Nc14Bm2wTs0/bogY
-         zVAWWxnEezSiNxrJMLDvZzkB/d1ok0+KALgJSMK2+2A8LjjQ31YVyf4bvhYdKKz7Ip9k
-         T4j5oa0emkqAtrKy24CW0VH+hDQUxyId+75+oLxvlaNUhwnQQsLUZHhOCXUuz33C+fbq
-         9BpA==
-X-Gm-Message-State: AFuF++m74UAECo5lcYUdBkaw78fosp1EZ25FPth6k+oKZt7/fZmbj1Qv
-	v+UqiHA5DgcHl8X5QcnyEG5HyZ/vVhCweKhsrkbdpvQg+/mxVrnrjrqC
-X-Gm-Gg: AR+sD12yHCcIG8J7fWnMosKSN7pdVUkCZp5Uy2GEaQDGHKhYjAZ/O+joTsXBjATuuF1
-	zEyz3l/cXHJNYOHxEDCgmA6tkwbpC7THK8GJ8iOFNtpW+buOBQCH2o7tFTD9Pp/+pn9IbBGgP/J
-	+JAQUbyReL8jkARFzq0+mNLOgzDvN41DhvxAmCGNNQZkxMDBmstpb/LAcPYPZp/ynXNRy6X8f9H
-	FD2924VHzQ7vbP9ZT5o5p7XiKgXP/KKvjMAl6VzLk0pBVw6/5psidhOUJ1VMEgxPMix8v9AjFiy
-	JaEuHQ/T9Gar+6SRT8fYWA5KJAOVlArx35KMXPdfT1o9Q0MUIMJ7uQoSESWtTDWFSHGDeI4WLwp
-	rWMJOh+WgM52zHjcFy/fS7b8ZTLeEusLVCCwITSBAmn0M3xxzL7KXWvwNGsjRADR3+NXqqqaJrq
-	AOL+6Tx0pG5M2WS/gmsz3tgbW+bPKrSgCuldEdkSwZhrJIY6eysz74SDrj5U7Km7YtuKsnZr/E8
-	Q==
-X-Received: by 2002:a17:902:e54f:b0:2c0:a555:80d6 with SMTP id d9443c01a7336-2d707a2f08bmr279793485ad.2.1787842288946;
-        Thu, 27 Aug 2026 07:51:28 -0700 (PDT)
-Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d704bfb684sm18063645ad.62.2026.08.27.07.51.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Aug 2026 07:51:28 -0700 (PDT)
-From: Yang Wen <anmuxixixi@gmail.com>
-To: anmuxixixi@gmail.com
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="jv93YuY1"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id C391C25444;
+	Thu, 27 Aug 2026 20:41:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me C391C25444
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1787863296; bh=vVni0rmQWSmVyA1RKxa8YhABalBmO0xWSiIALBoM3DA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=jv93YuY125mQfHVAm/RmebU/e/9gSyIduvorzSCI6uqgn0bWgsJ1d99arMxTHhBf6
+	 Bx6n3AupJr3wPsMZdMKvj1vtPUfFRsAOk8Aoe6tiNeyyhUJ7b4EVKdOT1y5BsT+v2C
+	 fuCiHXdTuFVkAlBpAqkV+RQXO9+Hwxkj2JBAfzmM=
+Received: from maya.d.snart.me ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id rDNIOvygkGosiAIA8KYfjw:T3
+	(envelope-from <dxdt@dev.snart.me>); Thu, 27 Aug 2026 20:41:35 +0000
+From: David Timber <dxdt@dev.snart.me>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Hyunchul Lee <hyc.lee@gmail.com>
 Cc: exfat@lists.linux.dev,
-	linkinjeon@kernel.org,
-	linux-kernel@vger.kernel.org,
-	sj1557.seo@samsung.com,
-	yuezhang.mo@sony.com
-Subject: Re: [PATCH] exfat: validate vendor allocation directory entries
-Date: Thu, 27 Aug 2026 22:51:08 +0800
-Message-Id: <20260827145108.979738-1-anmuxixixi@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260820150508.736275-1-anmuxixixi@gmail.com>
-References: <20260820150508.736275-1-anmuxixixi@gmail.com>
+	David Timber <dxdt@dev.snart.me>
+Subject: [PATCH v0 2/8] mkfs, fsck: refactor getopt_long() return values
+Date: Fri, 28 Aug 2026 05:39:48 +0900
+Message-ID: <20260827204056.222099-3-dxdt@dev.snart.me>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260827204056.222099-1-dxdt@dev.snart.me>
+References: <20260827204056.222099-1-dxdt@dev.snart.me>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Replace longopt ids with enum for the return values of getopt_long() for
+cleaner code. No functional change.
 
-A gentle ping on this patch.
+Signed-off-by: David Timber <dxdt@dev.snart.me>
+---
+ fsck/fsck.c | 14 ++++++++------
+ mkfs/mkfs.c | 20 +++++++++++---------
+ 2 files changed, 19 insertions(+), 15 deletions(-)
 
-When you have time, I’d appreciate any review or feedback.
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 2f75415..f1934d0 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -48,8 +48,10 @@ struct exfat_fsck exfat_fsck;
+ struct exfat_stat exfat_stat;
+ struct path_resolve_ctx path_resolve_ctx;
+ 
+-#define OPTID_PUT_MBR	(128 + 0)
+-#define OPTID_CLEAR_MBR	(128 + 1)
++enum longopt_num {
++	LON_PUT_MBR = CHAR_MAX + 1,
++	LON_CLEAR_MBR,
++};
+ 
+ static struct option opts[] = {
+ 	{"repair",		no_argument,		NULL,	'r' },
+@@ -63,8 +65,8 @@ static struct option opts[] = {
+ 	{"?",			no_argument,		NULL,	'?' },
+ 	{"ignore-bad-fs",	no_argument,		NULL,	'b' },
+ 	{"progress",		no_argument,		NULL,	'P' },
+-	{"put-mbr",		no_argument,		NULL,	OPTID_PUT_MBR },
+-	{"clear-mbr",		no_argument,		NULL,	OPTID_CLEAR_MBR },
++	{"put-mbr",		no_argument,		NULL,	LON_PUT_MBR },
++	{"clear-mbr",		no_argument,		NULL,	LON_CLEAR_MBR },
+ 	{NULL, 0, NULL, 0}
+ };
+ 
+@@ -2026,12 +2028,12 @@ int main(int argc, char * const argv[])
+ 		case 'P':
+ 			ui.options |= FSCK_OPTS_PROGRESS_BAR;
+ 			break;
+-		case OPTID_PUT_MBR:
++		case LON_PUT_MBR:
+ 			if (exfat_fsck.mbr)
+ 				usage(argv[0]);
+ 			exfat_fsck.mbr = 1;
+ 			break;
+-		case OPTID_CLEAR_MBR:
++		case LON_CLEAR_MBR:
+ 			if (exfat_fsck.mbr)
+ 				usage(argv[0]);
+ 			exfat_fsck.mbr = -1;
+diff --git a/mkfs/mkfs.c b/mkfs/mkfs.c
+index 2d0533a..492094f 100644
+--- a/mkfs/mkfs.c
++++ b/mkfs/mkfs.c
+@@ -870,9 +870,11 @@ static void usage(void)
+ 	exit(EXIT_FAILURE);
+ }
+ 
+-#define PACK_BITMAP	(CHAR_MAX + 1)
+-#define UPCASE_FILE	(CHAR_MAX + 2)
+-#define BOOTCODE_MSG	(CHAR_MAX + 3)
++enum longopt_num {
++	LON_PACK_BITMAP = CHAR_MAX + 1,
++	LON_UPCASE_FILE,
++	LON_BOOTCODE_MSG,
++};
+ 
+ static const struct option opts[] = {
+ 	{"volume-label",	required_argument,	NULL,	'L' },
+@@ -880,9 +882,9 @@ static const struct option opts[] = {
+ 	{"sector-size",		required_argument,	NULL,	's' },
+ 	{"cluster-size",	required_argument,	NULL,	'c' },
+ 	{"boundary-align",	required_argument,	NULL,	'b' },
+-	{"upcase",		required_argument,	NULL,	UPCASE_FILE },
+-	{"bootcode-msg",	required_argument,	NULL,	BOOTCODE_MSG },
+-	{"pack-bitmap",		no_argument,		NULL,	PACK_BITMAP },
++	{"upcase",		required_argument,	NULL,	LON_UPCASE_FILE },
++	{"bootcode-msg",	required_argument,	NULL,	LON_BOOTCODE_MSG },
++	{"pack-bitmap",		no_argument,		NULL,	LON_PACK_BITMAP },
+ 	{"full-format",		no_argument,		NULL,	'f' },
+ 	{"force",		no_argument,		NULL,	'F' },
+ 	{"check-written",	no_argument,		NULL,	'C' },
+@@ -1512,13 +1514,13 @@ int main(int argc, char *argv[])
+ 			}
+ 			ui.boundary_align = ret;
+ 			break;
+-		case UPCASE_FILE:
++		case LON_UPCASE_FILE:
+ 			ui.upcase.file = optarg;
+ 			break;
+-		case PACK_BITMAP:
++		case LON_PACK_BITMAP:
+ 			ui.pack_bitmap = true;
+ 			break;
+-		case BOOTCODE_MSG:
++		case LON_BOOTCODE_MSG:
+ 			ui.bootcode_msg = optarg;
+ 			/* A long message will just get truncated silently. */
+ 			break;
+-- 
+2.55.0
 
-Thanks!
