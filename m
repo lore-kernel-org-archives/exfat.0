@@ -1,46 +1,43 @@
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98BB83793B6
-	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 20:41:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C09F73939B9
+	for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 20:41:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787863312; cv=none; b=pacvcdWwwll6U0CfEbfyDMdarbAJZvEtAnvq8RGHJ+l9Z7JxXv892N6T4njlKeSARCvxeygEI24qxDJke8eWBs8Af0i4dUnwzwOVUJ/f8jHPYCMLYdNpY0Dy5Svrspp90kTh+7O07WSgwhovsNJ7ScpPVfoYGkKxBusfIUvhoe4=
+	t=1787863313; cv=none; b=nbYZeP1e6AmNSqrBYZONGnkATdgdOk7fGU7xqPP6YIgUgmHJM51qKah85jssfOrjWb7hYEhXXc02W9u0YwlNwkKEQf32BqtmyGDBb4qpwu3GMp3CgqzQamUeh/S2YmGMkSsYMT5k/6Qtc8sK8zQNMhhqMyQwuYzdbAHFuatOIHY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787863312; c=relaxed/simple;
-	bh=gQ2atmz8JUrg0WU0BRUaTVNIg8ozs62koAF4yP6BgUE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bArMAyiWNJa9v8Y5PSuEPQp6NbnHz3ayWf38YGFkIlDVkT1yVBg56+ghqKXG5PM2i745dGOX9FeDYP6Z/z+Ut3H5eQDYp8iO6iAp3IpI2jJdYpgUBHBX9P8Cl4BQ6qDK+3ZvX0e2BkkMLGnEZpbmrfJbUMxEeyqWF27djCtoR1U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=Dafvpp9x; arc=none smtp.client-ip=54.252.183.203
+	s=arc-20240116; t=1787863313; c=relaxed/simple;
+	bh=fTtzkGpv9bIwPLJlFPDhQM4uL/q7lSIkxfC/Ql9Jjmw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mhNAEH8mri6YXhlNG22HT4aLAxSrDvTWCI76ov2YK/93hqlHxqNbDQFoIe6J2ZyylBCzI69YX7+8wZ+rElio9DiO70Bej+SlQM8BRhc+PCTTqj/dudVsFDhe40BgFcy2ywkb0Jo5vNZm/KmHQmrzgFujnhjtUXsZdhkhcxz3ZPw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=ohelBRGz; arc=none smtp.client-ip=54.252.183.203
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="Dafvpp9x"
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="ohelBRGz"
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 845961D452;
-	Thu, 27 Aug 2026 20:41:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 845961D452
+	by embla.dev.snart.me (Postfix) with ESMTP id 437C91D451;
+	Thu, 27 Aug 2026 20:41:33 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 437C91D451
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1787863295; bh=gQ2atmz8JUrg0WU0BRUaTVNIg8ozs62koAF4yP6BgUE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Dafvpp9xUW5heT5noD38Yn7F1CatvrDiMGPAogkAAPAwyiOxSoYu7R8iLzt1Dyfrt
-	 /KU5hvgqbRufNthFHk//d1vqvcSHBam3tclRym5lLOHSkayxM3g+SfolszLYWTQbkZ
-	 psqMTeFIJO0t1Jbv40JmOXtAm0woSkoa47MVbz7k=
+	t=1787863294; bh=fTtzkGpv9bIwPLJlFPDhQM4uL/q7lSIkxfC/Ql9Jjmw=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ohelBRGzvqiTfLjiDEkKKxDARLISsTOFNgAwDt6rnUQN6s8BLkdbiHiUyCp9RW8wb
+	 OUr9zSBTdr/ljLB5k3TNgFQ1fnGDIOzO8sIvKWthH4yRBX0cCA4YSY5Z5eRb9FbpB2
+	 I7tRPTUn+U+XT/LXCFlMOnSbCmPDIYSFAiOOMi5M=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id rDNIOvygkGosiAIA8KYfjw:T2
-	(envelope-from <dxdt@dev.snart.me>); Thu, 27 Aug 2026 20:41:34 +0000
+	id rDNIOvygkGosiAIA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Thu, 27 Aug 2026 20:41:33 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Hyunchul Lee <hyc.lee@gmail.com>
 Cc: exfat@lists.linux.dev,
 	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH v0 1/8] exfat2img, treewide: do not clobber stdout
-Date: Fri, 28 Aug 2026 05:39:47 +0900
-Message-ID: <20260827204056.222099-2-dxdt@dev.snart.me>
+Subject: [PATCH v0 0/8] exfatprogs: optimise mkfs zeroing out and fix stdio output
+Date: Fri, 28 Aug 2026 05:39:46 +0900
+Message-ID: <20260827204056.222099-1-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260827204056.222099-1-dxdt@dev.snart.me>
-References: <20260827204056.222099-1-dxdt@dev.snart.me>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -49,63 +46,91 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Print the version info to stderr instead of stdout in show_version() to
-not interfere with the utils that use stdout to output data.
+Following is the performance impact profiling. I don't have a spare NVME
+SSD to test with so I used AWS EC2 :(
 
-exfat2img uses the stdout fd(1) to output the metadata image file, but
-the stdout FILE pointer is used directly throughout the program via
-[p]write(). This is UB: if the stdout is flushed before the program
-starts using the fd, the strings buffered in printf() may end up at the
-start of the metadata file. Although, with glibc, this doesn't seem to
-be the case:
+Your contributions welcome.
 
-	$ sudo exfat2img -o - /dev/... | hexdump -C | tail
-	*
-	05a404c0  00 00 00 00 04 f7 62 1d  00 65 78 66 61 74 70 72  |......b..exfatpr|
-	05a404d0  6f 67 73 20 76 65 72 73  69 6f 6e 20 3a 20 31 2e  |ogs version : 1.|
-	05a404e0  34 2e 32 20 28 32 30 32  36 2d 30 36 2d 31 35 29  |4.2 (2026-06-15)|
-	05a404f0  0a 31 37 35 33 39 20 66  69 6c 65 73 20 66 6f 75  |.17539 files fou|
-	05a40500  6e 64 2c 20 32 34 39 20  64 69 72 65 63 74 6f 72  |nd, 249 director|
-	05a40510  69 65 73 20 64 75 6d 70  65 64 2c 20 39 32 34 31  |ies dumped, 9241|
-	05a40520  36 20 6b 62 79 74 65 73  20 77 72 69 74 74 65 6e  |6 kbytes written|
-	05a40530  0a                                                |.|
-	05a40531
+I'm sure pgsteal_* in /proc/vmstat can be used as yet another metric on
+a busy host, but I didn't bother to go that far to collect that data.
 
-Before exiting exfat2img, print the stats data to stderr so that the
-output data is not clobbered.
+UAS:
 
-Signed-off-by: David Timber <dxdt@dev.snart.me>
----
- exfat2img/exfat2img.c | 2 +-
- lib/libexfat.c        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+  - Host: Raspberry Pi 4 Model B Rev 1.5
+  - Device: Samsung BAR+ 64GB (via USB 3.0)
+  - Target partition size: 1998585856 bytes
 
-diff --git a/exfat2img/exfat2img.c b/exfat2img/exfat2img.c
-index dc7ea52..e1e4a37 100644
---- a/exfat2img/exfat2img.c
-+++ b/exfat2img/exfat2img.c
-@@ -995,7 +995,7 @@ int main(int argc, char * const argv[])
- 		}
- 	}
- 
--	printf("%ld files found, %ld directories dumped, %llu kbytes written\n",
-+	fprintf(stderr, "%ld files found, %ld directories dumped, %llu kbytes written\n",
- 	       exfat_stat.file_count,
- 	       exfat_stat.dir_count,
- 	       (unsigned long long)DIV_ROUND_UP(exfat_stat.written_bytes, 1024));
-diff --git a/lib/libexfat.c b/lib/libexfat.c
-index 4cae9bc..9baef6f 100644
---- a/lib/libexfat.c
-+++ b/lib/libexfat.c
-@@ -288,7 +288,7 @@ void boot_calc_checksum(const unsigned char *sector, size_t size,
- 
- void show_version(void)
- {
--	printf("exfatprogs version : %s (%s)\n",
-+	fprintf(stderr, "exfatprogs version : %s (%s)\n",
- 			EXFAT_PROGS_VERSION, EXFAT_PROGS_RELEASE_DATE);
- }
- 
+  Pre-patch:
+
+          System time (seconds): 4.54
+          Percent of CPU this job got: 7%
+          Elapsed (wall clock) time (h:mm:ss or m:ss): 1:05.14
+          Maximum resident set size (kbytes): 3200
+          Voluntary context switches: 10297
+          Involuntary context switches: 978
+          File system inputs: 2168
+          File system outputs: 3903664
+
+  Post-patch:
+
+          System time (seconds): 0.29
+          Percent of CPU this job got: 0%
+          Elapsed (wall clock) time (h:mm:ss or m:ss): 0:56.49
+          Maximum resident set size (kbytes): 3200
+          Voluntary context switches: 5792
+          Involuntary context switches: 1322
+          File system inputs: 2224
+          File system outputs: 176
+
+NVME:
+
+  - Host: AWS EC2 c7gd.medium
+  - Device: "locally attached" SSD volume
+  - Size: 59000000000 bytes
+
+  Pre-patch:
+
+          System time (seconds): 22.64
+          Percent of CPU this job got: 0%
+          Elapsed (wall clock) time (h:mm:ss or m:ss): 45:47.70
+          Maximum resident set size (kbytes): 2792
+          Voluntary context switches: 227200
+          Involuntary context switches: 7352
+          File system inputs: 1360
+          File system outputs: 115235032
+
+  Post-patch:
+
+          System time (seconds): 1.14
+          Percent of CPU this job got: 0%
+          Elapsed (wall clock) time (h:mm:ss or m:ss): 26:08.06
+          Maximum resident set size (kbytes): 2788
+          Voluntary context switches: 56409
+          Involuntary context switches: 60
+          File system inputs: 1727
+          File system outputs: 656
+
+David Timber (8):
+  exfat2img, treewide: do not clobber stdout
+  mkfs, fsck: refactor getopt_long() return values
+  treewide: fix factual errors and reduce column length of usage message
+  libexfat: refactor exfat_bad_char()
+  libexfat: add exfat_secerase_blocks() and exfat_zeroout_blocks()
+  libexfat: add exfat_trace()
+  mkfs: use BLKZEROOUT for disk zeroing out
+  mkfs: issue POSIX_FADV_NOREUSE before zeroing out
+
+ dump/dump.c           |  14 +--
+ exfat2img/exfat2img.c |   2 +-
+ fsck/fsck.c           |  14 ++-
+ include/libexfat.h    |  33 +++++-
+ label/label.c         |   6 +-
+ lib/libexfat.c        | 114 +++++++++++++------
+ mkfs/mkfs.c           | 254 +++++++++++++++++++++++++++++-------------
+ mkfs/mkfs.h           |   1 +
+ tune/tune.c           |  18 +--
+ 9 files changed, 316 insertions(+), 140 deletions(-)
+
 -- 
 2.55.0
 
