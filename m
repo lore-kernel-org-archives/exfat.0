@@ -1,126 +1,92 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC4753DDDC0
-	for <exfat@lists.linux.dev>; Fri, 28 Aug 2026 04:52:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6C5444A3ED
+	for <exfat@lists.linux.dev>; Fri, 28 Aug 2026 12:34:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787892734; cv=none; b=bEN38HP8ZLy3exLi7RDbKzXFY2j+P05TfKzNY6qL9BkBcwgI5YOuYlLTwMXs4DUjsmARNBKOb++/UjWkT3K0aZ8W+eSYX10brS1GiBPK26S5z6EfNDVX9FGNy+o7EGlJAq+wf9MnQ4oLK5TaPV7gJlnietLDd5ffax0yOoi8Tjo=
+	t=1787920452; cv=none; b=Kpe95B91zNTWoSgObykq51QX2cn6r4v1+1l/D2Iw9vUgwVaC9apWBLmU0rUOHiqX+hmtKKshwJT0s6wOehRpKXGbowDX5PDqVcTFcxYx09bcd5jNhH7iXwn2wcbyFbEfa3YbIjVAGHBAYAQJKxE/uSyA4G3dKq2X9oGBIGFsFDA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787892734; c=relaxed/simple;
-	bh=sffi71r12xX7jLBbnQIBN6kD+NBfBMEhj5l2OkWZLlI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=d80lLrdW00n1zmvAlb7j9K4ISRFQT8KTswnD2eOhqyqfxVKYVTjZ7uFIrNHMFWEWDAgL3RtGjx4mwnlkZmtcYr2Kl87QqfVITuVL6ihWdnO+HlawfWXWl15wH2VVX7Pr8fxwyoEMxHTe8XIJL+rbP3lHX9XGKU8egwNAg5OKH/E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zur4ZrbB; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787920452; c=relaxed/simple;
+	bh=81KqIzUsGy1qulpSNvHF5tHp4EdkXa0CFFj1Th1yeB0=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=PbHIkhQFtY4sZE9MtuZKV+ErPbwiqejj1XybaOwB6/TwEoR66/GaLLXpT9N/U4WllwdTpI6/LhRDwg40Jw+EXrofTOqLe9yvL4fxdbdfJ1G7IS2ZObHYvfyecTpRM02tAtxgSLduIwntUei9nNSZA9VN0fvSDe0di8xp1xAkIq8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IOSQl0wy; arc=none smtp.client-ip=209.85.215.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zur4ZrbB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D54C21F00AC4
-	for <exfat@lists.linux.dev>; Fri, 28 Aug 2026 04:52:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787892732;
-	bh=h14SpsS2hlAa4J7cmdGhErCQ0al3kUyEP9nCoq0TcNU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Zur4ZrbBVPpfy1avuPiL246C0q5arp0HsFzaSWhOIEIoSZLTgyPQ5DF5BNQ9ErIz3
-	 CIdzsMD0iDEo6/e/bXzz7+/cvPZREW/yI92NLenvQZFQuPntbuBG//dZsSJ1qHY3l1
-	 1oEYBb9Jl098bDDwsSbomUFwboCDJDVjL6qG5HSg0PATLhwINif5kqnG+YQKLKXjos
-	 VSmoQproDZX9y4PeNegMLC8S91mf+bEXBc7Q5VQ2Hw8rX0rcPu01Hss06TWyoUyKPA
-	 njjbQf3jFhoH6FuDK3YSmjepigB1wUWHGgvQtppYF8JvIBBqKqtsOe2+Mfznd1GM4y
-	 XAG77rAsh+3xQ==
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-c2529b3139fso74612466b.3
-        for <exfat@lists.linux.dev>; Thu, 27 Aug 2026 21:52:12 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoQgT8T/BDrAc2Xs5JyQHwX8dznjmujgHya0lbWsLYGe3PC92pxQC9LE4z3iUqmORIWATofSg==@lists.linux.dev
-X-Gm-Message-State: AFuF++nxSTAZUR/vagPLnmAFrnAexefAChgtVuD3G0lketdxdofE1g+P
-	wcXkwqe+q8nURxbtFaXSNwwNw/AosskBpjSfDeTWM3bz7YF81QnLJNcPmBxx+dS80ScBYtEscrg
-	hhPTzQp50B5SzPPGua0wcPUH4EKc8NXM=
-X-Received: by 2002:a17:907:1ca4:b0:c21:9870:c4f7 with SMTP id
- a640c23a62f3a-c2557433257mr186751466b.20.1787892731502; Thu, 27 Aug 2026
- 21:52:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IOSQl0wy"
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cc1cc97b84bso888541a12.1
+        for <exfat@lists.linux.dev>; Fri, 28 Aug 2026 05:34:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787920441; x=1788525241; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=81KqIzUsGy1qulpSNvHF5tHp4EdkXa0CFFj1Th1yeB0=;
+        b=IOSQl0wybbBcglRv1UrcB2l4CrlTdU7a74jApPCM5tUOU8wbaw/2/T25aMFb3Aajl0
+         4AcCXtiSKk9bzptdniZXWEqRuXSDVQhnfG0XXLIDPktCa8gDX8C7H0dHIMoiBezolA5s
+         EEHGd6xVB108U7DYbi1peXlo61ZahD/TIaln/wOKubR4NmMkMHon8Jsp9EGkoCocG/Dw
+         uP+qJB6obT52q86oTAlrfiHmwDmVeDQdRnXEaIOcYdskJQEOXh5muBVNv8nnGjlSpiZ/
+         kVRpJ7FGrxEPNwlf06pvkb97SiBmAvj+80kNv88UaOvWrYtAJpUyrXXUWXyHxzFaRYGY
+         SD+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787920441; x=1788525241;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=81KqIzUsGy1qulpSNvHF5tHp4EdkXa0CFFj1Th1yeB0=;
+        b=qDvan6/EumwoJaNVH+cuedNvcvC2qvJFbQDqxrT7P4kY0/bTUBDVfENDOpXk/CxSv3
+         L85sXdc/u5lTaA0pkNwtn2hHmu/7MdGNZt6z8oFLB9xAKYcPAxYqDr/KRB5yQwjpqJpX
+         pIJ9cBFg/aVhe1rJ1SxdB5fLrfWF2N3ghZMLMNFSEHtfspBDxJMyNaLT5/7um2+TWWNp
+         3z4X28laAaHz4nBkOi9X7t2CBV0EajGRs7cnxcDxWNtCKjIEeBTlogpiAIFyRMe6+STk
+         ymto8DPDFn9jbP6EwFZCeO08G+GxhxZFgCkcldMZU6cqMVQLJO4WNpSCs4u9LCqO0fVP
+         AtPQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoZGYiayFLBud5wmIRyxBxIn9OzVJTC1hzav+DGAWtucB5/+d+xmoVcg7mr4Nl57lIfc4kEpg==@lists.linux.dev
+X-Gm-Message-State: AFuF++nBq6Lz5xrEXz3CjtHXwpuUYMrZ307vie3uUtxyno9Wcl7f3s6o
+	3tdH1NE2spj9mJSI6gb7cXbPCQ9gAsV8mDCOU+cChUhbcm+A6052aEtP
+X-Gm-Gg: AR+sD12N8EoLMa46Yggw03MtiqgZCf61NDLj+o8li04UEQYhykup2Dzi+/4B59a/cgT
+	vAlSG7xN8JDIJjcke4sTAAf5FPqboUweyV/Fe9DJ//ceocmIclNS4UkwHoNxWtaH0MN1ulV1+es
+	y3e2VqNqE1L2AWWewdkUF2sbSxgwrmq9Tlffa1cQB8mUQ2PEwJCzZB/7jeHLG1wX+NuYG/8JBQc
+	M5vIf26Jlho2WO90u1uH5yayjloN2JFuAGEzx+FH0g3u3vlnlqCnOFyMUJdX1yEcS53Gj44w0nX
+	abPqMfvM3CbX3I2+qZTSoyyKJpkHUwfHZqgYKMRe/FnYylA5KSoSWlBMqWGGZcZ8EAmouNCxG5/
+	fef+bKykHOHfJ59LV485t89B/wuJt+xKz7oMEnKIfvhPhJD7CycYFWe2YhEysE0ikshlJd7zvHf
+	/c/BofAllLGFtKttC8+0h4F+rguOJClDiZhZQ+SR33HsWnWKOnicrUUsjKdBHkKX8sy+8G2NwVZ
+	g==
+X-Received: by 2002:a17:90b:164b:b0:37f:fdc8:71b4 with SMTP id 98e67ed59e1d1-396d0e27d7amr12963110a91.2.1787920440975;
+        Fri, 28 Aug 2026 05:34:00 -0700 (PDT)
+Received: from localhost.localdomain ([47.100.192.162])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-396b1868086sm7009846a91.9.2026.08.28.05.33.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Aug 2026 05:34:00 -0700 (PDT)
+From: Yang Wen <anmuxixixi@gmail.com>
+To: linkinjeon@kernel.org
+Cc: anmuxixixi@gmail.com,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	sj1557.seo@samsung.com,
+	yuezhang.mo@sony.com
+Subject: Re: [PATCH] exfat: validate vendor allocation directory entries
+Date: Fri, 28 Aug 2026 20:33:42 +0800
+Message-Id: <20260828123342.1095335-1-anmuxixixi@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CAKYAXd9cKQ_Z9ZXRuE8qgA9qHMxO-__pt5J9xxDTyJ-E8PkR-w@mail.gmail.com>
+References: <CAKYAXd9cKQ_Z9ZXRuE8qgA9qHMxO-__pt5J9xxDTyJ-E8PkR-w@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260827204056.222099-1-dxdt@dev.snart.me>
-In-Reply-To: <20260827204056.222099-1-dxdt@dev.snart.me>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Fri, 28 Aug 2026 13:51:58 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_JNFheGWiXY2tfr1tWZ_uGqP1RB_xKp+PyGJ1mSnH15A@mail.gmail.com>
-X-Gm-Features: AcwNN1UajcFSQ4lj_FiLKIEHueHnhusb-kxKiaHeH8Av4PY9w45IUkOvy4BUe_U
-Message-ID: <CAKYAXd_JNFheGWiXY2tfr1tWZ_uGqP1RB_xKp+PyGJ1mSnH15A@mail.gmail.com>
-Subject: Re: [PATCH v0 0/8] exfatprogs: optimise mkfs zeroing out and fix
- stdio output
-To: David Timber <dxdt@dev.snart.me>
-Cc: Hyunchul Lee <hyc.lee@gmail.com>, exfat@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 28, 2026 at 5:41=E2=80=AFAM David Timber <dxdt@dev.snart.me> wr=
-ote:
->
-> Following is the performance impact profiling. I don't have a spare NVME
-> SSD to test with so I used AWS EC2 :(
->
-> Your contributions welcome.
->
-> I'm sure pgsteal_* in /proc/vmstat can be used as yet another metric on
-> a busy host, but I didn't bother to go that far to collect that data.
->
-> UAS:
->
->   - Host: Raspberry Pi 4 Model B Rev 1.5
->   - Device: Samsung BAR+ 64GB (via USB 3.0)
->   - Target partition size: 1998585856 bytes
->
->   Pre-patch:
->
->           System time (seconds): 4.54
->           Percent of CPU this job got: 7%
->           Elapsed (wall clock) time (h:mm:ss or m:ss): 1:05.14
->           Maximum resident set size (kbytes): 3200
->           Voluntary context switches: 10297
->           Involuntary context switches: 978
->           File system inputs: 2168
->           File system outputs: 3903664
->
->   Post-patch:
->
->           System time (seconds): 0.29
->           Percent of CPU this job got: 0%
->           Elapsed (wall clock) time (h:mm:ss or m:ss): 0:56.49
->           Maximum resident set size (kbytes): 3200
->           Voluntary context switches: 5792
->           Involuntary context switches: 1322
->           File system inputs: 2224
->           File system outputs: 176
->
-> NVME:
->
->   - Host: AWS EC2 c7gd.medium
->   - Device: "locally attached" SSD volume
->   - Size: 59000000000 bytes
->
->   Pre-patch:
->
->           System time (seconds): 22.64
->           Percent of CPU this job got: 0%
->           Elapsed (wall clock) time (h:mm:ss or m:ss): 45:47.70
->           Maximum resident set size (kbytes): 2792
->           Voluntary context switches: 227200
->           Involuntary context switches: 7352
->           File system inputs: 1360
->           File system outputs: 115235032
->
->   Post-patch:
->
->           System time (seconds): 1.14
->           Percent of CPU this job got: 0%
->           Elapsed (wall clock) time (h:mm:ss or m:ss): 26:08.06
->           Maximum resident set size (kbytes): 2788
->           Voluntary context switches: 56409
->           Involuntary context switches: 60
->           File system inputs: 1727
->           File system outputs: 656
-Looks great to me:)
-Applied them to #exfat-next now.
-Thanks!
+Hi,
+
+Thanks for the review.
+
+EXFAT_CLU_TO_B() was replaced by exfat_cluster_to_bytes() in the
+current tree. I missed this API change when preparing the patch.
+
+I will send a v2 shortly.
+
+Thanks.
