@@ -1,81 +1,196 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9905D345ED0
-	for <exfat@lists.linux.dev>; Mon, 31 Aug 2026 01:10:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F308C310779;
+	Mon, 31 Aug 2026 10:53:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788138665; cv=none; b=ISs2Po0xJtNIQm4G9BUlKv1MgHGwhI+fUaNapdO7zRStfYx6565YvgNtAsx5yDvT3MZ+Iop/k06LuJcHusTfBAnjsEyluRjn+re1lUIbJzLFW9K+Z8HnPfKSjOXAgd94RrFTGX025eiDC7XKUpp5bChhCNoFw1/sR7HSFpE3J/A=
+	t=1788173623; cv=none; b=CCcPfTB908rohtS6jT/2PeBGPdyWRmjaISQfToIrs0LDDKYsSqxEO+UHSwqc7jtenqkOTF44jhA0pJkWu4Q/O3Uq9HuvuOBMB3cdFnk+9q67KQH54haJWG8+fnP+UkztVz1Yrulvhe5L5eXzwEjRrCE4AAxVYyEDAXRhnbAtkrw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788138665; c=relaxed/simple;
-	bh=zRCl8UFo52UCUcfz7pBhtsayJFYRQ8hrYBMf5ypIY0U=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HJt9ueL533BKZGK7j98vt0pPkUL9BEpzYtQsTx+FJ54s/cVushRxUhcVAnm0xGqgOtwkyXqtTTlz+r0N2gO7N+dtZHiKRJ8/LtKyQGbbAH0pqSvOBnfQlMEymZU7lyRgBvcyx/H5PNjNRDrNl9OMGp+BdzVrCuOp1mgix6e/HVs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=lskqpYJZ; arc=none smtp.client-ip=117.135.210.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788173623; c=relaxed/simple;
+	bh=zQtdAjOc0xZG78n9bTgyF7fJtpb9ymJ/Xz3N0g8ohc0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=nf5B4qHT0f0xfubem8SFenmxk1W4XPu+tFW8IVpflfRg+hJUw2vFg3gYPy0QwSewW+rqanadPoPM9Ou3TA/aKkWCeUZ13v7oo3mDeMQh43jC4Pgyi1cdYXGq3QYhY2S2EbfPA71+1AaysUPQmqbID4+ILHzvXIlmQXIQdlA0Yss=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IIW0O3Zn; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="lskqpYJZ"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
-	Content-Type; bh=3o9s13cVBSuR0ZrCiKNmgYn6U3efzqN57tyNUTmiW+g=;
-	b=lskqpYJZ6VYu2aNBsY86JrAhCDDLeDPGHUg89EeS32OO8M8fIg5iyifKRCPbMp
-	Mg5uqecVHIvSX+YI4rmlkYUpwxnX0jJS82vz7YT5aiP+T1eTbecz6rxZfB/YNolD
-	FKpkFLGXbh6XoI/R/84BGNJrUqXqceWJZBiqmJN4BcDGw=
-Received: from [10.42.0.64] (unknown [])
-	by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id _____wC3f5qJ1JRqNBLuSQ--.48685S2;
-	Mon, 31 Aug 2026 09:10:34 +0800 (CST)
-Message-ID: <cabf4253-1d07-410c-8714-062317c9967f@163.com>
-Date: Mon, 31 Aug 2026 09:10:32 +0800
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IIW0O3Zn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5466D1F000E9;
+	Mon, 31 Aug 2026 10:53:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788173621;
+	bh=0TMUVUbDKhxygUyvxGHjekLLbSUdJfWiPqMGV9ltxqo=;
+	h=From:To:Cc:Subject:Date;
+	b=IIW0O3Zn/Nyrr1+WMyuZMwZ5nGDJoLFceTDXbEuJ5nmuClTmuswhYVqplpEm/Izza
+	 wf5QKAlld8TJohsdnHdZuHzx1qABpF7s3s74UrN4QVTszyvwSTImD2YqkeQq1F+h7a
+	 +2G+TnzmhWk7vi7zJRvt4amepcbI5bEMTctVXiP/oDJCWETiuDpXcnkBRYLp1uSU+f
+	 ShAQ79XSAcgoj3c9+aHDNV+Fh4vWq+nz5ReVi/I4EVkg+X7iLzQV0XXj7etNvM5BDC
+	 DoMjAmFtI3/v9EAY523n6Gjt5Rl0MDMfP9YCrjAVxd7kQDv0mrh8WXKGgeGKb9WQhD
+	 aO5PoU2DtHrgw==
+From: Namjae Jeon <linkinjeon@kernel.org>
+To: sj1557.seo@samsung.com,
+	yuezhang.mo@sony.com
+Cc: exfat@lists.linux.dev,
+	anmuxixixi@gmail.com,
+	dxdt@dev.snart.me,
+	chizhiling@kylinos.cn,
+	linux-kernel@vger.kernel.org,
+	Namjae Jeon <linkinjeon@kernel.org>
+Subject: [PATCH] exfat: doc: add documentation
+Date: Mon, 31 Aug 2026 19:53:30 +0900
+Message-Id: <20260831105330.10449-1-linkinjeon@kernel.org>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] exfat: speed up file creation in large directories
-To: Yang Wen <anmuxixixi@gmail.com>, linkinjeon@kernel.org,
- sj1557.seo@samsung.com
-Cc: yuezhang.mo@sony.com, exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20260828145838.1187356-1-anmuxixixi@gmail.com>
-From: Chi Zhiling <chizhiling@163.com>
-In-Reply-To: <20260828145838.1187356-1-anmuxixixi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:_____wC3f5qJ1JRqNBLuSQ--.48685S2
-X-Coremail-Antispam: 1Uf129KBjvdXoW7GFWxZrykJw15JFWrGr43GFg_yoWDWFg_Cr
-	W0qFWqyw4UZrn3CwsxCF4Yqr9rua18CrWYqr4xJr18JrZ3J3sIkF97XrnYyF1fG398tr98
-	Crn7tr1ftw18WjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IUj8sqtUUUUU==
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9woXtGqU1Ipy2AAA3U
+Content-Transfer-Encoding: 8bit
 
-Hi, Yang Wen
+Add documentation for the Linux exFAT filesystem driver, including
+supported mount options and exfatprogs.
 
+Signed-off-by: Namjae Jeon <linkinjeon@kernel.org>
+---
+ Documentation/filesystems/exfat.rst | 117 ++++++++++++++++++++++++++++
+ Documentation/filesystems/index.rst |   1 +
+ 2 files changed, 118 insertions(+)
+ create mode 100644 Documentation/filesystems/exfat.rst
 
-On 8/28/26 10:58 PM, Yang Wen wrote:
-> Negative name lookups scan a directory from the beginning. Repeating
-> this scan before creating each file makes bulk file creation approach
-> O(N^2).
-> 
-> Add a 64 KiB per-directory Bloom filter and retain the next empty entry
-> found during directory scans. A definite Bloom filter miss skips the
-> directory scan, while a possible match falls back to the normal lookup
-> path, preserving correctness in the presence of hash collisions.
-
-I think this is a nice optimization, and for large-directory workloads, 
-the 64 KB overhead is acceptable to me.
-
->   static void exfat_free_inode(struct inode *inode)
->   {
-> +	exfat_name_filter_free(inode);
-The exfat_free_inode() could be called in softirq context, see 
-destroy_inode() in fs/inode.c, which calls free_inode() via call_rcu(),
-
-so you can't call exfat_name_filter_free() from exfat_free_inode(). It 
-should be moved to exfat_evict_inode(), otherwise LOCKDEP will report a 
-warning.
-
-
-Thanks,
+diff --git a/Documentation/filesystems/exfat.rst b/Documentation/filesystems/exfat.rst
+new file mode 100644
+index 000000000000..ce5c9344a7b2
+--- /dev/null
++++ b/Documentation/filesystems/exfat.rst
+@@ -0,0 +1,117 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++==================================
++The Linux exFAT filesystem driver
++==================================
++
++
++.. Table of contents
++
++   - Overview
++   - Utilities support
++   - Supported mount options
++
++
++Overview
++========
++
++exFAT is a filesystem designed for removable storage and other devices that
++need to store large files.  The Linux exFAT filesystem driver provides read
++and write support for exFAT volumes.
++
++To mount an exFAT volume, use the ``exfat`` filesystem type::
++
++  mount -t exfat /dev/sdX1 /mnt
++
++
++Utilities support
++=================
++
++The exfatprogs project provides userspace utilities for creating, checking,
++repairing, inspecting, and tuning exFAT filesystems.  Use exfatprogs when
++creating or checking an exFAT filesystem.  For example, use ``mkfs.exfat``
++to create a filesystem and ``fsck.exfat`` to check or repair one.
++
++The project is available at:
++
++  https://github.com/exfatprogs/exfatprogs
++
++
++Supported mount options
++=======================
++
++The exFAT driver supports the following mount options:
++
++======================= ====================================================
++uid=
++gid=                    Set the owner and group of all files and
++                        directories.  The default is the uid and gid of
++                        the process mounting the filesystem.
++
++umask=                  Set the permission mask for files and directories.
++                        The default is the umask of the process mounting
++                        the filesystem.
++
++dmask=                  Set the permission mask for directories.
++
++fmask=                  Set the permission mask for files.
++
++allow_utime=            Control the permission check for changing file
++                        timestamps.  Only permission bits 0022 are used.
++                        Permission bit 0020 allows members of the file's
++                        group to change timestamps, and permission bit 0002
++                        allows other users to change timestamps.  The
++                        default is derived from dmask (``~dmask & 0022``).
++
++iocharset=name          Character set used to convert between user-visible
++                        filenames and the UTF-16 character encoding used by
++                        exFAT.  The default is
++                        CONFIG_EXFAT_DEFAULT_IOCHARSET, which is ``utf8``
++                        unless changed at kernel configuration time.  Use
++                        ``iocharset=utf8`` for UTF-8 filename handling.
++
++errors=                 Specify exFAT behavior on filesystem errors.  The
++                        value must be ``panic``, ``continue``, or
++                        ``remount-ro``.  These respectively panic, continue
++                        without changing the filesystem, or remount the
++                        filesystem read-only.  The default is
++                        ``remount-ro``.
++
++discard                 Issue discard/TRIM requests to the block device
++                        when clusters are freed.  This is disabled by
++                        default.  ``nodiscard`` disables it explicitly.
++
++keep_last_dots          Keep trailing periods in path components during
++                        lookup.  Without this option, trailing periods are
++                        stripped.  Existing entries with trailing periods
++                        can be accessed when this option is enabled, but
++                        creating new entries with trailing periods is
++                        rejected.
++
++sys_tz                  Use the system timezone as the UTC offset when an
++                        exFAT timestamp does not contain a valid timezone
++                        offset.  This takes precedence over time_offset.
++
++time_offset=minutes     Set the UTC offset, in minutes, used when an exFAT
++                        timestamp does not contain a valid timezone offset.
++                        Values from -1440 to 1440 are accepted.  The default
++                        is 0.  This option is ignored when sys_tz is set.
++
++zero_size_dir           Create directories with zero size and without
++                        allocating a cluster.  This is disabled by default;
++                        the default behavior allocates a cluster for a new
++                        directory.  ``nozero_size_dir`` disables it
++                        explicitly.
++======================= ====================================================
++
++
++Deprecated mount options
++------------------------
++
++The following options are accepted for compatibility but should not be used:
++
++``utf8``
++  Deprecated.  Use ``iocharset=utf8`` instead.
++
++``debug``, ``namecase=``, ``codepage=``
++  Deprecated and ignored by the exFAT driver.
+diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
+index 734a45e51667..fbd55915a318 100644
+--- a/Documentation/filesystems/index.rst
++++ b/Documentation/filesystems/index.rst
+@@ -87,6 +87,7 @@ Documentation for filesystem implementations.
+    ecryptfs
+    efivarfs
+    erofs
++   exfat
+    ext2
+    ext3
+    ext4/index
+-- 
+2.25.1
 
