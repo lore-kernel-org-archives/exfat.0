@@ -1,75 +1,81 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF42921A447
-	for <exfat@lists.linux.dev>; Sat, 29 Aug 2026 03:46:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9905D345ED0
+	for <exfat@lists.linux.dev>; Mon, 31 Aug 2026 01:10:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787975171; cv=none; b=WnAZ+XkrVzRQDz7/cT7AK7sQ70DVslaS0UMpvLFITYnX19mmK3k3r46uLlJhuPh+j4JDGcSYP+I7FKclwB7tEbKh7775q89dHkf8TUOx1e8VeTrLXITtnEjNOoGGCygVUvQC0bm54J0kMQOzmq8koqWXusCDuzKXOf4jbMwZFzA=
+	t=1788138665; cv=none; b=ISs2Po0xJtNIQm4G9BUlKv1MgHGwhI+fUaNapdO7zRStfYx6565YvgNtAsx5yDvT3MZ+Iop/k06LuJcHusTfBAnjsEyluRjn+re1lUIbJzLFW9K+Z8HnPfKSjOXAgd94RrFTGX025eiDC7XKUpp5bChhCNoFw1/sR7HSFpE3J/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787975171; c=relaxed/simple;
-	bh=6Li4JioL9nQQjO0JcYz13/zQiRGOScBYSVjTddVtr4A=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uSCDGonFlXFyW0ObMEzh4deeK4WJYJoOF1511EYAB8vDvwqANMOW9dlBydfEkUphrS6P8iUlc9ltywW/ocLi1kxsW/Qo6yb3lWWUPUEjGvAZ/DJG66uk5pKrE29WcbPMAYO5z8O6K/uFVUAO7qQVJglE6LnrRd2fM3LsDW3I7hE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K+jrDYIx; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788138665; c=relaxed/simple;
+	bh=zRCl8UFo52UCUcfz7pBhtsayJFYRQ8hrYBMf5ypIY0U=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HJt9ueL533BKZGK7j98vt0pPkUL9BEpzYtQsTx+FJ54s/cVushRxUhcVAnm0xGqgOtwkyXqtTTlz+r0N2gO7N+dtZHiKRJ8/LtKyQGbbAH0pqSvOBnfQlMEymZU7lyRgBvcyx/H5PNjNRDrNl9OMGp+BdzVrCuOp1mgix6e/HVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=lskqpYJZ; arc=none smtp.client-ip=117.135.210.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K+jrDYIx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60BBA1F00AC4
-	for <exfat@lists.linux.dev>; Sat, 29 Aug 2026 03:46:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787975170;
-	bh=6Li4JioL9nQQjO0JcYz13/zQiRGOScBYSVjTddVtr4A=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=K+jrDYIxDRFxrmEFfJZWnuZLz2xLi1ZyfqhEIOQE35p4QOgMvGYcYluq/n0R6BIGy
-	 +r89XeksP3sKWlQI4uFzS0C6yKHKl7yXZ7zaf4fXi51P0mvuui5uqVp40PF1K0h7Ik
-	 u2OX8X35rNmbhPuQgNXqKRfWWNp3h3sxpaxK+mYWqRIgoRGfPHMyATHPhbUvwyecqO
-	 mfAWe9KXD0xMmhBBeNCtWMK7go8H3WjHgc5iCFtu0XTAcaK8KxmBazhRIO3zmR43zr
-	 k4xOQa1kMDjhG+Ht20TEiPzR+2J0v3BGXDVlhvnYSmFdJ+t1XbJQ6woOuUlAHxojWH
-	 83oR19j6UaB5g==
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-c25366c9b42so189468966b.2
-        for <exfat@lists.linux.dev>; Fri, 28 Aug 2026 20:46:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoUBbNH+qqP78yfyrRrG6Ef+Opv5fuFkfFJixCNkI00MfoJSHlWuGNZQWaeBAnUTF0BgdWrNg==@lists.linux.dev
-X-Gm-Message-State: AFuF++mzHNQmoueonCc2xHm2EByi5NUR5cReebFastVy7OJrsH03RVAf
-	t2TuCsnlTHEWq9HpLXGPQFEtZpZBvBvaWFvVcVsCW2XutevGWIQwpu+Eq6VrNRFVoqtBQdBA4tV
-	mr8EfBo3EHRWWlnHRdWsJyCu+Vpz+y6Q=
-X-Received: by 2002:a17:907:9809:b0:c24:6f60:3f7e with SMTP id
- a640c23a62f3a-c2556fe8495mr880352766b.2.1787975169048; Fri, 28 Aug 2026
- 20:46:09 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="lskqpYJZ"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=3o9s13cVBSuR0ZrCiKNmgYn6U3efzqN57tyNUTmiW+g=;
+	b=lskqpYJZ6VYu2aNBsY86JrAhCDDLeDPGHUg89EeS32OO8M8fIg5iyifKRCPbMp
+	Mg5uqecVHIvSX+YI4rmlkYUpwxnX0jJS82vz7YT5aiP+T1eTbecz6rxZfB/YNolD
+	FKpkFLGXbh6XoI/R/84BGNJrUqXqceWJZBiqmJN4BcDGw=
+Received: from [10.42.0.64] (unknown [])
+	by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id _____wC3f5qJ1JRqNBLuSQ--.48685S2;
+	Mon, 31 Aug 2026 09:10:34 +0800 (CST)
+Message-ID: <cabf4253-1d07-410c-8714-062317c9967f@163.com>
+Date: Mon, 31 Aug 2026 09:10:32 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260828125154.1104851-1-anmuxixixi@gmail.com>
-In-Reply-To: <20260828125154.1104851-1-anmuxixixi@gmail.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Sat, 29 Aug 2026 12:45:56 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8oDiKPkQiE0vXCTdmEASKzbbVJhgs_2H4ZpS0_oFY_qw@mail.gmail.com>
-X-Gm-Features: AcwNN1W_N4ZBLICX2FjnAe9Z42Lj2hoKPX-2iWnr8faayfgda5TCBeyE253aWFU
-Message-ID: <CAKYAXd8oDiKPkQiE0vXCTdmEASKzbbVJhgs_2H4ZpS0_oFY_qw@mail.gmail.com>
-Subject: Re: [PATCH v2] exfat: validate vendor allocation directory entries
-To: Yang Wen <anmuxixixi@gmail.com>
-Cc: sj1557.seo@samsung.com, yuezhang.mo@sony.com, exfat@lists.linux.dev, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] exfat: speed up file creation in large directories
+To: Yang Wen <anmuxixixi@gmail.com>, linkinjeon@kernel.org,
+ sj1557.seo@samsung.com
+Cc: yuezhang.mo@sony.com, exfat@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20260828145838.1187356-1-anmuxixixi@gmail.com>
+From: Chi Zhiling <chizhiling@163.com>
+In-Reply-To: <20260828145838.1187356-1-anmuxixixi@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:_____wC3f5qJ1JRqNBLuSQ--.48685S2
+X-Coremail-Antispam: 1Uf129KBjvdXoW7GFWxZrykJw15JFWrGr43GFg_yoWDWFg_Cr
+	W0qFWqyw4UZrn3CwsxCF4Yqr9rua18CrWYqr4xJr18JrZ3J3sIkF97XrnYyF1fG398tr98
+	Crn7tr1ftw18WjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IUj8sqtUUUUU==
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9woXtGqU1Ipy2AAA3U
 
-On Fri, Aug 28, 2026 at 9:52=E2=80=AFPM Yang Wen <anmuxixixi@gmail.com> wro=
-te:
->
-> The exfat entry validator checks the type and ordering of benign secondar=
-y
-> entries, but does not validate Vendor Allocation entry fields. In additio=
-n,
-> exfat_find() reads only the first two entries, allowing malformed trailin=
-g
-> Vendor Allocation entries to bypass validation.
->
-> Validate the allocation flags, VendorGuid, FirstCluster, DataLength, and
-> NoFatChain extent. Read the complete entry set during lookup so malformed
-> Vendor Allocation entries are rejected.
->
-> Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
-Applied it to #dev.
-Thanks!
+Hi, Yang Wen
+
+
+On 8/28/26 10:58 PM, Yang Wen wrote:
+> Negative name lookups scan a directory from the beginning. Repeating
+> this scan before creating each file makes bulk file creation approach
+> O(N^2).
+> 
+> Add a 64 KiB per-directory Bloom filter and retain the next empty entry
+> found during directory scans. A definite Bloom filter miss skips the
+> directory scan, while a possible match falls back to the normal lookup
+> path, preserving correctness in the presence of hash collisions.
+
+I think this is a nice optimization, and for large-directory workloads, 
+the 64 KB overhead is acceptable to me.
+
+>   static void exfat_free_inode(struct inode *inode)
+>   {
+> +	exfat_name_filter_free(inode);
+The exfat_free_inode() could be called in softirq context, see 
+destroy_inode() in fs/inode.c, which calls free_inode() via call_rcu(),
+
+so you can't call exfat_name_filter_free() from exfat_free_inode(). It 
+should be moved to exfat_evict_inode(), otherwise LOCKDEP will report a 
+warning.
+
+
+Thanks,
+
