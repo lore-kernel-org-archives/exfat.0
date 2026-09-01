@@ -1,116 +1,100 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E096C3BE636
-	for <exfat@lists.linux.dev>; Tue,  1 Sep 2026 07:45:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A322D38C42F
+	for <exfat@lists.linux.dev>; Tue,  1 Sep 2026 08:42:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788248748; cv=none; b=VszQ+CsOh8oZuFxhfhSerqMg6qn9bGNJj51/HhDlJOzUd041HPP0RciaRLL1XHwtHM9SYGiCSvjRDgrkNWMqAN4SObZdnvhEI1z3uTdzli75b2xgKoaC5rvNSkdyOSC0pkF2NbUyLcWwJu1aqjHmxyNMSh/GfRuW0VDVw3ccKY0=
+	t=1788252159; cv=none; b=FeuioUbUMVUkRXca6/72N4+PNLmhVDwwabFo7mKhN8pxCp2OHJb4euN+vDG7/EyAoAE74nfaXbZWmK+aM1WifJRfRnBUdOlIt9DsiJbmcHNRIFiROkS3wgw8AGC2GPPmwup3My1SgxRou0wVYmNQXGIkz8tJ1ZXSzd6DkX4zbEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788248748; c=relaxed/simple;
-	bh=Mid89gYgVMubNd5SeLtGPKU9Eu9EvreEAN2NM2qvLSY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BGSlKwf+89iYd4XA3q6YN8OgGE8fgWWzK9oM8DZRc72IUH5bGA7bFjNfEisXoxqU2kLmKGXTOvBlRTvaAE7km22vGJTBynEHnyIVLSQYe64xPZTnWxKFwt2h1MERwS+AFGWaGvJkHW9yl0W1tcr2dt7P1YEDvKusq5ukptvjfoY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=oQO8Ohoi; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788252159; c=relaxed/simple;
+	bh=Mp9L1Mkd/gFKpsrn/k/XMqgbUYslDFL/aOv3FD6xWNc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Q4Pp9OjDSB0ZVxE+zaRkHqqpjZR/1NRGDM4prEdmRNHJK8VSh0MZP2UgVeKnbMUCCS3j0B7zrKZENu+wlEf9vxSJ+gEHi15cjjfTXQEwHvfwnsn0eRnsO2DeD+UfM3XCNyowJi69kHxpW2gClh82HlFlof89CCXOiR343IQKhwM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=sekJD3fq; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="oQO8Ohoi"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
-	Content-Type; bh=T92CL99kwa+djsSu7LsHukv/QHdIGeOl+96thK07VmU=;
-	b=oQO8OhoinXFC91NTvf/exFLREj/hsO9k8siVqYnmeupxoAzonLxfl986lx/fcE
-	f8geTizqlGP1sIAxa5+xyuNtWmmYEIO1EmTMGmtlPEwg9ngJaxP6Yrn52Jcdas+x
-	Md0tFFlgsxSSctn+Ij/gmLbpS/ISzF0Ewt9c0A2tAGRNY=
-Received: from [10.42.0.64] (unknown [])
-	by gzga-smtp-mtada-g0-4 (Coremail) with SMTP id _____wDn96+VgpZqNaBQTQ--.50045S2;
-	Tue, 01 Sep 2026 15:45:26 +0800 (CST)
-Message-ID: <d112a566-eaf0-4db5-ad33-91208b98e82d@163.com>
-Date: Tue, 1 Sep 2026 15:45:24 +0800
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="sekJD3fq"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id 385411D452;
+	Tue,  1 Sep 2026 08:42:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 385411D452
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1788252156; bh=Mp9L1Mkd/gFKpsrn/k/XMqgbUYslDFL/aOv3FD6xWNc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=sekJD3fqG+VdR/o6pzpvn6JE233pWZr0e4q68BA9nzZKw5RKAUNajzZKIgLg/6Ugy
+	 Joa2ah2okDp9VrgEC3uPLTmoCz7/Jg7OIx+VoTZo0kqmNxmIAkMKT1MXE8t4R60sYn
+	 cyJYrXGJ4w5mpOte4StA9logL8q+rBjR5O8Sbqt8=
+Received: from maya.d.snart.me ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id 6+XbNvqPlmqF+QMA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Tue, 01 Sep 2026 08:42:35 +0000
+From: David Timber <dxdt@dev.snart.me>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Hyunchul Lee <hyc.lee@gmail.com>
+Cc: exfat@lists.linux.dev,
+	David Timber <dxdt@dev.snart.me>
+Subject: [PATCH 1/2] libexfat, fsck: add volume flags definitions
+Date: Tue,  1 Sep 2026 08:42:18 +0000
+Message-ID: <20260901084219.39898-1-dxdt@dev.snart.me>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] exfat: speed up file creation in large directories
-To: Yang Wen <anmuxixixi@gmail.com>, linkinjeon@kernel.org,
- sj1557.seo@samsung.com, yuezhang.mo@sony.com
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20260831151539.1239134-1-anmuxixixi@gmail.com>
-From: Chi Zhiling <chizhiling@163.com>
-In-Reply-To: <20260831151539.1239134-1-anmuxixixi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:_____wDn96+VgpZqNaBQTQ--.50045S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7ZFWDAFW5Xw4rZF1kur4xXrb_yoW8uw18pa
-	1rGa4ftw1kJ3W7Jan3uF18JFy5J395GF1fX34fCry5Grn8ur1vvr1fKryjgayDu3y5Wr1a
-	qa1jvr10gwnrCrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U20PhUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC+BcGo2qWgpc5aAAA3y
+Content-Transfer-Encoding: 8bit
 
-On 8/31/26 11:15 PM, Yang Wen wrote:
-> Negative name lookups scan a directory from the beginning. Repeating
-> this scan before creating each file makes bulk file creation approach
-> O(N^2).
-> 
-> Add a 64 KiB per-directory Bloom filter and retain the next empty entry
-> found during directory scans. A definite Bloom filter miss skips the
-> directory scan, while a possible match falls back to the normal lookup
-> path, preserving correctness in the presence of hash collisions.
-> 
-> To avoid overhead for small directories, build the filter lazily when a
-> directory reaches 1024 on-disk directory entries. A filter reclaimed
-> under memory pressure is rebuilt on demand.
-> 
-> Manage the filters using a per-superblock LRU and shrinker so that filters
-> for inactive directories can be reclaimed under memory pressure.
-> 
-> Test environment:
->    QEMU TCG multi-thread, 4 vCPUs, 6 GiB RAM
->    4 GiB exFAT image, 32 KiB clusters
-> 
-> Test script:
->    mount -t exfat /dev/vda /mnt/test
->    time sh -c '
->            i=0
->            while [ "$i" -lt 20000 ]; do
->                    : > "/mnt/test/f.$i" || exit 1
->                    i=$((i + 1))
->            done
->    '
-> 
-> The measured results were:
-> 
->                           Before          After
->    real                   589.48 s         5.33 s
->    user                     4.72 s         2.28 s
->    sys                    584.63 s         3.03 s
-> 
-> The elapsed time was reduced by 99.10%, from 589.48 seconds to
-> 5.33 seconds, corresponding to a 110.6-fold speedup.
-> 
-> Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
-> ---
-> 
-> Changes in v2:
-> - Move exfat_name_filter_free() from exfat_free_inode() to
->    exfat_evict_inode(), after truncate_inode_pages_final(), because
->    ->free_inode() may run from an RCU callback in softirq context.
-> - Link to v1: https://lore.kernel.org/all/20260828145838.1187356-1-anmuxixixi@gmail.com/
-> ---
->   fs/exfat/dir.c      | 280 ++++++++++++++++++++++++++++++++++++++++++++
->   fs/exfat/exfat_fs.h |  22 ++++
->   fs/exfat/inode.c    |   1 +
->   fs/exfat/namei.c    |  44 ++++++-
->   fs/exfat/super.c    |   9 ++
->   5 files changed, 355 insertions(+), 1 deletion(-)
+Add the rest of volume flags(ACTIVE_FAT, DIRTY, MEDIA_FAILURE,
+CLEAR_TO_ZERO) from the exFAT volume format specs for cleaner code and
+upcoming features.
 
-This is a fairly large patch, which makes the review a bit more
-challenging. Perhaps next time you could consider splitting it into
-multiple patches in a patch series :)
+Use VOL_DIRTY instead of the magic value(0x02) in fsck.c.
 
-Reviewed-by: Chi Zhiling <chizhiling@kylinos.cn>
+No functional change.
 
+Signed-off-by: David Timber <dxdt@dev.snart.me>
+---
+ fsck/fsck.c            | 4 ++--
+ include/exfat_ondisk.h | 7 ++++++-
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index f1934d0..5447154 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -370,9 +370,9 @@ static int exfat_mark_volume_dirty(struct exfat *exfat, bool dirty)
+ 
+ 	flags = le16_to_cpu(exfat->bs->bsx.vol_flags);
+ 	if (dirty)
+-		flags |= 0x02;
++		flags |= VOL_DIRTY;
+ 	else
+-		flags &= ~0x02;
++		flags &= ~VOL_DIRTY;
+ 
+ 	exfat->bs->bsx.vol_flags = cpu_to_le16(flags);
+ 	if (!exfat_write_full(exfat->blk_dev->dev_fd, exfat->bs, sizeof(struct pbr), 0)) {
+diff --git a/include/exfat_ondisk.h b/include/exfat_ondisk.h
+index dde84d6..fdb29de 100644
+--- a/include/exfat_ondisk.h
++++ b/include/exfat_ondisk.h
+@@ -38,8 +38,13 @@
+ 
+ #define PBR_SIGNATURE		0xAA55
+ 
+-#define VOL_CLEAN		0x0000
++/* Volume flags masks */
++
++#define VOL_ACTIVE_FAT		0x0001
+ #define VOL_DIRTY		0x0002
++#define VOL_MEDIA_FAILURE	0x0004
++#define VOL_CLEAR_TO_ZERO	0x0008
++#define VOL_RESERVED		0xFFF0
+ 
+ #define DENTRY_SIZE		32 /* directory entry size */
+ #define DENTRY_SIZE_BITS	5
+-- 
+2.55.0
 
