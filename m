@@ -1,44 +1,42 @@
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B94C746D56E
-	for <exfat@lists.linux.dev>; Wed,  2 Sep 2026 12:02:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B926548A2D7
+	for <exfat@lists.linux.dev>; Wed,  2 Sep 2026 12:26:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788350554; cv=none; b=mRIkObDdbZMf7ZmwfTl32oqikJP5FrD/2lEoGlQaRuOSjED35/glmD/GJ6YV8xiEpbuarog/Aeig6AMtZQ0bOg70GWRs8sSVz3mB9jckvizNcOeWo0tBZGagiU2gNO4xZ1UBXeT2ewkmqrS/YSTHAUA9pA5ULgVOkTL+teJVu40=
+	t=1788351976; cv=none; b=pCX7GPW6i+adDKY9uqppwqNp0mFnzFbXAE+HaTRXQXWhn+cuRRdtL4i/T+/0V47z0MJqRjlH6V408gwMJ3jSCVql9P1tFMswUugBCCnW7S5BKLJqXQ+7Kkslk/1guoxNY7yXpVaaqEQnApbNnGif8nmOtOutfDj1mbZRdiPWwRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788350554; c=relaxed/simple;
-	bh=ts9vTFHY6jPPtqT4a6CWblQbYYCnjXoYJtui0TBKrbs=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qRrLwIi13pqBuVjbVgF0/5jBRR6LYgdPyCGiMZXVL54s4UUX018xulhjdPXlwIIbm2rVwKeBCSwDc/TTz8vsz55zhkfR9mLBe0+OcfGfzpmEm/5p7SsvC0bYXw5UBf2vQG8oI4veR8IvnROm1uyXAhq6VvNmkpukstM2huUOC84=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=lOtxlKh6; arc=none smtp.client-ip=54.252.183.203
+	s=arc-20240116; t=1788351976; c=relaxed/simple;
+	bh=DFlYfcg5wRgmjIJkCWAa4k825zFfwu+4dL29SfSS4hE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=B/W8CHS6ahi7MtjILo3jiQObItxKPnEJADlnJ9M0ECZ5xrjwbs6UCWoLZxY52XO+PbLT4kBq1TfX+sm2yIH7SknFF/WMPLD3zMrMdumLbqhDYizyLbyevvUIAlwqVrzCkSVkQGtMKcCeI9IV2LxXjm/0GU56AFHLXiEpRK0Y5Ys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=Og0yGbkt; arc=none smtp.client-ip=54.252.183.203
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="lOtxlKh6"
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="Og0yGbkt"
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 4B6161D452;
-	Wed,  2 Sep 2026 12:02:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 4B6161D452
+	by embla.dev.snart.me (Postfix) with ESMTP id 547491D452;
+	Wed,  2 Sep 2026 12:26:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 547491D452
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1788350532; bh=ts9vTFHY6jPPtqT4a6CWblQbYYCnjXoYJtui0TBKrbs=;
+	t=1788351973; bh=DFlYfcg5wRgmjIJkCWAa4k825zFfwu+4dL29SfSS4hE=;
 	h=From:To:Cc:Subject:Date:From;
-	b=lOtxlKh6Z19aLc6WUxxxmPj9D0SFXNbt1RFUwo4D5lcYVj2nnkHnJVFAsz2xqv0h3
-	 WltRPVj/FG8b6xu6IS6qE7ofRTWvREk7Zz8wBu+fj58NMu8rkS3bEqvFDyeQcFg306
-	 Yz+9J0ckf++qiSNOuniJHhiW1deCmON4kzz3oELQ=
+	b=Og0yGbkthVsY06dtzhHZgbe3Vf67YYjCH7A1KcOV//gp+NBKjNTIamVd7333HjVi6
+	 dtB79VRVC1TM+qCuWQDj75FMQgZXHEJOM8HhIwyHLPZudv8FvhiOTrxOVS4rUuncmW
+	 XUzMaXHbgLImbuqPIQRZpYHMvNXHSVNiJZJ1YS40=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id tWlVO0IQmGoYZAQA8KYfjw
-	(envelope-from <dxdt@dev.snart.me>); Wed, 02 Sep 2026 12:02:11 +0000
+	id tcNjA+QVmGrUZQQA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Wed, 02 Sep 2026 12:26:12 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>,
-	Sungjong Seo <sj1557.seo@samsung.com>,
-	Yuezhang Mo <yuezhang.mo@sony.com>
+	Hyunchul Lee <hyc.lee@gmail.com>
 Cc: exfat@lists.linux.dev,
-	Hyunchul Lee <hyc.lee@gmail.com>,
 	David Timber <dxdt@dev.snart.me>
-Subject: [RFC PATCH v0] exfat: update percent_in_use field when updating volume flags
-Date: Wed,  2 Sep 2026 12:01:43 +0000
-Message-ID: <20260902120143.7158-1-dxdt@dev.snart.me>
+Subject: [PATCH] mkfs: set perc_in_use to 0xFF
+Date: Wed,  2 Sep 2026 12:25:51 +0000
+Message-ID: <20260902122551.14090-1-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
@@ -48,75 +46,39 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently, the exfat fs implementation does not modify the
-percent_in_use in the boot sector header at all. Although the field is
-only an advisory field for situations where bit counting is not
-feasible, not updating the field at all can cause confusion if the
-the value is actually exposed to the user.
+Currently, mkfs.exfat always sets the perc_in_use field in the boot
+header to zero. This is not the correct behaviour since there is always
+going to be used clusters for the volume structures like the allocation
+bitmap and upcase table.
 
-Calculate the value using integer arithmetic only when the dirty flag is
-cleared. If the dirty flag is set, set to 0xFF.
+perc_in_use is only an advisory field. As the number of used clusters
+are determined later on during the formatting process, it's not worth
+risking a huge code change just for correctness. Therefore, to avoid
+confusion, set it to 0xFF which is the magic value that should be
+interpreted as "not known" according to the spec.
 
-It is set to 0xFF when mounting under the assumption that the number of
-used clusters will change - this is basically what is recommended in the
-SD Association's specs.
-
-When clearing the dirty flag, if overridden by
-sbi->vol_flags_persistent, set to 0xFF. This is intentional because if
-there are orphan clusters, the calculated value would be incorrect and
-correcting the fs error is fsck.exfat's job.
+As the Linux kernel exfat driver currently does not modify perc_in_use
+at all, unless the volume is mounted by an implementation that modifies
+it, it will always be read as 0. Setting it to 0xFF should somewhat
+alleviate the issue because the user would at least know it's not valid.
 
 Signed-off-by: David Timber <dxdt@dev.snart.me>
 ---
- fs/exfat/super.c | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ mkfs/mkfs.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/exfat/super.c b/fs/exfat/super.c
-index a9ea36ba2693..3df11164889a 100644
---- a/fs/exfat/super.c
-+++ b/fs/exfat/super.c
-@@ -69,16 +69,32 @@ static int exfat_statfs(struct dentry *dentry, struct kstatfs *buf)
- 	return 0;
- }
+diff --git a/mkfs/mkfs.c b/mkfs/mkfs.c
+index 0bc4876..609654b 100644
+--- a/mkfs/mkfs.c
++++ b/mkfs/mkfs.c
+@@ -388,6 +388,7 @@ static void exfat_setup_boot_sector(struct pbr *ppbr,
+ 	pbsx->fs_version[0] = 0;
+ 	pbsx->fs_version[1] = 1;
+ 	pbsx->phy_drv_no = 0x80;
++	pbsx->perc_in_use = 0xFF;
+ 	memset(pbsx->reserved2, 0, 7);
  
-+static inline __u8 exfat_calc_perc_in_use(const struct exfat_sb_info *sbi)
-+{
-+	const unsigned long long total_clus = EXFAT_DATA_CLUSTER_COUNT(sbi);
-+	unsigned long long ret = sbi->used_clusters;
-+
-+	ret *= 100;
-+	ret /= total_clus;
-+	return (__u8)ret;
-+}
-+
- static int exfat_set_vol_flags(struct super_block *sb, unsigned short new_flags)
- {
- 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
- 	struct boot_sector *p_boot = (struct boot_sector *)sbi->boot_bh->b_data;
-+	__u8 new_piu;
- 
- 	/* retain persistent-flags */
- 	new_flags |= sbi->vol_flags_persistent;
- 
-+	if (new_flags & VOLUME_DIRTY)
-+		new_piu = 0xFF;
-+	else
-+		new_piu = exfat_calc_perc_in_use(sbi);
-+
- 	/* flags are not changed */
--	if (sbi->vol_flags == new_flags)
-+	if (sbi->vol_flags == new_flags && new_piu == p_boot->percent_in_use)
- 		return 0;
- 
- 	sbi->vol_flags = new_flags;
-@@ -90,6 +106,7 @@ static int exfat_set_vol_flags(struct super_block *sb, unsigned short new_flags)
- 		return 0;
- 
- 	p_boot->vol_flags = cpu_to_le16(new_flags);
-+	p_boot->percent_in_use = new_piu;
- 
- 	set_buffer_uptodate(sbi->boot_bh);
- 	mark_buffer_dirty(sbi->boot_bh);
+ 	memset(ppbr->boot_code, 0, 390);
 -- 
 2.55.0
 
