@@ -1,163 +1,106 @@
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2522330301
-	for <exfat@lists.linux.dev>; Wed,  2 Sep 2026 01:07:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.43
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788311263; cv=pass; b=Tnqo8vF/AQM9UpsRsOgNA7fHUyG5QisNYB41xC590VsIm9AumGTxFVcoKbDiMO+alVw7y/pUU0ypxp9pxBPwE3cJLmTaf/SSwJ61Fnso0GNPW1pRFGl+0/Ur5ZITquFTwXoozz/xta4E/I33+YpI+9W6LXZWgOqdzUHGiHvQxq0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788311263; c=relaxed/simple;
-	bh=9ZyCkXOt1SPoVIQIg4LKn8wll9NvhoIjAu5XESoF1g0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=gpgq4RyyA3SSQeeo1PKlrjfjYzks2wnca2uuWK5xjIpIZzQ4eb/R5zTXgB+4O7q1tmWBR3G6lM69Fv8VauXCBraVsKUiaiEvVbvmMOGSXwQfp0n5H6yUg3qCWkdMX+lHbWca4w9op2HFbtPiQ48EecIt3k1JMvm1Cx/oFCcQVow=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=InuPHPDZ; arc=pass smtp.client-ip=209.85.167.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 944D53F54BF
+	for <exfat@lists.linux.dev>; Wed,  2 Sep 2026 08:45:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788338717; cv=none; b=eglYmAxSVZHRQ7aCuIDNdCMP/wZymFYfJwNPDe70hHuQs/CFb1uEHA+hXKQX4HMF+dcquDstEX8KPPbhpg/C3ppLHQ5l7I6BRyoL952mknEb7GSf75k6V8sly0DUUmIMHpwdM4D76PorpVwrb5N/YU0N8gPQqiG978DJmDQKVqM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788338717; c=relaxed/simple;
+	bh=ti6pwp/GFl6iYhEZmu4jLenBjALY2mkvjhlzycLF1CI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Q7/kdPUHh1aaM4bTnqlrmukh9wnmXbWwfkj9d649y9JwoWkaUBa4xY8Z7A5sASFlgZDriHqL3/lwF+oZAzZNKCz1WKfF3/hnEEAbOP/vgVfZ9EOqwc2VPzOTrahoeakfwQtS42JblBfgs34mgeZnU8esEWfGviyWfrCu3w0c524=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=RuY7KJ7z; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="InuPHPDZ"
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b4af730f8aso391150e87.1
-        for <exfat@lists.linux.dev>; Tue, 01 Sep 2026 18:07:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788311259; cv=none;
-        d=google.com; s=arc-20260327;
-        b=gC5DFfHgIfGvFG2VTNU45jAd+59Yp1pXB+6NzJPFw4V3qcYqei7Vcu83u0ebDKqveu
-         gAwqQ+9prp7kMzweetyBAQyBi+eU/O0G7V5OhWywrfYVCm0GkR3Esng+GrPP+YPeTAKE
-         H1oi6p9OBdgmm07IWkq80jt4fPGEEej9FApMROyzG/iPmVTgVVNjprkkll28fmYDPM+a
-         HSBRCM9uSm/F9UJEcOMYD9qm/h2ySG1hc0rf48eCC90uaBidRGW6wHzzErSQ0VBrDBJr
-         o4sTgH4dnR927GWlctlw0LpJi1bTenfNh5aJoAnHhskOmpZ5sw5oC7ZLDWRngSlAOa0q
-         a/iA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=thVN33qbeG55eSg2cuej7g+mXlG1kulBciNhjFWQ5V0=;
-        fh=E/k+ek5D11Qmtun4KT0V3MQu8sBaaBopoPFXhpZW5HQ=;
-        b=ioBgSZcXJuC6CBdHIS68kdlOv1yJRvHbQ4mY5Xj5+i8u+9kBg81B9kRn8gs4BGLj3n
-         l1B1B0oLmeqbgCW0aWhYzGzl9MuVYvsHzHt9S0oVmwXWyIZbO0OHEFzxRpItFa8RDhkO
-         2rNoUPYmnUpIotF2/F7clmpI1zF4KRrZ+0IEVSrrQipydGi87H4P5ncqrJ+3C519VLtR
-         LAZkdRRUbBzcPDSiSfqR+pnHKpYabIDbKoGR9LfI04Rbb2lvacDbHyWnXnCvA8inTkln
-         jetlCdq9qpBXhQ+NkqrZVcsk59Pq9uNYEUYskFFa+UxIWgjCTKbiuq9Tgtzootpdc7UA
-         NdXA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788311259; x=1788916059; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=thVN33qbeG55eSg2cuej7g+mXlG1kulBciNhjFWQ5V0=;
-        b=InuPHPDZxJveb2BZdALkTd1AhJJZfaXYUwZ1B4GIRCStS3f7Ocf1NLDATGeFc7Jmab
-         wEL7EEfpgZfbjI4XQn2wq6qw10YhVPMfJYVEKWZ+nLwkjjlakFhnQjIe1JURbs5q0FXh
-         1VIk+dR0Ku+e16idN2CZT+O+m0/MXnjJXUoG//U6PwPwDutsPyyUk6bosvJDgN+kXPdI
-         PoxnNjos1v8uO2E5bFUmkADp/Tqr43DItEe/26opF8uGf6ne6cdavJBpZrss6E/vkFoR
-         AMFfzAtBTmO1gfMpXXb6qd+U2T63iR1k6nd4jXjkiAB2XqNwlOS8gsSshln5Rcg2OR3V
-         Dc9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788311259; x=1788916059;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=thVN33qbeG55eSg2cuej7g+mXlG1kulBciNhjFWQ5V0=;
-        b=akTA9fGJnR3ea+NKWtoahgl0r8fAFvIS8Q79dFcoi56b5mJayumozN9NRSF8wgaEue
-         j2fIHXpf/DgAs9bND0W9BBfjmTXKgygkOCVwP0gXdceJ5xZusc7kaTbSzuFFVrEXJugq
-         WX/SsEq9N9266uAvrZKr2wSDsv2bh5te8B4UBD4fbsPDFKrq+chA4ZpMg7KjfmtZwtFd
-         Pb1diuGPB36Yna/TdTlNr3OUojt8OOieF45NqQipjOARqhmQucAqihMU17A7VcjNB6l/
-         Y5FMQWI3CNuQfCQ4azjt8blt4QdPczjlDO/BplGV5Nj9zXiETzfbanB4k+SvS1k4C9gM
-         b6lA==
-X-Forwarded-Encrypted: i=1; AKwUvBzjp/yhZizL+nknoNxpDfIpuC77qlB/qJWpU633xXBcO/GRk5wiNQ3QyR0BOOxGSG9PLn7U6g==@lists.linux.dev
-X-Gm-Message-State: AFuF++mdw+vDk4VnDh14rkELwdgBOr1jUVYawoZHuQ4d+mKasxdgcgph
-	Gqe2ej6YIHCOcYNASX8Rx0RrIxGt4c6Awz76+1/T1OOk0wj7NE4342xcWFDqevJTVUn57lz+r5Z
-	q1pNxb0g6lrRmHbRBY+c9CYwCtwOU+K8=
-X-Gm-Gg: AYBFou3CFIJBrdfp3dKHZLx9y/RA6oMmcwzCGnTnjcjiNZZyvMcdWHmfP3z/CVgts42
-	zk7DgML+UplFKCtE41E0/ME7yIrRo4f16gn5jB9yaUXsicEfF1MLnQhvdVAlueRdR+GF6ViU0eu
-	uI8xEatKq3EYLo7zJs5i8AugIzv4LYXHWf9JAOx1J9BTT4d1TjRYRTOMwwxwAdUEesnMcYmKF0z
-	HoGb595tlqdsekrYzitBtbAEaaGcGC4wBRW6G5efdbKuEdWpsi/Zj0ptBri6I55/BBHAxj3spLj
-	vOjTYMepgQiAZwKWxbuZXVhbo7rrCO/qxnAPH1EXQlEVGg==
-X-Received: by 2002:a05:6512:3b8a:b0:5b5:e1b5:e963 with SMTP id
- 2adb3069b0e04-5b608320660mr384864e87.2.1788311259090; Tue, 01 Sep 2026
- 18:07:39 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="RuY7KJ7z"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id C1F0A1D452;
+	Wed,  2 Sep 2026 08:45:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me C1F0A1D452
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1788338707; bh=ti6pwp/GFl6iYhEZmu4jLenBjALY2mkvjhlzycLF1CI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=RuY7KJ7zUUbK5kY15tbUm66y9QOJq7V5RdsNA1dJddyY3i0LqWaK69FHH+aP6efZ4
+	 JJnNWqhgnrTL3YilQ/PIkZNg8U+C749A9W7xz/0/nAHxNykb/bIhbnW4o2KAvTN0/9
+	 2ZpdohBSxgGSZnNUtxale93oTLs6lLn7twAKhUhw=
+Received: from [192.168.1.18] ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id AH/LGxLil2rkVgQA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Wed, 02 Sep 2026 08:45:06 +0000
+Message-ID: <680a31ae-d9b1-415a-91b5-0f93a5f27368@dev.snart.me>
+Date: Wed, 2 Sep 2026 08:45:05 +0000
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260901084219.39898-1-dxdt@dev.snart.me>
-In-Reply-To: <20260901084219.39898-1-dxdt@dev.snart.me>
-From: Hyunchul Lee <hyc.lee@gmail.com>
-Date: Wed, 2 Sep 2026 10:07:26 +0900
-X-Gm-Features: AcwNN1VyfGoZWx5DzmJHAV_DgTtfAOS927L24yoMb3aGwhpGnKsohIDDd_ZT_DM
-Message-ID: <CANFS6bZ_zSGRk1k8tvu6qvkYC-hj9dRPhjsfSLkxTpbJfjH78g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] libexfat, fsck: add volume flags definitions
-To: David Timber <dxdt@dev.snart.me>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] dump: show all fields of exFAT volume header
+To: Hyunchul Lee <hyc.lee@gmail.com>
 Cc: Namjae Jeon <linkinjeon@kernel.org>, exfat@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20260901084219.39898-1-dxdt@dev.snart.me>
+ <20260901084219.39898-2-dxdt@dev.snart.me>
+ <CANFS6bavXevwFWOh3rWiQ3wFXN+=cbBB5B=UTze-xqQFBP6hgQ@mail.gmail.com>
+From: David Timber <dxdt@dev.snart.me>
+Content-Language: en-US, ko
+Autocrypt: addr=dxdt@dev.snart.me; keydata=
+ xjMEYmJg1hYJKwYBBAHaRw8BAQdAf5E+ri1XLtjqYbZdHOyc8oS+1/XJ5bSlbx5WHXmVBZzN
+ IERhdmlkIFRpbWJlciA8ZHhkdEBkZXYuc25hcnQubWU+wpQEExYKADwWIQQn/Jn96EMUaIoF
+ X+T/ldyyrZpWaAUCYmJg1gIbAwULCQgHAgMiAgEGFQoJCAsCBBYCAwECHgcCF4AACgkQ/5Xc
+ sq2aVmjJZwD8COjPlUwccrlRvbNQ6f87DWchtYO0o8W2DNRM3RLps0EA/jEhIbRV6AsyC8jr
+ 30Ut3aJ3/mO/6G4sLj7OvkEEBH0MzjgEYmJg1hIKKwYBBAGXVQEFAQEHQFpgtIgaByv9lIEY
+ EmpavMO0pYjtu7TMJynwdnGYkN9LAwEIB8J4BBgWCgAgFiEEJ/yZ/ehDFGiKBV/k/5Xcsq2a
+ VmgFAmJiYNYCGwwACgkQ/5Xcsq2aVmhFCwEA0kM9VyYB4bLCM7+SuXUUH+5Ec99Nj4RXxFad
+ Key9GuwA/2BZK6bNyrLSfEk2JDRoskqf7OIL0wa6JOD5SrBnMe8E
+In-Reply-To: <CANFS6bavXevwFWOh3rWiQ3wFXN+=cbBB5B=UTze-xqQFBP6hgQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2026=EB=85=84 9=EC=9B=94 1=EC=9D=BC (=ED=99=94) =EC=98=A4=ED=9B=84 5:42, Da=
-vid Timber <dxdt@dev.snart.me>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+On 9/2/26 01:06, Hyunchul Lee wrote:
+[...]
+> I'm a bit concerned that adding this in the middle of
+> the existing output might break programs that
+> parse dump.exfat output.
 >
-> Add the rest of volume flags(ACTIVE_FAT, DIRTY, MEDIA_FAILURE,
-> CLEAR_TO_ZERO) from the exFAT volume format specs for cleaner code and
-> upcoming features.
->
-> Use VOL_DIRTY instead of the magic value(0x02) in fsck.c.
->
-> No functional change.
->
-> Signed-off-by: David Timber <dxdt@dev.snart.me>
-> ---
->  fsck/fsck.c            | 4 ++--
->  include/exfat_ondisk.h | 7 ++++++-
+> However, I think that they will parse it line by line.
+That crossed my mind as well and that is my assumption too.
 
-Looks good to me.
+I thought about adding the -v option and printing the extra fields with
+the increased verbosity. Other than the volume flags(especially
+MEDIA_FAILURE - this is a big one) which has legitimate use cases, the
+other boilerplate fields are not really that useful. I think that's why
+the original author(s) didn't bother printing all the fields.
 
-Reviewed-by: Hyunchul Lee <hyc.lee@gmail.com>
+I still don't know if we should add -v or not.
 
->  2 files changed, 8 insertions(+), 3 deletions(-)
->
-> diff --git a/fsck/fsck.c b/fsck/fsck.c
-> index f1934d0..5447154 100644
-> --- a/fsck/fsck.c
-> +++ b/fsck/fsck.c
-> @@ -370,9 +370,9 @@ static int exfat_mark_volume_dirty(struct exfat *exfa=
-t, bool dirty)
->
->         flags =3D le16_to_cpu(exfat->bs->bsx.vol_flags);
->         if (dirty)
-> -               flags |=3D 0x02;
-> +               flags |=3D VOL_DIRTY;
->         else
-> -               flags &=3D ~0x02;
-> +               flags &=3D ~VOL_DIRTY;
->
->         exfat->bs->bsx.vol_flags =3D cpu_to_le16(flags);
->         if (!exfat_write_full(exfat->blk_dev->dev_fd, exfat->bs, sizeof(s=
-truct pbr), 0)) {
-> diff --git a/include/exfat_ondisk.h b/include/exfat_ondisk.h
-> index dde84d6..fdb29de 100644
-> --- a/include/exfat_ondisk.h
-> +++ b/include/exfat_ondisk.h
-> @@ -38,8 +38,13 @@
->
->  #define PBR_SIGNATURE          0xAA55
->
-> -#define VOL_CLEAN              0x0000
-> +/* Volume flags masks */
-> +
-> +#define VOL_ACTIVE_FAT         0x0001
->  #define VOL_DIRTY              0x0002
-> +#define VOL_MEDIA_FAILURE      0x0004
-> +#define VOL_CLEAR_TO_ZERO      0x0008
-> +#define VOL_RESERVED           0xFFF0
->
->  #define DENTRY_SIZE            32 /* directory entry size */
->  #define DENTRY_SIZE_BITS       5
-> --
-> 2.55.0
->
+>>         dump_field("Cluster Heap Offset (sector offset)", "%u", clu_offset);
+>>         dump_field("Cluster Count", "%u", total_clus);
+>>         dump_field("Root Cluster (cluster offset)", "%u", root_clu);
+>>         dump_field("Volume Serial", "0x%x", le32_to_cpu(pbsx->vol_serial));
+>> +       dump_field("Version", "%02x%02x", pbsx->fs_version[0], pbsx->fs_version[1]);
+>> +       dump_field("Volume Flags", "%s%04x", vol_flags_str, vol_flags & VOL_RESERVED);
+>>         dump_field("Bytes per Sector", "%u", 1 << pbsx->sect_size_bits);
+>>         dump_field("Sectors per Cluster", "%u", 1 << pbsx->sect_per_clus_bits);
+>> +       dump_field("Number of FATs", "%u", pbsx->num_fats);
+>> +       dump_field("Drive Select (advisory)", "%02x", pbsx->phy_drv_no);
+>> +       dump_field("Percent in Use (advisory)", "%u", pbsx->perc_in_use);
+> How about printing "unknown" if perc_in_use is 0xff?
+Yeah. That was dumb. I'll change it to something like this. Interpreted
+decimal value if in range, raw hex value otherwise:
+
+    #define PERC_IN_USE_STR 13
+    char perc_in_use[PERC_IN_USE_STR];
+
+    perc_in_use[0] = 0;
+
+    if (0 <= x && x <= 100)
+        snprintf(..., "%u", x);
+    else
+        snprintf(..., "unknown (%02x)", x);
 
 
---=20
-Thanks,
-Hyunchul
+Davo
