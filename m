@@ -1,70 +1,86 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AE674A3F0A
-	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 12:28:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E786D4A49BA
+	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 12:43:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788438535; cv=none; b=fCEoUA/jWERe7XvEkJf7Peo/wjS7kb9rO6JRQ8JtgFrsUQuFyn3Rsy4fG621om0pB9vP5QPDThtKw3iofe8ga5WYPFmGmBONYpXuHYNJYLrBoJsL1rl4tCrcfwj/8POA1NRcgKo24ac46LqNXBWCyA8o+kT/JxPzgFjScqfzkXg=
+	t=1788439406; cv=none; b=WNcApR0w5zN69CctuOXf1ZDvh4rohZz08b8ubl8zAbjPhGYT8ybm1RynPMoCo2dFAdI8XKZE8cSJGC3M7fPc5FPwqXFVWAJ7jlvCpYc2ftlSP2E6zzCeV6f/1CDs1UIwIAvj44r45xGZwUHMUMJKXRrNy0rXCyZClcmf8zQf2gU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788438535; c=relaxed/simple;
-	bh=7fpaOBm849EDHkaDTTLjalWHjilq3zQL6rBSXDga8VE=;
+	s=arc-20240116; t=1788439406; c=relaxed/simple;
+	bh=lojE3L+gJdhwg0WVe8s1RgSBLlehF6KtF6jCyVdcjTg=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HGl30JJpkLq7XcT9IiqiUfkujT0YtF05jsH3DrC7JnD2a49mmQ/bJbm7mJCiYZmFGO7XQmu1CVPIxyrDWFXJv0KrCmr9xFMl/IyjS1duyaQIML5+Z+WawoDd/FjnX0REv5QcQaZTuo/slPJ0fWkTcNmAdhItQ7UIZGsBo4FtO6U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DQDvPjOQ; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=jZHWOu0mjVfLLjA3P3m2/lrOAH+AyWE0JnBFjLNxv0ur76zp1mOB+TdmEF4azu3QNVfQrNswZFOUUB77mdmfA60ZiyHAQBqWrWdA0fY6khzVkyV7L9gEvErfCCDlIheLppD+Zg6mUP5NF3ggK0AHKlxSGjtP/DD8ueijVxO2gy4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l3fG7aPA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DQDvPjOQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 317561F00A3A
-	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 12:28:51 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l3fG7aPA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 736771F00A3E
+	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 12:43:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788438531;
-	bh=7fpaOBm849EDHkaDTTLjalWHjilq3zQL6rBSXDga8VE=;
+	s=k20260515; t=1788439404;
+	bh=lojE3L+gJdhwg0WVe8s1RgSBLlehF6KtF6jCyVdcjTg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=DQDvPjOQiKWYYOW+ENUzUBD8gzPKgxb1bsbTJG+tWogC05XG90CkAOVNKrVobLREQ
-	 RxClwdDBiFybbEA62/NRpGGfDXdROQHOHhGjnksQDgk6TYv4QpSikzwhu6J6G45kBz
-	 69kq7IRXmzV3NHGO2fz+xeVfQO77zbExGKR51PHA/VmCxwWShuD/lapS8QTFN+vX6w
-	 k0cygcsO8cKspUKiXpbRSJ+liIkithJutJefg091XecdUy63kL0+5lSrnqdpmDKlks
-	 IdCgTu2h2xLKGvM/iwBPq3a47z5t6WMH3rFX3f1ScaZva+ETHYOtXIH8C42aw1kUPq
-	 bOpg3E4u25kNw==
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c2533d83e3bso361845166b.2
-        for <exfat@lists.linux.dev>; Thu, 03 Sep 2026 05:28:51 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBweGiwR53lnCNtCD1aYP82S2lT/Xiz0/8kq5XTQFPrp2PI/TJX7jLMkKOJySM/gMWQW9GbMnA==@lists.linux.dev
-X-Gm-Message-State: AFuF++kYNZI8Iad/JhBOHhEDOTiYo624GFehWRFsmiIhmCNwAxt4+agZ
-	oHIN3A5oENCER/0l5fk0giOYjEzHVDSPGHhMut3a0X9eXx02nDT1jfZtnPdlSpAiAAm7lRgtUa3
-	gy1YehGwxH2Aqe5NK4zn3U7N2MV19QJw=
-X-Received: by 2002:a17:906:99d4:b0:c25:58e:83ff with SMTP id
- a640c23a62f3a-c25d52b4f8cmr759707666b.10.1788438529872; Thu, 03 Sep 2026
- 05:28:49 -0700 (PDT)
+	b=l3fG7aPA2eG/l2lQs2nKrxghiX5116bB3qn/rZBsJ61+aeI56TxSWP7hlpdrgKyCE
+	 O512XPlBs0SGpb4nYW8NFQBREBbznQ49DH7mu5DEe7ASQKt9EyyyPDSgeQBk3gewgR
+	 g3Mi5bXSZPRSARXZk3MLvNHAso0HjH+AjSgI1st/T00SZP7FJBUxa1jLOdNAAr5ceG
+	 fbBIG15OcH0BgfAWfpuOORypKefpdeLwygkomKKHOGv7OQoso/U3czzIVHYMxmBYhv
+	 l4W66Kq0aay38EYjqQq//LC8z7vzVgnXS8oJ76SG0x5PB+FGWHAvtYc205wzp5RTYJ
+	 2r4jD5X+DuFPg==
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-66f7f62e915so2588876d50.3
+        for <exfat@lists.linux.dev>; Thu, 03 Sep 2026 05:43:24 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwFyb985C17gwY1Hc7xU8EF2IAkAa6/NdIOLfld3kqt5cVrbLxb2vOIFj9XQnEgKXlu7+/pgA==@lists.linux.dev
+X-Gm-Message-State: AFuF++lJqMK8rYqXeikGtGx9vIN9sAaPueQ0YcOg7kot4yTaO6EQoMsC
+	y64KlEBQLxxCGOucFaaoBwFc67KaHK9koaNMOeIf9iiX3L8cTgFM+/TlcKT0OrvH8DeCQW3gnrU
+	b15bp+cCviZ4nNsvKsJydThqsV49hBsk=
+X-Received: by 2002:a05:690e:168f:b0:66e:5fc2:ce2 with SMTP id
+ 956f58d0204a3-66f9bc0b102mr5087518d50.28.1788439403778; Thu, 03 Sep 2026
+ 05:43:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260901084219.39898-1-dxdt@dev.snart.me>
-In-Reply-To: <20260901084219.39898-1-dxdt@dev.snart.me>
+References: <20260902120143.7158-1-dxdt@dev.snart.me>
+In-Reply-To: <20260902120143.7158-1-dxdt@dev.snart.me>
 From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Thu, 3 Sep 2026 21:28:35 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_Jy1ycRkONZQZJx22o+dKRE89nbyjdJUmj+fAbLEDh7w@mail.gmail.com>
-X-Gm-Features: AcwNN1VN3qcEKobZf_2D2dl-9dZ4kNqyS-UY_3cv4C22DKIjY2MOAQqX8fX5Mt0
-Message-ID: <CAKYAXd_Jy1ycRkONZQZJx22o+dKRE89nbyjdJUmj+fAbLEDh7w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] libexfat, fsck: add volume flags definitions
+Date: Thu, 3 Sep 2026 21:43:06 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd__vL4=majhavWypYMR++v69SLv0jKH-+s2nXEW0Pd7Gg@mail.gmail.com>
+X-Gm-Features: AcwNN1Xe1kNk_ISJEZeLFqwN7Ea8DumjX3eAlmrUsmFf77h6Wmzz219p4h7oMMg
+Message-ID: <CAKYAXd__vL4=majhavWypYMR++v69SLv0jKH-+s2nXEW0Pd7Gg@mail.gmail.com>
+Subject: Re: [RFC PATCH v0] exfat: update percent_in_use field when updating
+ volume flags
 To: David Timber <dxdt@dev.snart.me>
-Cc: Hyunchul Lee <hyc.lee@gmail.com>, exfat@lists.linux.dev
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev, 
+	Hyunchul Lee <hyc.lee@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 1, 2026 at 5:42=E2=80=AFPM David Timber <dxdt@dev.snart.me> wro=
+On Wed, Sep 2, 2026 at 9:02=E2=80=AFPM David Timber <dxdt@dev.snart.me> wro=
 te:
 >
-> Add the rest of volume flags(ACTIVE_FAT, DIRTY, MEDIA_FAILURE,
-> CLEAR_TO_ZERO) from the exFAT volume format specs for cleaner code and
-> upcoming features.
+> Currently, the exfat fs implementation does not modify the
+> percent_in_use in the boot sector header at all. Although the field is
+> only an advisory field for situations where bit counting is not
+> feasible, not updating the field at all can cause confusion if the
+> the value is actually exposed to the user.
 >
-> Use VOL_DIRTY instead of the magic value(0x02) in fsck.c.
+> Calculate the value using integer arithmetic only when the dirty flag is
+> cleared. If the dirty flag is set, set to 0xFF.
 >
-> No functional change.
+> It is set to 0xFF when mounting under the assumption that the number of
+> used clusters will change - this is basically what is recommended in the
+> SD Association's specs.
+>
+> When clearing the dirty flag, if overridden by
+> sbi->vol_flags_persistent, set to 0xFF. This is intentional because if
+> there are orphan clusters, the calculated value would be incorrect and
+> correcting the fs error is fsck.exfat's job.
 >
 > Signed-off-by: David Timber <dxdt@dev.snart.me>
-Applied it to #exfat-next.
-Thanks!
+Applied it to dev.
+
+Shouldn=E2=80=99t mkfs.exfat also initialize ->perc_in_use with the calcula=
+ted
+value instead of leaving it at zero?
+Thanks.
