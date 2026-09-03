@@ -1,96 +1,104 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF379439331
-	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 08:41:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDC77372B50
+	for <exfat@lists.linux.dev>; Thu,  3 Sep 2026 09:26:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788424909; cv=none; b=nhsqHeyC0e3bR1z7cb7ArLrKr9ZlKPNP/DGANXU0pTIczuFwYSyYpXyq3ZL2ITkp7wYE+o0wS6tqBljU/9oSvH4/J4gIGmc7vfl1DMbQIA9aIXKbNAGft9gb9Nm1dWDiXfI83hCZzjC9Y3ubuEGUl5tCzHfzwpbN3j941P1SeqM=
+	t=1788427620; cv=none; b=gNw1o95ejjt/yBDuUE8nJiVs+MOBa998u2z+Y1ZmddXnvaA9b9aMbk0k0Wn/aU/+9L2AsD7kUEnphM4RyGbWo3at8NGDvJfECMg/yDLCDSygtmynID/h9bKGGkzBYgndSEJRZ/dpOFYBU/61VrojOTGwqKJmM6PaZLohX0SSDNg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788424909; c=relaxed/simple;
-	bh=4Q+YALJEGeW0Ge6c5F9Ij5f0cqsqZsMf9znuKoxCYDE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qqrDYfAkRG67r0cWhvLPPK6OOO6oUBVmymRilsVXE1aw6M3eDQMFlOquqdwBpKRaFjUYBQsuYSKSmPPjpmaeZz7SHDJel4nSe5kmWBPHsDVem2gVbuUJYP/wq8TQgDq3avhP9CrJd/sjcOmDCRVma90/dRv3pfoRhhR/6CI6gz4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ed98YSjA; arc=none smtp.client-ip=117.135.210.2
+	s=arc-20240116; t=1788427620; c=relaxed/simple;
+	bh=jPKw7QduCaJBI6bek1bq7fG/2eKp6dEaYhlCkbzbcNE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=h/SE8Ewxwjf5ejj4qKfJqSaYg1AhpPI8c/TPAKxS9MndmPnSDJ9hC1QqTa7czOMKEm87T6L4Qk8TwUlObN+2YAGyX+VrVclrhH3GDFeG2+L3gd8jdR46AU8SB2HsW5QDOcIJVlCEbv9rku6c2gzi6FFps0wWuah78qKEyEgT9qQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=T4MypING; arc=none smtp.client-ip=117.135.210.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ed98YSjA"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="T4MypING"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
-	Content-Type; bh=ALtFsj6pwnpHxyXfwXGz7hUSU6mpG6oBeDV0R3dmXYU=;
-	b=ed98YSjA7kwQ0gl5xbgG5AnZBFEka676et0+/bXTcL4U/FXKQpRLeOVYIDm/MS
-	txMu/i7PDVIiJIROEFE9Oua/W+exSeYvt73WNWHDvUU3bI6X6N0dW3MFx5pznC7Y
-	dMTo2ES8iw4XcYgPK6g/Dr0nnG2W1VMFAh599dM7Br4fk=
-Message-ID: <eb75911d-30cb-4271-aeee-4a629df8e8c5@163.com>
-Date: Thu, 3 Sep 2026 16:41:29 +0800
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=5j
+	SImAzUaatrdCdOJLu38AvNhLHkwQrh0ygEjAW4SFw=; b=T4MypINGGFhAN7j4Kb
+	nvoFJuYPXvUr1e8OlMQrkMugZN6zWkkslfJj2JoQnYsFqrM9TAnHkjJqE6CPILyd
+	Un71u8HPgkq8SK4020ul9jpY6QRgJ36THsdZJJmhH3WgKa/X74rW65KM67VUpvds
+	Q00ZscmEyF9IF83qEm+PC1F4o=
+Received: from czl-pc (unknown [])
+	by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id _____wD3P0hMPZlqmaJtAQ--.18608S2;
+	Thu, 03 Sep 2026 17:26:37 +0800 (CST)
+From: Chi Zhiling <chizhiling@163.com>
+To: exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [PATCH] exfat: clear the volume dirty flag only when remounting read-only
+Date: Thu,  3 Sep 2026 17:26:23 +0800
+Message-ID: <20260903092623.301981-1-chizhiling@163.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] exfat: speed up file creation in large directories
-To: Yang Wen <anmuxixixi@gmail.com>, linkinjeon@kernel.org,
- sj1557.seo@samsung.com, yuezhang.mo@sony.com
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20260902152455.1273557-1-anmuxixixi@gmail.com>
-From: Chi Zhiling <chizhiling@163.com>
-In-Reply-To: <20260902152455.1273557-1-anmuxixixi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:_____wD3BIi6Mplq9WhYAQ--.13027S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7urWrury5CF1rWFy8Ww1fCrg_yoW8AF17pF
-	s8G34rtrykJ347ZFn3uF18ury3Aw1rGFs5Jr9xuryYyF93ur10kr17K34UXFy7GFyFgr1j
-	qayjqr4UKwnruaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U20PhUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9xu7WWqZMru6sQAA3-
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3P0hMPZlqmaJtAQ--.18608S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7CF48AF17Jw4DZry3Xr18Zrb_yoW8ur4DpF
+	ZakayjgrWkGa18uFsrCF4xWryFk34xCF43Jry8Z3W5Xr98Zr9I9ryavFy5ZF4DZ3s3Ka1F
+	vrW0kFy5XF17GaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j089NUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9w1jAWqZPU2ZOQAA37
 
-On 9/2/26 11:24 PM, Yang Wen wrote:
-> Negative name lookups and empty-entry allocation can repeatedly scan a
-> directory from the beginning. Bulk creation in a large directory therefore
-> approaches O(N^2).
-> 
-> This series separates the optimization into three independently reviewable
-> steps. Patch 1 adds the Bloom filter used to reject definite name misses.
-> Patch 2 retains and correctly invalidates the next-empty-entry hint. Patch 3
-> adds the LRU and shrinker used to reclaim filters under memory pressure.
-> 
-> Test environment:
->    QEMU TCG multi-thread, 4 vCPUs, 6 GiB RAM
->    4 GiB exFAT image, 32 KiB clusters
-> 
-> Creating 20,000 empty files improved from 589.48 seconds to 5.33 seconds,
-> which is a 110.6-fold speedup.
-> 
-> Changes in v3:
-> - Split the change into Bloom filter, empty-entry hint, and shrinker patches.
-> - Accept filenames containing exactly 255 UTF-16 code units while building
->    the Bloom filter.
-> - Invalidate the empty-entry hint in every path that can free directory
->    entries, preventing stale hints from skipping earlier holes.
-> 
-> Changes in v2:
-> - Move exfat_name_filter_free() to exfat_evict_inode() because
->    ->free_inode() may run from an RCU callback in softirq context.
-> 
-> Yang Wen (3):
->    exfat: add a Bloom filter for negative name lookups
->    exfat: retain the next empty directory entry hint
->    exfat: reclaim name filters under memory pressure
-> 
->   fs/exfat/dir.c      | 279 ++++++++++++++++++++++++++++++++++++++++++++
->   fs/exfat/exfat_fs.h |  23 ++++
->   fs/exfat/inode.c    |   1 +
->   fs/exfat/namei.c    |  58 ++++++++-
->   fs/exfat/super.c    |   9 ++
->   5 files changed, 369 insertions(+), 1 deletion(-)
-> 
+From: Chi Zhiling <chizhiling@kylinos.cn>
 
-This is a much better version than v2.
+exfat_reconfigure() does not hold s_lock while calling
+sync_filesystem(). Therefore, the filesystem can become dirty again
+between the sync and clearing the volume dirty flag, leaving a dirty
+filesystem with a clean volume flag.
 
-Reviewed-by: Chi Zhiling <chizhiling@kylinos.cn>
+Holding s_lock across sync_filesystem() is not an option because it can
+lead to a deadlock: writeback takes s_lock in exfat_write_inode().
+Instead, clear the volume dirty flag only when remounting the filesystem
+read-only, where no writer can modify the filesystem after the sync.
 
-Thanks!
+For a normal read-only remount, reconfigure_super() calls
+sb_prepare_remount_readonly() before ->reconfigure(), which returns
+-EBUSY if any writer is still active. Afterwards
+sb_start_ro_state_change() sets sb->s_readonly_remount, so
+mnt_get_write_access() fails with -EROFS and no new writer can start
+until the reconfiguration finishes. Therefore no writer can race with
+the sync and the clearing.
+
+Forced remounts are different: with SB_FORCE, reconfigure_super() skips
+sb_prepare_remount_readonly(), so the writers active at that moment are
+not blocked and can still dirty the filesystem after the sync. Do not
+clear the volume dirty flag in this case.
+
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/super.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/fs/exfat/super.c b/fs/exfat/super.c
+index a9ea36ba2693..268732571837 100644
+--- a/fs/exfat/super.c
++++ b/fs/exfat/super.c
+@@ -775,9 +775,12 @@ static int exfat_reconfigure(struct fs_context *fc)
+ 	fc->sb_flags |= SB_NODIRATIME;
+ 
+ 	sync_filesystem(sb);
+-	mutex_lock(&sbi->s_lock);
+-	exfat_clear_volume_dirty(sb);
+-	mutex_unlock(&sbi->s_lock);
++
++	if ((fc->sb_flags & (SB_FORCE | SB_RDONLY)) == SB_RDONLY) {
++		mutex_lock(&sbi->s_lock);
++		exfat_clear_volume_dirty(sb);
++		mutex_unlock(&sbi->s_lock);
++	}
+ 
+ 	if (new_opts->allow_utime == (unsigned short)-1)
+ 		new_opts->allow_utime = ~new_opts->fs_dmask & 0022;
+-- 
+2.53.0
 
