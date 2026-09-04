@@ -1,105 +1,89 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31AC53B27E7
-	for <exfat@lists.linux.dev>; Fri,  4 Sep 2026 03:27:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 870C3438010
+	for <exfat@lists.linux.dev>; Fri,  4 Sep 2026 11:05:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788492441; cv=none; b=tSXQE3Cpw6JS24wAcvTTPc5wccTGHo/ykh9q2El3qbScAMBgWBelMj5TGbRSyXL8rWsWeA6yv2ca9ZI+Dbyz+kWbrL0Mna4P60UFKv6m6Vm743qtMlyLaqoIQyR80LzHJ1pG6hG79R6M/RmNhjUFDaSGPGSMg9Zd46K5u/s131g=
+	t=1788519934; cv=none; b=uedgVAjp4u6L1Y6JNqce8SaKoNlUbcWMM4HpY8I6dKMBcMUglBj/+1gvtCysMTyfbGTE3dSGkkLLNSs4xlQrlG9fmVcY5G7m+xURfizBGMcJElYCr0N/1blPHL0cI7xMY960WqD90t3kgDr/rauhaX+raPriKCElut/I1iXLYeo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788492441; c=relaxed/simple;
-	bh=m0sWhPWPmemLVNlSaBPqjCxpt64m5Tf7CRzVn3Wj6tw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=WOIJfxJbW2QNwaAOGg+Yizx52OL/5cPHqDRXpb4lg6ixzpygmZHETAO6t9hW7XJy3Rk2dHY4dsXp1gSbM+4tc/y3heGSm8lCm0vOTWbfhlVjuWLg9W4ZUHYRc/2IljEV7VFDNF3uYqcPapG5q/zqm8JDOX2UxzgZ51mNCKNUySg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=PWKxPBSZ; arc=none smtp.client-ip=117.135.210.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788519934; c=relaxed/simple;
+	bh=VRD9iI5obZj58cYue4amFQyh0VTrljNEzmlwATbaZ14=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=qdubIPNE4BLzWpD1jooy5TQKiB8MZzX2G/VH9x45CHsqkA0ZERkcMeuH3eD8p3zTs6B86odey3fPG6lTlfLX65IdlZkvLp4CkD9Z/iyR+McEX4y9sUnETTGSNl00CfvMrU0zm7hMrIGIM6pvhEr3F/4ioQi45xgpnXfHS2sRZBQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LPEDwoBY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="PWKxPBSZ"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=SO
-	oH18aPhcOliPefTS06vZ36gO2APY+eDPFLZLny21o=; b=PWKxPBSZhqmsxL2IXW
-	EWFH/evCRdFw0BLpT2oov9Pcv6r+/YdJ/fFkAHpWZdOej0sBdeZWG9Z9RZEyo5Yv
-	BlkBFqdDwSdD/LlE0eGzRESfZOAA/TnDqpttwyWK1gTEqHvuD+EwkghgT4Uf5Xl9
-	F62NsR8K7hv5n6zG9c1p/+GV0=
-Received: from czl-pc (unknown [])
-	by gzga-smtp-mtada-g1-4 (Coremail) with SMTP id _____wAXY956Oppq131AAg--.29039S2;
-	Fri, 04 Sep 2026 11:26:51 +0800 (CST)
-From: Chi Zhiling <chizhiling@163.com>
-To: exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Cc: Namjae Jeon <linkinjeon@kernel.org>,
-	Sungjong Seo <sj1557.seo@samsung.com>,
-	Yuezhang Mo <yuezhang.mo@sony.com>,
-	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH v2] exfat: clear the volume dirty flag only when remounting read-only
-Date: Fri,  4 Sep 2026 11:26:41 +0800
-Message-ID: <20260904032641.435958-1-chizhiling@163.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LPEDwoBY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32B6E1F01558
+	for <exfat@lists.linux.dev>; Fri,  4 Sep 2026 11:05:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788519932;
+	bh=VRD9iI5obZj58cYue4amFQyh0VTrljNEzmlwATbaZ14=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=LPEDwoBYeK1Nc4pBwiyJeKlJN4jvjQDnb1ieP5ipwpaRvNQkfx14vj8L6v8wkXSG6
+	 jdMjx09nKntMVn7YdJx6yOHvRPpHRjVNo3FSAQQRooqPNIeuCQAzHgih54TW54zKWJ
+	 GHGM6YuyCYyBsUAzM9TqUef/pypefV3LJ8xclI5xnAyRnQ0rH6OVBETzn46ZmZ0S00
+	 RJLCPF+IBtKm4T89k0t7udNj7faISHzS2kGHOGlhb1u53uS+BX7r0dipro02O+RfYw
+	 kqsaGOQH13clnyk0/ies8jh10IhUBQUvwsCKPE61FVaObNi9SpBvp/bdaC7wW27S8e
+	 iZxcjKeRI4x0Q==
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c252e703fa3so126778266b.3
+        for <exfat@lists.linux.dev>; Fri, 04 Sep 2026 04:05:32 -0700 (PDT)
+X-Gm-Message-State: AFuF++kr3N3xO5wIc8Fr76eg1qZ+Vx2MhnU80B3GVq+gekkuyAxo+XOs
+	M06vk6zBH/R7WyBl+rMQdAOtPQTaFiBbzD81uTSXnvDEOJvbyconNdP87OgdD+FOuhHAxfOl4iU
+	n9Nn9g/f0O/+N8v1EJSbQRisLfZX6br4=
+X-Received: by 2002:a17:906:730e:b0:c26:1648:a060 with SMTP id
+ a640c23a62f3a-c261648b673mr118091966b.27.1788519930808; Fri, 04 Sep 2026
+ 04:05:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wAXY956Oppq131AAg--.29039S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7CF48AF17Jw4DZry3Xr18Zrb_yoW8urWfpr
-	Zaka1jgrWkJa1xursrCF4xXryFk34IkF43Jry8Zw15Xrn0vr9I9ryaqFy5ZF4DZ3s3Ka1F
-	vr40kF98Xr17GaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jnF4iUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2xvti2qaOnsFGQAA3L
+References: <20260904032641.435958-1-chizhiling@163.com>
+In-Reply-To: <20260904032641.435958-1-chizhiling@163.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Fri, 4 Sep 2026 20:05:17 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-aYkPTBdUzoQh5KSyfQojs0TziyEXCfyRuhnHu8=W5pw@mail.gmail.com>
+X-Gm-Features: AcwNN1UVUhsxSqIwETefa1dzsat_fIF2mop6N_jh1Cn_AKTbFGKaZuN4DsT4D0g
+Message-ID: <CAKYAXd-aYkPTBdUzoQh5KSyfQojs0TziyEXCfyRuhnHu8=W5pw@mail.gmail.com>
+Subject: Re: [PATCH v2] exfat: clear the volume dirty flag only when
+ remounting read-only
+To: Chi Zhiling <chizhiling@163.com>
+Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
+	Chi Zhiling <chizhiling@kylinos.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Chi Zhiling <chizhiling@kylinos.cn>
-
-exfat_reconfigure() does not hold s_lock while calling
-sync_filesystem(). Therefore, the filesystem can become dirty again
-between the sync and clearing the volume dirty flag, leaving a dirty
-filesystem with a clean volume flag.
-
-Holding s_lock across sync_filesystem() is not an option because it can
-lead to a deadlock: writeback takes s_lock in exfat_write_inode().
-Instead, clear the volume dirty flag only when remounting the filesystem
-read-only, where no writer can modify the filesystem after the sync.
-
-For a normal read-only remount, reconfigure_super() calls
-sb_prepare_remount_readonly() before ->reconfigure(), which returns
--EBUSY if any writer is still active. Afterwards
-sb_start_ro_state_change() sets sb->s_readonly_remount, so
-mnt_get_write_access() fails with -EROFS and no new writer can start
-until the reconfiguration finishes. Therefore no writer can race with
-the sync and the clearing.
-
-Forced remounts are different: with SB_FORCE, reconfigure_super() skips
-sb_prepare_remount_readonly(), so the writers active at that moment are
-not blocked and can still dirty the filesystem after the sync. Do not
-clear the volume dirty flag in this case.
-
-Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
----
- fs/exfat/super.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
-
-diff --git a/fs/exfat/super.c b/fs/exfat/super.c
-index a9ea36ba2693..84f599b37a45 100644
---- a/fs/exfat/super.c
-+++ b/fs/exfat/super.c
-@@ -775,9 +775,13 @@ static int exfat_reconfigure(struct fs_context *fc)
- 	fc->sb_flags |= SB_NODIRATIME;
- 
- 	sync_filesystem(sb);
--	mutex_lock(&sbi->s_lock);
--	exfat_clear_volume_dirty(sb);
--	mutex_unlock(&sbi->s_lock);
-+
-+	if ((fc->sb_flags & (SB_FORCE | SB_RDONLY)) == SB_RDONLY &&
-+	    !sb_rdonly(sb)) {
-+		mutex_lock(&sbi->s_lock);
-+		exfat_clear_volume_dirty(sb);
-+		mutex_unlock(&sbi->s_lock);
-+	}
- 
- 	if (new_opts->allow_utime == (unsigned short)-1)
- 		new_opts->allow_utime = ~new_opts->fs_dmask & 0022;
--- 
-2.53.0
-
+On Fri, Sep 4, 2026 at 12:27=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wr=
+ote:
+>
+> From: Chi Zhiling <chizhiling@kylinos.cn>
+>
+> exfat_reconfigure() does not hold s_lock while calling
+> sync_filesystem(). Therefore, the filesystem can become dirty again
+> between the sync and clearing the volume dirty flag, leaving a dirty
+> filesystem with a clean volume flag.
+>
+> Holding s_lock across sync_filesystem() is not an option because it can
+> lead to a deadlock: writeback takes s_lock in exfat_write_inode().
+> Instead, clear the volume dirty flag only when remounting the filesystem
+> read-only, where no writer can modify the filesystem after the sync.
+>
+> For a normal read-only remount, reconfigure_super() calls
+> sb_prepare_remount_readonly() before ->reconfigure(), which returns
+> -EBUSY if any writer is still active. Afterwards
+> sb_start_ro_state_change() sets sb->s_readonly_remount, so
+> mnt_get_write_access() fails with -EROFS and no new writer can start
+> until the reconfiguration finishes. Therefore no writer can race with
+> the sync and the clearing.
+>
+> Forced remounts are different: with SB_FORCE, reconfigure_super() skips
+> sb_prepare_remount_readonly(), so the writers active at that moment are
+> not blocked and can still dirty the filesystem after the sync. Do not
+> clear the volume dirty flag in this case.
+>
+> Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+Applied it to #dev.
+Thanks!
