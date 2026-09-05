@@ -1,89 +1,113 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 870C3438010
-	for <exfat@lists.linux.dev>; Fri,  4 Sep 2026 11:05:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 997CE260580
+	for <exfat@lists.linux.dev>; Sat,  5 Sep 2026 05:50:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788519934; cv=none; b=uedgVAjp4u6L1Y6JNqce8SaKoNlUbcWMM4HpY8I6dKMBcMUglBj/+1gvtCysMTyfbGTE3dSGkkLLNSs4xlQrlG9fmVcY5G7m+xURfizBGMcJElYCr0N/1blPHL0cI7xMY960WqD90t3kgDr/rauhaX+raPriKCElut/I1iXLYeo=
+	t=1788587450; cv=none; b=kRxtjsSwSZ9WYQnq/Tuew548bpWfcK93XcjXILDIy+z8RqA1KIprBVagep1x97cRnzTuMrGwpw1Tk6TD0I2H8txLPGRXw7QPuLflYXTH8n9ZJ1/+5DDaYTkVqcYF02/FQGDg+ZwWU7YdXQH5ORil915/UUx5CJzyOOC7mpXHQWw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788519934; c=relaxed/simple;
-	bh=VRD9iI5obZj58cYue4amFQyh0VTrljNEzmlwATbaZ14=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=qdubIPNE4BLzWpD1jooy5TQKiB8MZzX2G/VH9x45CHsqkA0ZERkcMeuH3eD8p3zTs6B86odey3fPG6lTlfLX65IdlZkvLp4CkD9Z/iyR+McEX4y9sUnETTGSNl00CfvMrU0zm7hMrIGIM6pvhEr3F/4ioQi45xgpnXfHS2sRZBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LPEDwoBY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788587450; c=relaxed/simple;
+	bh=YvgPDATokHN3T7GyE3lGp8+hLVivd+jT76jGntq6OkE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=M7cqT28XC/4/KzmmJ/EeMni0XLXH6KJ02vQ7JElRHkjPGeVVRSTo3Etc8K3PvccvbIlzg1d/vfuPeUlleZzxqlmqHIcPVi4fTX5d8sflwHcR5bPcYLy538hQ2aEVasDsrh+uEMdfL8JjJz0bCKouFNisZIPXkhxycs9LHgFhHGI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=cRObNSzM; arc=none smtp.client-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LPEDwoBY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32B6E1F01558
-	for <exfat@lists.linux.dev>; Fri,  4 Sep 2026 11:05:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788519932;
-	bh=VRD9iI5obZj58cYue4amFQyh0VTrljNEzmlwATbaZ14=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=LPEDwoBYeK1Nc4pBwiyJeKlJN4jvjQDnb1ieP5ipwpaRvNQkfx14vj8L6v8wkXSG6
-	 jdMjx09nKntMVn7YdJx6yOHvRPpHRjVNo3FSAQQRooqPNIeuCQAzHgih54TW54zKWJ
-	 GHGM6YuyCYyBsUAzM9TqUef/pypefV3LJ8xclI5xnAyRnQ0rH6OVBETzn46ZmZ0S00
-	 RJLCPF+IBtKm4T89k0t7udNj7faISHzS2kGHOGlhb1u53uS+BX7r0dipro02O+RfYw
-	 kqsaGOQH13clnyk0/ies8jh10IhUBQUvwsCKPE61FVaObNi9SpBvp/bdaC7wW27S8e
-	 iZxcjKeRI4x0Q==
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c252e703fa3so126778266b.3
-        for <exfat@lists.linux.dev>; Fri, 04 Sep 2026 04:05:32 -0700 (PDT)
-X-Gm-Message-State: AFuF++kr3N3xO5wIc8Fr76eg1qZ+Vx2MhnU80B3GVq+gekkuyAxo+XOs
-	M06vk6zBH/R7WyBl+rMQdAOtPQTaFiBbzD81uTSXnvDEOJvbyconNdP87OgdD+FOuhHAxfOl4iU
-	n9Nn9g/f0O/+N8v1EJSbQRisLfZX6br4=
-X-Received: by 2002:a17:906:730e:b0:c26:1648:a060 with SMTP id
- a640c23a62f3a-c261648b673mr118091966b.27.1788519930808; Fri, 04 Sep 2026
- 04:05:30 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="cRObNSzM"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=nJ
+	HBdIVAkzhqsT5G2+dFhD52KoDX9XjMyY3A3x06H8o=; b=cRObNSzMCjp25Oi2HN
+	NzW7adUUPnfe5ORS8Xmwavjw5vlv5GC3FFkilB1/b/driv8PnqJcqExQIrdHe8fu
+	eNQORHS552II9hjTR3Y8JdhbaxrG3y3UvK/qFIBTmfUzM4wHc2SSd2srrGeykd12
+	TJ9/jFocEzFCrymmV3j7RW1jo=
+Received: from czl-pc (unknown [])
+	by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id _____wAnswumrZtqq78tAw--.49294S3;
+	Sat, 05 Sep 2026 13:50:31 +0800 (CST)
+From: Chi Zhiling <chizhiling@163.com>
+To: exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [PATCH 1/2] exfat: fix used_clusters accounting during cluster allocation
+Date: Sat,  5 Sep 2026 13:49:50 +0800
+Message-ID: <20260905054951.674766-2-chizhiling@163.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260905054951.674766-1-chizhiling@163.com>
+References: <20260905054951.674766-1-chizhiling@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260904032641.435958-1-chizhiling@163.com>
-In-Reply-To: <20260904032641.435958-1-chizhiling@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Fri, 4 Sep 2026 20:05:17 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-aYkPTBdUzoQh5KSyfQojs0TziyEXCfyRuhnHu8=W5pw@mail.gmail.com>
-X-Gm-Features: AcwNN1UVUhsxSqIwETefa1dzsat_fIF2mop6N_jh1Cn_AKTbFGKaZuN4DsT4D0g
-Message-ID: <CAKYAXd-aYkPTBdUzoQh5KSyfQojs0TziyEXCfyRuhnHu8=W5pw@mail.gmail.com>
-Subject: Re: [PATCH v2] exfat: clear the volume dirty flag only when
- remounting read-only
-To: Chi Zhiling <chizhiling@163.com>
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wAnswumrZtqq78tAw--.49294S3
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Ar1kXw1UCw48ZrWUXryrWFg_yoW8ZF1xpr
+	W0kw15Jrs8Xan7Cr4UGr1kXa45Cw4rWF15Gay5JrnFkFn8ur4v9Fyqqrs8ua9F9w48AFZF
+	qryqkw1j9a9xCaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jfzVbUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9wcWs2qbraerJgAA3j
 
-On Fri, Sep 4, 2026 at 12:27=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wr=
-ote:
->
-> From: Chi Zhiling <chizhiling@kylinos.cn>
->
-> exfat_reconfigure() does not hold s_lock while calling
-> sync_filesystem(). Therefore, the filesystem can become dirty again
-> between the sync and clearing the volume dirty flag, leaving a dirty
-> filesystem with a clean volume flag.
->
-> Holding s_lock across sync_filesystem() is not an option because it can
-> lead to a deadlock: writeback takes s_lock in exfat_write_inode().
-> Instead, clear the volume dirty flag only when remounting the filesystem
-> read-only, where no writer can modify the filesystem after the sync.
->
-> For a normal read-only remount, reconfigure_super() calls
-> sb_prepare_remount_readonly() before ->reconfigure(), which returns
-> -EBUSY if any writer is still active. Afterwards
-> sb_start_ro_state_change() sets sb->s_readonly_remount, so
-> mnt_get_write_access() fails with -EROFS and no new writer can start
-> until the reconfiguration finishes. Therefore no writer can race with
-> the sync and the clearing.
->
-> Forced remounts are different: with SB_FORCE, reconfigure_super() skips
-> sb_prepare_remount_readonly(), so the writers active at that moment are
-> not blocked and can still dirty the filesystem after the sync. Do not
-> clear the volume dirty flag in this case.
->
-> Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
-Applied it to #dev.
-Thanks!
+From: Chi Zhiling <chizhiling@kylinos.cn>
+
+In the current exfat_alloc_cluster(), p_chain->size is incremented as
+each cluster is allocated so that the partially allocated chain can
+be freed by __exfat_free_cluster() on the error path.
+
+However, sbi->used_clusters is still updated only after all clusters
+have been allocated, while __exfat_free_cluster() unconditionally
+subtracts the number of freed clusters from sbi->used_clusters.
+Therefore, when allocation fails partway through, the partially
+allocated clusters are subtracted from sbi->used_clusters even
+though they were never added to it. This corrupts the free-space
+accounting and can cause sbi->used_clusters to underflow.
+
+Increment sbi->used_clusters together with p_chain->size as each
+cluster is allocated. This keeps the accounting consistent with
+__exfat_free_cluster() on both the success and error paths.
+
+This issue is caught by generic/476 with 256k cluster size:
+
+    Ran: generic/476
+    Failures: generic/476
+    Failed 1 of 1 tests
+
+    *** fsck.exfat output ***
+    ERROR: <path>: more clusters are allocated. truncate to N bytes
+    ...
+    /dev/vdc: corrupted. directories 331, files 526
+    /dev/vdc: files corrupted 9, files fixed 0
+    *** end fsck.exfat output ***
+
+Fixes: d5c514b6a0c0 ("exfat: fix the newly allocated clusters are not freed in error handling")
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/fatent.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/fs/exfat/fatent.c b/fs/exfat/fatent.c
+index a8b11e2ce43f..a6728c361289 100644
+--- a/fs/exfat/fatent.c
++++ b/fs/exfat/fatent.c
+@@ -509,13 +509,13 @@ int exfat_alloc_cluster(struct inode *inode, unsigned int num_alloc,
+ 			}
+ 		}
+ 		p_chain->size++;
++		sbi->used_clusters++;
+ 
+ 		last_clu = new_clu;
+ 
+ 		if (p_chain->size == num_alloc) {
+ done:
+ 			sbi->clu_srch_ptr = hint_clu;
+-			sbi->used_clusters += p_chain->size;
+ 			mutex_unlock(&sbi->bitmap_lock);
+ 			return 0;
+ 		}
+-- 
+2.53.0
+
