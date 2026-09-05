@@ -1,74 +1,105 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A04BC386C13
-	for <exfat@lists.linux.dev>; Sat,  5 Sep 2026 09:33:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2092A33F5BE
+	for <exfat@lists.linux.dev>; Sat,  5 Sep 2026 13:11:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788600838; cv=none; b=or5lxujrqeyqdPB3eFnvdFR9Zk00aocgG7LOXqD9uEWT0JBOSwq4Ha/eCgQ98LRfU+jRfJBnGYfw8PW7lgJ8eh8o82eMzkxWdVZIlM1kymX5LOxReYPWkb0GxBcqFqOSTkaO2T2ToohOXHaAuAP0+TTV6CjdCCWlt5vffsmIuuo=
+	t=1788613870; cv=none; b=cbLT7I4547MoCUGx1f2A1SdWqE1pe+vYarMwcxPEVoMMDQBfWONLvh7DYWKtWUUJ1xKpEiGCZMBqjnOwTqHsk/O7Ht5/mTaX1njDnqibA+qXBfwyB4UQ12LhAdQFVugyjwAJoZFrPMZMitSLzhIlfRuZ6riYY3Gh8fS0C3LXGyA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788600838; c=relaxed/simple;
-	bh=+tmlWtzSwJH+v7W4srKJjDRZDcOBSpbvqxRmwOwzNJ4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=itDIQT197A1SBh2KnWeOjI1KZ/nleVOjTCWoMv2+2z+M42+2g+3bgdwDQ/TDfAyPfG5BHkRoa2Ud/vu5YCRtUXXldlcwtd62bwa4nL0BfoGMIXE3L0uNvju70OMruMZc0VoPkBaWQxDAIHRZGtt9lDix9EyuBPVtTnNcRasfU9U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zx3PkcK3; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788613870; c=relaxed/simple;
+	bh=OzVm6T5YAbPJggXiDM1XPM2RIY844VEas07qOka2SdU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=cQCUkAxwoxNIsVl3Iabr5Lq5ontd1m/ztEPRG88XaDUCqBuul80us3SMTpz+FUfg7FKibRAE+O0Ozf6YDYnD6eCgLoIddQFkKJK5EEDrA0XgMYgOsBX0e9PvqNZ0mFtkaVeYJpludJ63S0IPowA8FWivC7+qBVfx7Q+4yOql+M4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=Y0pwdf37; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zx3PkcK3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B18C1F00ADB
-	for <exfat@lists.linux.dev>; Sat,  5 Sep 2026 09:33:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788600837;
-	bh=TZNxwK/kOkxDfyAvXninVcQIyqIvcp76bcqLHzyy0vc=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Zx3PkcK37lFvmtFfWCdTsK7OgbNB7S10019HxNcIXjIBuVuFfd2iQElVU6XpeD7j8
-	 WXIVnS36FpW9clY0dJEStbc4i+UI4yqUW7JpESMBYrFjtTUuzYvWnIOckUyvt94Ge+
-	 v9TZU0r0y0e5zl51uUlRuiuLXigEdOsFS9lu/vTTLdWqQvZWJ5WPvbqFIDEstJe0yJ
-	 FvWd1dFdqjYedA/r1rPK1ka89AmhWsCWM8maZcSAZfcBIg+/MNU5LpadhA7EPSuLux
-	 ssW+64+V8yplTptfXgFF937N/9BqSgne6qKCUxjTlfbN231lnlYn7g+OYmYkXXsp2R
-	 PBXLBXz7MPbAg==
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6a7e0ff423dso4668064a12.1
-        for <exfat@lists.linux.dev>; Sat, 05 Sep 2026 02:33:57 -0700 (PDT)
-X-Gm-Message-State: AFuF++meTDH3S7CpQX5lcUEmKNO7W5gz+dStqwEUiv8BcmChxL2a1hW2
-	wH7ym0MmP8BaLrJNXHLG4qiqPIvh0TuF27N3kWxRDyWhyS1vJcKmCaRcJqrYG4tCSqkgi/jilgD
-	OCkb7wjzgMG15oEgMhtENRr6N4cwKj9M=
-X-Received: by 2002:a17:907:d2a:b0:c25:f7db:4bf0 with SMTP id
- a640c23a62f3a-c2610747c3emr398099266b.22.1788600835783; Sat, 05 Sep 2026
- 02:33:55 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="Y0pwdf37"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id 769BF1D452;
+	Sat,  5 Sep 2026 13:10:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 769BF1D452
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1788613860; bh=OzVm6T5YAbPJggXiDM1XPM2RIY844VEas07qOka2SdU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Y0pwdf37dZ+09mE0UEB/gy9ZtA9v4JWywHIEj1MsAJugw+h3rsDJEMw5cWX6BPBS5
+	 GA1lUuD7jyWZ8xLuczv52Vek0/bXkO8v/fxOxBWTzjjw1IGaL6LeIe0X3iQNque8h7
+	 1oiuDnXtu06+5AtUO2RHS+ve8dr3s64+MDAYL4sc=
+Received: from [192.168.1.18] ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id vq5pCuMUnGr8iwUA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Sat, 05 Sep 2026 13:10:59 +0000
+Message-ID: <1c67ff24-d331-4e2a-9e18-fec41fd5c152@dev.snart.me>
+Date: Sat, 5 Sep 2026 13:10:54 +0000
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260905054951.674766-1-chizhiling@163.com>
-In-Reply-To: <20260905054951.674766-1-chizhiling@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Sat, 5 Sep 2026 18:33:41 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8KYEtfLkSLGVP9fpjvkJ0vS8V09CFCg0J4i=h57BuWzQ@mail.gmail.com>
-X-Gm-Features: AcwNN1X3UIn5F7MjKZMa7uiFMU2vo1VDbO-8TviNGxPCxD6U6E1bt-ZAm6XyLys
-Message-ID: <CAKYAXd8KYEtfLkSLGVP9fpjvkJ0vS8V09CFCg0J4i=h57BuWzQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] exfat: fix cluster allocation accounting and locking
-To: Chi Zhiling <chizhiling@163.com>
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v0] exfat: update percent_in_use field when updating
+ volume flags
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo
+ <yuezhang.mo@sony.com>, exfat@lists.linux.dev,
+ Hyunchul Lee <hyc.lee@gmail.com>
+References: <20260902120143.7158-1-dxdt@dev.snart.me>
+ <CAKYAXd__vL4=majhavWypYMR++v69SLv0jKH-+s2nXEW0Pd7Gg@mail.gmail.com>
+ <f0ea97f3-db5d-4dad-9f96-45aa4401ef9e@dev.snart.me>
+ <CAKYAXd8v2U6q6kzf1JFe1qbGT8T+mwdKfUKrJZS=fwL1CSPzow@mail.gmail.com>
+From: David Timber <dxdt@dev.snart.me>
+Content-Language: en-US, ko
+Autocrypt: addr=dxdt@dev.snart.me; keydata=
+ xjMEYmJg1hYJKwYBBAHaRw8BAQdAf5E+ri1XLtjqYbZdHOyc8oS+1/XJ5bSlbx5WHXmVBZzN
+ IERhdmlkIFRpbWJlciA8ZHhkdEBkZXYuc25hcnQubWU+wpQEExYKADwWIQQn/Jn96EMUaIoF
+ X+T/ldyyrZpWaAUCYmJg1gIbAwULCQgHAgMiAgEGFQoJCAsCBBYCAwECHgcCF4AACgkQ/5Xc
+ sq2aVmjJZwD8COjPlUwccrlRvbNQ6f87DWchtYO0o8W2DNRM3RLps0EA/jEhIbRV6AsyC8jr
+ 30Ut3aJ3/mO/6G4sLj7OvkEEBH0MzjgEYmJg1hIKKwYBBAGXVQEFAQEHQFpgtIgaByv9lIEY
+ EmpavMO0pYjtu7TMJynwdnGYkN9LAwEIB8J4BBgWCgAgFiEEJ/yZ/ehDFGiKBV/k/5Xcsq2a
+ VmgFAmJiYNYCGwwACgkQ/5Xcsq2aVmhFCwEA0kM9VyYB4bLCM7+SuXUUH+5Ec99Nj4RXxFad
+ Key9GuwA/2BZK6bNyrLSfEk2JDRoskqf7OIL0wa6JOD5SrBnMe8E
+In-Reply-To: <CAKYAXd8v2U6q6kzf1JFe1qbGT8T+mwdKfUKrJZS=fwL1CSPzow@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Sep 5, 2026 at 2:50=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wro=
-te:
->
-> From: Chi Zhiling <chizhiling@kylinos.cn>
->
-> Patch 1 fixes sbi->used_clusters accounting when cluster allocation
-> fails partway through. This can cause the counter to underflow.
-> The issue is caught by generic/476.
->
-> Patch 2 takes bitmap_lock before checking and allocating clusters.
->
->
-> Chi Zhiling (2):
->   exfat: fix used_clusters accounting during cluster allocation
->   exfat: take bitmap_lock at the start of exfat_alloc_cluster()
-Applied them to #dev.
-Thanks!
+On 9/5/26 08:55, Namjae Jeon wrote:
+> On Fri, Sep 4, 2026 at 8:25 AM David Timber <dxdt@dev.snart.me> wrote:
+>> On 9/3/26 12:43, Namjae Jeon wrote:
+>>> On Wed, Sep 2, 2026 at 9:02 PM David Timber <dxdt@dev.snart.me> wrote:
+>>>> Currently, the exfat fs implementation does not modify the
+>>>> percent_in_use in the boot sector header at all. Although the field is
+>>>> only an advisory field for situations where bit counting is not
+>>>> feasible, not updating the field at all can cause confusion if the
+>>>> the value is actually exposed to the user.
+>>>>
+>>>> Calculate the value using integer arithmetic only when the dirty flag is
+>>>> cleared. If the dirty flag is set, set to 0xFF.
+>>>>
+>>>> It is set to 0xFF when mounting under the assumption that the number of
+>>>> used clusters will change - this is basically what is recommended in the
+>>>> SD Association's specs.
+>>>>
+>>>> When clearing the dirty flag, if overridden by
+>>>> sbi->vol_flags_persistent, set to 0xFF. This is intentional because if
+>>>> there are orphan clusters, the calculated value would be incorrect and
+>>>> correcting the fs error is fsck.exfat's job.
+>>>>
+>>>> Signed-off-by: David Timber <dxdt@dev.snart.me>
+>>> Applied it to dev.
+>>>
+>>> Shouldn’t mkfs.exfat also initialize ->perc_in_use with the calculated
+>>> value instead of leaving it at zero?
+>> I've sent the patch. I've just changed it to 0xFF instead of zero.
+> Please check a warning from kernel test robot.
+> For now, I will remove this patch from the exfat dev queue.
+There are several places where runtime division is used. I don't think
+fs/exfat would build on RISC-V w/o integer division either.
+
+mul_u64_u32_div() seems to be a good candidate for the fix. do_div() for
+other places.
+
+Will follow up.
+
+Davo
