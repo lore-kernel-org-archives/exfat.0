@@ -1,80 +1,91 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63F8E3A875F
-	for <exfat@lists.linux.dev>; Mon,  7 Sep 2026 14:42:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FFB3221DAE
+	for <exfat@lists.linux.dev>; Tue,  8 Sep 2026 00:54:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.252.183.203
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788792152; cv=none; b=AnsmP7cCZkyyBbm+NQOceHE7CgV3BxRNyeVybqPNXFU9CaWEvbg6Stsqq9YcrKPY1nFcSDz47H3IsOCWLdsjkBDsuswll5Tn8jdDw4Ea8nz5lMCLEp0ATLckiG8wDUnubBaAFII4l4yHD+0P1UC3k3BCgpOHc2ZYMIAEFiL5mF0=
+	t=1788828843; cv=none; b=uBaqLrK7y3BafN9X2DgkVqRFe6poGBeNe56Y5tf1p5/GM6WvftzW6uphtrlaWBloPShxSTzE73xipweS+qaXga4LJbhlQ+r3qfOf8ImJJcPcAs8S3xo0fTVpmNd7HMEoVBvs/5KiRaaiR6HYgF6NuwzTKUSF/wuXrP368TZs4zI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788792152; c=relaxed/simple;
-	bh=GNi77y7CCHtSiOeR3mrgA3qzYhq8zFe6d1+Esa22NQQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=pH9aMfSvJVfuuLVEjmM6P1Xv2o9uwQ1RYk1CijH86QnQJFHfbPnRUrJQ0QUj5ohuhnTbSLoPwUXOnCxbauI0nERU4XqnUqDHbpvHCT03bu5eBRTlW1SMZriXOMHwG/qsDejpxxz3Kriljaf4L0l0Me7fGSnQhI1sphduxkUuQXA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Edk5N/Wv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788828843; c=relaxed/simple;
+	bh=++FzqTLaFYfr8wejQ/E4bIWtzv8cLWckoV/axWcXg4o=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=O+YJKFefP1oikQnsuvCZATbQ8I/3SjYLAEO3EOYlCUf6MNDou7u+2C8nykR6ttPg/OFaW2hEjR1Oj0ZXeIxhFQP211FU0QgDxAq36BNQhlfuLxpMGR8ou097PpJg/B8oW315dqyJQcViQz2mvki5zCwvFz4qEve34T2SQEeDYR8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me; spf=pass smtp.mailfrom=dev.snart.me; dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b=qXAYM5Bu; arc=none smtp.client-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Edk5N/Wv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28B471F00ADB
-	for <exfat@lists.linux.dev>; Mon,  7 Sep 2026 14:42:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788792151;
-	bh=QzDMGyQeKSoeHQ8krXZbsj0L74Zf8D5oR9RuktQ4ziQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Edk5N/WvBVBjmYbAhH1zh7Cra3Tebp01bM+rvVywgEgFAZ9aBich6Lm7VAmuSD837
-	 xMQ9eJqFwItmheWHGs8wj2tuisei6ds9iNFGDnZOS25O3mxRqT8FTmdOBimgjdBSA4
-	 jB0IENYTYKVKMaqxtgarkvUIZYtlV67VZiIYw7nCaU30tQkEoBvl3Qt35H8OUuaIWL
-	 KcNv4HND60xTLjjNHCChcOVMe/xz3Wn2p1X2rygIUgJJCmTqt3z8tOwEgQlfiF5tV7
-	 vFmXSc+Ihj3kk8f391ypabzdWT7TKjOCYgrhwIjPuY6A6VoJ1rNuD0Op5hYzFKeGYH
-	 0UdIWV+xKGIDw==
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c1670dad7a8so546263966b.3
-        for <exfat@lists.linux.dev>; Mon, 07 Sep 2026 07:42:31 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwqNWGVRKPZrT5UJX5ynmeNjPvwJwotCfpO84ozaYW9zBzD0DQIHATX8u/6ad7VUifuYDj8FQ==@lists.linux.dev
-X-Gm-Message-State: AFuF++mH2S5jm7eLaqWm0pWknoa6VoLW1Tz2c+OSOufikyKEr4GdaPj2
-	DupyC2Z55ynZExlWSkurNdtOLivrsgPmluPQcCVfWfbtatnSGyIaqkWgWsOS6STPDbG/AIN5Sml
-	OKx9WX+OyxRo2+965KxQ8lZ9zrgwLQN8=
-X-Received: by 2002:a17:907:e00b:10b0:c26:2795:b4a0 with SMTP id
- a640c23a62f3a-c262795c180mr360010066b.47.1788792149765; Mon, 07 Sep 2026
- 07:42:29 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=dev.snart.me header.i=@dev.snart.me header.b="qXAYM5Bu"
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id 5D8251D452;
+	Tue,  8 Sep 2026 00:53:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 5D8251D452
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1788828840; bh=++FzqTLaFYfr8wejQ/E4bIWtzv8cLWckoV/axWcXg4o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=qXAYM5BumDrn7R130i07+H7AHV4oUZZ6dmD/AnA3n7Uo4OWjh67ZKIZMKY5EC3rw8
+	 PzLoHD740myIYEgqwwn400U8bBFbPIKYj+B8JfyONwggiGGMcAPOFRKSHQGQPXPEqD
+	 Lpswb7OFsOIarrmhQCLw0i3P2o7zilzODKaG2NTM=
+Received: from [192.168.1.18] ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id l4rPAqdcn2r3egYA8KYfjw
+	(envelope-from <dxdt@dev.snart.me>); Tue, 08 Sep 2026 00:53:59 +0000
+Message-ID: <147c3770-bc3e-446c-8bc2-352418aeb1ea@dev.snart.me>
+Date: Tue, 8 Sep 2026 00:53:57 +0000
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260905171043.922793-1-dxdt@dev.snart.me>
-In-Reply-To: <20260905171043.922793-1-dxdt@dev.snart.me>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Mon, 7 Sep 2026 23:42:16 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9_3579PDS_+w8waOJbaa8x1UFEdRXt+4B2Fma5icQA0Q@mail.gmail.com>
-X-Gm-Features: AcwNN1UXxZ4Y_vwg5VN5FNhvIEeiQ4L8Ek6dkwhEM-EGrPXyphDdjiR1UWYH_lA
-Message-ID: <CAKYAXd9_3579PDS_+w8waOJbaa8x1UFEdRXt+4B2Fma5icQA0Q@mail.gmail.com>
-Subject: Re: [PATCH v1 0/2] exfat: update percent_in_use, remove runtime
- integer division
-To: David Timber <dxdt@dev.snart.me>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev, 
-	Hyunchul Lee <hyc.lee@gmail.com>, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] exfat: take bitmap_lock at the start of
+ exfat_alloc_cluster()
+To: Chi Zhiling <chizhiling@163.com>, exfat@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+Cc: Namjae Jeon <linkinjeon@kernel.org>, Sungjong Seo
+ <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>,
+ Chi Zhiling <chizhiling@kylinos.cn>
+References: <20260905054951.674766-1-chizhiling@163.com>
+ <20260905054951.674766-3-chizhiling@163.com>
+ <0eb35731-1d8f-4f46-9a0d-36a45ceccfb2@dev.snart.me>
+ <6d6c01f9-4cc2-4e63-a765-f735452e7eab@163.com>
+From: David Timber <dxdt@dev.snart.me>
+Content-Language: en-US, ko
+Autocrypt: addr=dxdt@dev.snart.me; keydata=
+ xjMEYmJg1hYJKwYBBAHaRw8BAQdAf5E+ri1XLtjqYbZdHOyc8oS+1/XJ5bSlbx5WHXmVBZzN
+ IERhdmlkIFRpbWJlciA8ZHhkdEBkZXYuc25hcnQubWU+wpQEExYKADwWIQQn/Jn96EMUaIoF
+ X+T/ldyyrZpWaAUCYmJg1gIbAwULCQgHAgMiAgEGFQoJCAsCBBYCAwECHgcCF4AACgkQ/5Xc
+ sq2aVmjJZwD8COjPlUwccrlRvbNQ6f87DWchtYO0o8W2DNRM3RLps0EA/jEhIbRV6AsyC8jr
+ 30Ut3aJ3/mO/6G4sLj7OvkEEBH0MzjgEYmJg1hIKKwYBBAGXVQEFAQEHQFpgtIgaByv9lIEY
+ EmpavMO0pYjtu7TMJynwdnGYkN9LAwEIB8J4BBgWCgAgFiEEJ/yZ/ehDFGiKBV/k/5Xcsq2a
+ VmgFAmJiYNYCGwwACgkQ/5Xcsq2aVmhFCwEA0kM9VyYB4bLCM7+SuXUUH+5Ec99Nj4RXxFad
+ Key9GuwA/2BZK6bNyrLSfEk2JDRoskqf7OIL0wa6JOD5SrBnMe8E
+In-Reply-To: <6d6c01f9-4cc2-4e63-a765-f735452e7eab@163.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sun, Sep 6, 2026 at 2:11=E2=80=AFAM David Timber <dxdt@dev.snart.me> wro=
-te:
+On 9/7/26 08:04, Chi Zhiling wrote:
+[...]
 >
-> Changes from RFC v0:
+> You mean one user has changed the fs, and others see the stale value
+> of used_clusters?
 >
->   - use mul_u64_u32_div() for 32-bit arch without 64-bit integer
->     division
->
-> mul_u64_u32_div() isn't so popular API, so I'm not sure it's available
-> on all arch.
->
-> I don't have a beefy machine to test my patches for all arch... If you'd
-> like to apply, I suggest waiting for the CI bots to finish testing. I
-> believe all submitted patches that apply to the master branch are tested
-> by the bots. I'll ping when the patches get a pass.
->
->
-> David Timber (2):
->   exfat: update percent_in_use field when updating volume flags
->   exfat: remove runtime integer division
-Applied them to #dev.
-Thanks!
+> For SMP (including NUMA), if a certain CPU changes the value of
+> used_clusters, then the caches of all other CPUs will be invalidated
+> and need to be refilled. This process is completed by the hardware,
+> see MESI protocol.
+My bad for taking NUMA as an example. I was just curious as to what you
+might have to say on this since the fix is kinda related to your patch.
+
+I was just pointing out that there's a minor race condition in
+exfat_statfs(). I used NUMA as an example because the delay through the
+interconnect would make the cache coherency problem worse. btw, I think
+the MESI protocol only covers cache. It has no control over the
+execution flow of processors.
+
+I might have an access to a real NUMA hardware that I can test my
+reproducer on. I'll report back with a patch if I can actually reproduce
+it. Thanks anyways.
+
+Davo
