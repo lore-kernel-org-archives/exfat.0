@@ -1,84 +1,69 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E80983B71DC
-	for <exfat@lists.linux.dev>; Tue, 15 Sep 2026 14:29:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63110366055
+	for <exfat@lists.linux.dev>; Wed, 16 Sep 2026 02:33:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789482589; cv=none; b=OAbox+aGaFoI2BaNlMtuhqK8gnd60QAx8IP19fSW/zU23N+U35wQiByH3N+xRo/qRZzQiQGW4jq3Myfg4VzngmDtB52uxJf1Dqot4QwxhI7GRh3CTk2QObB46WBVTbTiINF3yDBMaTr7hbT46SGlky71dxYZlehrOymnNjGHh/M=
+	t=1789525986; cv=none; b=RG2MoQZX8J1QtXmGIUBqC4j1C5+9iL0Ksdll3CEmTGcRNTRfQhbras8Rlb7Tzy87SuT4kKrxria9Lvy5X4aX0GVqw3XUhIdmVQ09CayWXeDTujKkCe3RGu9C5PZ2DMvpS8FitgeBmBYRnPXXyGLM7qGnnOWpgYyIFU0CWgLpj8A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789482589; c=relaxed/simple;
-	bh=w6FJwout0DsKD6TkfCqvOKdMewok/Mrvz1ESpCSLO4c=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=MdvzTf6Ucr/1W6jrqBQIFA/o+KMCSIpqMYWtJHh9494/GYP6Z6YXXNWoCDbMWSLDt8VW77YnhgtnPwSLitHxOY6wLB08BZ8d3HziTIR3mKid8VFos2ttVXWYrw05oPsbuiRzwMP26SMtYHJrrlRijx0n6GiscXnDSV/EQ52jYX8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KU2CQBU9; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789525986; c=relaxed/simple;
+	bh=EZ0Y0GH0eFnv267z1dNfPCOyajbrwUevBxSP+KPoIKE=;
+	h=Message-ID:Date:MIME-Version:From:To:Subject:Cc:Content-Type; b=C2snBSYQe/44Ccs2puSfrpot6smclGm0jdreWL6bawZiXNsrzwQ3wsKKliMitwRz821/+YMDy2nNpTqcxlzClgkA82pYmaAm97Z0U5+gJhZAmBJqqr1FVCIevNzoqbF9XXa7Ub/DT7OTaqjHFLh2UKh671hJPNTLr0LutetJ+HI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=P8JOjN/P; arc=none smtp.client-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KU2CQBU9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 940001F00898
-	for <exfat@lists.linux.dev>; Tue, 15 Sep 2026 14:29:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789482587;
-	bh=PI8ofUAwsEfrd1/dz6YRefCreukSx2VFFqza5udhf/Y=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=KU2CQBU9y0+TQaIBPK+jvMld4LX56q/S7idFSjQJuqwX8ps0pNkK1F7gZUv+SZp4P
-	 BT/FElI0pyCl42+/LIT07IxfZXQlZRo1GIamKvj8aQ5sNpIp64T0wihaFOMmNH0bMR
-	 twAaFg16QPukKhvzh3ncxW2pA+3cpEsjv64CeDLvuQSVXlqSnZ/O3h+Cw3zqt5RiYb
-	 KvrM7GCDZyWKymXvtJ+dOEDGbz0Xc+m8MAv9CAcJFSRoJeZV0wkPT82UbxU78dlwxF
-	 h2+67HDe9CXtGIrCGAYWzq7y/rOvMG5k4KMGKBlUFzOA0sjM/3yYMytVbjT6uhr1mH
-	 K/bduZXn+7TTg==
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-86162c086f8so7178507b3.1
-        for <exfat@lists.linux.dev>; Tue, 15 Sep 2026 07:29:47 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBztqWpakrH+nhBmi3pEaexaT9WZO1bj+sfKeMeC94gTYIjgP+KS0gJ5DKzEwJUoUTnu4hmkrw==@lists.linux.dev
-X-Gm-Message-State: AFuF++lh5PRv2bnuhr9DY93P/NkP04F3kdVvZ+jcPr2x2X09IQuHRmJm
-	j+VhoVaVr4d29EmsDk337+LdjQ97lqUXefz8RWoOJRUoyfyRmWBoemfD+vI3dEzbh9JrGMUqj4c
-	0J664PPw6w0e/U8nvZKQOTjJOI8/DqyY=
-X-Received: by 2002:a05:690c:2702:b0:88f:3bb:8715 with SMTP id
- 00721157ae682-88f1b6cd7dfmr9384457b3.33.1789482586874; Tue, 15 Sep 2026
- 07:29:46 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="P8JOjN/P"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:From:To:Subject:
+	Content-Type; bh=J3z0XGcRdphSoSeo7/86EQAYwoXU6fhTS2E3TBUiKso=;
+	b=P8JOjN/P068XTNio9T4flSBqgmk466Su9mQeyJ5hkj93FMREfEBHnOYwyGEoNM
+	J8TBzMO7QXDnLYWesZqD+cSsktvmnLcWkHxd3r2Dhh4HYWxNECTBTu9xAcnj2b1T
+	FmS90Cp5Mo70OPauzUhBPQavJGV4YMuJGEOyBz2Mg+KGk=
+Message-ID: <34e67580-7b8c-491b-8beb-496a0d49077b@163.com>
+Date: Wed, 16 Sep 2026 10:32:40 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260913142314.1400062-1-anmuxixixi@gmail.com> <20260913142314.1400062-3-anmuxixixi@gmail.com>
-In-Reply-To: <20260913142314.1400062-3-anmuxixixi@gmail.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Tue, 15 Sep 2026 23:29:32 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9pPRi21V_t_h0FSQyU7mN6u3o8wUc8=pusU8fDSMA5JA@mail.gmail.com>
-X-Gm-Features: AcwNN1V-l9dr6tskmgf35OLBinpE_thNmKVTcxf2PEbVUtkbrZUXqH0vNiUS9R8
-Message-ID: <CAKYAXd9pPRi21V_t_h0FSQyU7mN6u3o8wUc8=pusU8fDSMA5JA@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] exfat: retain the next empty directory entry hint
-To: Yang Wen <anmuxixixi@gmail.com>
-Cc: sj1557.seo@samsung.com, chizhiling@163.com, yuezhang.mo@sony.com, 
-	exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Chi Zhiling <chizhiling@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>, exfat@lists.linux.dev
+Subject: exfat: question about valid_size and page cache
+Cc: "Yuezhang.Mo@sony.com" <yuezhang.mo@sony.com>,
+ Sungjong Seo <sj1557.seo@samsung.com>, Hyunchul Lee <hyc.lee@gmail.com>,
+ ChenXiaoSong <chenxiaosong@chenxiaosong.com>,
+ liubaolin <liubaolin12138@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:QCgvCgAHiSDI_6lqRgVBRw--.32346S2
+X-Coremail-Antispam: 1Uf129KBjvdXoWrZr45KF18uryftrW7CFWfKrg_yoWxCFX_WF
+	1vy34DX3Z29FyxCrs8Ga4kZrWSqrWUua18Z3sYgry3tw15XF1rJrnFvr1rWr10krWIkr4D
+	KFn3ta4Uur13ujkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IU8Q6pDUUUUU==
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9wk31Gqp-8nRZAAA3d
 
-> @@ -1489,7 +1491,10 @@ int exfat_write_volume_label(struct super_block *sb,
->                         goto unlock;
->                 }
->
-> -               ret = exfat_find_empty_entry(root_inode, &clu, 1, &es);
-> +               ret = exfat_find_empty_entry(root_inode, &clu, 1, &es,
-> +                                            &next_hint);
-> +               if (!ret)
-It should be if (ret >= 0) ?
+Hi, Namjae
 
-> +                       entry_allocated = true;
->         }
->
-> +static void exfat_set_next_empty_hint(struct inode *inode,
-> +                                     struct exfat_chain *p_dir, int dentry,
-> +                                     int num_entries,
-> +                                     struct exfat_entry_set_cache *es,
-> +                                     struct exfat_hint_femp *hint_femp)
-> +{
-Please check whether smaller holes can be skipped. For example, if
-there is a 3 entry hole near the beginning and a 4 entry name is
-appended, a subsequent 3entry name may skip the existing hole because
-the Bloom filter miss bypasses the name scan and allocation starts
-from the saved hint. Unless another deletion occurs, could this state
-persist and cause the directory to grow unnecessarily?
+I have a question about the valid_size advancement logic in exFAT.
 
-And please create the patches against #dev branch.
-Thanks.
+In exfat_zero_new_range(), we zero all folios that are either not 
+up-to-date or do not exist.
+
+I'm curious whether a page in the page cache can remain beyond 
+valid_size. If not, why do we need to skip an uptodate page? There 
+should be no uptodate page beyond valid_size, right?
+
+If such pages can exist, how do we prevent them from becoming holes in 
+the page cache? Those pages could be written back and then released. In 
+that case, we may later zero the corresponding range, which could 
+potentially result in data loss.
+
+By the way, I'd also like to understand how NTFS handles this issue.
+
+
+Thansk :)
+
