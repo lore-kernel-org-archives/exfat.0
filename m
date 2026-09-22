@@ -1,103 +1,73 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADC883515D3
-	for <exfat@lists.linux.dev>; Sun, 20 Sep 2026 05:54:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A2B154CF52
+	for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 14:44:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789883689; cv=none; b=Hwty18NDWFCuFiNgrhoMad8735BhpFRAxi1eq3e74JTUex8/Q1lxBozWEboFsxBllTUnfGcDE70U2AmTO7wg4f4VWJ4l8vvoBRTFsBS2cMz6N11gQoTqfA18ww3ocueK6Uvi/Cn2bJkPhdtxIX5teUfff+OdAdhEfdbnW6O3gFQ=
+	t=1790088249; cv=none; b=jEKET1LCV0+Cz78TnBaBEBnjvA9I2kfVoltm2PNH01QZlF3QW4gTLU+DhsIa8NNAKzhA6j3myMuXed9wEQ6lABf+gu0mEbayrMC1D+XyXIm5HnUUCo12VnrinTJoIqtwoqAI0VPrA/wBsLjMK4Yfj3F07zbJwROj0mBOaNNGTdg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789883689; c=relaxed/simple;
-	bh=d814LnLn4PqcRmpRGVXX4J9iJS1LtVlYGQW8mU3BtDE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GWYb6SPHTFqFjfkqFjZWZ2sxa5zvsSoIggu7wpE4/KBDCM/RU7/CeiC8+0e3apKfjH/eAYFB007kLdwm9OfSsNgk/Da3XCSJQ7bCjLwyQSDw0HM7JBTDzHZDx52Je+qA5NfqbTTLH5ytl4eAPbNKXPxnOOvM3ndYmPjKpcS9cKQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=fSsOC+MD; arc=none smtp.client-ip=220.197.31.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1790088249; c=relaxed/simple;
+	bh=SCANmlijJoE4v2B6DWNSsRxY0ITJRVA2y+vlm7to5XM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=g2/ovJ7c1bDcUyzzGGTpSvS3p/3Jx23+wXfZpZUMlqavaTCT/xB8wYgVIXSxJaW9msHzUO78PZl0W/LPHJ6oUmIbTuAcCmaXhv63kubDrsBJgbg1uhyWiF6XMPjNjC+VSsGApauZKN/j6riUmWDMujeuG5043q707d9ssjg6xI8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UvmnMaA/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="fSsOC+MD"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
-	Content-Type; bh=Fqb1xEIV2nBWDJtFPeFrYXTxS/YyoobPinE+XHejJAE=;
-	b=fSsOC+MDw+eD0CSZM/FOoiaF/vll0tqrfLQhXrdprtU2Mrg/4Ufsu/FFVr19KA
-	vl01tMR80KZulcY4AtS/HdK9JDLpMXyCeVPaxI+TMUFi9lxDFck4Aq2IJKDGo8Pb
-	fmx+Zmm/w8+7KxcfYOaiCTZFJ5hvKV4AI6KHivWA9WPTU=
-Message-ID: <10029d6f-13cc-4d17-a2f9-b093a8339dde@163.com>
-Date: Sun, 20 Sep 2026 13:54:07 +0800
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UvmnMaA/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08A5C1F00899
+	for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 14:44:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790088247;
+	bh=bSZ2l69C13YURC2F+Y4cEwIP1ktKgtxKCfV8IODRQwE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=UvmnMaA/HU6AyVV3T/pncaqPJOzBfcxleJq7jbV6OZGcWKNuGpOGaBOPRLJwx1YSD
+	 01a6ilHpEUGh8XIGkXC7ZtLmIqLmGKUrmwoQAFZfX6p09Gx6ZRWtVlSB7xBeMtQVTF
+	 fovsLmp3aE89eUmEA747q3EBD4iR1nIgmo6F5O/48Aqy/xrFMT8jEzWJ7Dvgx0vjss
+	 G6/7K66iJsLTSLhMZyM/3nfrsI0wVzWbaqhXlBjz981OKKyOssN3vJEm/1WzHzSlKE
+	 wsHuyK8K5SQUgVUOc3IJO/DcoX5KXGixqFyZeD4NW5/ddi7PEt9fpOBVyxSZH9CwW1
+	 Ew1yQ+yJj2RXQ==
+Received: by mail-yx2-f12.google.com with SMTP id 00721157ae682-85d45ae011cso2127b3.2
+        for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 07:44:06 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzFimmcBaMI9+ftu+ErGTRjcIpHPDekVLRv5zfZS4zkFWv9HNYDsn4D4gpNqq0qemfQTa869g==@lists.linux.dev
+X-Gm-Message-State: AFuF++kHxYBVm5dyR4rvpnZS3CJwjlurmyxTiZ1wEtTTrsLcAqAsT38r
+	HNmK2O8ppbLPA6XaY7pfR2SyVnVJRr5KgaIJUCpJN6CIyXP4zp38Bzd+THojiGHaD5bnRg/nZni
+	jgOmTv0Zu+0gXJuhAQ0fxiBuL3jqM7ro=
+X-Received: by 2002:a05:690c:dc7:b0:858:452a:3a92 with SMTP id
+ 00721157ae682-897308fdc31mr46827077b3.9.1790088246304; Tue, 22 Sep 2026
+ 07:44:06 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: exfat: question about valid_size and page cache
-To: "Yuezhang.Mo@sony.com" <Yuezhang.Mo@sony.com>,
- Namjae Jeon <linkinjeon@kernel.org>, "dxdt@dev.snart.me" <dxdt@dev.snart.me>
-Cc: "exfat@lists.linux.dev" <exfat@lists.linux.dev>,
- Sungjong Seo <sj1557.seo@samsung.com>, Hyunchul Lee <hyc.lee@gmail.com>,
- ChenXiaoSong <chenxiaosong@chenxiaosong.com>,
- liubaolin <liubaolin12138@163.com>
-References: <34e67580-7b8c-491b-8beb-496a0d49077b@163.com>
- <CAKYAXd9wnmVyp4ONjYQPs5pxo_ruDmCN_yu7Ma4agDP1n-NNBA@mail.gmail.com>
- <7380972e-de54-4b56-a67c-842be8887c5f@163.com>
- <PUZPR04MB631662C55F38599C3E6496FF81B82@PUZPR04MB6316.apcprd04.prod.outlook.com>
- <fd531465-622d-43d3-8c2f-ff38fb527061@163.com>
- <PUZPR04MB6316BE1BAD8C0AE697150E6981872@PUZPR04MB6316.apcprd04.prod.outlook.com>
- <0fa9e808-0401-42fa-8ecc-776cbc67e918@163.com>
- <PUZPR04MB6316FC1A97FFF6A062C9A6D881852@PUZPR04MB6316.apcprd04.prod.outlook.com>
-From: Chi Zhiling <chizhiling@163.com>
-In-Reply-To: <PUZPR04MB6316FC1A97FFF6A062C9A6D881852@PUZPR04MB6316.apcprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wD3JgUAda9qYzQkBw--.53585S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7tr17Aw1UAry7Zr1fAr4ruFg_yoW8uFW3pF
-	ZxKF1UKFWkJ3WUur1vq3WxXF10934rK3W5W3Z3Gay7AFn0vFn5Wr1UKayS9ay3Gwsrtr1S
-	v3y2va93X3WUZ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UseOXUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2wHjgWqvdQHrcwAA3R
+References: <20260919152240.1507914-1-anmuxixixi@gmail.com> <20260919152240.1507914-3-anmuxixixi@gmail.com>
+In-Reply-To: <20260919152240.1507914-3-anmuxixixi@gmail.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Tue, 22 Sep 2026 23:43:52 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
+X-Gm-Features: AcwNN1VbLLPsV5lOKFwU7yVmxVYAIzMTj5mEWuJYxp70mFyn5tER_B8dYFqZd1Y
+Message-ID: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
+Subject: Re: [PATCH v5 2/3] exfat: retain the next empty directory entry hint
+To: Yang Wen <anmuxixixi@gmail.com>
+Cc: sj1557.seo@samsung.com, chizhiling@163.com, yuezhang.mo@sony.com, 
+	exfat@lists.linux.dev, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On 9/20/26 10:17 AM, Yuezhang.Mo@sony.com wrote:
-> On 9/18/26 15:37 PM, chizhiling@163.com wrote:
->> On 9/18/26 1:56 PM, Yuezhang.Mo@sony.com wrote:
->>> On 9/17/26 18:10 PM, chizhiling@163.com wrote:
->>>> On 9/17/26 5:21 PM, Yuezhang.Mo@sony.com wrote:
->>>>>
->>>>> Revisited the implementation of exfat_zero_new_range(), I think it is unnecessarily duplicating
->>>>> existing functionality.
->>>>>
->>>>> exfat_iomap_read_end_io() already takes care of zeroing the page cache beyond valid_size. By using
->>>>> read_cache_folio() to obtain an uptodate folio, we can reuse the existing exfat_iomap_read_end_io()
->>>>> implementation instead of introducing another zeroing mechanism. Then just need to use
->>>>> folio_mark_dirty() to mark the folio dirty, causing it to be written back.
->>>>
->>>> Yes, you're right. In my local branch, I implemented this by calling
->>>> __filemap_get_folio() and exfat_read_folio(). The relevant code is
->>>> below. It's a bit ugly, so I’d really appreciate it if you have any
->>>> better suggestions:
->>>
->>> Why not simply use read_cache_folio()? Also, it is necessary to hold mapping->invalidate_lock.
->>
->> I only did a quick search under fs/ and noticed that
->> __filemap_get_folio() is used more often. I’ll change it to use
->> read_cache_folio() in the next version and test it.
->>
->> Why should we hold invalidate_lock? Is it because invalidate_lock is
->> supposed to protect valid_size?
->>
-> 
-> Yes, the current implementation uses inode_lock to protect updates to valid_size
-> and zeroed_size. We can consider using invalidate_lock to protect them instead.
+> @@ -516,6 +571,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
+>                                                    dentry, ES_ALL_ENTRIES);
+Should we invalidate the name filter when exfat_put_dentry_set() fails ?
+        ret = exfat_put_dentry_set(&es, IS_DIRSYNC(inode));
+        if (ret) {
+                int cleanup_ret;
 
-I think this is a direction worth exploring, but we should be careful 
-when using invalidate_lock. In the buffered write path, we should not 
-hold invalidate_lock while calling iomap_write_iter, because 
-iomap_write_iter may trigger a user-space fault during its execution, 
-which could lead to a deadlock.
++              exfat_name_filter_free(inode);
+                cleanup_ret = exfat_get_dentry_set(&es, sb, &info->dir,
+                                                   dentry, ES_ALL_ENTRIES);
 
-> What lock does your method intend to use for this?
-
-I was originally planning to use the folio lock, but just like with 
-invalidate_lock, there are some details that need to be considered.
-
-
+>                 if (!cleanup_ret) {
+>                         exfat_remove_entries(inode, &es, ES_IDX_FILE, false);
+> +                       exfat_invalidate_empty_hint(inode);
+>                         cleanup_ret = exfat_put_dentry_set(&es,
+>                                                            IS_DIRSYNC(inode));
+>                 }
