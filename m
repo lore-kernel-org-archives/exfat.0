@@ -1,73 +1,96 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pz2-f40.google.com (mail-pz2-f40.google.com [74.125.228.40])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A2B154CF52
-	for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 14:44:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78A26440A0B
+	for <exfat@lists.linux.dev>; Wed, 23 Sep 2026 12:32:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.40
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790088249; cv=none; b=jEKET1LCV0+Cz78TnBaBEBnjvA9I2kfVoltm2PNH01QZlF3QW4gTLU+DhsIa8NNAKzhA6j3myMuXed9wEQ6lABf+gu0mEbayrMC1D+XyXIm5HnUUCo12VnrinTJoIqtwoqAI0VPrA/wBsLjMK4Yfj3F07zbJwROj0mBOaNNGTdg=
+	t=1790166756; cv=none; b=UEj/f1YfudlRQseXiEXqdT8dfMb00TkCBPY1LfydRNQJh9Z6S214p230BB8ttx8bI07+hrHZdlEhLQi1bzjh7cONI3PklzELPnk8AXlPWoPAkCUDL5m7ypkwgmRTSn121iDeGJTF1JFzADFvMDIS+os121d8fEnfBHJ3ywuvU3k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790088249; c=relaxed/simple;
-	bh=SCANmlijJoE4v2B6DWNSsRxY0ITJRVA2y+vlm7to5XM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=g2/ovJ7c1bDcUyzzGGTpSvS3p/3Jx23+wXfZpZUMlqavaTCT/xB8wYgVIXSxJaW9msHzUO78PZl0W/LPHJ6oUmIbTuAcCmaXhv63kubDrsBJgbg1uhyWiF6XMPjNjC+VSsGApauZKN/j6riUmWDMujeuG5043q707d9ssjg6xI8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UvmnMaA/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790166756; c=relaxed/simple;
+	bh=cWL4fevHSSSX8thrOI3c5H6tW03iYZLERBtXM0woPUA=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=heKalYNU/f/O7g7V6Wo1Exo4RndzPUOpw5gCUiR6Aq9NRhJwQDbBA35U3WS8Ks9SfNI5kUR44G1Mb6Svg1XVE6UaS5Ku/EA1afo6Z9z5CWx22x1BW0rBFJPzan9gWkchMyGFw2T/K018UD7LXH5ol9VtspIOyxTZ60UITlS/Oyg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YO1d4lsa; arc=none smtp.client-ip=74.125.228.40
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UvmnMaA/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08A5C1F00899
-	for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 14:44:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790088247;
-	bh=bSZ2l69C13YURC2F+Y4cEwIP1ktKgtxKCfV8IODRQwE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=UvmnMaA/HU6AyVV3T/pncaqPJOzBfcxleJq7jbV6OZGcWKNuGpOGaBOPRLJwx1YSD
-	 01a6ilHpEUGh8XIGkXC7ZtLmIqLmGKUrmwoQAFZfX6p09Gx6ZRWtVlSB7xBeMtQVTF
-	 fovsLmp3aE89eUmEA747q3EBD4iR1nIgmo6F5O/48Aqy/xrFMT8jEzWJ7Dvgx0vjss
-	 G6/7K66iJsLTSLhMZyM/3nfrsI0wVzWbaqhXlBjz981OKKyOssN3vJEm/1WzHzSlKE
-	 wsHuyK8K5SQUgVUOc3IJO/DcoX5KXGixqFyZeD4NW5/ddi7PEt9fpOBVyxSZH9CwW1
-	 Ew1yQ+yJj2RXQ==
-Received: by mail-yx2-f12.google.com with SMTP id 00721157ae682-85d45ae011cso2127b3.2
-        for <exfat@lists.linux.dev>; Tue, 22 Sep 2026 07:44:06 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzFimmcBaMI9+ftu+ErGTRjcIpHPDekVLRv5zfZS4zkFWv9HNYDsn4D4gpNqq0qemfQTa869g==@lists.linux.dev
-X-Gm-Message-State: AFuF++kHxYBVm5dyR4rvpnZS3CJwjlurmyxTiZ1wEtTTrsLcAqAsT38r
-	HNmK2O8ppbLPA6XaY7pfR2SyVnVJRr5KgaIJUCpJN6CIyXP4zp38Bzd+THojiGHaD5bnRg/nZni
-	jgOmTv0Zu+0gXJuhAQ0fxiBuL3jqM7ro=
-X-Received: by 2002:a05:690c:dc7:b0:858:452a:3a92 with SMTP id
- 00721157ae682-897308fdc31mr46827077b3.9.1790088246304; Tue, 22 Sep 2026
- 07:44:06 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YO1d4lsa"
+Received: by mail-pz2-f40.google.com with SMTP id d2e1a72fcca58-87ac7657a24so355228b3a.3
+        for <exfat@lists.linux.dev>; Wed, 23 Sep 2026 05:32:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790166748; x=1790771548; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cWL4fevHSSSX8thrOI3c5H6tW03iYZLERBtXM0woPUA=;
+        b=YO1d4lsaoXFWc+8WZHHgEFR4DEk0vwF6hVug1buRuwpe3csVD2hvQSHDTmsnKcrILP
+         8IxC5NAn0tAKSJt2TBsPdkwbNi+ajnL4g5WdpHe29jcHlfWJBc/LUP/MlcI5/vWWLwQ+
+         Q6KPlrFmujizBa9izYeD33WIRFH8CywD8AUcuD1QUqqaPU865m0QmoFTkScwjT2MuE1P
+         YhVsTs5PHD8qFV8T3rvlr2dI/Z03NCxBLF0NLEdP7hoNLIf/gjGXduaRN3WQvZmE6kNQ
+         YoEnYaelZGzbjNATNrVBnU5hBRXc7P9P1WvpdWKD4CaeZJGPtlg1zbjHGFkpBbykaLmH
+         aK5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790166748; x=1790771548;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cWL4fevHSSSX8thrOI3c5H6tW03iYZLERBtXM0woPUA=;
+        b=YUawKUVzzw8hYPoy6P64dqe4Xa7TAlIGEPUcK/YpL6C3AYFuoklmuPxi9prx6TsV1P
+         r03p9H4gHeKvi5TT9Rbj7tQOyts9JMr3HwZpgbw8CBSj9lL7c2sP35Ha6eDbR8XrlwXv
+         zDYz93UPtvcn3cNliELYGCYrfz6bfS2WHoZg4lLnqlKQpKtGbCSdSpAnpj7XZUgdtP/9
+         uGrGV2tExFgBnfCnB2kDxgh5b4k3pmEZsDZWb/MK9cmI1kaasNg4l64OFJl+E5p42tp8
+         Uh5darkjdvpvpeNQjyJkoRESSc3VRvjZq1px2hED78yizP8MmRCBceUXxmt+K7IR8dZl
+         uVhg==
+X-Forwarded-Encrypted: i=1; AKwUvBzHWPepCd3Da2hympPUwPI4RE5kKBkzIa5VN2z1vDnAiHuEYc6njTFm7mlcXQpNeTZ2reQanA==@lists.linux.dev
+X-Gm-Message-State: AFuF++m6j4VbxQ27Z2Az4OdWY1s54/8qA0JKIkTuzSbUQrzjmR9IgvQT
+	gjSgKlNoZaaAzgq1jzoj3y+cBUxEhYsL5MulEI8IQr379dScT/1vupZ7
+X-Gm-Gg: AYBFou2dPZb+PabF4RLau8qSOR7RbUJ1NRQpAj67TqDfecqS2t9Io38eRIl4zNPwDxq
+	1G4kIE3Q7yXxfkqGNjf2HXi5w2TYJ7coWkDhW+ikO+O3fbh8szMCl8v3UPsfuqLU8RQWtWgPoAg
+	c1XQDf55F+2gnE/FtacapBWF4fdrXT5Lbppe6yuQptPvtqe0OKLKnQfBICVrvefhKRP2f5BE1Ht
+	sAl3pEjrbBFOZIaxcT4uezbq6DdDiroRrE1ZyCLZiX4oBjAbc5bb8nmRDqRXjz02vxRaVnbx0dQ
+	rxE/TePZcWrEAk99RgcVmhKrlmYqibW+NKn4hCd2x80Sv9vXyMH+MurjpFJzSXzMzeUunEZ4VOl
+	C0CIRwRfzueUheXAR429WCEbsoQy3qFo0yhZiFGzKw06EE3vasVJ07025dkbyN0YrP7JU7uCtwe
+	Zi5QojsUg3plZoqwNaOtdBnWMJE9AfN5Uah+634vuOt5xOSxpJeBYMrREB/iXvm0R9yO0w/l9qm
+	RvsEdh0szTC
+X-Received: by 2002:a05:6a00:3407:b0:842:2419:6c0b with SMTP id d2e1a72fcca58-87d1a7aec9fmr2191941b3a.10.1790166747788;
+        Wed, 23 Sep 2026 05:32:27 -0700 (PDT)
+Received: from localhost.localdomain ([47.100.192.162])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-87d1d5c252esm1127535b3a.31.2026.09.23.05.32.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Sep 2026 05:32:27 -0700 (PDT)
+From: Yang Wen <anmuxixixi@gmail.com>
+To: linkinjeon@kernel.org
+Cc: anmuxixixi@gmail.com,
+	chizhiling@163.com,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	sj1557.seo@samsung.com,
+	yuezhang.mo@sony.com
+Subject: Re: [PATCH v5 2/3] exfat: retain the next empty directory entry hint
+Date: Wed, 23 Sep 2026 20:31:58 +0800
+Message-Id: <20260923123158.1626278-1-anmuxixixi@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
+References: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260919152240.1507914-1-anmuxixixi@gmail.com> <20260919152240.1507914-3-anmuxixixi@gmail.com>
-In-Reply-To: <20260919152240.1507914-3-anmuxixixi@gmail.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Tue, 22 Sep 2026 23:43:52 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
-X-Gm-Features: AcwNN1VbLLPsV5lOKFwU7yVmxVYAIzMTj5mEWuJYxp70mFyn5tER_B8dYFqZd1Y
-Message-ID: <CAKYAXd99=QNEFH3n_=PyAYFrmTkqqxsBFHamYYnfOoFNex52Ow@mail.gmail.com>
-Subject: Re: [PATCH v5 2/3] exfat: retain the next empty directory entry hint
-To: Yang Wen <anmuxixixi@gmail.com>
-Cc: sj1557.seo@samsung.com, chizhiling@163.com, yuezhang.mo@sony.com, 
-	exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-> @@ -516,6 +571,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
->                                                    dentry, ES_ALL_ENTRIES);
-Should we invalidate the name filter when exfat_put_dentry_set() fails ?
-        ret = exfat_put_dentry_set(&es, IS_DIRSYNC(inode));
-        if (ret) {
-                int cleanup_ret;
 
-+              exfat_name_filter_free(inode);
-                cleanup_ret = exfat_get_dentry_set(&es, sb, &info->dir,
-                                                   dentry, ES_ALL_ENTRIES);
+Thank you for catching this.
 
->                 if (!cleanup_ret) {
->                         exfat_remove_entries(inode, &es, ES_IDX_FILE, false);
-> +                       exfat_invalidate_empty_hint(inode);
->                         cleanup_ret = exfat_put_dentry_set(&es,
->                                                            IS_DIRSYNC(inode));
->                 }
+I have updated the error path to invalidate the name filter immediately
+after the initial exfat_put_dentry_set() failure, before attempting the
+cleanup.
+
+I verified the updated series with a dirsync I/O failure test. The create
+operation returned -EIO, and the filter count decreased from two to one,
+confirming that the affected directory's filter was invalidated. I will
+include the fix in v6.
+
+Thanks again for the careful review.
