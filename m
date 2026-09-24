@@ -1,121 +1,106 @@
-Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com [113.46.200.224])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E175E4854E2;
-	Thu, 24 Sep 2026 10:23:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.224
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 360D64756B9
+	for <exfat@lists.linux.dev>; Thu, 24 Sep 2026 10:51:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790245409; cv=none; b=Z/2LmlX+SR7/OZWjfzkufDVgo+3GhMwZUOU4fvbLBk8Usa9ZgotTboAcfTUh8wRgPsBmg0Wcsjy3GjfjAPWPM8xtY/m0N7+iQFwLp+ZyPh0p7bjEcA1aUtRjRsxCVfhKBhjzyuGdUWlNmO4jRdzVsi9Fb7FBeh4ZFS2sz0+h61E=
+	t=1790247110; cv=none; b=nGdRjcN94SdH9+FUCShhTIWn+ETFPlzN/q7GfxSglgx1m0su30/roPgZlg0oNHleFFVQs9fkCixl+2MinPOXnWZ2D9S39GOty69lq7hx6/xbxlPCaxOHziUCUgb6JC/p6Hvc2HVHv/e339OH/S8ni4UHDzD+GCokdcFDoinWa/g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790245409; c=relaxed/simple;
-	bh=N9GNT5Gr77tnZpa1DIFKdP6tlc1V/iDCYmqnSrwJd4M=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=s1BZgTPtfRySXE/S84tzoV6u9K2H5jEE4jZS551iPjmK1PTAmLUz8UW2BKhYr8v5dcPIpLcL+rcrKaBkZT3NTQkOoTYYweoAUoi+wvjTjFeZqztBbReI/zYyMA13wHd2csoTzzJey0kMRyaCs1FqzXrdIrUozGTCf9NHt1uecIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=KojgF+/C; arc=none smtp.client-ip=113.46.200.224
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	s=arc-20240116; t=1790247110; c=relaxed/simple;
+	bh=VCOUBmSvA08OLSZZ0QUtRpBpXc4RIeX5lNww1zeNj+w=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=H7hmXEPpV2H2qmv2McD8vqmTEwO9kZFl11Sv/H1wVICCiE2ZFv2SNsY3ak5ZMgYBXdgr4R1LSTU7MJ6bM7c6CnF1KJE7s/TA/AIk5eiGJ2HQ+VDSTRrxYEFOcR+DGtN+yjNSG3risRptf5MHfUsuWRrNH2YPQeEIw0f2XF8KQYA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=FCc/RknF; arc=none smtp.client-ip=117.135.210.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="KojgF+/C"
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=WplCFr0Ls1VpRS9r4EdhOkQGGZvquUDe0yNKbhY/NCY=;
-	b=KojgF+/CS9kWlkRdNlF4xuRQ5V2F3k2F35yAWV4kuAlG5XZVUZIVOkLhqZC9+Fw+ibeb6Xuxz
-	wFGRVGNp/ebDt4Ncc3JLEUvjx1y/flsc3RltibM0z6jU4VDvmIsIlJFHfoHKT7GXRM3IWlraVyc
-	pHCciaYm2G1G4Z9Sf1aw0Mo=
-Received: from mail.maildlp.com (unknown [172.19.163.214])
-	by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4hr8lM6LmWz1cyPY;
-	Thu, 24 Sep 2026 18:12:15 +0800 (CST)
-Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
-	by mail.maildlp.com (Postfix) with ESMTPS id D49BB4057C;
-	Thu, 24 Sep 2026 18:23:18 +0800 (CST)
-Received: from octopus.huawei.com (10.67.174.191) by
- whupemk100010.china.huawei.com (7.152.184.41) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45; Thu, 24 Sep 2026 18:23:14 +0800
-From: Cai Xinchen <caixinchen1@huawei.com>
-To: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
-	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>
-CC: <rdunlap@infradead.org>, <gregkh@linuxfoundation.org>,
-	<rafael@kernel.org>, <dakr@kernel.org>, <dlemoal@kernel.org>, <hch@lst.de>,
-	<axboe@kernel.dk>, <viro@zeniv.linux.org.uk>, <brauner@kernel.org>,
-	<jack@suse.cz>, <dhowells@redhat.com>, <code@tyhicks.com>,
-	<linkinjeon@kernel.org>, <sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
-	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
-	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
-	<tom@talpey.com>, <miklos@szeredi.hu>, <amir73il@gmail.com>,
-	<senozhatsky@chromium.org>, <chenxiaosong@chenxiaosong.com>,
-	<zohar@linux.ibm.com>, <roberto.sassu@huawei.com>,
-	<dmitry.kasatkin@gmail.com>, <eric.snowberg@oracle.com>,
-	<stephen.smalley.work@gmail.com>, <omosnacek@gmail.com>,
-	<casey@schaufler-ca.com>, <nanx95726@gmail.com>, <djwong@kernel.org>,
-	<daniel@iogearbox.net>, <linux-security-module@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<driver-core@lists.linux.dev>, <linux-block@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>, <netfs@lists.linux.dev>,
-	<ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
-	<linux-nfs@vger.kernel.org>, <linux-unionfs@vger.kernel.org>,
-	<linux-cifs@vger.kernel.org>, <linux-integrity@vger.kernel.org>,
-	<selinux@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-	<xiujianfeng@huawei.com>, <caixinchen1@huawei.com>, <lujialin4@huawei.com>
-Subject: [PATCH RFC -next 12/12] Documentation: Update landlock doc for metadata rights
-Date: Thu, 24 Sep 2026 18:48:31 +0800
-Message-ID: <20260924104831.1081137-13-caixinchen1@huawei.com>
-X-Mailer: git-send-email 2.18.0.huawei.25
-In-Reply-To: <20260924104831.1081137-1-caixinchen1@huawei.com>
-References: <20260924104831.1081137-1-caixinchen1@huawei.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="FCc/RknF"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=Gb
+	iQVEWtVb+Jbk8/U09Tj0Cxmmbe6xVeYJInM/aCluU=; b=FCc/RknFcG65ZL6bzm
+	I7IXiL78N00nUmijRrJJ4SkZC1G9q+FXnJL8DdYUTskqxC279fkHKXRE3dV2+w1Z
+	OjfPlUOAxKGD+2Z2GTxCR64r5CK4FWTXYUiDGzz71cBgRgR213P24jvF+XzZKfng
+	16bNVJ2izr4/kIKRRuZx4UR44=
+Received: from pc.localdomain (unknown [])
+	by gzsmtp1 (Coremail) with SMTP id PCgvCgBHFxixALVqNOv+Aw--.7356S5;
+	Thu, 24 Sep 2026 18:51:34 +0800 (CST)
+From: Jiale Yao <yaojiale02@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Jiale Yao <yaojiale02@163.com>
+Subject: [PATCH 3/3] exfat: drain in-flight DIO before buffered write fallback
+Date: Thu, 24 Sep 2026 18:51:25 +0800
+Message-Id: <20260924105125.577714-4-yaojiale02@163.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260924105125.577714-1-yaojiale02@163.com>
+References: <20260924105125.577714-1-yaojiale02@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
- whupemk100010.china.huawei.com (7.152.184.41)
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PCgvCgBHFxixALVqNOv+Aw--.7356S5
+X-Coremail-Antispam: 1Uf129KBjvJXoW7tF4kGFy5AFykKF47tr1rXrb_yoW8ZF43pr
+	Z0ga45JryDt397XwnruF48W3WFk395A3y3ZrWvv3WDCrWUWr4vga1ktr1YvF43JanrGr4j
+	qa109rykAr1DCaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UY0PhUUUUU=
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbCzRY1b2q1ALb8DgAA3a
 
-Update the user space documentation to include the new
-LANDLOCK_ACCESS_FS_READ_METADATA and
-LANDLOCK_ACCESS_FS_WRITE_METADATA access rights in the example
-ruleset attributes, and extend the ABI version fallback switch to
-remove them for ABI < 12.
+An asynchronous direct write can remain in flight after the inode lock is
+released.  If another direct write falls back to buffered I/O while the
+first write is still pending, iomap_file_buffered_write() can dirty pages
+before the first write completes its post-I/O page cache invalidation.
+The invalidation then finds dirty pages, reports a page cache invalidation
+failure, and records -EIO in the mapping error sequence.  A later fsync()
+therefore returns -EIO.
 
-Assisted-by: opencode: glm-5.3
-Signed-off-by: Cai Xinchen <caixinchen1@huawei.com>
+Commit 15cdefd0c0522f9d5e12d947fa04f4c11649b699 ("ext4: drain
+in-flight DIO before buffered write fallback") fixed the same race in
+ext4.  ExFAT has an equivalent fallback after iomap_dio_rw() returns
+-ENOTBLK or a short write, but does not drain other in-flight DIO before
+dirtying the page cache.
+
+Wait for in-flight DIO before calling iomap_file_buffered_write() in the
+fallback path.
+
+A reproducer using concurrent AIO direct writes and buffered fallback
+triggered the following warning and made a subsequent fsync() return
+-EIO:
+
+  Page cache invalidation failure on direct I/O.  Possible data corruption
+  due to collision with buffered I/O!
+
+Fixes: 867b9c96dc83 ("exfat: add iomap direct I/O support")
+Link: https://lore.kernel.org/r/20260629113827.4074335-3-libaokun@linux.alibaba.com
+Signed-off-by: Jiale Yao <yaojiale02@163.com>
 ---
- Documentation/userspace-api/landlock.rst | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ fs/exfat/file.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
-index 84cb7bf6b3ed..f6389b9668b4 100644
---- a/Documentation/userspace-api/landlock.rst
-+++ b/Documentation/userspace-api/landlock.rst
-@@ -78,7 +78,9 @@ to be explicit about the denied-by-default access rights.
-             LANDLOCK_ACCESS_FS_REFER |
-             LANDLOCK_ACCESS_FS_TRUNCATE |
-             LANDLOCK_ACCESS_FS_IOCTL_DEV |
--            LANDLOCK_ACCESS_FS_RESOLVE_UNIX,
-+            LANDLOCK_ACCESS_FS_RESOLVE_UNIX |
-+            LANDLOCK_ACCESS_FS_READ_METADATA |
-+            LANDLOCK_ACCESS_FS_WRITE_METADATA,
-         .handled_access_net =
-             LANDLOCK_ACCESS_NET_BIND_TCP |
-             LANDLOCK_ACCESS_NET_CONNECT_TCP |
-@@ -140,6 +142,13 @@ version, and only use the available subset of access rights:
-         ruleset_attr.handled_access_net &=
-             ~(LANDLOCK_ACCESS_NET_BIND_UDP |
-               LANDLOCK_ACCESS_NET_CONNECT_SEND_UDP);
-+        __attribute__((fallthrough));
-+    case 10:
-+    case 11:
-+        /* Removes metadata rights for ABI < 12 */
-+        ruleset_attr.handled_access_fs &=
-+            ~(LANDLOCK_ACCESS_FS_READ_METADATA |
-+              LANDLOCK_ACCESS_FS_WRITE_METADATA);
-     }
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index a2a9ee1a2004..cf5ccbd54823 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -807,6 +807,12 @@ static ssize_t exfat_fallback_buffered_write(struct kiocb *iocb,
  
- This enables the creation of an inclusive ruleset that will contain our rules.
+ 	iocb->ki_flags &= ~IOCB_DIRECT;
+ 
++	/*
++	 * Prevent concurrent direct I/O and buffered I/O to the same file
++	 * range. Wait for in-flight DIO to finish before dirtying pages.
++	 */
++	inode_dio_wait(file_inode(iocb->ki_filp));
++
+ 	written = iomap_file_buffered_write(iocb, from, &exfat_write_iomap_ops,
+ 			NULL, NULL);
+ 	if (written < 0)
 -- 
-2.18.0.huawei.25
+2.34.1
 
