@@ -1,280 +1,257 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ECCC21A447
-	for <exfat@lists.linux.dev>; Sat, 26 Sep 2026 08:38:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20333370D6D
+	for <exfat@lists.linux.dev>; Sun, 27 Sep 2026 08:04:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790411911; cv=none; b=pwefB7fkYOUFH1k6PPLj9vXM7YNg/j6+kqbqh9FeXJnIBoo5oXid9f4x9n+5sCBNIyTPILVAe6SEGH5OmXDAHwt9yMlb+NNkpT1z3EjbzskLMu/T29JwiGivq1xmQnBl95M4Fqwn/EVavN9wiN/3YXL9rTyUo3XKTdOzm/n8vL4=
+	t=1790496255; cv=none; b=hllaOVgRh19lduFlxU5D2gRE6KQAS/QGJiHL4pUIZiQGn/zeROIfHPPU9ubws8bTIaLT/zWbzVlxK6w/3TXMX3DTiXtpLNjH+Nb+RCifzNnpMpAcvrpPyEa1tDCN5mDri+SeIaH5zJa+L9tYZc2aIOfmriKU9xjUJmj5DrvDPiY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790411911; c=relaxed/simple;
-	bh=dg1L5YWtdAyboMbKumSCH8z23MTRvvFyqARphfS6bXE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GCtBMOFOa0/HPfhDMsPs1L7iUtMfxSOT97lLfYWPL5UC8t1KUUyNHgosaDX9rtT17Qr/IXmnaWpGDW75HOz2Goj4qFvmrv5LJRfjkgHp/1ObWfzAzVkcMgf/VnvX10jdQnDf+axSdfc540fu6ESN+OqGW8Y1Gp3aclk+5GAYsWc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aszNx6Ui; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790496255; c=relaxed/simple;
+	bh=yS/pkfvSoFMg+v8FRvHVAOMCeffv6y2EKCo9TpER+9w=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=prWuQJIjNiGYod8pCkxREr7SSD3FZSpMl9t1R9Xz+FOYJbT5Hdaj9ar0YTFg2S+8F7okoDRhMklhlOXvZDi0c0rHmVhwDQ3rrKcecm03DzqQH6M5wFKcGF2t5jlm0ZbWZTmPRN+tyTjjluzw8FWGSBZWEIzca0TBgK1un8CrYUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=jYB5DZIR; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aszNx6Ui"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49b912df756so12571825e9.3
-        for <exfat@lists.linux.dev>; Sat, 26 Sep 2026 01:38:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790411906; x=1791016706; darn=lists.linux.dev;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=c9e9Ohjh62jjpKVoXb3eLlcbg9rHFeTPk+yn3uYWypA=;
-        b=aszNx6UiflGIgBTS2f1z2zZ3uU/lX5c/WgvL3DgAohqdVICLJfVb3Dtnh+cykkPTSX
-         oCcJWP7+JywOXeUVKLeXG48oWXOgvKzzy3gqhIQM9z7HEqiQdV0jRvxg2hBy0IuTrJQ2
-         vMRTYx2qndqYZL96sU6o55BkSUbW4noUlR+BQmqjVCPSeYJVoiWwRXfMGqy2aBwgSGWL
-         RWJlVdnt8ii/iWKB22ap3T5yoXLZEF1XvpvwTvjso2AFnIE9baaaOpRphT0uRZJnvwUy
-         TaghvrCmldoYYJqaJpUdVeC4Uf7WfOKzYoVBiiReOAUMqTQd2Qny6X2uhBbHiFPgwss5
-         FkVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790411906; x=1791016706;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=c9e9Ohjh62jjpKVoXb3eLlcbg9rHFeTPk+yn3uYWypA=;
-        b=uDdUd3T4t7xFSuKX66sGhYXhgGVR5NGpcBIP+ZYRw3RoEiOqMWjsL/q4rIBD3J2y6q
-         CYzKrR+IM6OMdNdjW6R62DGFbky439xs89h/CfYhRTA+SRbRCHbe+Fumvp2uLykwvTfF
-         3ZhDPpYPCBsfPOM4+p6KlPQIw3ipOsCBgARAh4rHjzYBhMd5pMRvtUlFL4nPZvbAdGd0
-         5hINasakPkzllghdY9V7mM2KbLqJaVL9YOXCP4lS96AekhPs1yfiGQ3XwOALfxKauaYm
-         E+BtQhjFSeNm6i8gNHA4MnEJoNHC36XsqsAMJ6YYxofRez6J20lY5Sup4U+NOWebHEak
-         cz0g==
-X-Forwarded-Encrypted: i=1; AKwUvBwMSMP8ghqZmg0TvaiSODsdeYG2Dr8rBlttBpYyZoEGS5S5LV5X4gE6ZiwzqGg1tI9EoFh1BA==@lists.linux.dev
-X-Gm-Message-State: AFuF++nZlc0eISdtlEIyQwuXvOYHqk1st/qGVohxBScfmA4GMJs4kUCW
-	BXXdIjeqZsZpLMm7sb8X6uF6EQGeu6HqCz+jNtGo8qY52wZzOw20zs3r
-X-Gm-Gg: AYBFou3Pf2cOmFRy+v6zOkD5myoOeRtqDxiqMJTjGZsObaYyId8ynlEbnd9j0U6ni5d
-	L1Rp3zDJNWlo+5dyHQaYE12ZSxiOUHEQvrPYZSNEtyfXzfPiNoqjhG6vsyUTGt/hAa9NQQL11j9
-	d13D6/VX7JkV2KrDzOv7Ww8nnEFeI0JQ8HM87Yei01XvMzly6L2Vg6cRIPsg4e89ScrUR+akMqm
-	zvflsKoU0110Jg4CtOAY1gZjZLnRm7XH4cXL+7CCmDKmR7qr8YBYTWOneocoeqEDQvCvSbTR/68
-	LKN7GqvAkAYq3WgG2SXQJYPVgFg68N85NNo6AlblLndd6TpATHJ/ci2TOeTacUnGsTCBWJJq3HY
-	oLkpCfSqr1/xIdqwyh1iobyQthivgs26Rs2K6Mt1URZvitQkJCFU+djyOb54BRCbgSKQTAJVF2V
-	qAOMKNzEecqNNuNlqSKyLcbmDKrHSLHwlRRCuPqEqC0QcYwUbCaHtsXSN3J6QXx9fauvw4JK0NV
-	5fvmYJBMP1010DWNQuRmfg=
-X-Received: by 2002:a05:600c:1d02:b0:49f:fd66:5fe0 with SMTP id 5b1f17b1804b1-49ffd6661a7mr12811255e9.9.1790411906263;
-        Sat, 26 Sep 2026 01:38:26 -0700 (PDT)
-Received: from localhost (ip87-106-108-193.pbiaas.com. [87.106.108.193])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5de4de4sm215396785e9.8.2026.09.26.01.38.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 26 Sep 2026 01:38:25 -0700 (PDT)
-Date: Sat, 26 Sep 2026 10:38:24 +0200
-From: =?iso-8859-1?Q?G=FCnther?= Noack <gnoack3000@gmail.com>
-To: Cai Xinchen <caixinchen1@huawei.com>
-Cc: mic@digikod.net, gnoack@google.com, paul@paul-moore.com,
-	jmorris@namei.org, serge@hallyn.com, corbet@lwn.net,
-	skhan@linuxfoundation.org, rdunlap@infradead.org,
-	gregkh@linuxfoundation.org, rafael@kernel.org, dakr@kernel.org,
-	dlemoal@kernel.org, hch@lst.de, axboe@kernel.dk,
-	viro@zeniv.linux.org.uk, brauner@kernel.org, jack@suse.cz,
-	dhowells@redhat.com, code@tyhicks.com, linkinjeon@kernel.org,
-	sj1557.seo@samsung.com, yuezhang.mo@sony.com,
-	hirofumi@mail.parknet.co.jp, cel@kernel.org, jlayton@kernel.org,
-	neil@brown.name, okorniev@redhat.com, Dai.Ngo@oracle.com,
-	tom@talpey.com, miklos@szeredi.hu, amir73il@gmail.com,
-	senozhatsky@chromium.org, chenxiaosong@chenxiaosong.com,
-	zohar@linux.ibm.com, roberto.sassu@huawei.com,
-	dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com,
-	stephen.smalley.work@gmail.com, omosnacek@gmail.com,
-	casey@schaufler-ca.com, nanx95726@gmail.com, djwong@kernel.org,
-	daniel@iogearbox.net, linux-security-module@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	driver-core@lists.linux.dev, linux-block@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, netfs@lists.linux.dev,
-	ecryptfs@vger.kernel.org, exfat@lists.linux.dev,
-	linux-nfs@vger.kernel.org, linux-unionfs@vger.kernel.org,
-	linux-cifs@vger.kernel.org, linux-integrity@vger.kernel.org,
-	selinux@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	xiujianfeng@huawei.com, lujialin4@huawei.com
-Subject: Re: [PATCH RFC -next 09/12] landlock: Implement metadata access hooks
-Message-ID: <20260926.a96402fcbd4b@gnoack.org>
-References: <20260924104831.1081137-1-caixinchen1@huawei.com>
- <20260924104831.1081137-10-caixinchen1@huawei.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="jYB5DZIR"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=ga
+	k6sS4I6jOBTPU1fPraI5bt8EtPLZlqZwbsHc2e/RI=; b=jYB5DZIRtJ6q8LD0TB
+	0H09Eebgr5v4Gw/pg2YKowWS5KL5xHUDtyG/q2y+aL4i8apDGGYU+EaiNWBxcVoJ
+	wFT95f4WM68fmXSMdMEx1u3Rsc8Mjh6x58CQEDftjWrqxogOJjwKXZP5AAjWxA5w
+	S4Y4uuie7cP9gsHdNp8LDezes=
+Received: from czl-pc (unknown [])
+	by gzsmtp4 (Coremail) with SMTP id PygvCgBXrkXNzbhqECuNBg--.31472S7;
+	Sun, 27 Sep 2026 16:03:28 +0800 (CST)
+From: Chi Zhiling <chizhiling@163.com>
+To: exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Yuezhang.Mo@sony.com,
+	chenxiaosong@chenxiaosong.com,
+	dxdt@dev.snart.me,
+	hyc.lee@gmail.com,
+	linkinjeon@kernel.org,
+	liubaolin12138@163.com,
+	sj1557.seo@samsung.com,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [PATCH v1 5/5] exfat: use folio lock to protect valid_size
+Date: Sun, 27 Sep 2026 16:03:04 +0800
+Message-ID: <20260927080305.831641-6-chizhiling@163.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260927080305.831641-1-chizhiling@163.com>
+References: <20260927080305.831641-1-chizhiling@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260924104831.1081137-10-caixinchen1@huawei.com>
+X-CM-TRANSID:PygvCgBXrkXNzbhqECuNBg--.31472S7
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JFWUXF15Wr4fAr4rWF1xXwb_yoWxAw13pr
+	ZIkw13GrWkZ3y7Wr1xGFyUZa4Ykw1SgFWxCr95u3WDZrnFy34xKFyUKFW29Fy3J3s3Gr4Y
+	qF4q9ry8GrnrG3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jeE_NUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC+BBwDmq4zdCLsAAA3i
 
-On Thu, Sep 24, 2026 at 06:48:28PM +0800, Cai Xinchen wrote:
-> Implement the LANDLOCK_ACCESS_FS_READ_METADATA and
-> LANDLOCK_ACCESS_FS_WRITE_METADATA access rights by hooking the
-> inode_getattr, inode_setattr, inode_setxattr, inode_getxattr,
-> inode_listxattr, inode_removexattr, inode_set_acl, inode_get_acl and
-> inode_remove_acl LSM hooks, which now receive a struct path thanks to
-> the preceding VFS and LSM refactoring.
-> 
-> The following system calls are now controlled:
-> 
-> - stat(2), fstat(2), lstat(2), newfstatat(2), getxattr(2) and
->   friends, listxattr(2) and friends, and POSIX ACL reads via
->   inode_getattr, inode_getxattr, inode_listxattr and inode_get_acl
->   (READ_METADATA)
-> - chmod(2), fchmod(2), fchmodat(2), fchmodat2(2), chown(2), fchown(2),
->   lchown(2), fchownat(2), chgrp(2), utimensat(2), futimens(2),
->   utime(2), setxattr(2) and friends, removexattr(2) and friends, and
->   POSIX ACL set and remove via inode_setattr, inode_setxattr,
->   inode_removexattr, inode_set_acl and inode_remove_acl
->   (WRITE_METADATA)
-> 
-> Both new rights are added to ACCESS_FILE as they apply to both files
-> and directories.
-> 
-> hook_inode_setattr only restricts explicit metadata changes, i.e. it
-> checks WRITE_METADATA only when the ia_valid mask contains
-> ATTR_MODE, ATTR_UID, ATTR_GID, ATTR_TIMES_SET or ATTR_TOUCH.
-> Metadata changes that the kernel performs implicitly, such as
-> timestamp updates on write(2) or size changes on truncate(2), are
-> therefore not restricted, and neither are chmod(2)/chown(2) calls
-> that do not change any attribute (e.g. chown(2) with -1/-1, which is
-> a no-op that never reaches the hook), matching the behavior of the
-> SELinux inode_setattr hook.
-> 
-> Kernel-internal accesses performed with override_creds() (e.g.
-> overlayfs and cachefiles) are not affected because Landlock domains
-> are attached to credentials, and kernel threads without a Landlock
-> domain (e.g. nfsd and ksmbd) are not restricted either.
-> 
-> Assisted-by: opencode: glm-5.3
-> Signed-off-by: Cai Xinchen <caixinchen1@huawei.com>
-> ---
->  security/landlock/fs.c | 86 ++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 86 insertions(+)
-> 
-> diff --git a/security/landlock/fs.c b/security/landlock/fs.c
-> index cab43892ec2f..e58b2aa0da65 100644
-> --- a/security/landlock/fs.c
-> +++ b/security/landlock/fs.c
-> @@ -318,6 +318,8 @@ static struct landlock_object *get_inode_object(struct inode *const inode)
->  	LANDLOCK_ACCESS_FS_EXECUTE | \
->  	LANDLOCK_ACCESS_FS_WRITE_FILE | \
->  	LANDLOCK_ACCESS_FS_READ_FILE | \
-> +	LANDLOCK_ACCESS_FS_READ_METADATA | \
-> +	LANDLOCK_ACCESS_FS_WRITE_METADATA | \
->  	LANDLOCK_ACCESS_FS_TRUNCATE | \
->  	LANDLOCK_ACCESS_FS_IOCTL_DEV | \
->  	LANDLOCK_ACCESS_FS_RESOLVE_UNIX)
-> @@ -1676,6 +1678,81 @@ static int hook_path_truncate(const struct path *const path)
->  	return current_check_access_path(path, LANDLOCK_ACCESS_FS_TRUNCATE);
->  }
->  
-> +static int hook_inode_getattr(const struct path *const path)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_READ_METADATA);
-> +}
-> +
-> +static int hook_inode_setattr(const struct path *const path,
-> +			      struct iattr *const attr)
-> +{
-> +	/*
-> +	 * Explicit metadata changes (i.e. mode, ownership, and timestamps
-> +	 * set with utimes() and friends) require
-> +	 * LANDLOCK_ACCESS_FS_WRITE_METADATA.  Implicit timestamp updates
-> +	 * (e.g. ATTR_CTIME set for a write) and size changes (handled by
-> +	 * the truncate hooks) are not restricted.
+From: Chi Zhiling <chizhiling@kylinos.cn>
 
-Nit: It feels like this comment about implicit timestamp updates
-(especially the size change) should go in the top-level documentation
-for the WRITE_METADATA right?  setattr() can not result in a size
-change, after all, AFAIK?
+The VM_FAULT_RETRY returned by exfat_page_mkwrite() is ignored by the
+memory management subsystem. As a result, an mmap write may proceed beyond
+valid_size without advancing valid_size, which could expose stale data.
 
-Remark on the side, apart from truncation, normal writes into the file
-can of course also change its size ;-) and ATTR_ATIME and ATTR_MTIME
-also come to mind as implicit metadata changes.
+If we block waiting for the inode lock, we would introduce an
+mmap_lock -> inode lock locking order, which could potentially lead to
+deadlocks. Therefore, we need to avoid using the inode lock in this path.
 
-> +	 */
-> +	if (!(attr->ia_valid & (ATTR_MODE | ATTR_UID | ATTR_GID |
-> +				ATTR_TIMES_SET | ATTR_TOUCH)))
-> +		return 0;
-> +
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_WRITE_METADATA);
-> +}
-> +
-> +static int hook_inode_setxattr(const struct path *const path,
-> +			       const char *const name,
-> +			       const void *const value, const size_t size,
-> +			       const int flags)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_WRITE_METADATA);
-> +}
-> +
-> +static int hook_inode_getxattr(const struct path *const path,
-> +			       const char *const name)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_READ_METADATA);
-> +}
-> +
-> +static int hook_inode_listxattr(const struct path *const path)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_READ_METADATA);
-> +}
-> +
-> +static int hook_inode_removexattr(const struct path *const path,
-> +				  const char *const name)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_WRITE_METADATA);
-> +}
-> +
-> +static int hook_inode_set_acl(const struct path *const path,
-> +			      const char *const acl_name,
-> +			      struct posix_acl *const kacl)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_WRITE_METADATA);
-> +}
-> +
-> +static int hook_inode_get_acl(const struct path *const path,
-> +			      const char *const acl_name)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_READ_METADATA);
-> +}
-> +
-> +static int hook_inode_remove_acl(const struct path *const path,
-> +				 const char *const acl_name)
-> +{
-> +	return current_check_access_path(path,
-> +					LANDLOCK_ACCESS_FS_WRITE_METADATA);
-> +}
-> +
->  /**
->   * unmask_scoped_access - Remove access right bits in @masks in all layers
->   *                        where @client and @server have the same domain
-> @@ -2100,6 +2177,15 @@ static struct security_hook_list landlock_hooks[] __ro_after_init = {
->  	LSM_HOOK_INIT(path_unlink, hook_path_unlink),
->  	LSM_HOOK_INIT(path_rmdir, hook_path_rmdir),
->  	LSM_HOOK_INIT(path_truncate, hook_path_truncate),
-> +	LSM_HOOK_INIT(inode_getattr, hook_inode_getattr),
-> +	LSM_HOOK_INIT(inode_setattr, hook_inode_setattr),
-> +	LSM_HOOK_INIT(inode_setxattr, hook_inode_setxattr),
-> +	LSM_HOOK_INIT(inode_getxattr, hook_inode_getxattr),
-> +	LSM_HOOK_INIT(inode_listxattr, hook_inode_listxattr),
-> +	LSM_HOOK_INIT(inode_removexattr, hook_inode_removexattr),
-> +	LSM_HOOK_INIT(inode_set_acl, hook_inode_set_acl),
-> +	LSM_HOOK_INIT(inode_get_acl, hook_inode_get_acl),
-> +	LSM_HOOK_INIT(inode_remove_acl, hook_inode_remove_acl),
->  	LSM_HOOK_INIT(unix_find, hook_unix_find),
->  
->  	LSM_HOOK_INIT(file_alloc_security, hook_file_alloc_security),
-> -- 
-> 2.18.0.huawei.25
-> 
+Once the inode lock is removed, mmap writes may race with other operations
+that hold the inode lock. Therefore, we need to advance valid_size while
+holding the folio lock to prevent inconsistencies between the page cache
+and valid_size.
 
-On the Landlock side, the implementation looks quite straightforward,
-without having double checked for missing hooks now.  This commit is
-probably fine as soon as we have agreement on the LSM hook changes.
+DIO bypasses the page cache, so a DIO operation and an mmap write
+targeting the same range could potentially result in data loss.
 
-–Günther
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/file.c  | 54 ++++++++++++++++++++++++++----------------------
+ fs/exfat/iomap.c | 16 ++++++++++++++
+ fs/exfat/iomap.h |  1 +
+ 3 files changed, 46 insertions(+), 25 deletions(-)
+
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index b2940732812a..ad4bf1c5bb06 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -666,6 +666,7 @@ int exfat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
+ static int exfat_zero_new_range(struct inode *inode, loff_t start, loff_t end)
+ {
+ 	struct address_space *mapping = inode->i_mapping;
++	struct exfat_inode_info *ei = EXFAT_I(inode);
+ 	loff_t next, pos = start;
+ 	struct folio *folio;
+ 	pgoff_t index;
+@@ -683,12 +684,23 @@ static int exfat_zero_new_range(struct inode *inode, loff_t start, loff_t end)
+ 		folio_lock(folio);
+ 		if (folio->mapping == mapping) {
+ 			folio_mark_dirty(folio);
++			exfat_advance_valid_size(ei, next);
+ 			pos = next;
+ 		}
+ 		folio_unlock(folio);
+ 		folio_put(folio);
+ 	}
+ 
++	/*
++	 * Track zeroed_size by block, not page, because writeback stops
++	 * at i_size recording blocks wholly beyond it could skip a
++	 * later required zeroing.
++	 */
++	exfat_advance_zeroed_size(ei, round_up(end, i_blocksize(inode)));
++
++	if (pos != start)
++		mark_inode_dirty(inode);
++
+ 	return 0;
+ }
+ 
+@@ -698,6 +710,8 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
+ 	loff_t old_valid_size = exfat_get_valid_size(ei);
+ 	int ret = 0;
+ 
++	inode_dio_wait(inode);
++
+ 	if (old_valid_size < new_valid_size) {
+ 		/* Do not re-zero blocks already covered by zeroed_size. */
+ 		loff_t gap_start = max(old_valid_size, exfat_get_zeroed_size(ei));
+@@ -731,11 +745,6 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
+ 			filemap_invalidate_unlock(inode->i_mapping);
+ 			return ret;
+ 		}
+-
+-		exfat_set_valid_size(ei, new_valid_size);
+-		exfat_advance_zeroed_size(ei,
+-				round_up(new_valid_size, i_blocksize(inode)));
+-		mark_inode_dirty(inode);
+ 	}
+ 
+ 	return ret;
+@@ -751,7 +760,7 @@ static ssize_t exfat_fallback_buffered_write(struct kiocb *iocb,
+ 	iocb->ki_flags &= ~IOCB_DIRECT;
+ 
+ 	written = iomap_file_buffered_write(iocb, from, &exfat_write_iomap_ops,
+-			NULL, NULL);
++			&exfat_iomap_write_ops, NULL);
+ 	if (written < 0)
+ 		return written;
+ 
+@@ -837,10 +846,14 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 		ret = exfat_dio_write_iter(iocb, iter);
+ 	else
+ 		ret = iomap_file_buffered_write(iocb, iter,
+-				&exfat_write_iomap_ops, NULL, NULL);
++				&exfat_write_iomap_ops, &exfat_iomap_write_ops,
++				NULL);
+ 	if (ret < 0)
+ 		goto unlock;
+ 
++	if (iocb->ki_pos > valid_size)
++		mark_inode_dirty(inode);
++
+ 	inode_unlock(inode);
+ 
+ 	if (iocb->ki_pos > pos) {
+@@ -888,9 +901,10 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
+ 	vm_fault_t ret;
+ 	loff_t new_valid_size, mmap_valid_size, fault_page_start;
+ 
+-	if (!inode_trylock(inode))
+-		return VM_FAULT_RETRY;
++	sb_start_pagefault(inode->i_sb);
++	file_update_time(vmf->vma->vm_file);
+ 
++	filemap_invalidate_lock_shared(inode->i_mapping);
+ 	mmap_valid_size = ((loff_t)vmf->pgoff + 1) << PAGE_SHIFT;
+ 	fault_page_start = ((loff_t)vmf->pgoff) << PAGE_SHIFT;
+ 	new_valid_size = min(mmap_valid_size, i_size_read(inode));
+@@ -909,30 +923,20 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
+ 			err = exfat_zero_new_range(inode, zeroed_size,
+ 					fault_page_start);
+ 			if (err < 0) {
+-				inode_unlock(inode);
++				filemap_invalidate_unlock_shared(inode->i_mapping);
++				sb_end_pagefault(inode->i_sb);
+ 				return vmf_fs_error(err);
+ 			}
+ 		}
+-
+-		/*
+-		 * Track zeroed_size by block, not page, because writeback stops
+-		 * at i_size recording blocks wholly beyond it could skip a
+-		 * later required zeroing.
+-		 */
+-		exfat_advance_zeroed_size(ei,
+-				round_up(new_valid_size, i_blocksize(inode)));
+-		exfat_set_valid_size(ei, new_valid_size);
+-		mark_inode_dirty(inode);
+ 	}
+ 
+-	sb_start_pagefault(inode->i_sb);
+-	file_update_time(vmf->vma->vm_file);
+-
+-	filemap_invalidate_lock_shared(inode->i_mapping);
+ 	ret = iomap_page_mkwrite(vmf, &exfat_iomap_ops, NULL);
++	if (ret == VM_FAULT_LOCKED &&
++	    exfat_advance_valid_size(ei, new_valid_size))
++		mark_inode_dirty(inode);
++
+ 	filemap_invalidate_unlock_shared(inode->i_mapping);
+ 	sb_end_pagefault(inode->i_sb);
+-	inode_unlock(inode);
+ 
+ 	return ret;
+ }
+diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+index 291367e10c1e..4ed64c67070e 100644
+--- a/fs/exfat/iomap.c
++++ b/fs/exfat/iomap.c
+@@ -221,6 +221,22 @@ const struct iomap_ops exfat_write_iomap_ops = {
+ 	.iomap_next	= exfat_write_iomap_next,
+ };
+ 
++static void exfat_iomap_put_folio(struct inode *inode, loff_t pos,
++		unsigned int copied, struct folio *folio)
++{
++	struct exfat_inode_info *ei = EXFAT_I(inode);
++
++	if (copied)
++		exfat_advance_valid_size(ei, pos + copied);
++
++	folio_unlock(folio);
++	folio_put(folio);
++}
++
++const struct iomap_write_ops exfat_iomap_write_ops = {
++	.put_folio	= exfat_iomap_put_folio,
++};
++
+ /*
+  * exfat_writeback_range - Map folio during writeback
+  *
+diff --git a/fs/exfat/iomap.h b/fs/exfat/iomap.h
+index fd8a913f7794..39c93f8cd790 100644
+--- a/fs/exfat/iomap.h
++++ b/fs/exfat/iomap.h
+@@ -9,6 +9,7 @@
+ extern const struct iomap_dio_ops exfat_write_dio_ops;
+ extern const struct iomap_ops exfat_iomap_ops;
+ extern const struct iomap_ops exfat_write_iomap_ops;
++extern const struct iomap_write_ops exfat_iomap_write_ops;
+ extern const struct iomap_writeback_ops exfat_writeback_ops;
+ extern const struct iomap_read_ops exfat_iomap_bio_read_ops;
+ 
+-- 
+2.53.0
+
