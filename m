@@ -1,29 +1,30 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BB33370D6D
-	for <exfat@lists.linux.dev>; Sun, 27 Sep 2026 08:04:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0B45399CF0
+	for <exfat@lists.linux.dev>; Sun, 27 Sep 2026 08:04:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790496261; cv=none; b=POlMx7R4juGviUs7PeQuiZHU6GKH8lTjukzZVffWHLn0PmSh7HvJZy2UWXGTwwMe3gOnw5tbmy78Pez3NaOycTwVfyv4PAilA1+N+r1Jr2mFHRCUN3SJCGZPFhrjkSVEdcv2MZ0mwcOt71wIwH50FYE9brGAAY8lD1/fuNC01jQ=
+	t=1790496263; cv=none; b=ay1pQvj46Y9axMDexF6DoUzX0b4Hv5okI2qYMry1I87dX4wqxhzpuUeeP/1q+Vh5Ie+QlcFE2dRoqur8VfXYwihj+CYXUU6EhiKIqYILT2AT5zD2eof5Zr2nbvgB+mzkciFmgcgFpPCnLhz8LnVeH4Mwrks957ry4qzxOHqGkG4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790496261; c=relaxed/simple;
-	bh=SbtIRR21/c11KTsXvSDZlPJ5WjrW7xSLoOk2lbW4Ljw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ZzO8Nqcoyf5P69k9fjnuO6zyyd4iDoGN+KF9wYxydAO1I3IM5eYFExGf8Jeo0o7zBzvkIqxU+WsBTu5N0DA5+8oQtIhdQlLiZD/rb0tJVs8rJQM7Sdl6CpEgeBSdtk/nYkuACZRe8gEPRxV882+g3GNXbMr5eM+DgZU3qfo4TKQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=T9ma12Ce; arc=none smtp.client-ip=220.197.31.2
+	s=arc-20240116; t=1790496263; c=relaxed/simple;
+	bh=v3GleeYe1rddJF6BGLIJVQY7ekgO93naMaMI8Z5Tdus=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=lxj9C7jR2h1LMPGHANQrd4oANnivLuaZGlDl5KpY0Ab3fZEzK7nJ7IRZukTi7XSoRK4nDjaxCc95MscFnhVUMTyBn5s/vtAZUwekbYgCyrtH6DEk8/Wg+i4iZlayOFLL2Z+5njdIrolwhJ/D6cWd2i/fqQAZpWKcA4nEXG7W1mI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=lF9HEhsd; arc=none smtp.client-ip=117.135.210.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="T9ma12Ce"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="lF9HEhsd"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=h+
-	jBEtt+Uycrx/t7AgF6SWV6Qx/Q9OzXsZBdC6utnHw=; b=T9ma12Cehe5SrcP3Pa
-	qoAtLkGqsIkx3BHO56JAlNxO280Hr2MxEb9fBe3e46Tcd8pEXKip35KB5BMZDX2j
-	HRAK23caGo+MohaNd8MflOOSRVUFHC9OqE2xctqxbbclPmdYwZjWsUZMCAUTuH7l
-	UlsnsP3QqfQ+iwn1DtjLEAPZQ=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=9T
+	Sl8VVYUNaAg7ltY34P28jHY2YR8qDkzjpgdOr5h2M=; b=lF9HEhsd1HDUc9iUTO
+	ezcZPmn86QMnJ0mwZf69mIDENVDVrsVNLyqVkP84ZSy/S+ofSK5fsEp0Kiw2AjvS
+	WGX2PB43bC6/TIMMJ2Nd/MWZH/wj4Ji+bQPCaj4YAcNqfI2IJa2QkKsdNnZXui7p
+	bIOhtg+wzryTcsR/6g4lQreKc=
 Received: from czl-pc (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgBXrkXNzbhqECuNBg--.31472S2;
-	Sun, 27 Sep 2026 16:03:26 +0800 (CST)
+	by gzsmtp4 (Coremail) with SMTP id PygvCgBXrkXNzbhqECuNBg--.31472S4;
+	Sun, 27 Sep 2026 16:03:27 +0800 (CST)
 From: Chi Zhiling <chizhiling@163.com>
 To: exfat@lists.linux.dev,
 	linux-kernel@vger.kernel.org
@@ -35,10 +36,12 @@ Cc: Yuezhang.Mo@sony.com,
 	liubaolin12138@163.com,
 	sj1557.seo@samsung.com,
 	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH v1 0/5] exfat: fix valid_size handling and locking
-Date: Sun, 27 Sep 2026 16:02:59 +0800
-Message-ID: <20260927080305.831641-1-chizhiling@163.com>
+Subject: [PATCH v1 2/5] exfat: dirty all new pages when extending valid_size
+Date: Sun, 27 Sep 2026 16:03:01 +0800
+Message-ID: <20260927080305.831641-3-chizhiling@163.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260927080305.831641-1-chizhiling@163.com>
+References: <20260927080305.831641-1-chizhiling@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -46,51 +49,137 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgBXrkXNzbhqECuNBg--.31472S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7uF45JrWUAF4xZr15AFyxXwb_yoW8Aw4fpa
-	9Ik3W3GrWjy34fur1fZ3W8Xa45uw1fWr13Gr9xt348ArnIkr1Fvr1UKayI9rWUt3s7tw12
-	vw1qqrW8G3ZrGr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jjQ6JUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9w9vDWq4zc+H4gAA3v
+X-CM-TRANSID:PygvCgBXrkXNzbhqECuNBg--.31472S4
+X-Coremail-Antispam: 1Uf129KBjvJXoWxur43CF47KF18Cw1fCr15Jwb_yoW5try5pr
+	W3Kr9xGrWDX34DuF1fXr18Zr1F93s3Wa18AFyxXwn3ZF98AryUKr17K3W0vFy5trW7AFy0
+	gF1Yyry8uF1UXFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j2xRhUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC+A9vDWq4zc+LpgAA3o
 
 From: Chi Zhiling <chizhiling@kylinos.cn>
 
-valid_size marks the on-disk up-to-date region of an exFAT file. It is
-advanced from the write path, from read/zeroing completion, and via
-truncate, while it is read without i_rwsem from ->iomap_begin and from bio
-completion context. This series fixes several races and stale-data windows
-that follow from that split ownership.
+In the current code, exfat_zero_new_range() does not mark non-uptodate
+pages as dirty, which may cause some blocks within a page to not be
+written back.
 
-Patches 1-2 are self-contained fixes: an append write may be moved to EOF
-by generic_write_checks(), so valid_size must be advanced using the
-recalculated position; and exfat_zero_new_range() must mark non-uptodate
-pages dirty so the whole page is written back.
+This commit no longer checks each block in a non-uptodate page
+individually. Instead, it reads the entire page back into the cache and
+then writes it back as a whole. This allows concurrent writes and zeroing
+operations to be synchronized using the folio lock.
 
-Patches 3-4 are prerequisites for patch 5: truncate now holds the
-invalidate lock so it is mutually exclusive with mmap writes, and
-valid_size/zeroed_size become atomic so they can be read safely outside
-i_rwsem. Patch 5 then takes exfat_page_mkwrite() out from under i_rwsem,
-since blocking on the inode lock under mmap_lock could deadlock and its
-VM_FAULT_RETRY result is not honored, and advances valid_size under the
-folio lock to keep the page cache and valid_size consistent.
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/file.c | 89 ++++++++-----------------------------------------
+ 1 file changed, 13 insertions(+), 76 deletions(-)
 
-Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339dde@163.com/T/#t
-
-Chi Zhiling (5):
-  exfat: advance valid_size to EOF for append writes
-  exfat: dirty all new pages when extending valid_size
-  exfat: hold the invalidate lock while truncating
-  exfat: make valid_size and zeroed_size atomic
-  exfat: use folio lock to protect valid_size
-
- fs/exfat/exfat_fs.h |  60 ++++++++++++++-
- fs/exfat/file.c     | 183 ++++++++++++++++----------------------------
- fs/exfat/inode.c    |  16 ++--
- fs/exfat/iomap.c    |  36 ++++++---
- fs/exfat/iomap.h    |   1 +
- fs/exfat/namei.c    |   4 +-
- 6 files changed, 160 insertions(+), 140 deletions(-)
-
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index b30aec858da6..e7225f548189 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -662,90 +662,27 @@ int exfat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
+ static int exfat_zero_new_range(struct inode *inode, loff_t start, loff_t end)
+ {
+ 	struct address_space *mapping = inode->i_mapping;
+-	unsigned int blocksize = i_blocksize(inode);
+-	loff_t pos = start;
+-	int err;
++	loff_t next, pos = start;
++	struct folio *folio;
++	pgoff_t index;
+ 
+ 	while (pos < end) {
+-		loff_t next = min_t(loff_t,
+-				round_down(pos, PAGE_SIZE) + PAGE_SIZE, end);
+-		struct folio *folio;
+-		loff_t bpos;
+-
+-		folio = filemap_get_folio(mapping, pos >> PAGE_SHIFT);
+-		if (IS_ERR(folio)) {
+-			err = iomap_zero_range(inode, pos, next - pos, NULL,
+-					       &exfat_iomap_ops, NULL, NULL);
+-			if (err < 0)
+-				return err;
+-			pos = next;
+-			continue;
+-		}
++		index = pos >> PAGE_SHIFT;
++		next = min_t(loff_t, (index + 1) << PAGE_SHIFT, end);
+ 
+-		if (folio_test_uptodate(folio)) {
+-			folio_lock(folio);
+-			if (folio->mapping == mapping)
+-				folio_mark_dirty(folio);
+-			folio_unlock(folio);
+-			folio_put(folio);
+-			pos = next;
+-			continue;
+-		}
++		balance_dirty_pages_ratelimited(mapping);
+ 
+-		/*
+-		 * Zero not-uptodate block runs. iomap_zero_range() requires an
+-		 * unlocked folio, so recheck ->mapping after each call.
+-		 */
+-		folio_lock(folio);
+-		bpos = pos;
+-		while (bpos < next) {
+-			loff_t rstart, rend;
+-
+-			if (folio->mapping != mapping) {
+-				folio_unlock(folio);
+-				err = iomap_zero_range(inode, bpos, next - bpos,
+-						NULL, &exfat_iomap_ops, NULL, NULL);
+-				if (err < 0) {
+-					folio_put(folio);
+-					return err;
+-				}
+-				folio_lock(folio);
+-				break;
+-			}
+-
+-			if (iomap_is_partially_uptodate(folio,
+-					offset_in_folio(folio, bpos), blocksize)) {
+-				bpos += blocksize;
+-				continue;
+-			}
++		folio = read_mapping_folio(mapping, index, NULL);
++		if (IS_ERR(folio))
++			return PTR_ERR(folio);
+ 
+-			rstart = bpos;
+-			rend = min_t(loff_t, bpos + blocksize, next);
+-			while (rend < next &&
+-			       !iomap_is_partially_uptodate(folio,
+-					offset_in_folio(folio, rend), blocksize))
+-				rend = min_t(loff_t, rend + blocksize, next);
+-
+-			folio_unlock(folio);
+-			err = iomap_zero_range(inode, rstart, rend - rstart,
+-					NULL, &exfat_iomap_ops, NULL, NULL);
+-			if (err < 0) {
+-				folio_put(folio);
+-				return err;
+-			}
+-			folio_lock(folio);
+-			bpos = rend;
+-		}
+-
+-		/*
+-		 * Dirty only a fully uptodate folio. Dirtying a partial folio could
+-		 * write uninitialised cache contents over valid on-disk blocks.
+-		 */
+-		if (folio->mapping == mapping && folio_test_uptodate(folio))
++		folio_lock(folio);
++		if (folio->mapping == mapping) {
+ 			folio_mark_dirty(folio);
++			pos = next;
++		}
+ 		folio_unlock(folio);
+ 		folio_put(folio);
+-		pos = next;
+ 	}
+ 
+ 	return 0;
 -- 
 2.53.0
 
