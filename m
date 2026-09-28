@@ -1,99 +1,91 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50A9D35675E
-	for <exfat@lists.linux.dev>; Mon, 28 Sep 2026 05:21:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BE98370AE0;
+	Mon, 28 Sep 2026 06:19:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.226
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790572893; cv=none; b=UgG5fV12rhSffeJw/001941D8Qux9EbEK4LX1mx1Titt9g5Caj8czYEGjswm9j0rluejWhbExLu9qmzGyzQPn5u82YaSWgwmVg1Yr2RfsnY7ok7RLNuHQuKB7lw+Ljnw4w6qNJHBYEVeLbJvr11a6r0LXVFR4aj9QAEbTgmb+Bo=
+	t=1790576360; cv=none; b=ExPKGgblfPlM4BNGTd7meJIFp9cRXkmcaANMYEZD0JlVeTrwratVZS4+krE9v0AuTqbZeBwd7kWBK5zR8oqRz7PRID2qtuAQUk4uzugErmilS8tM7xFoMRjXvMjLh/NrD2Jt1ovtYqCfzsHv/sLbj0iqIO0Gv4S+cp+CZf59TJA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790572893; c=relaxed/simple;
-	bh=kfwsWCeBCc6CpVXq49BlyyFOotTaRhwbGUrliVBhwlo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=oy3RmTUj6Lk5oaMr3Pv8NLW1jELlwJuhznVJ6Ex32wQ8kYicENCeorfi2vYittjyQT6FvltOylI4Vh8bR1hGt32DnIeEilnZiC4h/ACFFyBMicACRoZ33li3uu77X5hX8v+JJ9/Xj1sybUZWpOriDRAjLxRdYt/U4LDkUHRnAe8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fr/1K0GT; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790576360; c=relaxed/simple;
+	bh=4fL1geGwR/vTw2pP+aud257yMQC2kIMBAThqmN3v7XE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=tcgQAugebzns6PvivHglY1Q3BAeWg822Q0LhpPQKYLye9TB7Ue9YbBDZUBLvwiEBIZypGvU4J7hhHMHRyZ69eBpvnxxQsb9B/d3V2V0Tl3s6dml8c8gxzb+KEQsqk9YvARhl0KkEFXuDZF6qLJ3mCyT/RAZiqynLKaopWHeGlmw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=XvJLuFVF; arc=none smtp.client-ip=113.46.200.226
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fr/1K0GT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03DFA1F000FF
-	for <exfat@lists.linux.dev>; Mon, 28 Sep 2026 05:21:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790572892;
-	bh=lv49VszNXO1u4Ah+gG4wn7WA6kBQ6WLyLdJDnQRaxUo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=fr/1K0GTFe1uxTyi2fx0f/EYT7zxQ4nli5d/xD/rES7oyuVsAMFX+8Qb2ypV78Qxw
-	 qGGymosuh9ibFFCnu68kO4gJqZYBII5aBJgzPFwgZumDuLypvhqKf9IhStQWOJ/zFK
-	 UwtUh33jHvd/KnHkC84mLmbbphkB0KEkqTBN+kzzHweux2y95M99oF/XNyz4Ok3ap0
-	 jnQ2xFYNSLWiKTpFEEWehaBbY8MJj7WumGLPFnygNuGPYFP1iAcfTmd1ocPeXh/P2R
-	 R0LTNb1dDZbvynE/UAAkBOjuO+hBisIw4XYi+qyJ9ovNUsjEUzKcD1fz7pemoYQOxD
-	 DRKoQ3GxDNxsg==
-Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2dbbf409b8so179767866b.3
-        for <exfat@lists.linux.dev>; Sun, 27 Sep 2026 22:21:31 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBy+1vaCwHgOiKIi75iIy6aOI73qqsu7fs5mLxTXwKL7OJXEYtermG112BTZohJs/UvGG+Xqwg==@lists.linux.dev
-X-Gm-Message-State: AFq9FYIZ/kfdu4jT+Wyng/YtRQ+mtiTeFw/StFD75351uI9WLcznGI4i
-	k837M37BjE8vGbn1sQfFMwHpxCN6hgEbK4JqX3X/F3m/rxonNgtyfYuTpYaNLfCIRhhOQs2kV5+
-	MDeVJxSl7nZQU2Fl+5T3y5Q/HwRy0SBE=
-X-Received: by 2002:a17:907:6e88:b0:c2a:b1cc:158d with SMTP id
- a640c23a62f3a-c2ac24d3eb6mr1066458966b.32.1790572890660; Sun, 27 Sep 2026
- 22:21:30 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="XvJLuFVF"
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=hQEbXTR0WO6OLctre3xEpANMZkBOustPdfsjT/vetaI=;
+	b=XvJLuFVFKIsF5clGxrSoqwAGVY+g3ugM68udF3ON7tQ/lQLwaMuoYIolmm9/YnF1e05w8Iw8K
+	PDQnaD7jO+WxUfz/naLxHMBEuQrIGqHIYfxDCR1YoRyqyy6HAML1dNc1Gcw3j4CInQXfpbQm9P0
+	yW8zOpXooIbBwC6YE0IqSuo=
+Received: from mail.maildlp.com (unknown [172.19.163.200])
+	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4htW6Y0jfbzKm5t;
+	Mon, 28 Sep 2026 14:07:01 +0800 (CST)
+Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
+	by mail.maildlp.com (Postfix) with ESMTPS id CAABB40563;
+	Mon, 28 Sep 2026 14:19:12 +0800 (CST)
+Received: from [10.67.109.91] (10.67.109.91) by whupemk100010.china.huawei.com
+ (7.152.184.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 28 Sep
+ 2026 14:19:06 +0800
+Message-ID: <7161a5f0-0176-45c3-9e78-d90e39cf4288@huawei.com>
+Date: Mon, 28 Sep 2026 14:19:05 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260923123300.1626723-1-anmuxixixi@gmail.com> <20260923123300.1626723-4-anmuxixixi@gmail.com>
-In-Reply-To: <20260923123300.1626723-4-anmuxixixi@gmail.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Mon, 28 Sep 2026 14:21:17 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-mfrPQvnXXE-SOmwY-Vr1mZgi1B=qoFnO0sfFYdzqqiw@mail.gmail.com>
-X-Gm-Features: AclHuK87QM7Bjcs8cJ0sbqrQSsIPDE5dPT6ielVvjeU9GS7lSEs89ZLqaYnJ41Q
-Message-ID: <CAKYAXd-mfrPQvnXXE-SOmwY-Vr1mZgi1B=qoFnO0sfFYdzqqiw@mail.gmail.com>
-Subject: Re: [PATCH v6 3/3] exfat: reclaim name filters under memory pressure
-To: Yang Wen <anmuxixixi@gmail.com>
-Cc: sj1557.seo@samsung.com, chizhiling@163.com, yuezhang.mo@sony.com, 
-	exfat@lists.linux.dev, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC -next 09/12] landlock: Implement metadata access hooks
+To: =?UTF-8?Q?G=C3=BCnther_Noack?= <gnoack3000@gmail.com>
+CC: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
+	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <rdunlap@infradead.org>,
+	<gregkh@linuxfoundation.org>, <rafael@kernel.org>, <dakr@kernel.org>,
+	<dlemoal@kernel.org>, <hch@lst.de>, <axboe@kernel.dk>,
+	<viro@zeniv.linux.org.uk>, <brauner@kernel.org>, <jack@suse.cz>,
+	<dhowells@redhat.com>, <code@tyhicks.com>, <linkinjeon@kernel.org>,
+	<sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
+	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
+	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
+	<tom@talpey.com>, <miklos@szeredi.hu>, <amir73il@gmail.com>,
+	<senozhatsky@chromium.org>, <chenxiaosong@chenxiaosong.com>,
+	<zohar@linux.ibm.com>, <roberto.sassu@huawei.com>,
+	<dmitry.kasatkin@gmail.com>, <eric.snowberg@oracle.com>,
+	<stephen.smalley.work@gmail.com>, <omosnacek@gmail.com>,
+	<casey@schaufler-ca.com>, <nanx95726@gmail.com>, <djwong@kernel.org>,
+	<daniel@iogearbox.net>, <linux-security-module@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<driver-core@lists.linux.dev>, <linux-block@vger.kernel.org>,
+	<linux-fsdevel@vger.kernel.org>, <netfs@lists.linux.dev>,
+	<ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
+	<linux-nfs@vger.kernel.org>, <linux-unionfs@vger.kernel.org>,
+	<linux-cifs@vger.kernel.org>, <linux-integrity@vger.kernel.org>,
+	<selinux@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
+	<xiujianfeng@huawei.com>, <lujialin4@huawei.com>
+References: <20260924104831.1081137-1-caixinchen1@huawei.com>
+ <20260924104831.1081137-10-caixinchen1@huawei.com>
+ <20260926.a96402fcbd4b@gnoack.org>
+Content-Language: en-US
+From: Cai Xinchen <caixinchen1@huawei.com>
+In-Reply-To: <20260926.a96402fcbd4b@gnoack.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+ whupemk100010.china.huawei.com (7.152.184.41)
 
-> +static unsigned long
-> +exfat_name_filter_scan_objects(struct shrinker *shrinker,
-> +                              struct shrink_control *sc)
-> +{
-> +       struct exfat_sb_info *sbi = shrinker->private_data;
-> +       unsigned long freed = 0;
-> +
-> +       /* Avoid reclaim recursion from a GFP_NOFS allocation under s_lock. */
-> +       if (!mutex_trylock(&sbi->s_lock)) {
-> +               sc->nr_scanned = 0;
-> +               return SHRINK_STOP;
-> +       }
-> +
-> +       while (freed < sc->nr_to_scan) {
-> +               struct exfat_inode_info *ei;
-> +               unsigned long *filter;
-> +
-> +               spin_lock(&sbi->name_filter_lock);
-> +               if (list_empty(&sbi->name_filter_lru)) {
-> +                       spin_unlock(&sbi->name_filter_lock);
-> +                       break;
-> +               }
-> +
-> +               ei = list_first_entry(&sbi->name_filter_lru,
-> +                                     struct exfat_inode_info,
-> +                                     name_filter_lru);
-> +               filter = exfat_name_filter_detach_locked(sbi, ei);
-> +               spin_unlock(&sbi->name_filter_lock);
-> +
-> +               kvfree(filter);
-> +               freed++;
-> +               cond_resched();
-> +       }
-> +
-> +       mutex_unlock(&sbi->s_lock);
-> +       sc->nr_scanned = freed;
-When the LRU becomes empty before nr_to_scan is satisfied, this
-reports nr_scanned == 0. do_shrink_slab() subtracts only nr_scanned
-from total_scan and retries while total_scan >= freeable. For example,
-with one filter and reclaim priority 0, the first scan frees the
-filter, but the next scan makes no progress and the loop can run
-forever. Could the empty-list path return SHRINK_STOP or otherwise
-ensure the remaining scan budget is consumed?
+You are right.
+
+I will change in the next version
+
+On 9/26/2026 4:38 PM, Günther Noack wrote:
+> Nit: It feels like this comment about implicit timestamp updates
+> (especially the size change) should go in the top-level documentation
+> for the WRITE_METADATA right?  setattr() can not result in a size
+> change, after all, AFAIK?
