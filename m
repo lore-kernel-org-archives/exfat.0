@@ -1,116 +1,106 @@
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 236F646EF6A;
-	Mon, 28 Sep 2026 08:44:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EB433F7892;
+	Mon, 28 Sep 2026 08:54:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790585096; cv=none; b=cNA6/xLPW9ioG5KbsFcNMOkFKQxD/6BIb1iJzKOX8GU0ztWKA9r1V8M9Foc1+bA80Tmi/0JNx7BGa7Cs9GzPgPzn7cpJJpezGF4h17Yhwu4wJt6S4iuz5f6XWlx0KTYsvp952DtNe/MoWA6bvr1ccIdYfjiMbKn+gN24XHPvSnU=
+	t=1790585669; cv=none; b=CtTzF7YE0c6cRvIF8kqhvB2vkFblJUIcYxA8CeX1rEud0i+v9YeTLXWDwn4mxbJbNzNXmmVCaoCnh0UOQShYdxAmAgPe66gW9sedhpxwaAST/pSnPAbP/S81bSN0U+A6I4qX/nmUh7WWw63JSvwhc3DQBGMBzE23cuj9ZRZaAak=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790585096; c=relaxed/simple;
-	bh=iDGp7P3BEvSWs1L7iNJIWjF45NYDB+xMs1LHa1Er8uQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=pfVyHmoq/Q2gQ9ebu3eQEWsXTWUPT4NHNHmPcFjQ+8UGE6UQNtsJfEr6vEGPjXVoCQA9YwGRQqHNObSz9szPhIhfNHxaXKrgFh8SO7NBcG+M39TySQxTEXDQ2VVV5Ep8S+kp14dgFxn4MLU5vPNGlv4KjAcCQ6+WDhfWt0ZEqHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=Il61np93; arc=none smtp.client-ip=113.46.200.217
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	s=arc-20240116; t=1790585669; c=relaxed/simple;
+	bh=Gu8VLPRTCftgq6QZnrODe2DmnF3NE5o5dYzYXSoNsYY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=nmBXslZVEVp7W/auI/keKednPLbIHZXbp7FfgKUWHb7rbUehr8uImbbEqf0fJGnz/bqe30iqBBHYmxDqhqykkMM8rE3U7hVef3b2lGcmt3T9JTGaHCtI74MEfkoMnoVxYMlPngMEFvpHecJPXSIpM7MquOEL97BlbSbrFSD83+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=CjgxTm+6; arc=none smtp.client-ip=117.135.210.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="Il61np93"
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=iDGp7P3BEvSWs1L7iNJIWjF45NYDB+xMs1LHa1Er8uQ=;
-	b=Il61np93Mzpfh1Yw6ZTaudK8+nCQ4+DjNBs7VntEmE0tZXcn7sPEF3AumdIjHPSk2gTjz273a
-	wBOH1W7k/4xR4wPV7l62M9UPquFd63zSevJQns1zbf6BGnLBtZpCHWpqVhapwho/G5mndn+Ez1O
-	jCI6EYJd4AynyN7whX7Q3xA=
-Received: from mail.maildlp.com (unknown [172.19.162.197])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4htZM82gK2zcb3G;
-	Mon, 28 Sep 2026 16:33:08 +0800 (CST)
-Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
-	by mail.maildlp.com (Postfix) with ESMTPS id A9A0740579;
-	Mon, 28 Sep 2026 16:44:41 +0800 (CST)
-Received: from [10.67.109.91] (10.67.109.91) by whupemk100010.china.huawei.com
- (7.152.184.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 28 Sep
- 2026 16:44:37 +0800
-Message-ID: <f697efa0-81c9-4ace-b9cc-d672b98dfc9d@huawei.com>
-Date: Mon, 28 Sep 2026 16:44:35 +0800
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="CjgxTm+6"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=C0
+	xN9+Mm1EwHMBNzwLSmbI7LvmBH8XFz7NRvmKmiqKM=; b=CjgxTm+6/BQZfxrJTm
+	Kbf1UBoWMa3PZqyjCz02ppbP51TsYLj+30LYyfTeCZ7Jk5hupWkW+S7cEnuTksqW
+	e1Q4y9h6ngec+wpG9dj72HyXl7a1x1CXtsZoiZiRQmOrzC3CgimojYp8iSZlejc5
+	xz7gwmjHPPxmCXS/3vK0pROQo=
+Received: from pc.localdomain (unknown [])
+	by gzga-smtp-mtada-g0-0 (Coremail) with SMTP id _____wD3t582K7pqm5HnBA--.52401S2;
+	Mon, 28 Sep 2026 16:54:15 +0800 (CST)
+From: Jiale Yao <yaojiale02@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Jan Kara <jack@suse.com>,
+	Hyunchul Lee <hyc.lee@gmail.com>,
+	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-ext4@vger.kernel.org,
+	ntfs@lists.linux.dev
+Cc: Jiale Yao <yaojiale02@163.com>
+Subject: [PATCH v3 0/3] fs: drain in-flight DIO before buffered write fallback
+Date: Mon, 28 Sep 2026 16:54:09 +0800
+Message-Id: <20260928085412.2221055-1-yaojiale02@163.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC -next 03/12] fs: pass struct path to xattr helpers
-To: Amir Goldstein <amir73il@gmail.com>
-CC: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
-	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>, <rdunlap@infradead.org>,
-	<gregkh@linuxfoundation.org>, <rafael@kernel.org>, <dakr@kernel.org>,
-	<dlemoal@kernel.org>, <hch@lst.de>, <axboe@kernel.dk>,
-	<viro@zeniv.linux.org.uk>, <brauner@kernel.org>, <jack@suse.cz>,
-	<dhowells@redhat.com>, <code@tyhicks.com>, <linkinjeon@kernel.org>,
-	<sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
-	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
-	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
-	<tom@talpey.com>, <miklos@szeredi.hu>, <senozhatsky@chromium.org>,
-	<chenxiaosong@chenxiaosong.com>, <zohar@linux.ibm.com>,
-	<roberto.sassu@huawei.com>, <dmitry.kasatkin@gmail.com>,
-	<eric.snowberg@oracle.com>, <stephen.smalley.work@gmail.com>,
-	<omosnacek@gmail.com>, <casey@schaufler-ca.com>, <nanx95726@gmail.com>,
-	<djwong@kernel.org>, <daniel@iogearbox.net>,
-	<linux-security-module@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <driver-core@lists.linux.dev>,
-	<linux-block@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
-	<netfs@lists.linux.dev>, <ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
-	<linux-nfs@vger.kernel.org>, <linux-unionfs@vger.kernel.org>,
-	<linux-cifs@vger.kernel.org>, <linux-integrity@vger.kernel.org>,
-	<selinux@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-	<xiujianfeng@huawei.com>, <lujialin4@huawei.com>
-References: <20260924104831.1081137-1-caixinchen1@huawei.com>
- <20260924104831.1081137-4-caixinchen1@huawei.com>
- <CAOQ4uxhMhcxq5+crz84f8xj+Wi1bHhNqa_TecP-RvipheBR+ug@mail.gmail.com>
-Content-Language: en-US
-From: Cai Xinchen <caixinchen1@huawei.com>
-In-Reply-To: <CAOQ4uxhMhcxq5+crz84f8xj+Wi1bHhNqa_TecP-RvipheBR+ug@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
- whupemk100010.china.huawei.com (7.152.184.41)
+X-CM-TRANSID:_____wD3t582K7pqm5HnBA--.52401S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7AF1DtryfXFy7ZFykGF4rXwb_yoW8uF4Upr
+	WYga15trnFyrZ7CrZ7ua17JF1S9ws3J3y3urWag34Uuwn5Gr4DXF48tr1jqr43Aa1fGw12
+	vw40vas7uFyUC3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0piL0ePUUUUU=
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbC7xgiXGq6KzgicAAA3Y
 
-Thank you for review
+An asynchronous direct write can remain in flight after its submitting
+thread releases the inode lock.  If a buffered write dirties page cache
+in the meantime, the direct write can complete post-I/O invalidation after
+the pages become dirty.  The invalidation then reports a page cache
+invalidation failure and records -EIO in the mapping error sequence.  A
+later fsync() returns -EIO.
 
-I will switched to ovl_path_real in the next version.
+Commit 15cdefd0c0522f9d5e12d947fa04f4c11649b699 ("ext4: drain
+in-flight DIO before buffered write fallback") fixed this race in ext4.
+The same ordering is missing from the buffered fallback paths in ext2,
+NTFS, and exFAT, and from the regular buffered-write path in exFAT.
 
-ovl_creds is a prepare_creds() clone of the mounter, so unless
-the mounter itself was sandboxed, the clone carries no Landlock
-domain and every check short-circuits. The new rights are also
-enforced at the security_inode_*xattr() call sites in fs/xattr.c,
-which run with the user-visible overlay path.
+This series adds inode_dio_wait() before these paths dirty page cache.
+Each patch fixes one filesystem and remains independently buildable.  The
+NTFS patch also avoids entering the blocking fallback for IOCB_NOWAIT
+requests: it returns -EAGAIN if DIO made no progress and preserves a
+positive result after a partial direct write.
 
-The exception is an unprivileged overlay mount by an already
-sandboxed mounter: the domain is inherited into
-creator_cred through the cred_prepare hook, so the internal
-real-path calls *do* get checked there.  For this series that
-means:
+A reproducer using concurrent AIO direct writes and buffered fallback
+triggered the following warning on all three filesystems and made a
+subsequent fsync() return -EIO:
 
-- ovl_xattr_get/set/ovl_listxattr() forwarding and the
-   ovl_setattr() -> ovl_do_notify_change() forwarding would be
-   checked against the upper/lower paths;
-- copy-up would newly require the metadata rights on the backing
-   directories too (ovl_copy_xattr() calls the security-checking
-   vfs_listxattr()/vfs_setxattr());
-- stat() is unaffected: ovl_getattr() goes through the _nosec
-   variant.
+  Page cache invalidation failure on direct I/O.  Possible data corruption
+  due to collision with buffered I/O!
 
-This is not Landlock-specific: every LSM
-that keeps its state in the cred blob inherits the mounter's
-context into creator_cred through cred_prepare.
+Changes in v3:
+- Add inode_dio_wait() to both the regular and fallback buffered-write
+  paths in exFAT, and move the explanatory comment to
+  exfat_file_write_iter(), as requested by Chi Zhiling.
+- Add Baolin Liu's Reviewed-by tag to the NTFS patch.
 
-On 9/24/2026 7:12 PM, Amir Goldstein wrote:
-> that's ovl_path_real()
->
-> I have no technical issue with the ovl patch bits in this series.
-> Anyway, I guess landlock is not going to enforce anything on the
-> private mnt with ovl_creds anyway?
+Changes in v2:
+- Handle IOCB_NOWAIT before the potentially blocking NTFS fallback,
+  returning -EAGAIN before any bytes are written and preserving a positive
+  short-write result otherwise, as requested in review.
+
+Jiale Yao (3):
+  ext2: drain in-flight DIO before buffered write fallback
+  ntfs: drain in-flight DIO before buffered write fallback
+  exfat: drain in-flight DIO before buffered writes
+
+ fs/exfat/file.c | 12 ++++++++++--
+ fs/ext2/file.c  |  7 +++++++
+ fs/ntfs/file.c  | 13 +++++++++++++
+ 3 files changed, 30 insertions(+), 2 deletions(-)
+
+-- 
+2.34.1
+
