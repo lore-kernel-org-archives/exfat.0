@@ -1,129 +1,97 @@
-Received: from jpms-ob02-os7.noc.sony.co.jp (jpms-ob02-os7.noc.sony.co.jp [211.125.139.72])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A672F4B4867
-	for <exfat@lists.linux.dev>; Wed, 30 Sep 2026 10:54:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.125.139.72
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51BB0356767
+	for <exfat@lists.linux.dev>; Thu,  1 Oct 2026 02:53:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790765700; cv=none; b=WpAVMfZnPAm960nNuAe+aplk9YqJbv1QWxF3hfUOgmLJwKzKCKvdQojYCX4QFL9tQZMxjjnXyMnYwael3Z8ZFh5hu0WvwVasjWUKnzAZd4wEypjSefYGNw+Gpf2vTt0jNk45W3vbS59cNL2xh1q7bcThCmvIloMSFhpMq7uCZKk=
+	t=1790823196; cv=none; b=NWmeLkUW6ztj9eCLiC63coL/rw3ZReB26CAJviCIciJpNPwQp8Qnq7/M3xE+mVGY7HOqmByDnRUke8qluxWKzquHXKdnz9VgacRiiFtVVl0UMuVHyqsdsGZ3Q+uYeeqjp2au5+RySuTzuum1XtWWNQ6B6JkdCuFalV4v0qS0bLU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790765700; c=relaxed/simple;
-	bh=M9f6BL3BIKwS06qEWRvsUeVOddfXPpWyNZ2LQfUpEks=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=apr+APtwZKJ7giBXsB/q+JtvdXXPzlKR7gY00evHcNG/gzswLzrSCMRmmjED6z6R9688Ol1wVKpW6CuZ8rbhYCBIPz5rQ9tGhjwDyympnej16w+bZh8XkzVZtZofZ5v9rjOXNNdJIdUONETOdugWysK31a+Kgc81VawwPnYByi0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=fail smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=sKBdYQ1c; arc=none smtp.client-ip=211.125.139.72
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=sony.com
+	s=arc-20240116; t=1790823196; c=relaxed/simple;
+	bh=dqPqmJAL6inzWOfzfxfCyeBecNaPTgS46cs6JJ87kuQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=UpH6DNzziVOa4MY6hHOH+KeRfVyH3/y2fSEcOgunT2e5YJfAIR+U32hYtD/GMB7899/9dsiLLdXckn6DadfXQlLuLIHRytdnIffYBjgUMu2gagRonPhWVolx65kQqorzc9apX0ia2gswruI0uKD3j10IEGe6KCmwuyf63VE8hmE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=gJaqdWal; arc=none smtp.client-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="sKBdYQ1c"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=sony.com; s=s1jp; t=1790765693; x=1822301693;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=pD/q+MNX5kFxSsXpUE+Q60a0j5CpSIlDJd2jT1oUFCM=;
-  b=sKBdYQ1cNpQN9rVnPy65320eYcqF2+cZqOkVkMQW/xP/c+G4Y4GAojfx
-   8Ks7+ezjmeUUumrk2o33/oAXmQSFbKx4ndSvhNWQ6eqcCaQis7vs1LRUY
-   RlHu043A+w7036GYZqJpNyh2QAiub8S5B0f+T7JnvGMVe55fK8Ek70nV+
-   18oHeKaBBAD1v+HYtOrXRko34+xiTW6D79R/v+ppClSDh1MNVVo9xJ07g
-   Wo1kf+tZcfeJL3KjdAmqpSEkurN0lM/7U/AUBvcIGsMnJT2+I9vLSQuxg
-   WIpJ22CFkIlWuFAB46hG3Aom3uS/4U6j1EPB6edytgsavRwtmXnI4XTYi
-   Q==;
-X-CSE-ConnectionGUID: G6CqKkXtSEG8Y8j8sua+Sg==
-X-CSE-MsgGUID: INj7lixRRAaYRggAIQj3Jw==
-Received: from unknown (HELO jpmta-ob01-os7.noc.sony.co.jp) ([IPv6:2001:cf8:acf:1104::6])
-  by jpms-ob02-os7.noc.sony.co.jp with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 30 Sep 2026 19:44:42 +0900
-X-CSE-ConnectionGUID: Iq9fMEkFTJqVBeDmszgO4g==
-X-CSE-MsgGUID: /qy11t9OQxubzPlVGYcI4w==
-X-IronPort-AV: E=Sophos;i="6.27,132,1786978800"; 
-   d="scan'208";a="70395633"
-Received: from unknown (HELO cscsh-7000014390..) ([43.82.111.225])
-  by jpmta-ob01-os7.noc.sony.co.jp with ESMTP; 30 Sep 2026 19:44:42 +0900
-From: Yuezhang Mo <Yuezhang.Mo@sony.com>
-To: exfat@lists.linux.dev
-Cc: linux-kernel@vger.kernel.org,
-	linkinjeon@kernel.org,
-	sj1557.seo@samsung.com,
-	chizhiling@163.com,
-	dxdt@dev.snart.me,
-	Yuezhang Mo <Yuezhang.Mo@sony.com>
-Subject: [PATCH v1] exfat: mark straddling folio RO for 4K block size
-Date: Wed, 30 Sep 2026 18:43:33 +0800
-Message-ID: <20260930104332.4022207-2-Yuezhang.Mo@sony.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="gJaqdWal"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=xzIyxJDw0ySzQZ9vUbRIkXLBKSc23dTDjYRzmHyKxpQ=;
+	b=gJaqdWalKLZb9cLlwAVbWgsecZIncaUZofDZIwLiKbwQsaU4X/8LIH2jQw6/Pk
+	mjG5wHSBf0Eev3C85d4AnCzFm3jdQ4HgKmizEirCiPgPIRFtC1d8SO/9Pw9x7a7d
+	CQsfHUg4op9eoJqXIJ6jJkxT/jLseT7fVCF8sLERDJRdg=
+Message-ID: <24c5c9ea-1bfe-44a8-81ad-c2b1588e0a63@163.com>
+Date: Thu, 1 Oct 2026 10:52:27 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 0/5] exfat: fix valid_size handling and locking
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org,
+ Yuezhang.Mo@sony.com, chenxiaosong@chenxiaosong.com, dxdt@dev.snart.me,
+ hyc.lee@gmail.com, liubaolin12138@163.com, sj1557.seo@samsung.com,
+ Chi Zhiling <chizhiling@kylinos.cn>
+References: <20260927080305.831641-1-chizhiling@163.com>
+ <CAKYAXd8u2iLQ5aO6XR7vFojB3=9Jcmk7nK1mbzAk=Tza_UoYJA@mail.gmail.com>
+From: Chi Zhiling <chizhiling@163.com>
+In-Reply-To: <CAKYAXd8u2iLQ5aO6XR7vFojB3=9Jcmk7nK1mbzAk=Tza_UoYJA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PigvCgC3Z9zryr1quXhGCQ--.11933S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7CFykJFW8uryUZr48JF47Jwb_yoW8urWDpF
+	ZYk3W5GayYq340yr4vk3W8Xa4Y9wn3Xr17Gr98t3yUArnI9r1ayry3Kay093y5tws7Kw12
+	vr4DtrZ7Zw1DJr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UeMKtUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9w-3lWq9yu-mkAAA3e
 
-The maximum file system block size supported by exFAT is 4096 bytes.
-When extending a file whose EOF is not page aligned, the straddling
-folio must be marked RO so that a subsequent mmap write can trigger
-->page_mkwrite() and extend the valid data size.
+On 9/30/26 6:01 PM, Namjae Jeon wrote:
+> On Sun, Sep 27, 2026 at 5:04 PM Chi Zhiling <chizhiling@163.com> wrote:
+>>
+>> From: Chi Zhiling <chizhiling@kylinos.cn>
+>>
+>> valid_size marks the on-disk up-to-date region of an exFAT file. It is
+>> advanced from the write path, from read/zeroing completion, and via
+>> truncate, while it is read without i_rwsem from ->iomap_begin and from bio
+>> completion context. This series fixes several races and stale-data windows
+>> that follow from that split ownership.
+>>
+>> Patches 1-2 are self-contained fixes: an append write may be moved to EOF
+>> by generic_write_checks(), so valid_size must be advanced using the
+>> recalculated position; and exfat_zero_new_range() must mark non-uptodate
+>> pages dirty so the whole page is written back.
+>>
+>> Patches 3-4 are prerequisites for patch 5: truncate now holds the
+>> invalidate lock so it is mutually exclusive with mmap writes, and
+>> valid_size/zeroed_size become atomic so they can be read safely outside
+>> i_rwsem. Patch 5 then takes exfat_page_mkwrite() out from under i_rwsem,
+>> since blocking on the inode lock under mmap_lock could deadlock and its
+>> VM_FAULT_RETRY result is not honored, and advances valid_size under the
+>> folio lock to keep the page cache and valid_size consistent.
+>>
+>> Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339dde@163.com/T/#t
+>>
+>> Chi Zhiling (5):
+>>    exfat: advance valid_size to EOF for append writes
+>>    exfat: dirty all new pages when extending valid_size
+>>    exfat: hold the invalidate lock while truncating
+>>    exfat: make valid_size and zeroed_size atomic
+>>    exfat: use folio lock to protect valid_size
+> Could you check the review comments from Sashiko ?
+> 
+> https://sashiko.dev/#/patchset/20260927080305.831641-1-chizhiling%40163.com
 
-This is normally handled by pagecache_isize_extended(), which marks
-the straddling folio RO when the filesystem block size is smaller
-than 4K. However, pagecache_isize_extended() returns early when the
-filesystem block size is PAGE_SIZE:
+Okay, I’ll take a close look at this review comment.
 
-    if (from >= to || bsize >= PAGE_SIZE)
-        return;
+I also noticed that the comment mentions that concurrent DIO and page 
+faults may lead to data corruption. I believe this is a long-standing 
+issue, and I don’t currently have a good way to fix it.
 
-As a result, on an exFAT filesystem with a 4K block size, the PTE
-for the straddling folio remains writable after a file extension.
-A subsequent mmap write operation that modifies the straddling folio
-beyond the old EOF, will not trigger ->page_mkwrite(), leaving
-valid_size unchanged.
 
-This was found by running xfstests generic/030 on a block device with
-a 4096-byte sector size: the test fails without this fix and passes
-with it.
-
-Fix this by marking the straddling folio RO in exfat_cont_expand()
-when the filesystem block size is 4K and the old EOF is not page
-aligned. This mirrors what pagecache_isize_extended() does for smaller
-filesystem block sizes.
-
-Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
-Signed-off-by: Yuezhang Mo <Yuezhang.Mo@sony.com>
----
- fs/exfat/file.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index a2a9ee1a20048..390bfae3f3aa4 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -17,6 +17,7 @@
- #include <linux/fileattr.h>
- #include <linux/iomap.h>
- #include <linux/pagemap.h>
-+#include <linux/rmap.h>
- 
- #include "exfat_raw.h"
- #include "exfat_fs.h"
-@@ -91,6 +92,20 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	 */
- 	pagecache_isize_extended(inode, oldsize, inode->i_size);
- 
-+	if (i_blocksize(inode) >= PAGE_SIZE && (oldsize & (PAGE_SIZE - 1))) {
-+		struct folio *folio;
-+
-+		folio = filemap_lock_folio(inode->i_mapping,
-+				oldsize >> PAGE_SHIFT);
-+		if (!IS_ERR(folio)) {
-+			if (folio_mkclean(folio))
-+				folio_mark_dirty(folio);
-+
-+			folio_unlock(folio);
-+			folio_put(folio);
-+		}
-+	}
-+
- 	inode->i_blocks = round_up(size, sbi->cluster_size) >> 9;
- 	mark_inode_dirty(inode);
- 
--- 
-2.43.0
+Thanks!
 
