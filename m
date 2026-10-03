@@ -1,116 +1,105 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C8FC357CE0
-	for <exfat@lists.linux.dev>; Fri,  2 Oct 2026 23:42:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09340318ED9
+	for <exfat@lists.linux.dev>; Sat,  3 Oct 2026 01:11:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790984546; cv=none; b=f+cp2dDD3YVDWcKITTwPGcoC7jMIChffII4KJUQ7bnCUWwWXOb10yO6iZfWDf1JJJ/dT7v0Vmuw2fO5k6IQaFGA2j7N2laSJlkxxKE6vXEnWAC8glDuF8JWPc0++/Q6i36ztSC0NOCDxkdVxJRsT/LB7V+8jXf2LyOw82ab6Lek=
+	t=1790989920; cv=none; b=Tn0Fn2Z9sH8g34qVeqp53cF1ZUBp4z1MMOCCYHqkrcacVRVt97pPMsI2SxWSKAX0Pg69kTNGJQRa0aX0s+KxHVW2cEuxGXnv0xsmzieMhkxhKtPrecnlhrknXyoNxhmetLBlZmnqC7wkb8OcfWzSbtZUPaJJz9cQ/ScItHoyyG0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790984546; c=relaxed/simple;
-	bh=KO2I75VNoFgww9GdJxtJmZyHtp1JqOLqssmy5VsG5Q8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=qN/cckgr1t7Rp8M6Q1mdlClXUV7b3+h240orm1Zakh37YBAhvKg6Cz8woQX/NZ4O5e9XA9yha83EiT3g3ExrUwm+YXJ+R7jgdNUu/+M9kKjOtnTGfBNp4wg4Gwn2KzZJ6xYGaezAEQmMiwhsnsUxRE0c37b3lIZrv4NDjJRd5qQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Nv/wtJL+; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790989920; c=relaxed/simple;
+	bh=B4JkUi9my2d9U4NwA9n6bMZyhByBHhozgf11BX091ds=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Fzfn1hVJAmIpb+NWmKApAllOphBosw/ztemK+6Cv9WojA9umKQH9AIs0VX0PcOL5FhDAR8x3eOpW2pvfPM5T2KXGxsKLe+syDpIKQItyS2NbofIGDTkAd+yra9d07LJETlLrSML52t7qhPMgH+NffdbFm7C2NRLA4P498QU9fEs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ED6lssCM; arc=none smtp.client-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Nv/wtJL+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31C5D1F00899
-	for <exfat@lists.linux.dev>; Fri,  2 Oct 2026 23:42:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790984545;
-	bh=vrwqr+wISnCgu+/lva2fJIO8Rcc0hIHfuzKvIAwo3Wg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Nv/wtJL+n/trw0mvNHHJWi8IJOz9VAFPXpkV98LHGra9I9ffRnHuN4smn1nB2stX6
-	 RXCg1mFJv+ugb+Z1wHIAdxbvF9OGXNSKdgN9ny8easF5Qrgn/tGOp/c/Ep9QWFgkes
-	 qGHXxDHqmaPamT9xF7iKtrImTyJFyvtWZzU6l1Zf3+qaDjObmA91rqz9nnE+bRAg6D
-	 b+xA8DPntenQgLhQV0HzvmNMyhCzYvX27O4BS44yl/ZxRhaZomJMz+F0zkr/q4ZMLA
-	 PK2J+0FK2bcpihijvdwCMHcKVYiBxfxMFML7aNLPc7pbWwOhDqQHgQLOW682r9z4OI
-	 uPPI9T5a6j94g==
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-c2a25dfbf5fso47510766b.1
-        for <exfat@lists.linux.dev>; Fri, 02 Oct 2026 16:42:25 -0700 (PDT)
-X-Gm-Message-State: AFq9FYI2WADa7BRfXJcpxf/wzaF/QXlM74K2KAeOeECG5D6/VKOUMJmD
-	8SqjE2sxIVMViQ+Y2geUfBQDCJSv0X5bJqfnQI4CwxSbvnG/IHbBt0T3gZlhxCBZXw5P3CBDQLl
-	z2+RsYeMzBR2NTzAFPSpwmTXNjlr3HS8=
-X-Received: by 2002:a17:907:1ca1:b0:c2e:4292:d268 with SMTP id
- a640c23a62f3a-c2e6ece2e6amr52143966b.16.1790984543870; Fri, 02 Oct 2026
- 16:42:23 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ED6lssCM"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=yYGDYGipIPKpCp7ZOn9wro1eUA2lYhqQ2yXsDOAsYaM=;
+	b=ED6lssCM4oK2Tt3de/JOs7BTXyQ+tGpn5Z/DsVeJtVjMunzd4rdpCSb9y3XFMz
+	s1/dFJc66XRoiQFlf1/bKkQy/+rsUY29DRpk4DS50zxMQQIYXBk2sv4Dz7MTiNyI
+	T9u3z+anbQqB7ioiSL4hZ2WUIYKefKwC9X5MtU51h0obI=
+Message-ID: <59056131-e3bd-4003-8c30-0a356cf0bd82@163.com>
+Date: Sat, 3 Oct 2026 09:11:03 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260927080305.831641-1-chizhiling@163.com> <CAKYAXd8u2iLQ5aO6XR7vFojB3=9Jcmk7nK1mbzAk=Tza_UoYJA@mail.gmail.com>
- <24c5c9ea-1bfe-44a8-81ad-c2b1588e0a63@163.com>
-In-Reply-To: <24c5c9ea-1bfe-44a8-81ad-c2b1588e0a63@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Sat, 3 Oct 2026 08:42:11 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9Z7opATEpHtyTp+cbzsYS_+Ym621fBHHbY1OZw=Hzt2w@mail.gmail.com>
-X-Gm-Features: AclHuK8TG_7kY28i4gXzmOvrt-9xidqiIUWOyaNs3d5IKC9LGkDH-eZhfFg01is
-Message-ID: <CAKYAXd9Z7opATEpHtyTp+cbzsYS_+Ym621fBHHbY1OZw=Hzt2w@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1 0/5] exfat: fix valid_size handling and locking
-To: Chi Zhiling <chizhiling@163.com>
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, Yuezhang.Mo@sony.com, 
-	chenxiaosong@chenxiaosong.com, dxdt@dev.snart.me, hyc.lee@gmail.com, 
-	liubaolin12138@163.com, sj1557.seo@samsung.com, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org,
+ Yuezhang.Mo@sony.com, chenxiaosong@chenxiaosong.com, dxdt@dev.snart.me,
+ hyc.lee@gmail.com, liubaolin12138@163.com, sj1557.seo@samsung.com,
+ Chi Zhiling <chizhiling@kylinos.cn>
+References: <20260927080305.831641-1-chizhiling@163.com>
+ <CAKYAXd8u2iLQ5aO6XR7vFojB3=9Jcmk7nK1mbzAk=Tza_UoYJA@mail.gmail.com>
+ <24c5c9ea-1bfe-44a8-81ad-c2b1588e0a63@163.com>
+ <CAKYAXd9Z7opATEpHtyTp+cbzsYS_+Ym621fBHHbY1OZw=Hzt2w@mail.gmail.com>
+From: Chi Zhiling <chizhiling@163.com>
+In-Reply-To: <CAKYAXd9Z7opATEpHtyTp+cbzsYS_+Ym621fBHHbY1OZw=Hzt2w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wAXLh0nVsBqWoBUCA--.30796S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7urWkAF4DurykWrWxGw1DAwb_yoW8KFW5pa
+	yFk3W5GFW5J340yrs293W8Xa4Ygwn3Xr17Wr98t3yUArn09F1avry7K3y093y5tws7Kw4j
+	vr4vq397Xw1DJr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UeMKtUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9wtqCGrAViu9aQAA3d
 
-On Thu, Oct 1, 2026 at 11:53=E2=80=AFAM Chi Zhiling <chizhiling@163.com> wr=
-ote:
->
-> On 9/30/26 6:01 PM, Namjae Jeon wrote:
-> > On Sun, Sep 27, 2026 at 5:04=E2=80=AFPM Chi Zhiling <chizhiling@163.com=
-> wrote:
-> >>
-> >> From: Chi Zhiling <chizhiling@kylinos.cn>
-> >>
-> >> valid_size marks the on-disk up-to-date region of an exFAT file. It is
-> >> advanced from the write path, from read/zeroing completion, and via
-> >> truncate, while it is read without i_rwsem from ->iomap_begin and from=
- bio
-> >> completion context. This series fixes several races and stale-data win=
-dows
-> >> that follow from that split ownership.
-> >>
-> >> Patches 1-2 are self-contained fixes: an append write may be moved to =
-EOF
-> >> by generic_write_checks(), so valid_size must be advanced using the
-> >> recalculated position; and exfat_zero_new_range() must mark non-uptoda=
-te
-> >> pages dirty so the whole page is written back.
-> >>
-> >> Patches 3-4 are prerequisites for patch 5: truncate now holds the
-> >> invalidate lock so it is mutually exclusive with mmap writes, and
-> >> valid_size/zeroed_size become atomic so they can be read safely outsid=
-e
-> >> i_rwsem. Patch 5 then takes exfat_page_mkwrite() out from under i_rwse=
-m,
-> >> since blocking on the inode lock under mmap_lock could deadlock and it=
-s
-> >> VM_FAULT_RETRY result is not honored, and advances valid_size under th=
-e
-> >> folio lock to keep the page cache and valid_size consistent.
-> >>
-> >> Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339d=
-de@163.com/T/#t
-> >>
-> >> Chi Zhiling (5):
-> >>    exfat: advance valid_size to EOF for append writes
-> >>    exfat: dirty all new pages when extending valid_size
-> >>    exfat: hold the invalidate lock while truncating
-> >>    exfat: make valid_size and zeroed_size atomic
-> >>    exfat: use folio lock to protect valid_size
-> > Could you check the review comments from Sashiko ?
-> >
-> > https://sashiko.dev/#/patchset/20260927080305.831641-1-chizhiling%40163=
-.com
->
-> Okay, I=E2=80=99ll take a close look at this review comment.
->
-> I also noticed that the comment mentions that concurrent DIO and page
-> faults may lead to data corruption. I believe this is a long-standing
-> issue, and I don=E2=80=99t currently have a good way to fix it.
-Okay, I'll take a look at that. Will you send v2 patchset soon?
-Thanks!
+On 10/3/26 7:42 AM, Namjae Jeon wrote:
+> On Thu, Oct 1, 2026 at 11:53 AM Chi Zhiling <chizhiling@163.com> wrote:
+>>
+>> On 9/30/26 6:01 PM, Namjae Jeon wrote:
+>>> On Sun, Sep 27, 2026 at 5:04 PM Chi Zhiling <chizhiling@163.com> wrote:
+>>>>
+>>>> From: Chi Zhiling <chizhiling@kylinos.cn>
+>>>>
+>>>> valid_size marks the on-disk up-to-date region of an exFAT file. It is
+>>>> advanced from the write path, from read/zeroing completion, and via
+>>>> truncate, while it is read without i_rwsem from ->iomap_begin and from bio
+>>>> completion context. This series fixes several races and stale-data windows
+>>>> that follow from that split ownership.
+>>>>
+>>>> Patches 1-2 are self-contained fixes: an append write may be moved to EOF
+>>>> by generic_write_checks(), so valid_size must be advanced using the
+>>>> recalculated position; and exfat_zero_new_range() must mark non-uptodate
+>>>> pages dirty so the whole page is written back.
+>>>>
+>>>> Patches 3-4 are prerequisites for patch 5: truncate now holds the
+>>>> invalidate lock so it is mutually exclusive with mmap writes, and
+>>>> valid_size/zeroed_size become atomic so they can be read safely outside
+>>>> i_rwsem. Patch 5 then takes exfat_page_mkwrite() out from under i_rwsem,
+>>>> since blocking on the inode lock under mmap_lock could deadlock and its
+>>>> VM_FAULT_RETRY result is not honored, and advances valid_size under the
+>>>> folio lock to keep the page cache and valid_size consistent.
+>>>>
+>>>> Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339dde@163.com/T/#t
+>>>>
+>>>> Chi Zhiling (5):
+>>>>     exfat: advance valid_size to EOF for append writes
+>>>>     exfat: dirty all new pages when extending valid_size
+>>>>     exfat: hold the invalidate lock while truncating
+>>>>     exfat: make valid_size and zeroed_size atomic
+>>>>     exfat: use folio lock to protect valid_size
+>>> Could you check the review comments from Sashiko ?
+>>>
+>>> https://sashiko.dev/#/patchset/20260927080305.831641-1-chizhiling%40163.com
+>>
+>> Okay, I’ll take a close look at this review comment.
+>>
+>> I also noticed that the comment mentions that concurrent DIO and page
+>> faults may lead to data corruption. I believe this is a long-standing
+>> issue, and I don’t currently have a good way to fix it.
+> Okay, I'll take a look at that. Will you send v2 patchset soon?
+> Thanks!
+
+Okay
+
+
+
