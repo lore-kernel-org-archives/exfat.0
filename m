@@ -1,47 +1,46 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5806837F8D7
-	for <exfat@lists.linux.dev>; Sat,  3 Oct 2026 03:31:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA4753DC878;
+	Sat,  3 Oct 2026 09:30:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790998308; cv=none; b=TJPrmyd0qS08D7n7AQ7UMif2CetaDbuzVBEpVrATM4MxRCCZRBvUdG3xVMcftTUpoE2i6tJsI2LJSzPrhmBCRMzt4hcsD8N+MP+ukKOwuU4pVHvUg2Z6CASLIlsEKnqKiXqWxJGOMgNAiYEHJp2Y2MlUXEZs53XQV42apj0z8og=
+	t=1791019854; cv=none; b=D3V2a25nVFNHhzR3VR/qcjVpjXnYaHP4pv9PsZmmzwzrvQymYcI1L2lYML1JoVCJ0MTL8jwQc10Hv4f92hS24Iv/2PO1QFGCbX1ja+pD37KzsLtVT4TIOiilJXyFOsh1hpXuq0cYVSI8ndoKsV+JzcbD30SpN9Sgd44yaD/6e1E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790998308; c=relaxed/simple;
-	bh=UFbcR9aJCgwwNjHkv2z/Zp1rljfvI/rGNjjAyUd6gpQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=OJioSABWwKHBcMchQlOVpPVmvcKD6pL9kx1pN7ZYHTn49xcrDdAG5Xfd8xyJg9NyUvbZKM65vDjQMs1FDBuV1gdVsKcYOTCVB9tXJy+bGsRq4zJG/mzcYfA9b6XbyZSyap7EkvnI06R9TwZKqQNAMp9CI5YCGvFs862dbuAZiIg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=mkySbm20; arc=none smtp.client-ip=220.197.31.5
+	s=arc-20240116; t=1791019854; c=relaxed/simple;
+	bh=rxtFUFSHxs8TblB4lb0hLms4E4gJN7vG6V6DWTK1Rvw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=uk695tyB3pvdVYBRS/q4Ou2IJaZI6/L2o4rhXuOxzMsVh3v7G+pdzn3smr1+LgfnH0mpq4D9YdPfBaoryNPYBNzvhDmN0eTehgGr9FjpddOFh41HuJ0U5ZW0oHYMYFIgKU+AqzwYT+KTzxF7KrPSyGsYwuf9p94VgsY3jVVLfnI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=R37Oe0XN; arc=none smtp.client-ip=117.135.210.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="mkySbm20"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="R37Oe0XN"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=HG
-	k816CnFgcodWJFZDPBEzVchfSLUZwN7QvVY+L8jZw=; b=mkySbm20r/a8T/XHmH
-	oxPDFBo4Ww1jLaNp8mrzv0zum3M4QEYFZjIDcYnan/qMwGdMCjDxhMpz00jDUcOs
-	WnIuC4dk3O/4YK3y5ZhjUAY+82leXDyZOLiSNphZNva6ooR3YApKTUksMRrAAQH1
-	3rI7puea0RCOdRCiNTVueAsp0=
-Received: from czl-pc (unknown [])
-	by gzga-smtp-mtada-g0-1 (Coremail) with SMTP id _____wCXTnLfdsBqOdNwCA--.32914S8;
-	Sat, 03 Oct 2026 11:30:44 +0800 (CST)
-From: Chi Zhiling <chizhiling@163.com>
-To: exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Cc: Yuezhang.Mo@sony.com,
-	chenxiaosong@chenxiaosong.com,
-	dxdt@dev.snart.me,
-	hyc.lee@gmail.com,
-	linkinjeon@kernel.org,
-	liubaolin12138@163.com,
-	sj1557.seo@samsung.com,
-	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH v2 6/7] exfat: advance valid_size while zeroing new ranges
-Date: Sat,  3 Oct 2026 11:30:31 +0800
-Message-ID: <20261003033032.1775311-7-chizhiling@163.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261003033032.1775311-1-chizhiling@163.com>
-References: <20261003033032.1775311-1-chizhiling@163.com>
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=M0
+	fMs6qgG2xKZRFestL3XQh7m7yKQHNCKfKQ/oaF3mM=; b=R37Oe0XNiDZHpUfCuY
+	+f0+hSD3a/uxhjVr8GPfX1B2GldDZQEYcq5BzqM2nvRTTVVvXSH8oR+40SGFw2vz
+	MiAtFZwrcjvGQL8xH+0MgbuYQoeQohvJS3T/k4HGT1XBnJq9V5iPvebLVwrG6OCj
+	JUrxxdFCsUxZRHzKbybJD5aZ8=
+Received: from pc.localdomain (unknown [])
+	by gzsmtp3 (Coremail) with SMTP id PigvCgBnTqs9y8BqZLmrCg--.23213S2;
+	Sat, 03 Oct 2026 17:30:37 +0800 (CST)
+From: Jiale Yao <yaojiale02@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Jan Kara <jack@suse.com>,
+	Hyunchul Lee <hyc.lee@gmail.com>,
+	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-ext4@vger.kernel.org,
+	ntfs@lists.linux.dev
+Cc: Jiale Yao <yaojiale02@163.com>
+Subject: [PATCH v4 0/3] fs: drain in-flight DIO before buffered write fallback
+Date: Sat,  3 Oct 2026 17:30:32 +0800
+Message-Id: <20261003093035.532916-1-yaojiale02@163.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -49,74 +48,64 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wCXTnLfdsBqOdNwCA--.32914S8
-X-Coremail-Antispam: 1Uf129KBjvJXoW7urW8Jr1xCrWUZrWUtF1UWrg_yoW8KF15pr
-	W5Cws5G398Z395Wr1vqrs8ZFyY93sagFWxu3s8Cw1DZFnrA34xKF18KrWxuF43t395Wr1Y
-	qF4qyrWUXFnrG3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jetCwUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9wShP2rAduRV9gAA32
+X-CM-TRANSID:PigvCgBnTqs9y8BqZLmrCg--.23213S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7AF1DtryfXFy7ZFykGF4rXwb_yoW8tF4kpr
+	WYga15trnFyrZ7ArZ7uF43JF1Sgws3X3y3urZIg34Uuwn8Gr4qqF48tr1jgr43Aa1fGw42
+	vw4vvas7uFyDC3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0piK9a9UUUUU=
+X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbCzR7MB2rAyz6nowAA3D
 
-From: Chi Zhiling <chizhiling@kylinos.cn>
+An asynchronous direct write can remain in flight after its submitting
+thread releases the inode lock.  If a buffered write dirties page cache
+in the meantime, the direct write can complete post-I/O invalidation after
+the pages become dirty.  The invalidation then reports a page cache
+invalidation failure and records -EIO in the mapping error sequence.  A
+later fsync() returns -EIO.
 
-valid_size is currently updated only after the range has been zeroed, so
-it lags the folios that were just marked uptodate and dirty.
+Commit 15cdefd0c0522f9d5e12d947fa04f4c11649b699 ("ext4: drain
+in-flight DIO before buffered write fallback") fixed this race in ext4.
+The same ordering is missing from the buffered fallback paths in ext2,
+NTFS, and exFAT, and from the regular buffered-write and valid-size
+extension paths in exFAT.
 
-Advance it from exfat_zero_new_range() page by page, under the folio
-lock and right after the folio is marked dirty.  exfat_extend_valid_size()
-then only advances zeroed_size, and exfat_page_mkwrite() advances
-valid_size once iomap_page_mkwrite() has returned the locked folio.
+This series adds inode_dio_wait() before these paths dirty page cache.
+Each patch fixes one filesystem and remains independently buildable.  The
+NTFS patch also avoids entering the blocking fallback for IOCB_NOWAIT
+requests: it returns -EAGAIN if DIO made no progress and preserves a
+positive result after a partial direct write.
 
-Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
----
- fs/exfat/file.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+A reproducer using concurrent AIO direct writes and buffered fallback
+triggered the following warning on all three filesystems and made a
+subsequent fsync() return -EIO:
 
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index 6bd2b6d28a82..d92997dc8eec 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -666,6 +666,7 @@ int exfat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
- static int exfat_zero_new_range(struct inode *inode, loff_t start, loff_t end)
- {
- 	struct address_space *mapping = inode->i_mapping;
-+	struct exfat_inode_info *ei = EXFAT_I(inode);
- 	loff_t next, pos = start;
- 	struct folio *folio;
- 	pgoff_t index;
-@@ -683,6 +684,7 @@ static int exfat_zero_new_range(struct inode *inode, loff_t start, loff_t end)
- 		folio_lock(folio);
- 		if (folio->mapping == mapping) {
- 			folio_mark_dirty(folio);
-+			exfat_advance_valid_size(ei, next);
- 			pos = next;
- 		}
- 		folio_unlock(folio);
-@@ -732,7 +734,6 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
- 			return ret;
- 		}
- 
--		exfat_set_valid_size(ei, new_valid_size);
- 		exfat_advance_zeroed_size(ei,
- 				round_up(new_valid_size, i_blocksize(inode)));
- 		mark_inode_dirty(inode);
-@@ -925,7 +926,6 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
- 		 */
- 		exfat_advance_zeroed_size(ei,
- 				round_up(new_valid_size, i_blocksize(inode)));
--		exfat_set_valid_size(ei, new_valid_size);
- 		mark_inode_dirty(inode);
- 	}
- 
-@@ -934,6 +934,9 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
- 
- 	filemap_invalidate_lock_shared(inode->i_mapping);
- 	ret = iomap_page_mkwrite(vmf, &exfat_iomap_ops, NULL);
-+	if (ret == VM_FAULT_LOCKED)
-+		exfat_advance_valid_size(ei, new_valid_size);
-+
- 	filemap_invalidate_unlock_shared(inode->i_mapping);
- 	sb_end_pagefault(inode->i_sb);
- 	inode_unlock(inode);
+  Page cache invalidation failure on direct I/O.  Possible data corruption
+  due to collision with buffered I/O!
+
+Changes in v4:
+- Add inode_dio_wait() to exfat_extend_valid_size(), as requested by
+  Chi Zhiling.
+
+Changes in v3:
+- Add inode_dio_wait() to both the regular and fallback buffered-write
+  paths in exFAT, and move the explanatory comment to
+  exfat_file_write_iter(), as requested by Chi Zhiling.
+- Add Baolin Liu's Reviewed-by tag to the NTFS patch.
+
+Changes in v2:
+- Handle IOCB_NOWAIT before the potentially blocking NTFS fallback,
+  returning -EAGAIN before any bytes are written and preserving a positive
+  short-write result otherwise, as requested in review.
+
+Jiale Yao (3):
+  ext2: drain in-flight DIO before buffered write fallback
+  ntfs: drain in-flight DIO before buffered write fallback
+  exfat: drain in-flight DIO before buffered writes
+
+ fs/exfat/file.c | 14 ++++++++++++--
+ fs/ext2/file.c  |  7 +++++++
+ fs/ntfs/file.c  | 13 +++++++++++++
+ 3 files changed, 32 insertions(+), 2 deletions(-)
+
 -- 
-2.53.0
+2.34.1
 
