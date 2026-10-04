@@ -1,78 +1,73 @@
-Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1111C43A7E9
-	for <exfat@lists.linux.dev>; Sun,  4 Oct 2026 13:57:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A640317BCA
+	for <exfat@lists.linux.dev>; Sun,  4 Oct 2026 14:35:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791122241; cv=none; b=nR7uj4TzcmJJA39Qm3D+PouVxJkc2B3+QJNpt9snl5sEnAp4POMwjAgc/lcCZG0KPhjkIv2i4ae96SSCw7jeJx/lnI309B3gAVzpZm6aXqwn092kOVTn2lL4cjAH0SRn8Hb4K3xuN0hi/1mvEmxtJsJyVCaWdlrZODI9JdgfuDo=
+	t=1791124514; cv=none; b=S6Bzci4FH2JP+f1AmdkbdKXPun64+XfM+XwatUnck55wjxUfK36zy/+UVbOTCzzqnKLSO3kbbB1Hhj7lzYXZqSaEnIRdwvEeQ4DJHbX1Ye0Q8ZbjSC8wrFcJfXlWblKC8eoG8Y3Ie2CwgorOPVgS271i954gTgulurgexooz2oY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791122241; c=relaxed/simple;
-	bh=pIQ+IRKIzFQu+nwE6rpRbECGYFdSKs6+qMmd1UYLM8I=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=JeTdoLygy5k9f7tJ5NCXRh4MNSFE8P4br0JV6XFdgAnWg1oHIh71kXze3pFqCxciv4YWMq8dOIbi0jAu3lsHdCQcxZJrPlBlwZKdPEdAJcv6mPjzt2pD/J7AC3TnGx/AM2fYHQc1yxO+nA4rbmqWsp4FLZAn2YI5IOFWUI4qoi8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DY3tejh8; arc=none smtp.client-ip=74.125.227.171
+	s=arc-20240116; t=1791124514; c=relaxed/simple;
+	bh=v5BkTTV6xIkZ4U0MNoc+KJe5KBVNrtMb6C2kSKm3W7w=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=AuXiYNcm1neb7CYH6ygdsF7CFvw/31vOU0F4PMJ/dD+DPg8oWUpuConaxjnypuozabfxvpH/fM7oHu83IyOFBeYGe2dfo01GZyTWIEFBeD4QLs9MtpNILF/FKPyTfIwC4g7tm2UVa8qsrs4GB4n6i8/HxF2Jd20ubJm0gMaDv7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QTIurBtn; arc=none smtp.client-ip=74.125.227.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DY3tejh8"
-Received: by mail-pj2-f43.google.com with SMTP id 98e67ed59e1d1-3a49573b8bdso572838a91.2
-        for <exfat@lists.linux.dev>; Sun, 04 Oct 2026 06:57:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QTIurBtn"
+Received: by mail-pj2-f12.google.com with SMTP id 98e67ed59e1d1-396ccdaea76so269181a91.0
+        for <exfat@lists.linux.dev>; Sun, 04 Oct 2026 07:35:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791122239; x=1791727039; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TJmJ3Y08JKcht7kTp4k3VyLvWVZcL/LexUSVXApnbpE=;
-        b=DY3tejh8CVeRgxsgHO/xdq+qc/0Jm0SVkWN3jAxc9B0sc/Ib6gkDXLRoa+5HJdYqdw
-         6xzjc3MipFodWosb8AScYYOZvHX9sAUD5jpWQSwCgZxGUlKO+1volbIubHUk1YoNwVev
-         qr6tWmQXsv76qzWbne2bWRtVz/0p8HtXU8DV443KUNqT6Fyqv6XhVp+TUcXXmOE5gjzj
-         6fbtoPw+fcsNyBhg2eQiO0GEm9vnejDVBj6H1xhu4p71ac/oU4LzfDU5Ll6WtJcAwp68
-         pCaqLbxc1ts/+TATOxePmwpx8akYdO5cGleCi/tLemyQFNKnIhr2uqVuS38f/UMUF9T7
-         UiNA==
+        d=gmail.com; s=20251104; t=1791124512; x=1791729312; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=l6hn3SSDnsurWqxR/1PA4qw29vS80uvAthHs9d01q00=;
+        b=QTIurBtn6hNmRiwCdBRoh+AAXotzxPoESWlijx5Vd+maJ6UYnAvEP1jtMoZi6Ir4h0
+         EYqC+5pNfNM1ao2q92soktlQTe6mkQb8AaZIx8LMxKNzFKDfoEEYdQLf4vyonoHtNwaN
+         tabedp4N4JFjOKYpTJyOHeNH0UqAXU02giMwp2N4GVuHx4FFSlboOyO3txFt2ihPnBN1
+         bPNrWq+5J5/2+SErmbF3XZmWyRLDKza2yebfBWvVykhhxU3y6JtI6Qr+oRDbMUVFc1b6
+         8hBmoqDNzZ7qhJh/RdsKAwiSgAq96b28fpGSafODAaoheO2TtotZ0SADQUtpnN6/h0Ou
+         gPgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791122239; x=1791727039;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TJmJ3Y08JKcht7kTp4k3VyLvWVZcL/LexUSVXApnbpE=;
-        b=sw+yUuXtOsLSMLnY3Fze804LWBIAvin4D0eC7x/npfAML+2XDRd1sTJU4nDu6wvkx5
-         gCKbNrL3bLd4a7eYnqntq5O6G/JftWpktfNtghGD+hfMfUg/nneq5NnXaiiQ9BK/hHdl
-         ZgYrbjwp33JgXslrE8SsgPzG1PK6KZ1SyDtyC1Gy2smo2xduWAZ/LkzZROvPb5gHFFko
-         kFDwvm/usZU+72O9p4pQcpkyMUTOA4zW/EA5hNlfTy72iPUKso0wJVvzBKw2jHmfh90r
-         bZ3sujCU+/uI+w9NUFiEDD/3WNnPjNZXi2DpfIWMN8dGA+50VjiOtYgerXoa64QEGoq6
-         Rzdw==
-X-Forwarded-Encrypted: i=1; AKwUvBxE0o0S8/giE64Afy75IFu38uUAvHa+tWDzq5nenJ2HEb3/Qe3NQrWx+4LYc+x5yCPS5Bqyxg==@lists.linux.dev
-X-Gm-Message-State: AFq9FYIiRQoSQqyRwITBEgOEtZHXTx0piS81hzslJOjjFOfG2tRlHLeU
-	pB8o1H3oFkzjyWQG2B/vMtFGcPG7h41bAvxcSkY53OoQjDiIQj8UgpG0
-X-Gm-Gg: AYBFou0VnI5CWIwCQPyvdX9KyIIMkIx8cn6v9rQr615TkI0sxR8emCJ/dYM3ug9cHSF
-	awsz39SyYVjaJgiRQ2ixLPNGmKnTxdJfzFkyPhSPJMFFtkSjdqqTY0oCwx6OsBlGQEa+8qcw58G
-	fLQQwXx0PxOLQntsfiAX9qNIxAqKxNw8NI5q4+9N4zc5Wu6QMmpSHw5Jhu4aqpJw+32XBLcm9La
-	rQS0tVSUGs9k1j7otp5kPbvzafzblvz10bQOhlgF8Ygg/gs97L/X1HElsYXV8fSRadr9vzuqyZR
-	3iJNLpKxslnEIuqHnPnwc/Qihu9qc49xmBSyKvT+KAcm/dyL/dj5MtGW3B2oKZ+nCePnSF/C0M+
-	YtltaXnwQ2zYZeYnDyREVXgSQ2g/Y4AJPEb1PtmHbVRVNXw4DYLdbsQdvagpcM8O9kFyMh0cW3j
-	uC4YE/aB/oeoVPPyiWgalPP3+BkSTGXHBIDgnlhdka8HMl6rqjsLxUfdkOUM3SP+4EXFQVdBYq4
-	l6yinBeOtBP
-X-Received: by 2002:a17:90b:5690:b0:3a4:f1f9:2569 with SMTP id 98e67ed59e1d1-3a6ced62a58mr6830062a91.55.1791122239248;
-        Sun, 04 Oct 2026 06:57:19 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1791124512; x=1791729312;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=l6hn3SSDnsurWqxR/1PA4qw29vS80uvAthHs9d01q00=;
+        b=xqYgcTd/IqoCsNRta83n8fL/8Tjbq1NxCkPk+cfbhtKGuFKGkR0z+gptJRQCMUxP9/
+         ybHCzgCIg+thrT3DT3Sil6XeMJyfefZaIQXHt30MyXJDW/c0COjvAU4oMpVX0SzHe62l
+         emw2E0+Yh283wSQmla/pgu3U3SWCAoFL8qVHO4Ppcjn+qqM6CPApA3UBt/SejQ3GrODG
+         BSTPQ4k/U07uBMFpfNuESG/OKWsRt2MF8e7XI/hYTmov+7EC94Ino3uz4w+2Eh7el8EX
+         exub1GqrbGsdK3MoWbTCIHUyuk7FjATm2W7RgTBJJcyEty3A+zwe3AH+KoPhRux3lHlg
+         +kDQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw923D5Cnn/pH7+i4X/PLDoSaLUBTXTnq/jNdZxQ4BuNKsTrfKJIYvHO9q2XJSYuchogcbvXw==@lists.linux.dev
+X-Gm-Message-State: AFq9FYILm7cQ1SCthQwgjWPX+24CDgVbyw0Z2Q5vjblaUlnjyDvmGvIe
+	2YKl871DLhLg/cAGRe21iuoW6ZGahgDR9KeEyfWt+DXgsiYeSOpcAFRS
+X-Gm-Gg: AYBFou338Dc86+P60lIrP7SisQvj2G4jfnDZrmPwz4MkklRwzXr4OZxAeb5UZqYIK/m
+	acTG3rFv9IqSfNXSh4aBoC1Bh+6PmvOkQelTq3z8hQUc29yPQqyMDIuZq775Sop6r/yBc99aut+
+	0p2VihOx/MBvnXNjxzuwU2IbyiPwh841HYrimCS/8rRj7OE4ITE5BP8BfSx3Bjai1tabVeQAwh0
+	E2msrZlWNSxBrp7qbzrnPKgAnNMdvzo0Y08tMRj3mF8bq96goHCQffrLDZ+X+4Qs67lba5P7BWq
+	+jvvqLQASvvOwp86zBIJrIPHRqUvuJ0neO/JqWltBX7wOtws0VXF3kFswZ+12nLtsQrVtidCVUI
+	7Tnm+c45E3D1Nz8xE7unVEhAJOLWlzsNFUZDhWbIm6dUKcdUAd3PpuslHgpYLbCRKtUIY1nLvFQ
+	pJo794ahrf4+Hv68uWQcydpoglaQClf777w5chTgrvNPAfYYJKeovZ5biP5uI6Q2ir16z9GU2n3
+	JR+yl9xGRb7
+X-Received: by 2002:a17:90b:134c:b0:3a0:eec6:b065 with SMTP id 98e67ed59e1d1-3a6ce97cf78mr4539968a91.13.1791124511846;
+        Sun, 04 Oct 2026 07:35:11 -0700 (PDT)
 Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78d7cd433sm6876358a91.15.2026.10.04.06.57.15
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a78d4a869esm7285868a91.2.2026.10.04.07.35.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Oct 2026 06:57:18 -0700 (PDT)
+        Sun, 04 Oct 2026 07:35:11 -0700 (PDT)
 From: Yang Wen <anmuxixixi@gmail.com>
 To: linkinjeon@kernel.org,
-	sj1557.seo@samsung.com,
-	chizhiling@163.com
+	hyc.lee@gmail.com
 Cc: yuezhang.mo@sony.com,
 	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
+	David Anderson <dvander@google.com>,
 	Yang Wen <anmuxixixi@gmail.com>
-Subject: [PATCH v7 3/3] exfat: reclaim name filters under memory pressure
-Date: Sun,  4 Oct 2026 21:56:38 +0800
-Message-Id: <20261004135638.1888530-4-anmuxixixi@gmail.com>
+Subject: [PATCH] fsck: prevent overflows from invalid clu_count and vol_length
+Date: Sun,  4 Oct 2026 22:34:52 +0800
+Message-Id: <20261004143452.1902108-1-anmuxixixi@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261004135638.1888530-1-anmuxixixi@gmail.com>
-References: <20261004135638.1888530-1-anmuxixixi@gmail.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -81,316 +76,154 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Each active large directory can hold a dynamically sized name filter with a
-bitmap of up to 4 MiB. Add a per-superblock LRU and shrinker so filters can
-be reclaimed when memory is tight. Account reclaimable filters in pages so
-reclaim cost tracks their differing allocation sizes.
+From: David Anderson <dvander@google.com>
 
-Keep the scan budget initialized by the shrinker core instead of replacing
-it with the number of filters freed. If the LRU is already empty, return
-SHRINK_STOP. This guarantees that do_shrink_slab() either consumes its scan
-budget or stops, even when the LRU becomes empty before nr_to_scan is
-satisfied.
+Malformed exFAT boot-sector values can cause arithmetic overflows in
+read_boot_region(), resulting in an out-of-bounds read.
 
+Validate vol_length, clu_offset, and clu_count before using them in
+cluster-count calculations. Also perform DIV_ROUND_UP arithmetic using
+uint64_t to prevent intermediate overflow.
+
+This issue is tracked as CVE-2026-45531.
+
+Link: https://source.android.com/docs/security/bulletin/2026/2026-09-01
 Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
 ---
- fs/exfat/dir.c      | 159 +++++++++++++++++++++++++++++++++++++++++++-
- fs/exfat/exfat_fs.h |  10 +++
- fs/exfat/super.c    |   8 +++
- 3 files changed, 174 insertions(+), 3 deletions(-)
+ fsck/fsck.c                               |  20 ++++++++++++++++++--
+ include/libexfat.h                        |   2 +-
+ tests/clu_count_overflow/exfat.img.tar.xz | Bin 0 -> 3636 bytes
+ 3 files changed, 19 insertions(+), 3 deletions(-)
+ create mode 100644 tests/clu_count_overflow/exfat.img.tar.xz
 
-diff --git a/fs/exfat/dir.c b/fs/exfat/dir.c
-index 9f9183116784..cf780f7f540c 100644
---- a/fs/exfat/dir.c
-+++ b/fs/exfat/dir.c
-@@ -10,6 +10,7 @@
- #include <linux/filelock.h>
- #include <linux/hash.h>
- #include <linux/log2.h>
-+#include <linux/shrinker.h>
- #include <linux/stringhash.h>
- 
- #include "exfat_raw.h"
-@@ -127,12 +128,158 @@ static bool exfat_name_filter_set(struct exfat_name_filter *filter,
- 	return filter->nr_set_bits >= nr_bits / 3;
- }
- 
-+static unsigned long
-+exfat_name_filter_nr_pages(const struct exfat_name_filter *filter)
-+{
-+	size_t size = struct_size(filter, bitmap,
-+				  BITS_TO_LONGS(BIT(filter->order)));
-+
-+	return DIV_ROUND_UP(size, PAGE_SIZE);
-+}
-+
-+static struct exfat_name_filter *
-+exfat_name_filter_detach_locked(struct exfat_sb_info *sbi,
-+				struct exfat_inode_info *ei)
-+{
-+	struct exfat_name_filter *filter = ei->name_filter;
-+
-+	if (!filter)
-+		return NULL;
-+
-+	ei->name_filter = NULL;
-+	list_del_init(&ei->name_filter_lru);
-+	sbi->name_filter_pages -= exfat_name_filter_nr_pages(filter);
-+	return filter;
-+}
-+
-+static void exfat_name_filter_touch(struct exfat_inode_info *ei)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(ei->vfs_inode.i_sb);
-+
-+	spin_lock(&sbi->name_filter_lock);
-+	if (ei->name_filter)
-+		list_move_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
-+	spin_unlock(&sbi->name_filter_lock);
-+}
-+
- void exfat_name_filter_free(struct inode *inode)
- {
- 	struct exfat_inode_info *ei = EXFAT_I(inode);
-+	struct exfat_sb_info *sbi;
-+	struct exfat_name_filter *filter;
- 
--	kvfree(ei->name_filter);
--	ei->name_filter = NULL;
-+	if (!READ_ONCE(ei->name_filter))
-+		return;
-+
-+	sbi = EXFAT_SB(inode->i_sb);
-+	spin_lock(&sbi->name_filter_lock);
-+	filter = exfat_name_filter_detach_locked(sbi, ei);
-+	spin_unlock(&sbi->name_filter_lock);
-+	kvfree(filter);
-+}
-+
-+static unsigned long
-+exfat_name_filter_count_objects(struct shrinker *shrinker,
-+				struct shrink_control *sc)
-+{
-+	struct exfat_sb_info *sbi = shrinker->private_data;
-+	unsigned long pages;
-+
-+	spin_lock(&sbi->name_filter_lock);
-+	pages = sbi->name_filter_pages;
-+	spin_unlock(&sbi->name_filter_lock);
-+
-+	return pages ? pages : SHRINK_EMPTY;
-+}
-+
-+static unsigned long
-+exfat_name_filter_scan_objects(struct shrinker *shrinker,
-+			       struct shrink_control *sc)
-+{
-+	struct exfat_sb_info *sbi = shrinker->private_data;
-+	unsigned long freed = 0;
-+	bool empty = false;
-+
-+	/* Avoid reclaim recursion from a GFP_NOFS allocation under s_lock. */
-+	if (!mutex_trylock(&sbi->s_lock)) {
-+		sc->nr_scanned = 0;
-+		return SHRINK_STOP;
-+	}
-+
-+	while (freed < sc->nr_to_scan) {
-+		struct exfat_inode_info *ei;
-+		struct exfat_name_filter *filter;
-+
-+		spin_lock(&sbi->name_filter_lock);
-+		if (list_empty(&sbi->name_filter_lru)) {
-+			spin_unlock(&sbi->name_filter_lock);
-+			empty = true;
-+			break;
-+		}
-+
-+		ei = list_first_entry(&sbi->name_filter_lru,
-+				      struct exfat_inode_info,
-+				      name_filter_lru);
-+		filter = exfat_name_filter_detach_locked(sbi, ei);
-+		spin_unlock(&sbi->name_filter_lock);
-+
-+		freed += exfat_name_filter_nr_pages(filter);
-+		kvfree(filter);
-+		cond_resched();
-+	}
-+
-+	mutex_unlock(&sbi->s_lock);
-+	if (empty && !freed) {
-+		sc->nr_scanned = 0;
-+		return SHRINK_STOP;
-+	}
-+	return freed;
-+}
-+
-+void exfat_name_filter_shrinker_register(struct super_block *sb)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
-+	struct shrinker *shrinker;
-+
-+	shrinker = shrinker_alloc(SHRINKER_NONSLAB,
-+				  "exfat-name-filter:%s", sb->s_id);
-+	if (!shrinker) {
-+		exfat_warn(sb, "failed to allocate name filter shrinker");
-+		return;
-+	}
-+
-+	shrinker->count_objects = exfat_name_filter_count_objects;
-+	shrinker->scan_objects = exfat_name_filter_scan_objects;
-+	shrinker->private_data = sbi;
-+	shrinker_register(shrinker);
-+	sbi->name_filter_shrinker = shrinker;
-+}
-+
-+void exfat_name_filter_shrinker_unregister(struct super_block *sb)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
-+	struct shrinker *shrinker = sbi->name_filter_shrinker;
-+
-+	sbi->name_filter_shrinker = NULL;
-+	shrinker_free(shrinker);
-+
-+	for (;;) {
-+		struct exfat_inode_info *ei;
-+		struct exfat_name_filter *filter;
-+
-+		spin_lock(&sbi->name_filter_lock);
-+		if (list_empty(&sbi->name_filter_lru)) {
-+			spin_unlock(&sbi->name_filter_lock);
-+			break;
-+		}
-+
-+		ei = list_first_entry(&sbi->name_filter_lru,
-+				      struct exfat_inode_info,
-+				      name_filter_lru);
-+		filter = exfat_name_filter_detach_locked(sbi, ei);
-+		spin_unlock(&sbi->name_filter_lock);
-+		kvfree(filter);
-+	}
- }
- 
- bool exfat_name_filter_maybe_contains(struct inode *inode,
-@@ -145,6 +292,7 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
- 	if (!filter)
- 		return true;
- 
-+	exfat_name_filter_touch(ei);
- 	exfat_name_filter_indexes(inode->i_sb, name, filter->order, indexes);
- 	return test_bit(indexes[0], filter->bitmap) &&
- 	       test_bit(indexes[1], filter->bitmap) &&
-@@ -161,6 +309,7 @@ void exfat_name_filter_add(struct inode *inode,
- 	if (!filter)
- 		return;
- 
-+	exfat_name_filter_touch(ei);
- 	if (exfat_name_filter_order(inode) > filter->order) {
- 		exfat_name_filter_free(inode);
- 		return;
-@@ -188,7 +337,7 @@ static void exfat_build_name_filter(struct super_block *sb,
- 	u8 order;
- 	int i;
- 
--	if (ei->name_filter ||
-+	if (!sbi->name_filter_shrinker || ei->name_filter ||
- 	    exfat_bytes_to_dentries(i_size_read(inode)) <
- 					EXFAT_NAME_FILTER_MIN_DENTRIES)
- 		return;
-@@ -240,7 +389,11 @@ static void exfat_build_name_filter(struct super_block *sb,
+diff --git a/fsck/fsck.c b/fsck/fsck.c
+index 5447154..ed8b505 100644
+--- a/fsck/fsck.c
++++ b/fsck/fsck.c
+@@ -447,8 +447,7 @@ static int read_boot_region(struct exfat_blk_dev *bd, struct pbr **pbr,
+ 		goto err;
  	}
  
- complete:
-+	spin_lock(&sbi->name_filter_lock);
- 	ei->name_filter = filter;
-+	list_add_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
-+	sbi->name_filter_pages += exfat_name_filter_nr_pages(filter);
-+	spin_unlock(&sbi->name_filter_lock);
- 	return;
- abort:
- 	kvfree(filter);
-diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
-index 70f4e2d4ac81..159c1aa40372 100644
---- a/fs/exfat/exfat_fs.h
-+++ b/fs/exfat/exfat_fs.h
-@@ -14,6 +14,8 @@
- #include <uapi/linux/exfat.h>
- #include <linux/buffer_head.h>
- 
-+struct shrinker;
-+
- #define EXFAT_ROOT_INO		1
- 
- /*
-@@ -265,6 +267,11 @@ struct exfat_sb_info {
- 
- 	spinlock_t inode_hash_lock;
- 	struct hlist_head inode_hashtable[EXFAT_HASH_SIZE];
-+	/* Protects name_filter_lru and name_filter_pages. */
-+	spinlock_t name_filter_lock;
-+	struct list_head name_filter_lru;
-+	unsigned long name_filter_pages;
-+	struct shrinker *name_filter_shrinker;
- 	struct rcu_head rcu;
- };
- 
-@@ -296,6 +303,7 @@ struct exfat_inode_info {
- 	struct exfat_hint_femp hint_femp;
- 	/* Complete, in-memory Bloom filter of directory names */
- 	struct exfat_name_filter *name_filter;
-+	struct list_head name_filter_lru;
- 
- 	spinlock_t cache_lru_lock;
- 	struct list_head cache_lru;
-@@ -637,6 +645,8 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
- void exfat_name_filter_add(struct inode *inode,
- 			   const struct exfat_uni_name *name);
- void exfat_name_filter_free(struct inode *inode);
-+void exfat_name_filter_shrinker_register(struct super_block *sb);
-+void exfat_name_filter_shrinker_unregister(struct super_block *sb);
- 
- static inline int exfat_chain_advance(struct super_block *sb,
- 		struct exfat_chain *chain, unsigned int step)
-diff --git a/fs/exfat/super.c b/fs/exfat/super.c
-index 4924f0fad836..26b25cc86d1c 100644
---- a/fs/exfat/super.c
-+++ b/fs/exfat/super.c
-@@ -46,6 +46,7 @@ static void exfat_put_super(struct super_block *sb)
- {
- 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
- 
-+	exfat_name_filter_shrinker_unregister(sb);
- 	mutex_lock(&sbi->s_lock);
- 	exfat_clear_volume_dirty(sb);
- 	exfat_free_bitmap(sbi);
-@@ -210,6 +211,7 @@ static struct inode *exfat_alloc_inode(struct super_block *sb)
- 		return NULL;
- 
- 	ei->name_filter = NULL;
-+	INIT_LIST_HEAD(&ei->name_filter_lru);
- 	return &ei->vfs_inode;
- }
- 
-@@ -746,6 +748,8 @@ static int exfat_fill_super(struct super_block *sb, struct fs_context *fc)
- 		goto free_table;
+-	if (le64_to_cpu(bs->bsx.vol_length) * EXFAT_SECTOR_SIZE(bs) >
+-			bd->size) {
++	if (le64_to_cpu(bs->bsx.vol_length) > (bd->size >> bs->bsx.sect_size_bits)) {
+ 		if (verbose)
+ 			exfat_err("too large sector count: %" PRIu64 ", expected: %llu\n",
+ 				  le64_to_cpu(bs->bsx.vol_length),
+@@ -456,6 +455,23 @@ static int read_boot_region(struct exfat_blk_dev *bd, struct pbr **pbr,
+ 		goto err;
  	}
  
-+	exfat_name_filter_shrinker_register(sb);
++	/* Prevent underflow when subtracting clu_offset from vol_length */
++	if (le32_to_cpu(bs->bsx.clu_offset) >= le64_to_cpu(bs->bsx.vol_length)) {
++		if (verbose)
++			exfat_err("cluster offset %u exceeds volume length %" PRIu64 "\n",
++				  le32_to_cpu(bs->bsx.clu_offset),
++				  le64_to_cpu(bs->bsx.vol_length));
++		goto err;
++	}
 +
- 	return 0;
++	/* Cap clu_count to the spec limit to prevent overflow */
++	if (le32_to_cpu(bs->bsx.clu_count) > EXFAT_MAX_NUM_CLUSTER) {
++		if (verbose)
++			exfat_err("too large cluster count: %u, max allowed: %u\n",
++				  le32_to_cpu(bs->bsx.clu_count), EXFAT_MAX_NUM_CLUSTER);
++		goto err;
++	}
++
+ 	clu_max_count = (le64_to_cpu(bs->bsx.vol_length) - le32_to_cpu(bs->bsx.clu_offset)) >>
+ 				bs->bsx.sect_per_clus_bits;
+ 	if (le32_to_cpu(bs->bsx.clu_count) > clu_max_count) {
+diff --git a/include/libexfat.h b/include/libexfat.h
+index fbf0668..65f13dd 100644
+--- a/include/libexfat.h
++++ b/include/libexfat.h
+@@ -24,7 +24,7 @@ typedef __u32 clus_t;
+ #define MIN(a, b)	((a) < (b) ? (a) : (b))
+ #define MAX(a, b)	((a) > (b) ? (a) : (b))
  
- put_inode:
-@@ -845,6 +849,10 @@ static int exfat_init_fs_context(struct fs_context *fc)
+-#define DIV_ROUND_UP(__i, __d)	(((__i) + (__d) - 1) / (__d))
++#define DIV_ROUND_UP(__i, __d)	(((uint64_t)(__i) + (__d) - 1) / (__d))
  
- 	mutex_init(&sbi->s_lock);
- 	mutex_init(&sbi->bitmap_lock);
-+	spin_lock_init(&sbi->name_filter_lock);
-+	INIT_LIST_HEAD(&sbi->name_filter_lru);
-+	sbi->name_filter_pages = 0;
-+	sbi->name_filter_shrinker = NULL;
- 	ratelimit_state_init(&sbi->ratelimit, DEFAULT_RATELIMIT_INTERVAL,
- 			DEFAULT_RATELIMIT_BURST);
- 
+ #define EXFAT_MIN_NUM_SEC_VOL		(2048)
+ #define EXFAT_MAX_NUM_SEC_VOL		((2 << 64) - 1)
+diff --git a/tests/clu_count_overflow/exfat.img.tar.xz b/tests/clu_count_overflow/exfat.img.tar.xz
+new file mode 100644
+index 0000000000000000000000000000000000000000..bd0f0853a32f476a3afafd483ae5ba5fc5b3b66a
+GIT binary patch
+literal 3636
+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
+O9`ZZ^{yPfo9sU7J?g+sE
+
+literal 0
+HcmV?d00001
+
+
+base-commit: 2399fbe848f57aff15ef3a7db4bf852e0de0d0e9
 -- 
 2.34.1
 
