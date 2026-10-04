@@ -1,29 +1,30 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C215920E023
-	for <exfat@lists.linux.dev>; Sun,  4 Oct 2026 02:59:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C5693B6C1E
+	for <exfat@lists.linux.dev>; Sun,  4 Oct 2026 10:20:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791082789; cv=none; b=Xds4odys1/sTOj0kY7oJELfLgpaaoSLFV1kBgWnp+d27vzv+U/1oiBd7My5FlkB4BWRXHk+zKBFrZaoH/GP6DpqM2FVh9B3TmS+byQ3Z6MDHRfzrSquiF72s4hJOn2dvjy60tAQcEE6RCcSGwQP1f2pv0v6LMeBIeUdPa7W1hC0=
+	t=1791109218; cv=none; b=ZOK9Yn2xTjrbFQk0LJ8vwXZeWRNl7+eIIHeQCDA3yOzG/7ZyqXKyy4xBCtfb4fixm0VuuMiDeRwWyoJpqmG+Nh0p2qvAJ7SR+K77C8Ru7K/R+gJBaWeKF1ASIbb3pTT3Fflb5czejYwFsBxH/emJ+YLDW62RFdSFPbGSaoYtUGU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791082789; c=relaxed/simple;
-	bh=DQEGPL0sJiIevbEEl6cXB0XP/D9IVuBPPkikZMTbS4A=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dZdhrML4ZSAwZVHOdKuNxDX35jZBs5PL2BpAkq6P0piB4cU6bFIwSb2d7VtBZ7JZPmCP2CGepjv1QLvxKM+PS3gdp9gR68LOaZvCizBTsrFPP5Sv2XbbgJpvzFd9oHVXDATpB0U0Fr13UPAkQoa45Qy06Q7kY2iJ7YnRQhpkYQw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=hjLZq+Qh; arc=none smtp.client-ip=117.135.210.5
+	s=arc-20240116; t=1791109218; c=relaxed/simple;
+	bh=kqaL7ihrMOLXwMT1cXEKvNMh4tLq+4kGfbCXFE0tXLE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=a3lXv7j3wOcP+NNaXityviIx28qlgYcQn2v0H1YtNfIrOtS1sP1Ca9ik817U0Qx4dkD6x2zOFOO+RDkMsbKrVcbDjSwku9GMYUu/BjuFl3E3wfDEzO1mTs0RTrqm38LnMlc0Wp3xKhW2xnvEqli8qfEYJNuSjeAAqB33zsg9oHQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=llN3MBxj; arc=none smtp.client-ip=220.197.31.5
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="hjLZq+Qh"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="llN3MBxj"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=EL
-	F5A/GLLBvIP+UWXVTG79PIal5/PwJaYOFeHUDKhCo=; b=hjLZq+Qhm1UmNXPgEt
-	REcdGtgogoN+TUiZ0rin7LoJTwSpl8DjO98hrZ0agVMQ2v+yHpmvbgy7KpdBmYMW
-	/LtDPmYHdEH4ZAkE/ycib7VGt/3qKnzYbDyOi74mBWvgpzRdHcNWRJqmF6XvvQzJ
-	nZF9beIVkoglZwEwJqqlgm9rw=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=8D
+	A33G3PMGkkRtLvHlImnqeYVoOOTU+86ytzFekoRVY=; b=llN3MBxj0MPXBabnO3
+	B8UFbTyh782GeB+QOG8QhqFBx9qv31uEQHUcLXg1O0E2+yiDfEsTQ6jqp5FdLwbG
+	wNwnT3kTTm7PrjKiEQ2ckWE1WrCTVKsHpP+dNMvzO+QyF208BsWqEG3DXsqeMDn+
+	F/ptAxOCugKIYJXu984tlDAsU=
 Received: from czl-pc (unknown [])
-	by gzsmtp2 (Coremail) with SMTP id PSgvCgB3HLn9wMFqhREUCg--.6715S2;
-	Sun, 04 Oct 2026 10:59:09 +0800 (CST)
+	by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id _____wD3361AKMJqYRaTCQ--.22355S3;
+	Sun, 04 Oct 2026 18:19:47 +0800 (CST)
 From: Chi Zhiling <chizhiling@163.com>
 To: exfat@lists.linux.dev,
 	linux-kernel@vger.kernel.org
@@ -32,10 +33,12 @@ Cc: Yuezhang.Mo@sony.com,
 	linkinjeon@kernel.org,
 	sj1557.seo@samsung.com,
 	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH 0/4] exfat: fix VDL tracking bugs
-Date: Sun,  4 Oct 2026 10:59:03 +0800
-Message-ID: <20261004025907.1899933-1-chizhiling@163.com>
+Subject: [PATCH v2 1/4] exfat: advance valid_size to EOF for append writes
+Date: Sun,  4 Oct 2026 18:19:30 +0800
+Message-ID: <20261004101934.1975655-2-chizhiling@163.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261004101934.1975655-1-chizhiling@163.com>
+References: <20261004101934.1975655-1-chizhiling@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -43,56 +46,87 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PSgvCgB3HLn9wMFqhREUCg--.6715S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxJr15ur47Kw1rJw1UuFyDJrb_yoW8AFWUpa
-	y3K3WfGrWDK34xZryfZw1rt3WY9w1fXr17Wr93t348ArnIkrn7AFWjqFWFg3y5t3s3G3W2
-	qF4qqFWrKFnrGrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UWv35UUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3B96GGrBwP-wlQAA3Q
+X-CM-TRANSID:_____wD3361AKMJqYRaTCQ--.22355S3
+X-Coremail-Antispam: 1Uf129KBjvJXoW7CF47Gr1rtF4rGr4kJw4Dtwb_yoW8Kr4fpF
+	Wak3W5ArWIq3y3Gr1xGFs8Z3WrK3Z3trWxX3sYkan8ZrnFyw1fKF1UtFyUKay5t3ykJw4a
+	qa1vyrWDJr17Cw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UNL0OUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2wNlA2rCKEM7RwAA3B
 
 From: Chi Zhiling <chizhiling@kylinos.cn>
 
-exFAT tracks a valid data length (VDL) as exfat_inode_info.valid_size:
-below it is valid data, at or above it is a hole that the read paths
-zero-fill.  It is read without the inode lock (->iomap_begin and the
-buffered-read bio completion) and updated from the write, mmap and
-truncate paths, so it must only move forward, and only once the data has
-actually been copied and the folio dirtied.  This series fixes the bugs
-around that invariant:
+For an append write, the write position is recalculated by
+generic_write_checks(). Therefore, the write position must be obtained
+after generic_write_checks() returns.
 
- - An O_APPEND write uses the caller's offset instead of the position
-   recalculated by generic_write_checks(), so valid_size may not be
-   advanced to EOF.
+Using the original write position to advance valid_size may cause the
+valid_size update to be skipped, potentially exposing stale data.
 
- - Truncate does not hold mapping->invalidate_lock, so it can race with
-   an mmap write faulting a page back in for the same range.
+Also move the truncate_pagecache() check below the recalculated
+position, so that pos is never read before it is assigned.
 
- - exfat_zero_new_range() does not dirty non-uptodate pages, so some of
-   the zeroed blocks are never written back.
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/file.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-Patch 4 converts valid_size and zeroed_size to monotonic atomic counters
-as a prerequisite for updating valid_size from contexts that do not hold
-i_rwsem.
-
-This series was split from:
-https://lore.kernel.org/exfat/20261003033032.1775311-1-chizhiling@163.com/T/#t
-The other patches still need some improvement.
-
-Chi Zhiling (4):
-  exfat: advance valid_size to EOF for append writes
-  exfat: hold the invalidate lock while truncating
-  exfat: dirty all new pages when extending valid_size
-  exfat: make valid_size and zeroed_size atomic
-
- fs/exfat/exfat_fs.h |  60 +++++++++++++++++-
- fs/exfat/file.c     | 144 ++++++++++++++------------------------------
- fs/exfat/inode.c    |  16 ++---
- fs/exfat/iomap.c    |  20 +++---
- fs/exfat/namei.c    |   4 +-
- 5 files changed, 123 insertions(+), 121 deletions(-)
-
-
-base-commit: 216426aff8f69379f03337857551ca0ed3190361
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index a2a9ee1a2004..b30aec858da6 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -854,8 +854,7 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 	struct file *file = iocb->ki_filp;
+ 	struct inode *inode = file_inode(file);
+ 	struct exfat_inode_info *ei = EXFAT_I(inode);
+-	loff_t pos = iocb->ki_pos;
+-	loff_t valid_size;
++	loff_t pos, valid_size;
+ 	int err;
+ 
+ 	if (unlikely(exfat_forced_shutdown(inode->i_sb)))
+@@ -863,11 +862,6 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 
+ 	inode_lock(inode);
+ 
+-	if (pos > i_size_read(inode))
+-		truncate_pagecache(inode, i_size_read(inode));
+-
+-	valid_size = ei->valid_size;
+-
+ 	ret = generic_write_checks(iocb, iter);
+ 	if (ret <= 0)
+ 		goto unlock;
+@@ -878,6 +872,11 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 		goto unlock;
+ 	}
+ 
++	pos = iocb->ki_pos;
++	if (pos > i_size_read(inode))
++		truncate_pagecache(inode, i_size_read(inode));
++
++	valid_size = ei->valid_size;
+ 	if (pos > valid_size) {
+ 		ret = exfat_extend_valid_size(inode, pos);
+ 		if (ret < 0 && ret != -ENOSPC) {
+@@ -887,6 +886,8 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 		}
+ 		if (ret < 0)
+ 			goto unlock;
++
++		pos = valid_size;
+ 	}
+ 
+ 	if (iocb->ki_flags & IOCB_DIRECT)
+@@ -899,9 +900,6 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 
+ 	inode_unlock(inode);
+ 
+-	if (pos > valid_size)
+-		pos = valid_size;
+-
+ 	if (iocb->ki_pos > pos) {
+ 		ssize_t err = generic_write_sync(iocb, iocb->ki_pos - pos);
+ 
 -- 
 2.53.0
 
