@@ -1,73 +1,75 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 102527404E
-	for <exfat@lists.linux.dev>; Wed,  7 Oct 2026 04:48:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FF1B3BAD9B
+	for <exfat@lists.linux.dev>; Wed,  7 Oct 2026 04:54:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791348497; cv=none; b=NcugOEyFqOvet2ti3IRZB2mvk+70CeDAMWcFwkMz+maDTDH5klO/kzNm7kzrh5jsaa+kqMC8/bsleOhVZCYcC80MsVEGfAS5wIfefAfYaQUH/vAFye0PhuL2ePb0FjhZUpnYncKWb5jNVMuGdfWr0BoeKUCg5ewweywpEQcJPfc=
+	t=1791348892; cv=none; b=qyQ2+4sOUZVTk2GcjORsOJIV1dGKygANywGgk3xTSkcDi1U3pFH0jRX5wgneCS3vDhwi40EF4OoSYv93eF+7FWd8IitRBPzyTvoOqnqcBebNixeCoyjieC9bgfsC3vJtSY8j7aa96RjvowD3481ERQkhVjhh4JfF0ZxhDdRVBjk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791348497; c=relaxed/simple;
-	bh=LUOwIF/+RKSg4yeAuSHwTalkrYAuYrT8ZtBENuizEq4=;
+	s=arc-20240116; t=1791348892; c=relaxed/simple;
+	bh=R4gxAiy2cYP4HjSob6btlec55W1JEftO29AboCedots=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hjmxcgv2pFsLKRT4fBfoVkXvi9k5apXMGuAgN6aiSefyqW34ezHfEWv467gtlFf43VZxAKamQQuXzrOU84ua3SgTL4YSYuwVQk3TvnznzzowBIIznAWijXqdODn/2eMhqvo4BB9xpC586usqNAZsyTczTuEZNbPIOY6b9yygbPE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c66NvjnN; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=HJllT5xgfh+GuLpQpPAp2qb/J3UcSyQ7SM4Qo0s0OdjhMRUqCzlfJurGFnEfpTg2hj+EmnqVvYLqHvcgxwP9vR+wXG3jhfPhOjWRSlvURA9EE5tMCI4X8AJkIDnY8g4cynMfj2oJs7XPL++TGTU+yciIzKE8gunuMLljahwPq3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K5jaul2f; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c66NvjnN"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC0F11F0089F
-	for <exfat@lists.linux.dev>; Wed,  7 Oct 2026 04:48:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K5jaul2f"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F22A1F0089E
+	for <exfat@lists.linux.dev>; Wed,  7 Oct 2026 04:54:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791348496;
-	bh=LI/GifCYkuyachy7bv9KoRPB+5bzVn2Chv8jale9T0E=;
+	s=k20260515; t=1791348891;
+	bh=T2jk9xEUwiDWFHfF7VDejdB8L90v70T2lBCf/w8ZGHg=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=c66NvjnNcdEWzLOlRO43M/oCgHpFTx5N6QOluYzF2FsuqaqZ9kSlksDekIxYjGa/p
-	 IYpPf1UN5oBSRCF7kclHg9yHYtFk3bJf+Bm9MoR04KDz4O3EvKgi2ZsDVkbRMO4yAP
-	 tDTGNmfQHK0XXsKVjCQcwXnrHmM9c8Xwl++dXWl8UpBSRFfJ0ABcsc0Sd5gEhw3M+V
-	 wwPc/z2YtdeSpIldEl0NGdqc6MSsGSykBah1iY+lr5zcS8lBmy+ziV/XfCSNy/xkpN
-	 KqLR60M/DKcqC2dF+Rvfr2C/0tdLaecI9u/m7vhEUPdCI5Z3LqWeYdBqxLDaDiuCJR
-	 cZz42FatNFYrw==
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c2e5d08214dso526770366b.1
-        for <exfat@lists.linux.dev>; Tue, 06 Oct 2026 21:48:16 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwX63QgzUbxLCYHYILuewzobz18urpORrVZ+kUz0SVOuJ2tqEP+gpy4sJ4NBqoNZgofuygMYA==@lists.linux.dev
-X-Gm-Message-State: AFuF++mPWhQfwxjBLUAxEa6YqAhSGSWUlIALBxdMY7QBVeo1jYkbNieF
-	ugLVB1QFku4xXBh1We9M2J7Ro99XuU3DMLirhAYg0XYfMaAr4AjhzjlB08+Xkk7CEqcb844xuPm
-	WAOv83qThUA70kx82BWZMIp8KlKFW3qg=
-X-Received: by 2002:a17:907:3e20:b0:c2e:4f16:fbf with SMTP id
- a640c23a62f3a-c317c09e5c1mr89396466b.31.1791348495342; Tue, 06 Oct 2026
- 21:48:15 -0700 (PDT)
+	b=K5jaul2fphUpM0dOMlL8eeMhjQRQZUCm5HGXOzw3EjLMtu+7+HfY3Ob3RSVRkZeG5
+	 N163ct4hYUCfaZsU3l04YpaKGEU3qMRgW2MNVxmPb9wjymyRPIJXN+6uFUBW5g1Mz6
+	 SlkHGoTFx64Ar+7ZeP6+hBzWDYb6bm4yFiaGIt2BcUPt7XEFX7h5mdDNIEh+ygGdDX
+	 12nbFRTeDg6p1FqnPaB/9bmzQz2B4emQpuVjgRnyfumk8T8ffOjMGsCdu+hJ7hqeRK
+	 9BdqeauiHm3eF7dUa98+z3Nx0onCDtwXljy2Zr8fUzWsNca5RPLaqA+X7iprw6R0JS
+	 RiKIa7/YVWeYQ==
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6aaebeadf3cso2518782a12.3
+        for <exfat@lists.linux.dev>; Tue, 06 Oct 2026 21:54:51 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBz9dtHU3F0X6zY8W7rG5Qe5VSauHnpzlt1Euoo5gK9F9ELi0DybEGXSAFIEv6R2TYpRIGyX8g==@lists.linux.dev
+X-Gm-Message-State: AFuF++mYMTG0tXykqwUxU+lAR8N2pinpeI0OCirOgUT0e7KwzaQntTqB
+	fGqSzjK5ItgWcCNSxaI8ydny3QEYNeTepmtFZvXs5V1t3nlQg8DMmiNJDvDcCSaSPVtqXzA+npz
+	/YlNIQGEmH8Cveqw4AiB7mKWH6l8suZU=
+X-Received: by 2002:a17:906:dc8d:b0:c26:1648:a065 with SMTP id
+ a640c23a62f3a-c317bf59dd0mr107496266b.32.1791348889771; Tue, 06 Oct 2026
+ 21:54:49 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20261004135638.1888530-1-anmuxixixi@gmail.com> <20261004135638.1888530-2-anmuxixixi@gmail.com>
-In-Reply-To: <20261004135638.1888530-2-anmuxixixi@gmail.com>
+References: <20261004135638.1888530-1-anmuxixixi@gmail.com> <20261004135638.1888530-3-anmuxixixi@gmail.com>
+In-Reply-To: <20261004135638.1888530-3-anmuxixixi@gmail.com>
 From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Wed, 7 Oct 2026 13:48:02 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd9d9qzt2mxQNQoUiwHR6EkzxD2LAPWijY2DxSV8gYLkJQ@mail.gmail.com>
-X-Gm-Features: AclHuK9U2Ugsb7y5_33gEeoGDoTuYmFee95M_cfEaV0iY9mMTQN8iU9mA3G9Xco
-Message-ID: <CAKYAXd9d9qzt2mxQNQoUiwHR6EkzxD2LAPWijY2DxSV8gYLkJQ@mail.gmail.com>
-Subject: Re: [PATCH v7 1/3] exfat: add a Bloom filter for negative name lookups
+Date: Wed, 7 Oct 2026 13:54:36 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9xR8URbVbf6+yvQc3MKBGuzNc_8N8WW4DjpyjLBW+Xtg@mail.gmail.com>
+X-Gm-Features: AclHuK_jlgqNw8J9J20L0doQoEPpwY7vhQahkbwZILi-EzvIQNqo9U2hgj4rwdE
+Message-ID: <CAKYAXd9xR8URbVbf6+yvQc3MKBGuzNc_8N8WW4DjpyjLBW+Xtg@mail.gmail.com>
+Subject: Re: [PATCH v7 2/3] exfat: retain the next empty directory entry hint
 To: Yang Wen <anmuxixixi@gmail.com>
 Cc: sj1557.seo@samsung.com, chizhiling@163.com, yuezhang.mo@sony.com, 
 	exfat@lists.linux.dev, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
->  /* read a directory entry from the opened directory */
->  static int exfat_readdir(struct inode *inode, loff_t *cpos, struct exfat_dir_entry *dir_entry)
->  {
-> @@ -1035,6 +1216,8 @@ int exfat_find_dir_entry(struct super_block *sb, struct exfat_inode_info *ei,
+> @@ -309,8 +358,9 @@ int exfat_find_empty_entry(struct inode *inode,
+>         hint_femp.eidx = EXFAT_HINT_NONE;
 >
->         if (num_entries < 0)
->                 return num_entries;
-> +       if (!exfat_name_filter_maybe_contains(&ei->vfs_inode, p_uniname))
-> +               return -ENOENT;
-This early return bypasses the normal lookup path, which resets or
-rebuilds ei->hint_femp. For example, a prior FS_IOC_GETFSLABEL on a
-volume without a label can leave a root-directory hint with cur.size
-set to zero. 0002 patch marks that hint as usable for any create
-through min_entries = 1. If the first deleted run is too short and the
-search crosses a cluster boundary, exfat_chain_advance() sees a zero
-length chain and returns -EIO. Could this path invalidate the hint, or
-could the volume-label scan avoid publishing an invalid chain hint?
+>         if (ei->hint_femp.eidx != EXFAT_HINT_NONE) {
+> -               hint_femp = ei->hint_femp;
+> -               ei->hint_femp.eidx = EXFAT_HINT_NONE;
+> +               if (num_entries >= ei->hint_femp.min_entries)
+This size check does not establish that the hint covers the beginning
+of the directory. exfat_find_dir_entry() can start at hint_stat.eidx
+and return a positive match without rewinding, while recording deleted
+runs found only in that suffix. later Bloom-filter miss bypasses the
+full scan. This condition can then reuse the suffix-only hint and skip
+a larger free run earlier in the directory. That can cause unnecessary
+directory growth and, if growth is impossible, a false -ENOSPC. Could
+hints from partial scans be invalidated or marked unusable before
+reuse?
+
+> +                       hint_femp = ei->hint_femp;
+> +               exfat_invalidate_empty_hint(inode);
