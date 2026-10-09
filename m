@@ -1,181 +1,87 @@
-Received: from jpms-ob01-os7.noc.sony.co.jp (jpms-ob01-os7.noc.sony.co.jp [211.125.139.71])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0830049D5A8
-	for <exfat@lists.linux.dev>; Fri,  9 Oct 2026 09:41:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.125.139.71
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 740A34E4321
+	for <exfat@lists.linux.dev>; Fri,  9 Oct 2026 14:12:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791538917; cv=none; b=u61fkt0NJN0SrbkaPn+Bg/BOgcR9od2D/XnAwyQpI5WgtJ5oejtZd9OeWuYu9dlKq2c446FxsG2IIgzObZMqkLKhl61cquY7nSikgtOK71X64I3nGXMRWZXFeKTnRjRKGi1zI6jAh8Zmtk5PRuwVYb9yVhAozgCLvgrrxUyqf7k=
+	t=1791555178; cv=none; b=cp6J6BMUXRgw4i6Zhbq3Os6HInsIxLj5Wq/9yj7+1zoaHktwvHW31k464fj4YXqwYKDbcGXpW6Jzg8e2UFwCOlclmr9uY1RX3bVE8DECNsePPzPyMALWDe0tu/8wP0JH7rn9TAxilH90OztvIKHD6arii7QqJgrp0vzabDy60J0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791538917; c=relaxed/simple;
-	bh=V+j+Anp8GyyWs81jNLTLZD14njbyzPBqJ1PR3EV0DOA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=p8pNiYlsjWEEYSUAsnvxkCfBcmAg1PlCIzyfAXbLkHlYw5nvV2iLJMKkRReB9wSyt+e2uZd3Q2pRPEcQoyiAYSORCUyhAipeeGIntPufmLwUs011GxaCEUxU/sLF4C4/3F/iFsaLSPyADoV9iX6CpmFjenHgqayd0Lh+lJ3g9hg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=fail smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=q80Z6uVA; arc=none smtp.client-ip=211.125.139.71
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=sony.com
+	s=arc-20240116; t=1791555178; c=relaxed/simple;
+	bh=wocjecccdY/ci/ZVU26HIKMQ9QjdMuvBoMdEk+FEx9o=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=pZAR04uKzuex+WMzi6KD/2vW1Ne6/3oXXKMRshdsFtm40xjGYivN6Vj4NMzOVDtm7yZOqL7U+X62dYN0SrZmKRcrYc8TRSm7aR4ox/Ql8OvsxyxiVlp+050KJB3G7sguLWkPjLCDf+F/4xL8nabbAyXHQGPzbamN8Nl2j0BWE5A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XXINKFm+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="q80Z6uVA"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=sony.com; s=s1jp; t=1791538904; x=1823074904;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=rAjwrtbHwf7nrpLFc+O0gQY1kNWsu+pqV/BPaBmEek0=;
-  b=q80Z6uVAWkevpBvpMLGOXGdCMXPMcxWINI1Fzy7RAjVpJwjH4RzE+cFf
-   rRIeAGTl69Uapaka0rOXYK97r228edfP7I9nDBCjhvqgCCJp38lSbjWsb
-   AN9AgK6K6KwD4Un3EbzH02WqaJa502cXiRuyLKHTl0y+l8BUsBwz40CkW
-   IFqUevvAUC7qqLXdSqH6wNzwkV/pn2S+CS4Uv/pmDA7hKpMeoGboZPvPO
-   XkxRwLpj/GrblrppmIclq+1/HaB8pIxiA3KeMkusFJXHl8MQ0YgwGcn+f
-   gnu+oPAjryx7uu4iBGRCF6qlPwu1DaYXpf4s1g1/5CsJLctwTDmxc7nCj
-   Q==;
-X-CSE-ConnectionGUID: 7GHiDs+5TT+31tC2/Rv9/A==
-X-CSE-MsgGUID: GaQ6gpmnQZ6fIdR4id+cYQ==
-Received: from unknown (HELO jpmta-ob01-os7.noc.sony.co.jp) ([IPv6:2001:cf8:acf:1104::6])
-  by jpms-ob01-os7.noc.sony.co.jp with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Oct 2026 18:31:35 +0900
-X-CSE-ConnectionGUID: O8kf2ZvmTvqe58NpQlJ0RQ==
-X-CSE-MsgGUID: wY+UZJhQT2+YOwZ44SLY+g==
-X-IronPort-AV: E=Sophos;i="6.27,148,1786978800"; 
-   d="scan'208";a="71293994"
-Received: from unknown (HELO cscsh-7000014390..) ([43.82.111.225])
-  by jpmta-ob01-os7.noc.sony.co.jp with ESMTP; 09 Oct 2026 18:31:34 +0900
-From: Yuezhang Mo <Yuezhang.Mo@sony.com>
-To: exfat@lists.linux.dev
-Cc: linux-kernel@vger.kernel.org,
-	linkinjeon@kernel.org,
-	sj1557.seo@samsung.com,
-	chizhiling@163.com,
-	dxdt@dev.snart.me,
-	Yuezhang Mo <Yuezhang.Mo@sony.com>
-Subject: [PATCH v2] exfat: mark straddling folio RO and zero the post-EOF range
-Date: Fri,  9 Oct 2026 17:30:22 +0800
-Message-ID: <20261009093020.1018892-3-Yuezhang.Mo@sony.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XXINKFm+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16D3A1F000FF
+	for <exfat@lists.linux.dev>; Fri,  9 Oct 2026 14:12:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791555177;
+	bh=wocjecccdY/ci/ZVU26HIKMQ9QjdMuvBoMdEk+FEx9o=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=XXINKFm+cV59eB8Os1UfKas37rSnpk6v8WvhHmAVSmp+hRDwBsiuqLL0r8kJiAJP6
+	 gPkUJuqV1lU6d753L6CWUGfMfFzUCE7jzs+Caxobl7R5muOM1K5pl4dhbJLCGYpBpv
+	 6o+aJ2bjvSf9KVOjD6/NLDosnNr+s2NvmkeqRFEOD2kSNJtuNbAmY58RTft515PxKb
+	 8w+3/Kp8poKjMYNBNFVbM/nvH/maX8oPPcHyPx6zNo5m9JUQAkD8AH7ohLf6etz32k
+	 /fHgTwEpffo1kqTF6C2Mvxj7gsssxgII/4pXLrhUs/3LSZWa1DQIiS9q2wBA6YbKO4
+	 KO9B9LWWyK8mw==
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c2e62319cfaso665391566b.2
+        for <exfat@lists.linux.dev>; Fri, 09 Oct 2026 07:12:57 -0700 (PDT)
+X-Gm-Message-State: AFq9FYJEkRFwvvBN45tJqW47SaNsf+H+/dYpravSGiK3k3f9MddfMGwZ
+	vdATK3oE1UtLUtSzfWifHc0nKZyHRozI9H+auPhExmOloz4wr3101yeXlfHzT1DTJDaevp6hfoY
+	cTze2VZqdP8kNTCot9F4stgj8Ax07EiQ=
+X-Received: by 2002:a17:907:3e1d:b0:c2e:640f:f9f0 with SMTP id
+ a640c23a62f3a-c31a9a28fdamr243069466b.5.1791555175695; Fri, 09 Oct 2026
+ 07:12:55 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261009093020.1018892-3-Yuezhang.Mo@sony.com>
+In-Reply-To: <20261009093020.1018892-3-Yuezhang.Mo@sony.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Fri, 9 Oct 2026 23:12:41 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd_5PztOY2wAmGzZQpafQobyjziD0NSyphdZ-mzSmmDrkg@mail.gmail.com>
+X-Gm-Features: AclHuK8AK4rUzNI4EFKtplGabIcKRhxh6pDH_Tp1LSS953WdhmJjFp5PxI51LEc
+Message-ID: <CAKYAXd_5PztOY2wAmGzZQpafQobyjziD0NSyphdZ-mzSmmDrkg@mail.gmail.com>
+Subject: Re: [PATCH v2] exfat: mark straddling folio RO and zero the post-EOF range
+To: Yuezhang Mo <Yuezhang.Mo@sony.com>
+Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	sj1557.seo@samsung.com, chizhiling@163.com, dxdt@dev.snart.me
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-When extending a file across a non-page-aligned EOF, the folio
-containing the old EOF must be marked RO so that subsequent mmap
-writes trigger ->page_mkwrite() and update valid_size.
+On Fri, Oct 9, 2026 at 6:31=E2=80=AFPM Yuezhang Mo <Yuezhang.Mo@sony.com> w=
+rote:
+>
+> When extending a file across a non-page-aligned EOF, the folio
+> containing the old EOF must be marked RO so that subsequent mmap
+> writes trigger ->page_mkwrite() and update valid_size.
+>
+> The straddling folio remains mapped to the same filesystem block
+> after the file is extended. As a result, the existing writable PTE
+> may remain in place, allowing mmap writes to bypass ->page_mkwrite()
+> and leave valid_size unchanged.
+>
+> Furthermore, writes to the post-EOF range may occur between
+> truncate_pagecache() and locking the folio, so the post-EOF range
+> should be zeroed after marking the straddling folio RO.
+>
+> Introduce exfat_pagecache_isize_extended() to mark the straddling
+> folio RO and zero the post-EOF range after clearing writable mapping.
+> This ensures that data written beyond the old EOF before the extension
+> is not exposed as valid file data, and that subsequent mmap writes
+> trigger ->page_mkwrite() to update valid_size.
+>
+> Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+> Signed-off-by: Yuezhang Mo <Yuezhang.Mo@sony.com>
 
-The straddling folio remains mapped to the same filesystem block
-after the file is extended. As a result, the existing writable PTE
-may remain in place, allowing mmap writes to bypass ->page_mkwrite()
-and leave valid_size unchanged.
+There are still review comments on sashiko. Please check them.
 
-Furthermore, writes to the post-EOF range may occur between
-truncate_pagecache() and locking the folio, so the post-EOF range
-should be zeroed after marking the straddling folio RO.
+https://sashiko.dev/#/patchset/20261009093020.1018892-3-Yuezhang.Mo%40sony.=
+com
 
-Introduce exfat_pagecache_isize_extended() to mark the straddling
-folio RO and zero the post-EOF range after clearing writable mapping.
-This ensures that data written beyond the old EOF before the extension
-is not exposed as valid file data, and that subsequent mmap writes
-trigger ->page_mkwrite() to update valid_size.
-
-Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
-Signed-off-by: Yuezhang Mo <Yuezhang.Mo@sony.com>
----
-
-v1: https://lore.kernel.org/all/20260930104332.4022207-2-Yuezhang.Mo@sony.com/
-
- fs/exfat/file.c | 60 +++++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 53 insertions(+), 7 deletions(-)
-
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index d24f0650bfc88..ffc49eab77fe5 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -17,11 +17,59 @@
- #include <linux/fileattr.h>
- #include <linux/iomap.h>
- #include <linux/pagemap.h>
-+#include <linux/rmap.h>
- 
- #include "exfat_raw.h"
- #include "exfat_fs.h"
- #include "iomap.h"
- 
-+/*
-+ * Unlike pagecache_isize_extended(), this function does not skip
-+ * the straddling folio when the filesystem block size is >= PAGE_SIZE
-+ * or when 'from' and 'to' fall within the same filesystem block
-+ * (i.e. to <= rounded_from).
-+ *
-+ * exFAT needs to handle these cases to ensure that the straddling
-+ * folio is marked RO and the post-EOF range is zeroed.
-+ */
-+static void exfat_pagecache_isize_extended(struct inode *inode, loff_t from,
-+		loff_t to)
-+{
-+	struct folio *folio;
-+
-+	WARN_ON(to > inode->i_size);
-+	if (!(from & (PAGE_SIZE - 1)))
-+		return;
-+
-+	folio = filemap_lock_folio(inode->i_mapping, from >> PAGE_SHIFT);
-+	/* Folio not cached? Nothing to do */
-+	if (IS_ERR(folio))
-+		return;
-+	/*
-+	 * See folio_clear_dirty_for_io() for details why folio_mark_dirty()
-+	 * is needed.
-+	 */
-+	if (folio_mkclean(folio))
-+		folio_mark_dirty(folio);
-+
-+	/*
-+	 * The post-eof range of the folio must be zeroed before it is exposed
-+	 * to the file. Writeback normally does this, but since i_size has been
-+	 * increased we handle it here.
-+	 */
-+	if (folio_test_dirty(folio)) {
-+		unsigned int offset, end;
-+
-+		offset = from - folio_pos(folio);
-+		end = min_t(unsigned int, to - folio_pos(folio),
-+			    folio_size(folio));
-+		folio_zero_segment(folio, offset, end);
-+	}
-+
-+	folio_unlock(folio);
-+	folio_put(folio);
-+}
-+
- static int exfat_cont_expand(struct inode *inode, loff_t size)
- {
- 	int ret;
-@@ -32,8 +80,6 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	struct exfat_chain clu;
- 	loff_t oldsize = i_size_read(inode);
- 
--	truncate_pagecache(inode, oldsize);
--
- 	ret = inode_newsize_ok(inode, size);
- 	if (ret)
- 		return ret;
-@@ -84,12 +130,12 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	/* Expanded range not zeroed, do not update valid_size */
- 	i_size_write(inode, size);
- 	/*
--	 * When extending file size, call truncate_pagecache() first,
--	 * then update i_size, and call pagecache_isize_extended()
--	 * to ensures the straddling folio is properly marked RO so
--	 * page_mkwrite() is called and post-EOF area is zeroed.
-+	 * When extending file size, call exfat_pagecache_isize_extended()
-+	 * after updating i_size to ensures the straddling folio is
-+	 * properly marked RO so page_mkwrite() is called and post-EOF
-+	 * area is zeroed.
- 	 */
--	pagecache_isize_extended(inode, oldsize, inode->i_size);
-+	exfat_pagecache_isize_extended(inode, oldsize, size);
- 
- 	inode->i_blocks = round_up(size, sbi->cluster_size) >> 9;
- 	mark_inode_dirty(inode);
--- 
-2.43.0
-
+Thanks.
