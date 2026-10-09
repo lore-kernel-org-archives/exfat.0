@@ -1,231 +1,219 @@
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx08-001d1705.pphosted.com (mx08-001d1705.pphosted.com [185.183.30.70])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0302C4C33D6
-	for <exfat@lists.linux.dev>; Thu,  8 Oct 2026 14:55:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.48
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791471376; cv=none; b=EqT9wlws3xsF9IO06q5iw04Nr5agNeVhqKeQN80P51H83eNPy19Iy7ytikQw1N/cSq7ZVALQ1jOKG8sKHhOLZqWD2qRsz6nO5FfxT4SOrSaC6IczwiNNHg6zoG27YErlq+gdfRV18s5A0lNK1qEujZWMjjBj19ZOHsicYKQsodQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791471376; c=relaxed/simple;
-	bh=5Kk0u8fu21mwveRSRK6fUY91B3QlztR7tuUIxKIH3HU=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=WTE3pdYkgsYl9hK023g6A4rfBAIOExNfDB5xutQJ61fzOKg86WUfBackQc23FbFkj26a/JwhVy7CbE4znuyAA3yrf41/Lj+Q+hZXVHyvw/qaFeZdbaIYNex5QsqRnkJrkfBACJAnEL5yylAZqVCHoem6jCQvpulw+Nj281pzYGE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VCenXABs; arc=none smtp.client-ip=209.85.216.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0032E1E1A3D
+	for <exfat@lists.linux.dev>; Fri,  9 Oct 2026 02:47:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=185.183.30.70
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791514027; cv=fail; b=Wpg06hUYqLzblqK7+82laJbaRxkhLcIHc6V2ZR9iZs3D1NLcJKjANuACGJvS+ekppuXGSIDjRkR41OIhTjXdepyc8j6v/StjuD9mL3QnZggVtv10IIbnd/hzYSyuwEizXL/cYNHIby0zK5JYkQQaWw4NXQ7B65UABpPV0ZJYMqk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791514027; c=relaxed/simple;
+	bh=7j/5RKQVqSuwtLDO4BWzPODB7HSpBYWNwUvT4l110UQ=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=Hnws1M3FgGn8HxI/e/xZY4FSohgzUPEeqOAktogXK3+QyUGeHFkMphcVrmsIqDynptCdK50/FSSpc1L2NgIz7uaK2Rb9IsztK1wEuZZYX8LvWHHoxpD+jW62dbVChtyhSGBJCR6eZOjduqHbVvrsl7xUoN8X0KrnSSbZbhhePgY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com; spf=pass smtp.mailfrom=sony.com; dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b=P63N3R/O; arc=fail smtp.client-ip=185.183.30.70
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=sony.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sony.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VCenXABs"
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3a4c47bb6e3so1675528a91.1
-        for <exfat@lists.linux.dev>; Thu, 08 Oct 2026 07:55:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791471359; x=1792076159; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wKvTbos4Dxr7+dlQi/4PaLq6hOuxE2UVKPiv4+rBtg0=;
-        b=VCenXABsUiPcC5EDe9NrKrrJvc0QNolE0K+4ccF/w5WuBp9oKetkDaaDMfcwirdgr9
-         Kd/+XNgzOuRIISfTEtJx9CjcB/cBFLlIJSP3swpm+mdFXd3PA3ZoiC2AfFGRBua1kySU
-         AjiPTK1VJqcHOlYWt66WrSAbVljZ/NdU1vTusHnnVeQuAdYQmJlhTf+5VBwQiamcORGj
-         rteXqHK3fUoaKd/ItKjDFbdp33n0O/8LVo2qJ36d8z/c/XxpoSoxO5humoUcHgjbBC/A
-         pKi0D77fJjyauMYVwwCXFkhOUo4hCrFKRQ8U3uETg9S+t2CVtYOtWZfk2bLOKjNQAC+A
-         rUeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791471359; x=1792076159;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wKvTbos4Dxr7+dlQi/4PaLq6hOuxE2UVKPiv4+rBtg0=;
-        b=EBIfD99lhgBNchNCdx5sJCemkrg3rAmaYqkAg1bfvLUobRKkqDaUy7vnofBnuJw7kl
-         ZKuw3Y3AVOw739DSvD4O3QzWWrwseuAJejhIbO0qbdAYS4xbTbRZbvUsC4fUHdsx/XaR
-         5yFMxcrOhN63CTKnXyKafTt9VUqHiPPlCOT0KLx4lAFDOrj/hrn4YcrK+lOTedzlHJve
-         iIkTDV/VzuP8rFuhL48kiXFWEodNnd6lxVGvNkKpqeyi8tSFmCoBV2QCMutJbrrpOORe
-         IPHbXfSkG1SsvYo08uBoACmP4vlrpEtjJ14XbDEM7ZiFVMoaO8S6aWP1nPEUSdS/1TB5
-         y7+w==
-X-Forwarded-Encrypted: i=1; AKwUvBzd3W02Kq99uR3u6csQbR5T3k7zkHA1clB5mFtaJ0tgwucaqFLJu41tFHxlUiY7JomcXCWUcg==@lists.linux.dev
-X-Gm-Message-State: AFq9FYI/glxfO5Xnbt8dsiqtikm5d2yG9qU+WL48HUQxs4RvIkh+U1Sm
-	TYgR94WKkQ+uJBxvrGBRXXqMhIzGbfnpBCi8hH7t8ABRIWkPkF+yVNvN
-X-Gm-Gg: AYBFou0Yq9dDmB/u0GC9v3uUOirligi2GxNhMfagvcNL7ZlaN/wXTCvlnB55Eo6REwn
-	CfmjTDoXCTGDlyFHr1WR6IfUXd1c/vUm+tOzoKSkk5bRg3bKBiS+MN42FWBm1o1B/kZ4wYcuYWM
-	qsz4zn/1Z0OFx8/CihP5J33j8hvC0mpJ3iBdikQw8GBHZtsXVBJlP5aUWucfil9El3r+yQ+I9Co
-	cb40p46dIvSiomIKDh4yXpIYZxrxHmbTrXA7wzX8QbgOykaF9covuYBQh3MFESKPY09PT0CEUjC
-	NnUbhqmTOlUbeQ1xxBJ0GABpVTjkQyQQow+yCNeqBP6G4I2PfEDP6jRUPgEVUMzcnBuYF8NbDKu
-	HjyZZ3fFUFjEhC8MPo4pDk2S+5wMwVHhFFPeOk5zahVvVhB7HhipaTNcAMU8UIBGpa/gyHyYMYs
-	IkHYgMxjQ0A1IQbZOHdbst49dSFu/gpKrSqfjfMEv5yV6z5BUTxc3pBmF94GsNfVjko/o8oPDS1
-	6FA0bstErrI
-X-Received: by 2002:a17:90b:28c6:b0:3a4:b022:1747 with SMTP id 98e67ed59e1d1-3a8a1b0bb79mr4822556a91.33.1791471358725;
-        Thu, 08 Oct 2026 07:55:58 -0700 (PDT)
-Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3ab12e6b7f9sm1071596a91.3.2026.10.08.07.55.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Oct 2026 07:55:58 -0700 (PDT)
-From: Yang Wen <anmuxixixi@gmail.com>
-To: linkinjeon@kernel.org,
-	hyc.lee@gmail.com
-Cc: yuezhang.mo@sony.com,
-	exfat@lists.linux.dev,
-	David Anderson <dvander@google.com>,
-	Yang Wen <anmuxixixi@gmail.com>
-Subject: [PATCH v2 2/2] fsck: prevent overflows from invalid clu_count and vol_length
-Date: Thu,  8 Oct 2026 22:55:25 +0800
-Message-Id: <20261008145525.1950813-3-anmuxixixi@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261008145525.1950813-1-anmuxixixi@gmail.com>
-References: <20261008145525.1950813-1-anmuxixixi@gmail.com>
+	dkim=pass (2048-bit key) header.d=sony.com header.i=@sony.com header.b="P63N3R/O"
+Received: from pps.filterd (m0209322.ppops.net [127.0.0.1])
+	by mx08-001d1705.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6990PBbI743899;
+	Fri, 9 Oct 2026 02:46:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sony.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=p1; bh=4J/fAWn
+	/6h976P/K7ZxckVK2tgrjHZ+bPBYMn2WcYek=; b=P63N3R/O8+E+OK1snIOa1ko
+	Xw1Li+yKLPax5IxgFNIrY+4G0NqGq0gvWq3zsHAQ9nWh5y1ZhlnJ8E8Vb+aheZxJ
+	0FZ9UTtss/+18MuMOVov6HafTfVfTL2MpuZ/l7mTBEyomaqd4KblEvhhUBHDCGKo
+	rxEwCi+ibtHG+TLupZ5mYRRsXXTCDIT66MRj5gdfIo4uwpwLsCuTyFVDFcydKBdZ
+	Wh3VWU0OVXWaJFlIWJEH+c8H58/ObE5DrVp01P0HUjWkgvNQLFDpkVLaHdG4Ybx3
+	Mp6Q4tfxC4006h3wub6zPpqfJIFRsmasMlM62yUZyiroaaXBzpb65eOr/D6WEXQ=
+	=
+Received: from seypr02cu001.outbound.protection.outlook.com (mail-koreacentralazon11013055.outbound.protection.outlook.com [40.107.44.55])
+	by mx08-001d1705.pphosted.com (PPS) with ESMTPS id 4h5xdgherr-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=OK);
+	Fri, 09 Oct 2026 02:46:29 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QLMBcdCoxbO8BVHGtTRhAkP1uB+uOJN4x3LhVhfV+aXR7L+ZoIwcR5VELzX/y+InmuXTCsPyZCTkB/PMN0aaTJ09WBiqsgswlJUZ14rTuWYLQgojlf/QQGCjIhGMzhoa574O0nVOVjANvV9dx2kVr4wVo09d7SHsisISBt6uIuCqXd9FPZZbxPFCp9vLTvGS0mAXtEhcT94qk7E7ubaRO2wdw5mr8RSxa//L+CoiJGp2gA8wo8dv314q5u+hStKSN/pdcrEJ7Wf3e7uRFhryGMuYH0LhuYa33lF/zUUJnBlXBsgOW7wO4U9YznEAKZ/cMgowTA5wzlmhJB5BdSXbgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4J/fAWn/6h976P/K7ZxckVK2tgrjHZ+bPBYMn2WcYek=;
+ b=ST2If/owM/63I6p/1770qR4GwxrWItsXvE6+bZuRqKoFl23/l1QaKM1kgpx5MDcWh2DvljB7ZjDSi9aUHCxFB/5inpb79Clh/iwjkCh5+9sqN0Vh33/b60XHRd/iyhIDCNjKQgyhDi6XjJ9BE7vkKyyqLvAlLRNBiOEkQHx5Hrqlv98NSAeHwYCIQyAFo51cVsQ9KMUoM9xCmkbCtHPGbvxc2TTc/7tdJIoRjuKLnNzAL+PR8dtfoKBaUr3+iTwcLi9zxsZayBjsVdWfygefZqjdeP5fqDEY0H4H/7miwSQLE0AFyNUgybaVAj72PWXPfzxK0TRcuzu8v8M2SItQwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sony.com; dmarc=pass action=none header.from=sony.com;
+ dkim=pass header.d=sony.com; arc=none
+Received: from PUZPR04MB6316.apcprd04.prod.outlook.com (2603:1096:301:fc::7)
+ by KL1PR0401MB6211.apcprd04.prod.outlook.com (2603:1096:820:9b::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Fri, 9 Oct
+ 2026 02:46:21 +0000
+Received: from PUZPR04MB6316.apcprd04.prod.outlook.com
+ ([fe80::a631:6b1a:332c:831c]) by PUZPR04MB6316.apcprd04.prod.outlook.com
+ ([fe80::a631:6b1a:332c:831c%6]) with mapi id 15.21.0496.015; Fri, 9 Oct 2026
+ 02:46:21 +0000
+From: "Yuezhang.Mo@sony.com" <Yuezhang.Mo@sony.com>
+To: Chi Zhiling <chizhiling@163.com>,
+        "exfat@lists.linux.dev"
+	<exfat@lists.linux.dev>
+CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linkinjeon@kernel.org" <linkinjeon@kernel.org>,
+        "sj1557.seo@samsung.com"
+	<sj1557.seo@samsung.com>,
+        "dxdt@dev.snart.me" <dxdt@dev.snart.me>
+Subject: Re: [PATCH v1] exfat: mark straddling folio RO for 4K block size
+Thread-Topic: [PATCH v1] exfat: mark straddling folio RO for 4K block size
+Thread-Index: AQHdUMi6PIMYj26g8UGMn//t2iEhgbboI26AgAxgUz4=
+Date: Fri, 9 Oct 2026 02:46:21 +0000
+Message-ID:
+ <PUZPR04MB6316DF5C2179DCD7B4200A6A81922@PUZPR04MB6316.apcprd04.prod.outlook.com>
+References: <20260930104332.4022207-2-Yuezhang.Mo@sony.com>
+ <ff3a2271-542a-44a0-b5a0-700990119630@163.com>
+In-Reply-To: <ff3a2271-542a-44a0-b5a0-700990119630@163.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=sony.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PUZPR04MB6316:EE_|KL1PR0401MB6211:EE_
+x-ms-office365-filtering-correlation-id: da8a4de2-4720-4986-ddb4-08df25af8054
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|10070799003|23010399003|366016|1800799024|38070700021|56012099006|11063799006|4143699003|10067099003|18002099003|22082099003|3023799007;
+x-microsoft-antispam-message-info:
+ xg2qTKUVXT2MxL98NN6xGdqb0eshvpNES7ZKT0tHWg4yKyDXnlaVz/EdtBkFzwy6d7auPLwDOaChHTy1iY24nXit+WKzgX4yv/5LS5gskJPoIdwjMCPmM1jKbgy/RyJCwC8+rII1mPCKE6UHyN1YL4KhQYlOEZX0e0jXHBbsD3X7JHXJHDx8EvFnjgEkyPyqQhraHf/WuQp1vWThpfUkRZKi0RwG8DHfMfiyZw27LswtxVsuNTR+nvk3IwMfYW+Twvyj1Ta+8NAftJaL6x30TslbReKv70YnCpGY8lA2NGD6iUKI+cFk0+OKxMnw4Gf17b7I5aSxHJNnRvUuc4h22qKzmnAcdwRQjiBLgy/Fs7ExZFwJFG2w9OApw6suqdZ+5vvtOzTBpnlJX/5PQRa6Se7CMdKDhcH3K+EJARHZtzAzuKuiCHPQgxN/Ypaa3Mh6HPfxePfBxX+bg2N7ZpC4qjbtM6Pdvbl3INFRCNMktgW+Zc7MH1lvTalPs0IyR3ncxzDH6mcdSNKEwFENdfiEpAj2BIXLuVPPk5dChSmJxmmklOK+u+nnh9Q8n08a7hnNurl3e8JcAdPBm0EuS0H08xFqojtpTMNobh+Kjo1kUrrsM6i0/vD2k0ZGt+6Oi3v1zXnMllgxieqH76Cc/fzP2ZKS2sGYWfyNnGDfV8GAGUhr4bHyEnEeCEPSXLfaOeOT9HnkAc27I0ei4XhBKN79JsgRW0PXsAPjCUlhNb0l51U=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PUZPR04MB6316.apcprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(10070799003)(23010399003)(366016)(1800799024)(38070700021)(56012099006)(11063799006)(4143699003)(10067099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?Sw10ySij6DTPG/D+aeETngdLFsKHndhcFA/UufGp1T/LUW+rOlHiHDYAe2?=
+ =?iso-8859-1?Q?IHRWVKKJfX0ki8yiaLighOaPI55fN7LVH3s/UdfaIrnumHxHSDlZ6wcA4D?=
+ =?iso-8859-1?Q?p0gBs8SQyWTDlsCCa9SNx3NGFaONc5OVfkWvs0lC1ic/+psGLHSlXbxzGm?=
+ =?iso-8859-1?Q?9FQFk/j0Oa4iyfhX4VSte7iZHezfF8vYojclQ1RvLOqx6m5xb3urzqcrc2?=
+ =?iso-8859-1?Q?ShtMGKG7BfToAEBNt+QBqjptm2AWzJB1d3mwudIm6yRnDwinchb4dqa0X0?=
+ =?iso-8859-1?Q?SA+iTBNoDtoTuzo0gE5593ETnaJrAQQ0iB2IYwyFEuMD2AwHszE7N69U4x?=
+ =?iso-8859-1?Q?SuPEA+eWygREH+eLBMlGyLw9MzKuyoDh2+5XMDRyzccXhK2EraKl52YYaV?=
+ =?iso-8859-1?Q?VrvhUKA4i62a8bJa5fdNHbiH20TVTK+6IPeqGWvLBnvExxVH9nUVOSkX1v?=
+ =?iso-8859-1?Q?H5Xf6bkqIv8LTLO2gywEhTngahKrq46jJqO2MMMjpyPZMWp+Mj/zjjpsZD?=
+ =?iso-8859-1?Q?oU5CZtEa4xpbUoPPT/j6Rzt4t8pgbihovD/dlj1XXrQvtA5PD1vHwbXwxC?=
+ =?iso-8859-1?Q?bFvNqQdE6YVupX+2Tro+8ztuzJ1gLoC9KuS2xt8YJ52+zdSgXdpepENbZA?=
+ =?iso-8859-1?Q?2Iy/akPGiyghboYqDZD+mb872VyRn380ieJanFO1wGtaztz/EcXrqNYj3J?=
+ =?iso-8859-1?Q?mjq+uJWNT68i3QTJP92v9SccZ56LTRL+0Tvgpg4FC7RF+eOADePDqpPUD0?=
+ =?iso-8859-1?Q?Mr7mGD2I4+wuA1PPEt5fNz4JSqHeSLm3mSuT++lRlfro5YBJeuIIkLr96C?=
+ =?iso-8859-1?Q?5EH0xhmmm8xjQVvVNiwWQGHeGP/ijYhE3Wi//VoXgPfBwTVjILnWGemJT2?=
+ =?iso-8859-1?Q?y8oNbzJYGv5BYg+04nQgf6oxrnot5sCtG7jCYgR2FiuIolvtzcWe/GuGFZ?=
+ =?iso-8859-1?Q?7q6DeTZtWeyy7blsj6Ix4XZSGDVGGRJbGIEk0Ffo5zyFbXQEbb9G80GqgH?=
+ =?iso-8859-1?Q?goka2tWRb7NK6V2opTDbSMfoCaPXp6MkLXbI9jGdemq5DKg5zRLetQfVvP?=
+ =?iso-8859-1?Q?GqOhtgyGWGTNnb8/HpRtC+G+9LDJqnyYKunn/iFJI8K9FwfvbByCdKjTPd?=
+ =?iso-8859-1?Q?m6gZaTj/bYt4AYnEl8varfZCHgwuC7aP27A+svgPr391VOqlIF39ghnkdE?=
+ =?iso-8859-1?Q?6sKg+UjfGyv6FY9aED4iXupSz+kfb56/shzCtS/xw+eLx2q9qSQ4BsF1Q2?=
+ =?iso-8859-1?Q?iLVmkqbxuzL6iIIiVjtY4fRRg6RsdCB0cyZprQDQlaEMkBAaP/oDY/Wggd?=
+ =?iso-8859-1?Q?KlaUjZgjJCi9ytJaAbweToRwV0S4unr3e3DdpR6E6nrRiXKWJHJb/Rsiuc?=
+ =?iso-8859-1?Q?RAB8NG5nXSFXlqRImuOsCa6lpB4OfTMrpnX7BMdBhGikx4iJpvKlUbtAAn?=
+ =?iso-8859-1?Q?w2z7G/MP+KatgZ0Be5sKMsUbCf34RR9igtHaPwY4NixETqIqeltBOkrPL9?=
+ =?iso-8859-1?Q?b7CtO6fFm4EJMPEWTDIlv0XRwbG9zJ/LY4MyWjwfN3gz303yhGaWgtx6Ym?=
+ =?iso-8859-1?Q?Jef1fDKB0X1ZMW1kJPSSS4J1sfeHnqjCScC5+VxaNJXQUa9/B1jL0TPIqk?=
+ =?iso-8859-1?Q?FGQ2mi09Tdppf7LQL8krQm39KiW9LzUwyzCf2Ml6LICSio490i7cvncmBe?=
+ =?iso-8859-1?Q?vyAEiyXhpHPj/KLnzN7/ulmPeHG3DH8NyLyDkG0UqQLn86ZQydvURsY3Mq?=
+ =?iso-8859-1?Q?yoSSMljUrqQ66ueGlM/3VV7qcyhQNcV2GpisiSXl4jxpb/D7ZUJ0ROqiCa?=
+ =?iso-8859-1?Q?wBOfGK+3rpT2tYL9a7LsNgwDw5Ns3+M=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Exchange-RoutingPolicyChecked:
+	K5ETp1uJBlbe8WnCtHkEaw5cbXg5LCuoon2KmzSZZSV1Xio1UFg5GMs0q3Wa38AZtvqQ8Qh3VpM3nWLrhzO7b4+/ayNhiND8QHxVNe65GS1R9BxSo5lwxePaAIsqW5JZY0KPxvQFIi87Hd/48VSdkXKFRUgZc1pHLWQNB055wtOmjQDM3ikpBcRRcBOeCMJDP4AuYDzOQsAa1tNA6iwnqctyMCn6hhmrwmX9Ez3CYdE6WzcyTUyu8x7qyL0uLR5PJ1Ddiv6HCq+138EySE4GsMtXTJjbafcRVinOWbCi0dkSOdzGmOhhFskfL2nSZ+zlaP9wAJh94lc4IDZlXtaX1A==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	h6D9ovPRLpLHrxjhmeojZ3gqDyFwaWxi0BGAB2A8gjGWmmVlxV86mSwCHTVHbSVFBNL0eFgigCAZhIa3KDXltp54VT8q/bj094hGS5GLL19h9IuUXgMR3wk0Sdksi4wg57xR8By2vQHr0uvMDSKIWf49JomoVyOPVPPFCUNdf3ZheXYr4IwkJ424HU5wp0ua2UF/a7c4jxUs4K1E5EQrel+GCs1XWY+9/UTQHSQbQyHbeuRIV3b3b5CYyjJt6T2jNeXySA0LxFKtj7ZS/E0qsRg5bxFoDFpgVKPZifCJyFH5Q9kvTjUZ//8N7+lalOkBn02OKDQK6y5T+G+uRNKpLn7+O23WLfjw0V5/Q26GBaTIpjY4QT+qgEUbVvo9dflEkAP+/QRP39H0iWwARI+aFEaL22ovrgJAm3eb1ea7h17iYDWX6vMKKO/NqJ90MHDelSuFZuU1fLLatT9WMSeo73jZg03os6bOEmbLyMfdlrQALljwNqdQA/u1TkqGMvlnnWhuIF0wlUOlsubP6SbPbQWDGTd/PSHzkfrvXCIfXd8Qc8UncfJpCj7dhXhwAZviU4GAU6c5Q4Hq1trEJNYDfPhOUbezFP2W+QFCuzKCK8WSt9/16zqYbFm/nl/oWo1b
+X-OriginatorOrg: sony.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PUZPR04MB6316.apcprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: da8a4de2-4720-4986-ddb4-08df25af8054
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Oct 2026 02:46:21.2035
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 66c65d8a-9158-4521-a2d8-664963db48e4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: io2FG6bm5NAk4JtlhpzNRtd2yKD2URjBQMhMQG5PELOjfkm4RvH34tlqZvIVdvV+23Y6OhwAu0QQP1VoTixKFQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR0401MB6211
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA5MDAxMCBTYWx0ZWRfX07A+SRwJd+kH
+ baYk075HItZE/PMa4OuPjVz2LsgtzPPt17h8ODFurSD38YpIm9q+CTs9Mysz10J6ahAklFj6+20
+ T2hWB4kdqkq/k4JfnjeZWsJdhgT2rGGLCO64/7PK3DEEQ0NMDrvO
+X-Proofpoint-ORIG-GUID: kGMMzGww79DzcqTDg-K1u5UpbTFoKqjN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA5MDAxMCBTYWx0ZWRfXwddkfUIU4GAo
+ VZpLT2Kwdbo+J/2x6AWm/UtnuN93Cv3SoekRALqb6yVAOXg4xl7fnlzQoCOQTRxsho0vvSl1ow8
+ a6lvsaJtDwleYsxW+0pCVe8OM1hL7TPJJrk8zPl+ssa2E344mW52siOdZSrai3Y8Hrm94mRkrCd
+ QP+ABalgIYoKUXl0sAstbqF7pObVqwTI9PxxYnrp/ST5ulq4V50lQVHNi6j50LvYzOJmoD4JDQj
+ GnGXzQUx6yWrI9ftlUabXTKhpXrLc1X7sYPiDmKYaMzPiRIPEIT7qDvKY5F4XSFk+1J2hIX1A5z
+ vW8EZ1gHutj3T9roDOu6cnSc45NeZlITL+K8rY/oSmFaT92al/LLPnlaGKRGj9N/rTOqY51XSzi
+ P+hpCaEHlsojJ4Z5H7n7w0ZmQ5UC8wIkX83Z5wz7Ap08YS1Nhf/JyPR8G15Xcc/d7vaJ8UW5gm/
+ s0zzS82M07rwqZ3YdSQ==
+X-Authority-Analysis: v=2.4 cv=YsCa1IYX c=1 sm=1 tr=0 ts=6ac85585 cx=c_pps
+ a=9sSFmBz/HBx1ZOhNuxQbag==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=8nJEP1OIZ-IA:10
+ a=660iZSQnnn4A:10 a=7j0FZ4iXMVMA:10 a=xR56lInIT_wA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=KAb5x4SsHD3PzxGk7EmX:22 a=cIyGuqrkuvkXWOl_fzuj:22
+ a=hL5X9aV1IJL_vOGeEhwA:9 a=wPNLvfGTeEIA:10
+X-Proofpoint-GUID: kGMMzGww79DzcqTDg-K1u5UpbTFoKqjN
+X-Sony-Outbound-GUID: kGMMzGww79DzcqTDg-K1u5UpbTFoKqjN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-09_01,2026-10-08_01,2025-10-01_01
 
-From: David Anderson <dvander@google.com>
-
-Malformed exFAT boot-sector values can cause arithmetic overflows in
-read_boot_region(), resulting in an out-of-bounds read.
-
-Validate vol_length, clu_offset, and clu_count before using them in
-cluster-count calculations. Also perform DIV_ROUND_UP arithmetic using
-uint64_t to prevent intermediate overflow.
-
-This issue is tracked as CVE-2026-45531.
-
-Link: https://source.android.com/docs/security/bulletin/2026/2026-09-01
-Link: https://android.googlesource.com/platform/external/exfatprogs/+/5ec5ede9ba508dde0c2cc95363742f2c2f669fff
-Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
----
- fsck/fsck.c                               |  20 ++++++++++++++++++--
- include/libexfat.h                        |   2 +-
- tests/clu_count_overflow/exfat.img.tar.xz | Bin 0 -> 3636 bytes
- 3 files changed, 19 insertions(+), 3 deletions(-)
- create mode 100644 tests/clu_count_overflow/exfat.img.tar.xz
-
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 3be783a..4dec837 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -461,8 +461,7 @@ static int read_boot_region(struct exfat_blk_dev *bd, struct pbr **pbr,
- 		goto err;
- 	}
- 
--	if (le64_to_cpu(bs->bsx.vol_length) * EXFAT_SECTOR_SIZE(bs) >
--			bd->size) {
-+	if (le64_to_cpu(bs->bsx.vol_length) > (bd->size >> bs->bsx.sect_size_bits)) {
- 		if (verbose)
- 			exfat_err("too large sector count: %" PRIu64 ", expected: %llu\n",
- 				  le64_to_cpu(bs->bsx.vol_length),
-@@ -470,6 +469,23 @@ static int read_boot_region(struct exfat_blk_dev *bd, struct pbr **pbr,
- 		goto err;
- 	}
- 
-+	/* Prevent underflow when subtracting clu_offset from vol_length */
-+	if (le32_to_cpu(bs->bsx.clu_offset) >= le64_to_cpu(bs->bsx.vol_length)) {
-+		if (verbose)
-+			exfat_err("cluster offset (%u) is larger than volume length (%" PRIu64 ")\n",
-+				  le32_to_cpu(bs->bsx.clu_offset),
-+				  le64_to_cpu(bs->bsx.vol_length));
-+		goto err;
-+	}
-+
-+	/* Cap clu_count to the spec limit to prevent overflow */
-+	if (le32_to_cpu(bs->bsx.clu_count) > EXFAT_MAX_NUM_CLUSTER) {
-+		if (verbose)
-+			exfat_err("too large cluster count: %u, max allowed: %u\n",
-+				  le32_to_cpu(bs->bsx.clu_count), EXFAT_MAX_NUM_CLUSTER);
-+		goto err;
-+	}
-+
- 	clu_max_count = (le64_to_cpu(bs->bsx.vol_length) - le32_to_cpu(bs->bsx.clu_offset)) >>
- 				bs->bsx.sect_per_clus_bits;
- 	if (le32_to_cpu(bs->bsx.clu_count) > clu_max_count) {
-diff --git a/include/libexfat.h b/include/libexfat.h
-index fbf0668..65f13dd 100644
---- a/include/libexfat.h
-+++ b/include/libexfat.h
-@@ -24,7 +24,7 @@ typedef __u32 clus_t;
- #define MIN(a, b)	((a) < (b) ? (a) : (b))
- #define MAX(a, b)	((a) > (b) ? (a) : (b))
- 
--#define DIV_ROUND_UP(__i, __d)	(((__i) + (__d) - 1) / (__d))
-+#define DIV_ROUND_UP(__i, __d)	(((uint64_t)(__i) + (__d) - 1) / (__d))
- 
- #define EXFAT_MIN_NUM_SEC_VOL		(2048)
- #define EXFAT_MAX_NUM_SEC_VOL		((2 << 64) - 1)
-diff --git a/tests/clu_count_overflow/exfat.img.tar.xz b/tests/clu_count_overflow/exfat.img.tar.xz
-new file mode 100644
-index 0000000000000000000000000000000000000000..bd0f0853a32f476a3afafd483ae5ba5fc5b3b66a
-GIT binary patch
-literal 3636
-zcmd6q_dgU41IN!HGa}>4$~w6aAv-J1miaZ~ayZ$u%U+@EJ+96^=Zw2#Z&AKhNRpN8
-zOP5vdF7sJ`!SloOdOe>%;Qjji_<o-$h1)p*0CZcQoAv4XfAhtb#R7$CcmV$zo$6-n
-z#W@*x%NcM7&A68YN0hPpYwc2K*Hart5a$tY-E8Hc$8gp?WLf9RHxWtAClKp<!Ete!
-zF(IPyh38!;cP|T94=TmQfE%c#v0H)ku@wWV@sHY%-u{>zsfP*q8y#O6rbOTCG_nNI
-ztq|oe3S!}ux3|qp`i8(rOb|AL9WdQ9Au7|_s_$O0!8)Z<4c=Q5Z-IsT0nr^=g#pOM
-zI7OF>7$$X*7H<;^4sK^JM|JS6yt2XZP)Semj@Zy$s>Nw-RO`Bzi)6QnOc}eYy;aoU
-zm#12ndfiQ=qyH2aori}P&PI#!;!nXYxjh$l&ARkbeWAW5um3FmaouOhjSA5m^L-rn
-zKCbO4sBAO_D<-+0{w*!pF@0oIS+OE=*7--0&Q%T1vinpeY1ic+K}{R_Wb6HuP$}8P
-zw-2ndMG7y`x{L&<arNI(DyrtDsU}u3K}fg@2XK85D^E^MuS%xaY5=-M)P;0&?AdgF
-z(TiwE_Mt>5<y!xxBGaO?FZkIk_91aA>QVMxIr?fsZs?(IwZ`q0TH>ip%Nc|3v{O+o
-z0mS5^{X*_~X<NFS-+#f{^&bc@g|bd(bKn|W1v)>xmH;`~Cw=#@wCnvIR&T$t=}6D`
-zXLzCE^u+R3$b_Kd4V^#BRvJ`EIFnlJ7{q6#MQwkmN5%!me$UuLC+jNP#g$xYVA$-t
-zq|ysF7CZp%jO8imV&#q996gY27p6GlGcE-yuc~cvxpeZB(k6%F#Psaa5*;4krPJR1
-zEZuwhLpj`23p!(2)3{X&U~}zQs(%iyRWS$$<plD0_UJlCiXJb=C!AbJKp|%td;}&x
-zs=uYUgp+!&ukzD_6Oo@8^&fU?Q6c-g2~p2@gF;<?i&frrT=*`bki5|gGWV(KRM56=
-zmr(F+FOKBtJyg`A+wM|CDAW3rmI;|O*yw7zO_~(OnSizIN%8h{EjhJ5brXdSKmE-w
-z8`<&3o#Y$3n+#%1xrm>s>0U$KvSpC=tKZi<i&lYmZ^<@=--|5xbtPY8r~A9UspQ3r
-z2s<~US&K||WUu%E2~M}o!Z&!w{?+@8VtBAWsKiNENw=@9-!e_N0=;x^Pe0{Qs2`>-
-zM_9MLvG&-{Q;)Njn6F)v(#L&^fT9|y-&HZi`mL}xu<e)!%)?(b7`IvO&^@w8vcDzu
-zr&6U%V-pVs{1jVm^Jt{x)Rc$PjzP)>!`o&Sm1l}ej}NC=XM`t$jT6LG7(6Zo+U4(H
-zqnDd6$aNH7zZL(7*Pc!pQQrLY?gzZlEn*f-bVK{EBP}t-D>Tv+n|357esDy53gw2l
-z8ZWTIjQMfRtOs$kM_!`7GfBw#?r^pxZC!zz`l@046_}VGe~a^*+3P9U{GjrqhV!T}
-z&4N29JORJ)#&CY2tET_ZN<My(i<#WucZd3FH(~l1FT*zPxRNruCFJ|G2){8-OdG3x
-zeWm2EDeh+Dt}gux#m2-)DgH|O;zPOD9Is1we=|s%LFf2wXc$f_-(ooUQi&apK-&&^
-z^C`@&C0Qb>{vVYI)|!u;ySBcw@mVB1_<XlUD<9%}Uk<GrYx>@^zF-hEa}Ksrm>E8(
-zdkY(lM;8N%A82FfRqNzRbK7Y&TKM=3^F(IYp5NKhN=UuW9Mobv#7ise`7M<QsmK28
-zyQ!LkuvBwNLlF9_J4=RRrxV~RMoe#EJMIV2y_#GD3B0V+R5xEF_LVe@ON5j)$aA_v
-zhB90ksSe(H2hrPQ_yl&pfz!#k&LIrQpa{;2<%9KkM&EMLjr*Y{AOZou^cPOYqns0}
-z%2MZMlipD*s=XW}_HQGk(7{2!-yF-hVhf5CZW7iVe%H=+BzQ2bv_}QYGpRqvi@a?G
-zwr}8CIfYRW@5htmaXIUgQ(#q=(!pO{u`=-Oh@Vy(6~$KD(TihW>1ou26>$BbDkevi
-z^X?&y{Fc$TI#WNFE>n!;!Cgk~fnO~V_Q-=>1xf2*TkfHwKN(i_?$1X+Lm-FnXDCgf
-zC9T@9SFp`1Yff?*O>c}HAu%>P_%cN+iJe4q#bCAwodFXhVFL%PGoDwnmAsSRa1ww2
-za(GmWRm-VwbI}+U`vO`CZ^OeWjZ_Jb6NQLUbEx)*W|CuJM8;46)H^0b-jFsrdu<E6
-z=fv&Pgn25`W{m5dMTrErR8qYrl$KcOe<%?v&QMe3>zEOh8%YJFlE|w5@(}W|fwXPZ
-zuAk_^04qaUS)p_iI7(@g_aNh)=hZg-eJ`_*6#D2;z85eg7cDuv|AkNzv%{fQ_p??p
-z#kIg&7e1__9g?9B{4|fO6C=58c0XTrc4}5L@@jdvW2oE~+A(y6+Cv<cEf-}73uP4Q
-zkcU<izvAF`C<sD5uxk1Tv|SWsHf1xfjmk|C&zcFuv@@eQlm(eAmgvR}8#NGg0`H{t
-z)!4l`?CW4(v`je$*qi37S@imi$cy)+R<?5bjuO8HghV&+D}pL<g7-Quj#&17F+zb?
-z&7_GwJJY-yFVpnBzZQx98ok$}%RWbZzA%!a(?3%eD1$8?5C9956iwQ4id4UW!B`NZ
-z66(6?;2dYEo-Z1s8M#l5?{Yw$!=N+g?g3S;r}Lyd0Cj(C$W5)CIW^~p*&1|EXaGpw
-zGr{r?UMv6lEqq!rshuF0d44w6-8A2~cyd2f8$D9GNSiLw<^jebv$w0xnd=GS)s*HE
-z-bvZt>J>6Xt}e*oOzebIg$yUhL7Z2c_;y+3OLA>c4i_+j5WoG<KBhHI$tP_Pm(y@;
-zeL1;`P{sI1=Xt5`bD~gj&I;s6(4oP8a%X<5u=J&<?{A#^yOBc~jz><iyxl;_0+9<j
-zE9ZwioaW710uw^FiS(bxKcCli&6`P|A3Fl`^OzgFzrRK6T>*KFZ@#QXYn7joH^X&u
-z^^Xo_bI=OOyT712%h|Rn7PE=NENc5uc-)nQH#Cm>*0Q8rX%2csiLlf~kRcYfdgIv6
-zw>L%yYi7UTrX>EFHJ}nFoH-4QX_P14_@b#ic~ltfq~;j-um}1LiP?+%^;K^YMNqU9
-zs2CwNHnQ?A20852aqjs)fdU?79PHupD1J}yJ*(E#Webz{nIf#>C4r9iN2)Al>tpDJ
-zIGD>We3sef+6VCoor#4r-y1xa>}0R=yow~G#7B;Ci3;}lT38G#sb1F)K1cH!R@Rwu
-zK)n|T31Y=dT_WOX&;^-QK|Brh6=r+x1g&y$G3+tL*h1DlkMge@ukymEvA#CDw)+0Q
-z=aZ9C>fz|=ny0!lHi>p5Mk@d{=h!;GPHhbcu&{y@(n~BxYqRAEr?(ySA|__2Sx@+<
-z{;~r!lt)EXOh|s7nKZ`+Rg@zG5x}yCLib)0D%{|LQj=0KQJ)0EQqZB-DT$zGP=vP$
-zX>x~Rp7dC)t+*NNUzqSrx1bs2ZUG6JGw_sq$h$?>>ZZ<cf*az(3ma+}j9vTDc(s6j
-zQ(>Kp?ZrQX%$H2DCG+lKEKHII6EtIKI)d*(EKTL`@Q(3_f`KpdrrNi;&8>0dz%?*~
-z6ihYu+I;q9jo>VK1L~7xKcCVV8>ISY4i4!TtlQ7~yHzlZpQS&h2C7T-GDi=x4`tf7
-z=1E^BeQHVba8fuu9mN#RCWUxjH#k=D^Le=1CF9i?#^-Q2u})J!0SS%S+#e|4|0Juu
-z5zoggWb)XL<Cjj?aKtmPh{0SY`lxdv^(;u4xj45`Jhz;vd<j50Nn+7HmQ&@b<INzJ
-zI@g&SF$d~=Y8`-~U~(2+Mj*!7i@SBk>AKt?0cKxcQocS<YmW|F8}~h9x%MXYzEk7x
-zjf{2;55i>LuMvg1ys1i#Zh6$DsWdlLhE#FP<eV;Vw(Wf`TE{ep4;yQ{E)UO96rh?)
-z>Cwnp2=J7~7#xrk=o+zz5nZO8P5pZ&9bl*c@)9e_Jv~85k&nqq;xc<8I_}E6BbpOx
-zw5AgJ70a+08j|Q7`GrK;b(Zu!xWQi^h-c8BT>@F(%xxBJM3cQ*x?rmao<$pN?hYW%
-zXVg!=;aTxfjy7FFwo!NMQek84w{dvPLk(5`Uw9^Ut&sW5WCT)l9Y_5;UTI%Tvd50y
-z+QQTrlOL!#MkeH7ck#w3Cy^`_dSniy`9u8VkmN`EOoCJvY52%P;!OgbO2y9F2-ytW
-zI^|S7#YuQD!N=%;y5GA<B`F(Aeym^dSO8$JM~4i}(K!tGxR$Vz{ziS~=rlYngCld#
-zp3E<r{ML(WYi~u;GR409HOH58l|VvX`wmp{w_n@gS=MJymy;Gd>ASO-Y@3+g)b_uU
-z^8ZexZ?q2gz-l`FKhFHe>di}4Q(`%)0G9xpK70lL>^^+TC|d{=a2G(6#sBXf#ATMe
-O9`ZZ^{yPfo9sU7J?g+sE
-
-literal 0
-HcmV?d00001
-
--- 
-2.38.0.windows.1
+> >   #include "exfat_raw.h"=0A=
+> >   #include "exfat_fs.h"=0A=
+> > @@ -91,6 +92,20 @@ static int exfat_cont_expand(struct inode *inode, lo=
+ff_t size)=0A=
+> >        */=0A=
+> >       pagecache_isize_extended(inode, oldsize, inode->i_size);=0A=
+> >=0A=
+> > +     if (i_blocksize(inode) >=3D PAGE_SIZE && (oldsize & (PAGE_SIZE - =
+1))) {=0A=
+> > +             struct folio *folio;=0A=
+> > +=0A=
+> > +             folio =3D filemap_lock_folio(inode->i_mapping,=0A=
+> > +                             oldsize >> PAGE_SHIFT);=0A=
+> > +             if (!IS_ERR(folio)) {=0A=
+> > +                     if (folio_mkclean(folio))=0A=
+> > +                             folio_mark_dirty(folio);=0A=
+> > +=0A=
+> > +                     folio_unlock(folio);=0A=
+> > +                     folio_put(folio);=0A=
+> > +             }=0A=
+> > +     }=0A=
+>=0A=
+> I think fixing this issue specifically for the block size =3D 4K case may=
+=0A=
+> not be thorough enough, because pagecache_isize_extended() may also fail=
+=0A=
+> to work when the block size is smaller than 4K.=0A=
+=0A=
+What condition might pagecache_isize_extended() fail to work when the block=
+=0A=
+size is smaller than 4K?=0A=
+=0A=
+>=0A=
+> We should set the folio containing valid_size to RO whenever valid_size=
+=0A=
+> !=3D i_size and valid_size is not page-aligned, regardless of the block s=
+ize.=0A=
+=0A=
+We should set the folio containing oldsize to RO, rather than valid_size.=
+=0A=
+This is because, when the folio containing oldsize was first set to RW, old=
+size=0A=
+constrained valid_size, after the file size is subsequently expanded, that =
+=0A=
+constraint changes, necessitating a re-setting of valid_size.=0A=
+=0A=
+=0A=
+=0A=
