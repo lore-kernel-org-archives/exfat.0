@@ -1,217 +1,114 @@
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0DFD314D18
-	for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 09:40:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC033F4DCA;
+	Mon, 12 Oct 2026 10:21:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791798062; cv=none; b=lp/ZqHoWNpCnTXRwlSopJ/3q3azNEk+te0iDtmUJLrJp76n5UFOP155xdo+To0etonqTnEYOi8wPSUDXkwaAkQo5hR/lksMkbcn2Af9ah3969I4JESDY2oPYATCZ7fpZPd0HXluZBC1SOd5ViHF5XH9YSRRDhbMVbPHpbYjBgGE=
+	t=1791800490; cv=none; b=f7KkYBjx8q0DcXkqWMk4PFaTL0MjKlxN9xlLaG6QyJ6KXIkZlb2Hm//ELJYFLX+qNrtx6FrrhvWcMDGqdYcLGfggzPnsCTZkjYUqp3o/L7nU64oRTE2AyLddJd3SivGUkE8N5a/GIcxxDO9p4WhEt8qsIp7UrJ8qzwQqpQQoT5k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791798062; c=relaxed/simple;
-	bh=lmbfP6/LQtekS5d2UAKODhzYECFpFLpPjSLkUfC8pXI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GMZ9a86OTjdOwOt6u6HduHkGHWNPEnj5Vef6rpMnkagVnsHmM4cee1wSgc4KfvJY8TpyivM2xWJtKsjpDr+0YEwalzl7UfzJ4LmVMygRDMaM0yXav3KC6OrvAmf6FICr5xMREXQqxFJRaJDo1KEBsPCr5YANgdVpBsPKCm90Eig=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu; spf=pass smtp.mailfrom=cs.unc.edu; dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b=IUxw+mxp; arc=none smtp.client-ip=209.85.160.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.unc.edu
+	s=arc-20240116; t=1791800490; c=relaxed/simple;
+	bh=FHwfq/OCDsnntrfJYkKn8tLOjs4Tv7YHZV8JitYQDQ0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=llHmXC+YlFhxReQ+rBpOwfXrUggAXxiutyzHwER/gdhdOZULL9JInaAX+tBU0WNtkK+y/kuXR4AKWIl8bwRcC8mqj8RmXRJen71R5nn89q49m2v1txB5bxEBlCdTCE7mEC0G7dOGAeoRpIHHbRcWfn/e0xGpvYmQyx/l2oIl9Bo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=daD9kmOa; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b="IUxw+mxp"
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-5350c1b9e0dso24016901cf.0
-        for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 02:40:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cs.unc.edu; s=google; t=1791798059; x=1792402859; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TFmCIpUfagd6jNTqIQiMG7oS1DzngqujJGbDwYFy81o=;
-        b=IUxw+mxp+bIJbRK3cmvnEirhJ3KzUyTF5QD/cwOiRKbIpsdlLinMq1nJqo3iVk469W
-         C2tlvEkSmocJ51eyuwDpxbtxu1YDm86YyBNpcmvV3SGvwc5AtAVySzhptRGYob93MLhz
-         AV/H5XkEH1VG31LrM0VLV1B83XQ2Th6r06VMrlfITUiMFeTQ5TCBS2vZqSXS0+86hP/m
-         4NeFIB6KY0qPvDFec/Qom6EwoxFRVma+EtTUfrwtIy3SBpj+sjvl0fl0Jz22H6FBqq7d
-         6iAjwIGl3Ygodn1aTEdzF8D7A4EwqG5kYiidO4RYEeKou+xaOoGQ16EWXbV2K/cFLdab
-         UVng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791798059; x=1792402859;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TFmCIpUfagd6jNTqIQiMG7oS1DzngqujJGbDwYFy81o=;
-        b=ISzXhxfpB40IH4/VHXGoO5jj1w8QYFpd04UkjHL4NMYtHyf/oBxb3CEpFSVh8uAwX2
-         j1kGBLlMjBIsPrG1OkRMVuw5BnAFGPPpMrCDuQ7OotE0tlhR6CciKS4atl71RscYqNwc
-         BQAKJqZVOfE1tSjIiS9gwgrE8Trdo2VMhRPemOKx+x4z8YC6O0cVvDpBCjJLrEAQgols
-         M7yRGWzcCKDetwSiymMtiYOAuk6RUU1u/xet3lj/vrHl2gx3JqnoTmAPnHlJ1EuDLc6I
-         MGqcMozUl7UfpncmUDFx4z89XnP7hX4oNmyHgE1gPn2ej7q6axyuVRaE1JqHrOCmssn5
-         EGAw==
-X-Forwarded-Encrypted: i=1; AKwUvBw1tO7Z7tGyYOlwWPHKz/vi5+NCKdEYUnvh464nBhMqNHwOEAPoxIEdoVirmodDv2f+nSig/A==@lists.linux.dev
-X-Gm-Message-State: AFq9FYKCuUZ/YLhGyUpea28YUa1y85eSHQ+hSCApkaDF2oXmakfjNPLJ
-	l6RmFVwN8ZOY9z3N1RtWhdS7wDWjQZhQ8/7EzpjBjpAbAP8Muovu7ukoOam6WvUyC4VdJesBcNM
-	NNazrKA==
-X-Gm-Gg: AYBFou1QnHirJWWdWl4kazBlnWZlq3RiXl1ne2OOCy6dbFeGFKMIhpGxN5fP/Ot1Jp0
-	OMeLnbr6injrCXztb4n1BCtUW0fbpnx7ovhZ6DhkzbvxZkRLhHm2vKAPStq9q5M8ZKNi8vSBWGw
-	9IxuC2Fkuc7pBNiCPwjnv0vh3xc4V9HFO+41f2hsj8OXCd0ooOgrg4A0mbw8zyd3UCsP8IagezH
-	1ElZpGbXq3Q8XZIPF9DuZ9yAXvPioTPyVv1hkQ5gyLvAsazmtC/kWP3on2WcGSEYOUE1LFz8c3A
-	gHDaX6FE/VEaeW7I515r/jkFpmU3Zt9lWH/zCl/OgeEBNEF3rQveyGnRr9eDhgV/vX/kUkRQcGl
-	CqWUP4pzjCUqlfjX8TkcCR2azm3OYRVqG2B/L5MHQWRMhln4WGjLDJ0ObGhSJGygZTbRYoIILdZ
-	mJk17RhuOdllGIjW6pGOk5sewMkSjcIc7bCf0S8voSwefg2rt6pMVGI0a92Yk93GmXPSfWe9c79
-	Rkj/uzsRoOTx/5k1EYfCQ==
-X-Received: by 2002:a05:620a:710d:b0:93e:5daa:67a4 with SMTP id af79cd13be357-93ebd225a6cmr1469980085a.29.1791798058677;
-        Mon, 12 Oct 2026 02:40:58 -0700 (PDT)
-Received: from cobra01.cs.unc.edu (cobra01.cs.unc.edu. [152.2.130.143])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91b815fd211sm21817986d6.48.2026.10.12.02.40.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 02:40:58 -0700 (PDT)
-From: Hengyu Liang <hengyul@cs.unc.edu>
-To: Namjae Jeon <linkinjeon@kernel.org>,
-	Sungjong Seo <sj1557.seo@samsung.com>
-Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
-	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH] exfat: free clusters beyond EOF when a write fails or is short
-Date: Mon, 12 Oct 2026 05:40:46 -0400
-Message-ID: <20261012094046.2592731-1-hengyul@cs.unc.edu>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="daD9kmOa"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07DB31F0089C;
+	Mon, 12 Oct 2026 10:21:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791800478;
+	bh=jSaTeXy5zEI39kgqqTi6yfSkP3Kgm5wm6RfoGXruvqg=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=daD9kmOaoDrecEZ+GKWXxyW9H20UJr48DcxIiw0e65dcl8QTST3JZXcj61YvqNTyb
+	 c5d34ADQW1FTC40OtFvDZ/r1oWnvdCTDB2nBPiUWZpsdvr64rU3yyTUZCbQmtT/WHN
+	 M4L3IE8ZFu/uZjDyHAoHWVVDuNF/pppyPWohHYEa4Yvx8fprF5PUJYsVDI169f9kxo
+	 jBe+V1vSuEX9xF71FfYPmOVHGKSg4cEB3pIABRCDPA7K95hBDggmzUqYSJbpYomakn
+	 PXM0tJDgLdWEhvw5L8NTowb8aNFn6hJrwa/MlDBOPgqwCRarNEsyBQ1YwBmx0RfVjr
+	 WbnHd24KBBfVA==
+From: Christian Brauner <brauner@kernel.org>
+Date: Mon, 12 Oct 2026 12:20:46 +0200
+Subject: [PATCH RFC 01/28] ecryptfs: don't leak the inode when a lookup
+ can't open the lower file
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261012-work-fs-sb_rdonly-v1-1-60743a3dc326@kernel.org>
+References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org>
+In-Reply-To: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org>
+To: Jan Kara <jack@suse.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
+ linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
+ linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, 
+ linux-fsdevel@vger.kernel.org, ntfs@lists.linux.dev, 
+ ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org, 
+ gfs2@lists.linux.dev, linux-efi@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org, 
+ "Christian Brauner (Amutable)" <brauner@kernel.org>, stable@vger.kernel.org
+X-Mailer: b4 0.17-dev-3d1b8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1919; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=FHwfq/OCDsnntrfJYkKn8tLOjs4Tv7YHZV8JitYQDQ0=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWSd2TJJmlVX9PaCsIn+FsHZwuxHGEpPFCj+mriqsDrpf
+ qGIfFJFRykLgxgXg6yYIotDu0m43HKeis1GmRowc1iZQIYwcHEKwETcDjD8sz1q8vHQt6fh7p09
+ uT08PmKLO9tkzFMehF2fYnDC/qOTC8P/xLgFX20+PbiQ+CC39cSDhwe1Dlq6qHKtT7/euMmvwfE
+ UHwA=
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 
-Commit 82a81a7352bc ("exfat: add iomap buffered I/O support") and commit
-867b9c96dc83 ("exfat: add iomap direct I/O support") made a write
-allocate the clusters for its whole range in one step. They also dropped
-exfat_write_failed(), which freed the clusters beyond the end of the
-file after a failed or short write.
+ecryptfs_lookup_interpose() opens the lower file of a regular file to
+read the size from the header. If that fails it calls make_bad_inode()
+and returns the error. A new inode is still I_NEW at that point and
+nothing ever unlocks or puts it, so it leaks together with the reference
+it holds on the lower inode. And an inode that was already in the cache
+gets marked bad for all its other users instead of just losing the
+reference this lookup took.
 
-However, a write can stop early, for example when the process is killed
-or when a part of the buffer cannot be read. As of now, the clusters for
-the part that was not written stay allocated beyond the end of the file.
-exfat_cont_expand() does not expect them, so a later write or truncate
-that extends the file fails with ENOSPC. The directory entry records
-only the size of the file, so the space can be lost for good once the
-volume is unmounted.
+umount then complains:
 
-The issue can be reproduced on a 64M volume made by mkfs.exfat and
-mounted on /mnt, with a write of 1M from a buffer that has only its
-first 4K mapped:
+  VFS: Busy inodes after unmount of ecryptfs (ecryptfs)
 
-    #include <fcntl.h>
-    #include <stdio.h>
-    #include <sys/mman.h>
-    #include <sys/stat.h>
-    #include <unistd.h>
+That's a WARN, or a BUG with CONFIG_BUG_ON_DATA_CORRUPTION. The lower
+filesystem reports the same when it is unmounted. Use iget_failed() for
+a new inode and iput() for one from the cache.
 
-    int main(void)
-    {
-            char *p = mmap(NULL, 8192, PROT_READ | PROT_WRITE,
-                           MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-            int fd = open("/mnt/f", O_CREAT | O_WRONLY, 0644);
-            struct stat st;
+Reproducer, opening the lower file read-write fails on a read-only bind
+mount:
 
-            munmap(p + 4096, 4096);
-            printf("write: %zd\n", write(fd, p, 1 << 20));
-            fstat(fd, &st);
-            printf("blocks: %ld\n", (long)st.st_blocks);
-            printf("ftruncate: %d\n", ftruncate(fd, 1 << 16));
-            return 0;
-    }
+  sig=$(printf x | ecryptfs-add-passphrase - | sed -n 's/.*\[\(.*\)\].*/\1/p')
+  mount --bind -o ro /lower /lower
+  mount -i -t ecryptfs -o ecryptfs_sig=$sig,ecryptfs_cipher=aes,ecryptfs_key_bytes=16,ecryptfs_passthrough /lower /upper
+  cat /upper/f      # EROFS
+  umount /upper     # VFS: Busy inodes after unmount of ecryptfs
 
-Before commit 82a81a7352bc ("exfat: add iomap buffered I/O support"),
-the result is:
-
-    write: 4096
-    blocks: 8
-    ftruncate: 0
-
-After that commit, the result is:
-
-    write: 4096
-    blocks: 2048
-    ftruncate: -1
-
-This patch will bring back exfat_write_failed() and call it when a write
-ends before the end of its range, so that the clusters beyond the end of
-the file are freed again. It waits for direct I/O in flight first, as
-exfat_setattr() does before it frees clusters.
-
-Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
-Fixes: 867b9c96dc83 ("exfat: add iomap direct I/O support")
+Fixes: 3b06b3ebf441 ("eCryptfs: Fix new inode race condition")
 Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Signed-off-by: Hengyu Liang <hengyul@cs.unc.edu>
+Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 ---
-Based on the exfat dev branch (1cae92a58966).
+ fs/ecryptfs/inode.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Tested on v7.3-rc6 with fs/exfat taken from that branch (KASAN, and a
-second build with lockdep), on volumes with 512-byte, 4K and 32K
-clusters: the program above, the same write with O_DIRECT, a process
-killed in the middle of one 48M write(), a fragmented volume, and
-asynchronous direct writes in flight while writes on the same file
-fail. With the patch no clusters are left beyond EOF and all the space
-is free again after the file is deleted.
-
-Without the patch, the killed 48M write leaves a 1.5M file with 48M
-allocated; after a remount and deleting the file, only 15M of the 62M
-volume are free.
-
-The inode_dio_wait() is needed. In a test build without it, a direct
-write that fails while asynchronous direct writes are extending the
-file frees their clusters, and fsck.exfat reports "less clusters are
-allocated".
-
- fs/exfat/file.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
-
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index f106db945d8d..dc57d2c2f0f0 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -804,6 +804,19 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
- 	return ret;
- }
- 
-+/*
-+ * The clusters for a write are allocated before the data is copied. Free the
-+ * ones that a failed or short write has left beyond the end of the file.
-+ */
-+static void exfat_write_failed(struct inode *inode)
-+{
-+	inode_dio_wait(inode);
-+	filemap_invalidate_lock(inode->i_mapping);
-+	truncate_pagecache(inode, i_size_read(inode));
-+	exfat_truncate(inode);
-+	filemap_invalidate_unlock(inode->i_mapping);
-+}
-+
- static ssize_t exfat_fallback_buffered_write(struct kiocb *iocb,
- 		struct iov_iter *from)
- {
-@@ -862,7 +875,7 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
- 	struct file *file = iocb->ki_filp;
- 	struct inode *inode = file_inode(file);
- 	struct exfat_inode_info *ei = EXFAT_I(inode);
--	loff_t pos, valid_size;
-+	loff_t pos, valid_size, end;
- 	int err;
- 
- 	if (unlikely(exfat_forced_shutdown(inode->i_sb)))
-@@ -881,6 +894,7 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+diff --git a/fs/ecryptfs/inode.c b/fs/ecryptfs/inode.c
+index 525297c7ebd8..0d8452558a98 100644
+--- a/fs/ecryptfs/inode.c
++++ b/fs/ecryptfs/inode.c
+@@ -362,7 +362,10 @@ static struct dentry *ecryptfs_lookup_interpose(struct dentry *dentry,
+ 	if (S_ISREG(inode->i_mode)) {
+ 		rc = ecryptfs_i_size_read(dentry, inode);
+ 		if (rc) {
+-			make_bad_inode(inode);
++			if (inode_state_read_once(inode) & I_NEW)
++				iget_failed(inode);
++			else
++				iput(inode);
+ 			return ERR_PTR(rc);
+ 		}
  	}
- 
- 	pos = iocb->ki_pos;
-+	end = pos + iov_iter_count(iter);
- 	if (pos > i_size_read(inode))
- 		truncate_pagecache(inode, i_size_read(inode));
- 
-@@ -909,6 +923,8 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
- 		ret = iomap_file_buffered_write(iocb, iter,
- 				&exfat_write_iomap_ops, NULL, NULL);
- 	}
-+	if (ret != -EIOCBQUEUED && end > i_size_read(inode))
-+		exfat_write_failed(inode);
- 	if (ret < 0)
- 		goto unlock;
- 
+
 -- 
 2.53.0
 
