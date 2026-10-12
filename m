@@ -1,99 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DC722BD022
-	for <exfat@lists.linux.dev>; Sun, 11 Oct 2026 22:18:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03CF338C2C3
+	for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 02:44:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791757084; cv=none; b=r/zqBawWTlblcsz0va2tcmTL7pPtBA8zCaOyu2BfgC48kbgB/ju7muPEke8GbO/5mUQNtraTHPUwELsvVivnxNEysgtlRxEQDzS+tbiC5cn3aWOWbFz+LYZt5EORI6Oe7JHPXtSqTbeeYy/kfsI1W1h2pEqWTbMrtpT56kFm1Jo=
+	t=1791773084; cv=none; b=JKLMoDPDDLF2leP5MPLYzhL1n8gf+fAAFY1ex51ZcnxYLf4iks3kWU8M03WfILIYF/+4XAsCN0Os5iYu/8+I2cHrkXvHrhIgdZZ6BhRNgGIMaZonxzwvlpSFVcLV+hTebud9+rBsN92uRCcoG+lsoa/CpW94K8s2HKs6ETcExJ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791757084; c=relaxed/simple;
-	bh=rnNStryNTGVZAeJp7OPkxubE2+1Ji8/5qCigHYn8GWU=;
+	s=arc-20240116; t=1791773084; c=relaxed/simple;
+	bh=JxBhWizKqawB69gMFbfC//gobttUSGb7NtbnLsBXUSo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=CLC5PLLjb80m8ToEhyT5E88xRVGQQfvjTzcCx8W4f2r88gOOMW5v0LyIbgZ23A0x8WCQieBoXdqwq3oJU3RWnb9HLxxDDYV160PjnUOrTemerXB65g7UsinT8leJGY2Zs4OQWqcD9J+hFLjlcUQJHz+48ndH1KJ+CzHzWoSg03A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wamye5Az; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=t3Ff+JLMY0sLYwyDqmv3KKORUnxMWFMc10DG9dEKC+zxkU6hZ73t2eZDh4o0vIycJCIRNcgiUE7UsMm3XRiq2Kf+h+/eP7xeyNSSQ5E0fK4RwK1PHLZFbALiq5F7Ovmdd41rbARLnUwAHoG+J1DCtPaEQ9GLgdRhOVYo5jwpHKc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zc1A5aX/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wamye5Az"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34AB71F008A1
-	for <exfat@lists.linux.dev>; Sun, 11 Oct 2026 22:18:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zc1A5aX/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 810DB1F0089C
+	for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 02:44:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791757082;
-	bh=rnNStryNTGVZAeJp7OPkxubE2+1Ji8/5qCigHYn8GWU=;
+	s=k20260515; t=1791773083;
+	bh=6YWN66Wl7KZlYOubm3O9+X/mTFE29yBJjcpx9ZFTfS0=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Wamye5Azwj5oVOghTNQfHMSUfJ47DeVB1jflkpTwWpQ6Z3N6ziToQkz+Nwn9/3wO/
-	 G5+g8MRYXezB0YnUFTGi0Zmy+g94k1wfD5J6K6q28s1C9NNWDlaBZc6vb70NTrez+O
-	 7LSfuoyZFyhEOIRjXNsCdzwaSAOoNUiyiGOIqUHH4TxTfgneoV3wWmlN/+Ng4fEfzD
-	 qgiPzuClnA1hMEcBvPmEL/OE2dn5eoqP5gCVp0bNr423WgI7KpAOvTeMD7v/RXzM3v
-	 bY4wIA4iB8GDKrIxBSw8r2Nka5qyyRU7m6WmDNDO+gZyQ1t1UKebfyGXJz0G+CKieI
-	 vpp+e8wBmIHgQ==
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c2e8e738ae0so208426166b.1
-        for <exfat@lists.linux.dev>; Sun, 11 Oct 2026 15:18:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzv0zpS6jArzCGgiFqyafCTNBHJ6YUiD1vmISQQ3qfOc8t2hf4QCoJIAUYEBGfWktl7yTMK+Q==@lists.linux.dev
-X-Gm-Message-State: AFq9FYIw34ZXX+mHkMqci+5ClTfvqOc0PoBccNe9VvpnaqToiuMLVxrb
-	RkqfSziS6p9tDK9eXmCjFhNSwoZ+DhBlmD4ewdxwTOsY/NDfbfM42EB+cLmAylJPUlaqAPAV/Ml
-	VsLbBAymCdrXlgj81rNy3wTvkrHWUmhE=
-X-Received: by 2002:a17:907:8692:b0:c2e:2720:8f68 with SMTP id
- a640c23a62f3a-c31aa01b41fmr700438266b.46.1791757080557; Sun, 11 Oct 2026
- 15:18:00 -0700 (PDT)
+	b=Zc1A5aX/yWZK6HwX1WvkIAcSNqqlrGYBs/2O6SUihzbdzvWdbPnWDm3O2lYge1/9K
+	 nFPgg0UVw0djku/pi++QfP5p+q5Xzzy+zJNirkok5lseQRtKle2oPVvIgF3VHRDAmP
+	 KHxcJNdpfCMVPG3kzNK6TDqrZRJ7riF9ucfozNRX97jUbhcYVCnOqIq/ssn5ZXKv5b
+	 NoUa1otIsAP0TWyxKvEHTC7KfJZnxrzlgVWhuoOqjspoZ+m9rr5mvlowPH+AW5hb6U
+	 5AuCHpGuZJ/Kadl4KNtiLc6ndFLXRI5ow3BOPQVNHSmtdBQeUb5uvAxAmPX2X5+3kV
+	 OiG4cRBNPcyBg==
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c2e5d08214dso182624166b.1
+        for <exfat@lists.linux.dev>; Sun, 11 Oct 2026 19:44:43 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzwnbbEuMNe0GugZlzBqHw07g3r8IVF8u3dmyRaQdpkCINnkayg/XLtG0HAeYgQmCQs964avg==@lists.linux.dev
+X-Gm-Message-State: AFq9FYJoC3CgzGxskoOLOBp5nxZmeHea+FLUNi49CJtIYKcuW/VtJNYU
+	cpMnyYv0WmwVGcoCpxlruKoyIl8J/PxwYrk+u5i2xk61087S1LkSpqd710tB+7K1e0ooYCbuml4
+	FV0SDRUUsey4H8JLP00ScobY8p81UzSM=
+X-Received: by 2002:a17:907:c28f:b0:c31:9b37:ed3 with SMTP id
+ a640c23a62f3a-c31a9b0b9c7mr757346066b.14.1791773082161; Sun, 11 Oct 2026
+ 19:44:42 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <010001a1222f66ba-0c745f29-d4fe-4862-93ff-1db2055b05fc-000000@email.amazonses.com>
- <CAKYAXd9EkVrdKjsmcd96OFc7pf=2WA8KMUBhRPZROkUOdkV=SA@mail.gmail.com> <010001a1273da435-1b6e4385-3185-451f-821b-8d8723ba78d3-000000@email.amazonses.com>
-In-Reply-To: <010001a1273da435-1b6e4385-3185-451f-821b-8d8723ba78d3-000000@email.amazonses.com>
+References: <20261008145525.1950813-1-anmuxixixi@gmail.com>
+In-Reply-To: <20261008145525.1950813-1-anmuxixixi@gmail.com>
 From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Mon, 12 Oct 2026 07:17:47 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_2nx=EmTYdH1t76KuRzJZw5Ln75ZQepEvNGn-46f5+dQ@mail.gmail.com>
-X-Gm-Features: AclHuK_6HzT0lWvDRIo4hmLdpb1qADFCHsjTK2KvGuYlyDQteQt66fSMdtGSres
-Message-ID: <CAKYAXd_2nx=EmTYdH1t76KuRzJZw5Ln75ZQepEvNGn-46f5+dQ@mail.gmail.com>
-Subject: Re: [PATCH] exfat: clean stale bdev buffers of newly allocated clusters
-To: nfalesy@gmail.com
-Cc: sj1557.seo@samsung.com, yuezhang.mo@sony.com, exfat@lists.linux.dev, 
-	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	regressions@lists.linux.dev, hch@lst.de, djwong@kernel.org
+Date: Mon, 12 Oct 2026 11:44:30 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-5rnpAP9Wgn37f7d04GJC7SCm5bnDi4=sQpWjRxUxk_g@mail.gmail.com>
+X-Gm-Features: AclHuK97K4dFNdpuvwtrMs3V-rfrX4sOzCQ-q3tsLqpqD6QWT7pbC9updR3IDhY
+Message-ID: <CAKYAXd-5rnpAP9Wgn37f7d04GJC7SCm5bnDi4=sQpWjRxUxk_g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] fsck: harden boot-sector field validation
+To: Yang Wen <anmuxixixi@gmail.com>
+Cc: hyc.lee@gmail.com, yuezhang.mo@sony.com, exfat@lists.linux.dev
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 11, 2026 at 4:15=E2=80=AFAM Nicolas Falesy
-<nicolas@nicolasfalesy.com> wrote:
+On Thu, Oct 8, 2026 at 11:55=E2=80=AFPM Yang Wen <anmuxixixi@gmail.com> wro=
+te:
 >
-> Directory entries are read and written through buffer_heads of the
-> block device. Removing the entries of a directory dirties such a
-> buffer. If the directory is then removed and its cluster is reused for
-> file data before writeback, the stale buffer stays dirty in the block
-> device mapping, and the next flush of the block device (fsync, syncfs
-> or umount) writes it over the new file data. The file silently reads
-> back with one sector replaced by the deleted directory entries.
+> This series hardens validation of untrusted fields in the exFAT boot
+> sector.
 >
-> This was harmless while file data went through exfat_get_block(), as
-> __block_write_begin_int() and do_direct_IO() call clean_bdev_aliases()
-> for newly allocated blocks. Since data I/O moved to iomap, nothing
-> drops these buffers any more.
+> The first patch validates the sector and cluster shift fields before
+> using them in shift expressions. It addresses the review feedback on
+> v1 and is authored by me.
 >
-> Clean the aliases in exfat_alloc_cluster(), once per contiguous run of
-> allocated clusters. Doing it at allocation time covers every path that
-> allocates clusters: buffered and direct writes, and also fallocate()
-> and an extending truncate(), which allocate clusters before the data is
-> written, so the later iomap mapping does not see them as new.
+> The second patch is the CVE-2026-45531 fix from the Android exfatprogs
+> tree, preserving David Anderson's authorship and the original code
+> changes.
 >
-> Tested on the exfat dev branch in a KVM guest with a reproducer that
-> removes the entries of a directory, removes the directory and writes a
-> file over its freed cluster: buffered with and without fsync, O_DIRECT,
-> after fallocate(), after an extending ftruncate(), and with the freed
-> cluster in the middle of a fragmented allocation. Without this patch
-> every run corrupted the file (55/55); with it, none did (0/55). A churn
-> test that creates, removes, preallocates and truncates directories and
-> files, then runs fsck.exfat, is clean with and without the patch.
+> Changes in v2:
+> - Split the shift-field validation into a preparatory patch.
+> - Validate sect_size_bits and sect_per_clus_bits before shifting.
+> - Add a link to the original Android commit.
 >
-> Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
-> Fixes: 867b9c96dc83 ("exfat: add iomap direct I/O support")
-> Link: https://lore.kernel.org/all/010001a1222f66ba-0c745f29-d4fe-4862-93f=
-f-1db2055b05fc-000000@email.amazonses.com/
-> Suggested-by: Namjae Jeon <linkinjeon@kernel.org>
-> Assisted-by: Claude-Opus-5.5
-> Signed-off-by: Nicolas Falesy <nicolas@nicolasfalesy.com>
-Applied it to #dev.
+> David Anderson (1):
+>   fsck: prevent overflows from invalid clu_count and vol_length
+>
+> Yang Wen (1):
+>   fsck: validate boot-sector shift values before use
+Applied them to #exfat-next.
 Thanks!
