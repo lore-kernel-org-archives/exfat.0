@@ -1,90 +1,244 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 278AD13B58C
-	for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 04:04:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F18438F922
+	for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 05:17:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791864280; cv=none; b=dVdjsOCFXpS0UL4D3n226rmgjc7P30PVHPYIklDDiMqD9seuQT215iJJ18WN8r9JOrXKC9MA4+WCr+FP7xt/40BLC2CaSqxkGqH6uI7QjY/IBkJZ462aFbPvMo3KO6Ply7SVXU20XWCh2iCbCkonmOPSnQ5m/pOZcLjPjphwzUg=
+	t=1791868651; cv=none; b=TH5/4uHE1HCaP0Uu1upN6t2iSUCAg9RV/7ToEoTLRiRJihOnpQ/VrVFwy5uqm6qR9S29C6KWwPJfp/mUALyq2rIB6PpFqW1UjUfJBs8aTcgGo+R4fEXkWmxdICJLjhXFBR5z7gd6S8qc8gOKlKubkKnVUQxNt2RzKtyOW9XD1O8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791864280; c=relaxed/simple;
-	bh=22fgWg8r91/+6V5WYSm0YSgAjtUpD/vSS4Xav919aC8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=BpMNOwoFm1C841NCWDywteFvIEeqlse5R1XBR5kJ6veCOmi+0nOw4GPCM3lGLiLw85rzZm374YPxt9q7vuV3I6BNx8ABFmtWn5q3FPg/X9ZdB0Gg2j71Io/hrkt8eoBF44aXsoDrHX1WWoUwBPsGjhTduMUBlo204gwhifDuu5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eHcsYCZm; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791868651; c=relaxed/simple;
+	bh=NG7803GYFj1/NT1KPUeFcH6YKP2sUhf5Mqt0wpJMSH0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Wzje7yw1P95GFlPbpGuxqu21jimZQurAI+OTbxI/GGEazvyeXrp12amIZ5jKBszkgfc7zY4P+kVGSyX1458AfSui5nBOodnFHGobhIiyojFW8twBv4ojMaLZI3nDf7p8lS7kRswieUaXHhm6sW48OBYe8vpuRyKoVJSQBvODh9M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu; spf=pass smtp.mailfrom=cs.unc.edu; dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b=KRtAQqDw; arc=none smtp.client-ip=209.85.160.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.unc.edu
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eHcsYCZm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF0991F0089B
-	for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 04:04:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791864278;
-	bh=u+ekwzoIEO6HDb5CIajNnysgN4jHJu6P1HU1o1BTcjs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=eHcsYCZmDm8pw6T+Cp4/39GIp8seMwq4sUmc+epg1NIiu72fieisMgNI906TzRbaT
-	 tsEg7A/jW0SEnGmUAZdrBJCu53RB8MgLZnkwwklkavgqcyH1f+PGdB/bFkUzFl8zx9
-	 cUhzsROSmGYwK+coqW/7deYNJbFc9M1Lm/jzrEIO3jng+UAxMYLSoXHIqxVwO3eOLi
-	 QMBe6APl/r+yhComcNsZzo5tD3bKlp7vaovyqZzytFNy/IHb8nY1T9Vj65MlffuvhS
-	 AGWcoruYNOql9+giKX8OwTHdWdKJbjXtO2zci/eLm5u79wkSzWLjW4+iZleov+f62d
-	 UsqZYTe2WAhHw==
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6acb57c2b88so3295385a12.2
-        for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 21:04:38 -0700 (PDT)
-X-Gm-Message-State: AFq9FYLl2/ePuUTLi9Ip5OqPLKYF9mzgnmge+/bbr97vXM47P38NdXbe
-	toeRW1unycwH0Pf7dVVT6nfktPaOS+WBrCGkLbCdl8spjwlt2q3v0p1DE+eniqxW8R4adbcQWUW
-	X+RhkSdRhasWbRbpHksYAAc4BbkuCp34=
-X-Received: by 2002:a17:907:2d88:b0:c2e:4373:521 with SMTP id
- a640c23a62f3a-c31aa0d2286mr956856066b.46.1791864277500; Mon, 12 Oct 2026
- 21:04:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b="KRtAQqDw"
+Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-53397554beaso28574611cf.3
+        for <exfat@lists.linux.dev>; Mon, 12 Oct 2026 22:17:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cs.unc.edu; s=google; t=1791868647; x=1792473447; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=38PBnMxcx41H3htIuiNF43HwAWIX+fZeyGJVp3dp+R0=;
+        b=KRtAQqDwc5R3yylSOvFpcpwbqc7/9aJt0UpcECk0/UtwiW8ddtAKBGKnMYhh2zvuqA
+         FNJ7EWPbEm7XRb7WaE/nJpsOf5xQqMDfejujUzgFu1fsbc91LAc4eh9m43UiXC0apiCK
+         rgYSVJV5KFAdv67oiHDPMacp/b7uMkwed5ES9LSVwfb2GCRT0zNu3D8SO2x1YFlHmjoa
+         OXLFlGUJjxr4fD334OYFGrq23qKoDNEPZzDMYiKKxhtda2Ky8Jo/K0GTMiSTWE9JqLF6
+         Fc06+k+VtbmIAWCYkQGH0Zi9HGgE7wLKif//8gXtLr3OG+WmAf3YfCapLV5283cJQQjx
+         8Cbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791868647; x=1792473447;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=38PBnMxcx41H3htIuiNF43HwAWIX+fZeyGJVp3dp+R0=;
+        b=v6hw47tju3BshlgWE8fHMoTQdx9pvqYETxgQGy1imDwPbzPWMe4Ce3nSb3ixt0xvQE
+         ZMaaU0wlfYVYOTo1g27TO+eygRE64kAb/UYGaLsbvhPEqpGGUUyxdSrgyq4qZMb27P/D
+         Cx9cyx45aUaFj0Nt5vCRoxs2fpc3dY5S05G51uCI/DkCuObm2lGesL6meNWobALkdD+6
+         jsxsWoVPEkoO6cT+3p0tj4/bx7NcbbpDzDCeEApvV2pbdCSj+UzLj18rn0LDppB/+YX8
+         EIdrsqBZQSzg4UW6XjvbmZ+MA1GGkHMlLC9bWgFh08gMA16IbbNNcK52CPgukjps0jfQ
+         46uw==
+X-Forwarded-Encrypted: i=1; AKwUvBxW/aKTkCSftg7o4FH14sazoGcvc3+2XVUdJl+cEhK4V5pUxTSC06KhsXWvEoKwQAkbAizuTA==@lists.linux.dev
+X-Gm-Message-State: AFq9FYKPenQjPwAeSI5HdI8g9XrSc3JM0/uTWK2EdpFskYIbuDi/T6Hz
+	cowutAiv1gqXerpUSdjrkcjWn+ZaOX/A/D4cN0C20t5gmcN8uOMK+hvcAN8LO1tPew==
+X-Gm-Gg: AYBFou0KdPSqkjlJjCG8Oy0lYMPdjaB/kExxY/JaPpuYJVMMs+UJGAekbTSmHYw6xEu
+	qP3w3IkFjDyrWQQNRj19lAxIwFWr1C7Zcv4YjjY1qN5JgZLQdGCZx22hEM38smsJGInlr3PuIr3
+	Mk66qE4neiSmfPSN7IJPOeVbkLr9grKSD2H0XE/L1wtlgC0VV3ldc3u0+vUqJW395bx5XQocrdD
+	IFAZEyHRtJENCCFJq0UngQRnTOLgG5eTMkxN9BqgtRDwig3FNElUi/GOC+r5eZjcIX8H7MHfw7e
+	+fhGeeH1lBSQgvliwY1oTfvct9kRz3iKDAGiCgS1aZa8gZyl2rrA/Owoax6lfS2qZPzvbuxakIq
+	2BwEBwQ0pSdYakS1J8CZHOn0vBShTpVWpVupdpIV0VIu59BDz8sliYXquGLKOh2b+thlw0mWahF
+	9n9NX0ikcBLJqTrpeNuJ41ZWFlfNBom+x1emy/m1oP6YXPMk5tHXctd/WXm+t2+vb5gDQ7KvKGj
+	LUOFiJlBpm8P8Tm5eB02A==
+X-Received: by 2002:ac8:5906:0:b0:535:a5f9:7521 with SMTP id d75a77b69052e-535a5f97847mr174791381cf.64.1791868646823;
+        Mon, 12 Oct 2026 22:17:26 -0700 (PDT)
+Received: from cobra01.cs.unc.edu (cobra01.cs.unc.edu. [152.2.130.143])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5359b7e986fsm94908661cf.29.2026.10.12.22.17.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Oct 2026 22:17:26 -0700 (PDT)
+From: Hengyu Liang <hengyul@cs.unc.edu>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>
+Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH] exfat: zero invalid block tails in direct reads
+Date: Tue, 13 Oct 2026 01:17:10 -0400
+Message-ID: <20261013051710.3505767-1-hengyul@cs.unc.edu>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20261013033837.2748258-1-chizhiling@163.com>
-In-Reply-To: <20261013033837.2748258-1-chizhiling@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Tue, 13 Oct 2026 13:04:25 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd8gAtr9uhF_ogOUuc511VEed5HbXbvjzeq-81t_u-4uJQ@mail.gmail.com>
-X-Gm-Features: AclHuK-GufY7IP1gFi4ZBIytqs8p0Hg6dhX4WNQikwPCLrcSLwnq0RK35ANLG_Y
-Message-ID: <CAKYAXd8gAtr9uhF_ogOUuc511VEed5HbXbvjzeq-81t_u-4uJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] exfat: fix valid_size update races
-To: Chi Zhiling <chizhiling@163.com>
-Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org, Yuezhang.Mo@sony.com, 
-	dxdt@dev.snart.me, sj1557.seo@samsung.com, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 13, 2026 at 12:39=E2=80=AFPM Chi Zhiling <chizhiling@163.com> w=
-rote:
->
-> From: Chi Zhiling <chizhiling@kylinos.cn>
-Hi Chi,
->
-> exFAT uses valid_size (ValidDataLength) as the on-disk boundary of
-> initialised data, but the current code advances it too late or without
-> proper serialisation.  As a result, buffered writes can silently lose
-> data reclaimed before valid_size covers it, page faults and direct I/O
-> can race with writes, and a failed direct write still grows the file
-> on disk.
->
-> This series advances valid_size under the folio lock for buffered
-> writes, revalidates cached iomaps, drops i_rwsem from
-> exfat_page_mkwrite(), and publishes i_size/valid_size only on
-> successful direct I/O completion.
->
-> V1: https://lore.kernel.org/exfat/59056131-e3bd-4003-8c30-0a356cf0bd82@16=
-3.com/
-> Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339dde/=
-T/#t
->
-> Chi Zhiling (7):
->   exfat: advance valid_size under the folio lock for buffered writes
->   exfat: advance valid_size while zeroing new ranges
->   exfat: validate cached iomaps during buffered writes
->   exfat: drop i_rwsem from exfat_page_mkwrite
->   exfat: do not re-zero the valid range in exfat_page_mkwrite
->   exfat: complete direct writes synchronously when they update metadata
->   exfat: publish i_size and valid_size on direct I/O completion
-Can you add fixes tags to the patches ?
-Thanks.
+Commit 867b9c96dc83 ("exfat: add iomap direct I/O support") made
+exfat_file_read_iter() use iomap_dio_rw() for direct reads, removing the
+zeroing done by exfat_direct_IO().
+
+However, the read mapping still includes the whole block containing
+valid_size. As of now, O_DIRECT reads return old data from the invalid
+tail of that block, while buffered reads return zeros.
+
+The issue can be reproduced on an exfat filesystem with 512-byte blocks
+mounted at /mnt:
+
+    head -c 4096 /dev/zero | tr '\000' A > /mnt/f
+    sync /mnt/f
+    truncate -s 100 /mnt/f
+    truncate -s 8192 /mnt/f
+    dd if=/mnt/f of=/tmp/readout bs=4096 count=1 iflag=direct status=none
+    od -An -tu1 -j100 -N1 /tmp/readout
+
+Before commit 867b9c96dc83 ("exfat: add iomap direct I/O support"),
+od prints 0.
+
+After that commit, it prints 65 ('A') instead.
+
+This patch will zero the part of that block beyond valid_size when the
+read bio completes, as exfat_iomap_read_end_io() does for buffered reads.
+
+Fixes: 867b9c96dc83 ("exfat: add iomap direct I/O support")
+Cc: stable@vger.kernel.org
+Signed-off-by: Hengyu Liang <hengyul@cs.unc.edu>
+---
+Based on the exfat dev branch (1cae92a58966). It also applies on top of
+"[PATCH v2 0/7] exfat: fix valid_size update races".
+
+Tested on v7.3-rc6 with fs/exfat taken from that branch (KASAN and
+lockdep), on volumes with 512-byte and 4K blocks: the commands above,
+and direct reads with pread(), preadv(), native AIO and io_uring (READ,
+READV and READ_FIXED) at aligned and unaligned valid sizes, after
+drop_caches and after a remount, including short reads at EOF and
+misaligned requests. Without the patch 88 of the 280 pread/AIO reads
+and 180 of the 384 io_uring reads get old data in their buffer; with
+the patch none does. The results are the same with the series above
+applied.
+
+The pages of the bio are zeroed, not the user addresses as
+exfat_direct_IO() did. This also works for asynchronous reads, and it
+does not depend on the buffer still being mapped writable when the read
+completes.
+
+The allocation in exfat_dio_read_submit_io() was failed with fault
+injection: the read returns ENOMEM.
+
+ fs/exfat/file.c  |  4 ++--
+ fs/exfat/iomap.c | 60 ++++++++++++++++++++++++++++++++++++++++++++++++
+ fs/exfat/iomap.h |  1 +
+ 3 files changed, 63 insertions(+), 2 deletions(-)
+
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index f106db945d8d..0aa99238c0ea 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -941,8 +941,8 @@ static ssize_t exfat_file_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 
+ 	if (iocb->ki_flags & IOCB_DIRECT) {
+ 		file_accessed(iocb->ki_filp);
+-		ret = iomap_dio_rw(iocb, iter, &exfat_iomap_ops, NULL, 0,
+-				NULL, 0);
++		ret = iomap_dio_rw(iocb, iter, &exfat_iomap_ops,
++				   &exfat_read_dio_ops, 0, NULL, 0);
+ 	} else {
+ 		ret = generic_file_read_iter(iocb, iter);
+ 	}
+diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+index e50ecbfbfbe0..ec152776c7ff 100644
+--- a/fs/exfat/iomap.c
++++ b/fs/exfat/iomap.c
+@@ -5,13 +5,73 @@
+  * Copyright (C) 2026 Namjae Jeon <linkinjeon@kernel.org>
+  */
+ 
++#include <linux/bio.h>
++#include <linux/blk-crypto.h>
+ #include <linux/iomap.h>
++#include <linux/slab.h>
+ #include <linux/pagemap.h>
+ 
+ #include "exfat_raw.h"
+ #include "exfat_fs.h"
+ #include "iomap.h"
+ 
++struct exfat_dio_read {
++	struct bvec_iter zero;
++	void *private;
++};
++
++/*
++ * exfat_dio_read_end_io - Direct I/O read bio completion handler
++ *
++ * exfat_iomap_begin() maps the whole block containing valid_size, so a
++ * direct read of that block also reads the stale data beyond valid_size.
++ * Zero it before iomap releases the pages, as exfat_iomap_read_end_io()
++ * does for buffered reads.
++ */
++static void exfat_dio_read_end_io(struct bio *bio)
++{
++	struct exfat_dio_read *read = bio->bi_private;
++	struct bvec_iter iter;
++	struct bio_vec bv;
++
++	__bio_for_each_segment(bv, bio, iter, read->zero)
++		memzero_bvec(&bv);
++
++	bio->bi_private = read->private;
++	kfree(read);
++	iomap_dio_bio_end_io(bio);
++}
++
++static void exfat_dio_read_submit_io(const struct iomap_iter *iter,
++				     struct bio *bio, loff_t pos)
++{
++	loff_t valid_size = exfat_get_valid_size(EXFAT_I(iter->inode));
++	struct exfat_dio_read *read;
++
++	if (pos + bio->bi_iter.bi_size > valid_size) {
++		read = kmalloc_obj(*read, GFP_NOFS);
++		if (!read) {
++			bio->bi_status = BLK_STS_RESOURCE;
++			bio_endio(bio);
++			return;
++		}
++
++		/* bio->bi_iter may have advanced by the time the bio completes. */
++		read->zero = bio->bi_iter;
++		if (pos < valid_size)
++			bio_advance_iter(bio, &read->zero, valid_size - pos);
++		read->private = bio->bi_private;
++		bio->bi_private = read;
++		bio->bi_end_io = exfat_dio_read_end_io;
++	}
++
++	blk_crypto_submit_bio(bio);
++}
++
++const struct iomap_dio_ops exfat_read_dio_ops = {
++	.submit_io	= exfat_dio_read_submit_io,
++};
++
+ /*
+  * exfat_file_write_dio_end_io - Direct I/O write completion handler
+  *
+diff --git a/fs/exfat/iomap.h b/fs/exfat/iomap.h
+index fd8a913f7794..99853c78ce55 100644
+--- a/fs/exfat/iomap.h
++++ b/fs/exfat/iomap.h
+@@ -6,6 +6,7 @@
+ #ifndef _LINUX_EXFAT_IOMAP_H
+ #define _LINUX_EXFAT_IOMAP_H
+ 
++extern const struct iomap_dio_ops exfat_read_dio_ops;
+ extern const struct iomap_dio_ops exfat_write_dio_ops;
+ extern const struct iomap_ops exfat_iomap_ops;
+ extern const struct iomap_ops exfat_write_iomap_ops;
+
+base-commit: 1cae92a58966f19d3e43fe34e9c4f315d4e9b822
+-- 
+2.53.0
+
