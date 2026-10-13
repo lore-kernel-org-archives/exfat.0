@@ -1,76 +1,124 @@
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D254F395AE4;
-	Tue, 13 Oct 2026 07:40:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF5DB31E845
+	for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 12:56:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791877249; cv=none; b=RJoNqwyqDyvKFaINlu16NoCbqnWyKpqLUFJgJfUy+hgloSMKB3IpJZRZNXctgnIZCa/OHMFJHp0YGi+iKrJXnhEyCZJD0wFRx4tRc0g76ca14eLG3U2ZNfAuogX0xeYg8IqaUIbrDtkhvSEH9SV1vqHTis4XNkzw6hE6TKqYGp8=
+	t=1791896204; cv=none; b=mR/RdRMcU9xaTAuSZtQWuwq+bmsiFf5CxcY0n6uIlOfBPcHgAf6sXigps5zDjM+5/JF9B7X6TgYnyDIhO5oNJl/9j75V2arTfXi7+55iZvXx8nx3mJRYbz13s0hPZpXXjtUcWXVYA+oteEX2y/Sm8ytXoHSD49d07fA5bQNvbNU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791877249; c=relaxed/simple;
-	bh=ZTnOrsti/2w8yAPqPu5abDI5OT9mEbN9qOXIuqgEeYg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sPy2HSJzx50dR6jXHBjlzzCroxgh67mawVXAkbESjSuZQ1PiQOgqxXMvnQLXErZRtKL1HQeVmE0cbU4eYam+yIptebHeuv1UXDXik0mGar3p6+0kwSTjPXnH0XxMJSqeaphbij/middSthT6Ffk2D/0E4ZpnZ+Nm726TMFhzX1E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=AaZbjD2s; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+	s=arc-20240116; t=1791896204; c=relaxed/simple;
+	bh=zMYTyrf3I15Js8ygcd8tyjsEvwoH+054x9RksQFizRw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QADbxpYouQq7UgQvaFD84k6x4pLKnpAc0gwf0bpHFFGgV3moP3j3Q8dhXrlf168/EYg3dv1L0Z9uHi3K3RaMzljqvEr0oHrko+ViHOOH21wiOOszyOFwjogAEBlVI7SL8TOHiSeqjNG6i9FEHultLEjNlt+y+udH5gDErSF8Ie0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Lsl0g0qk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="AaZbjD2s"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=z8P81LjS8NfdOGd3+gt4wOMwgwV0ZCatSPsh7k6dc2Q=; b=AaZbjD2soi/yvHMBw/9GVnAIAL
-	shFTyE+Qr1ymdCPeMyfq5lqtdeYZcJr5NtEdEZX2Vr6tV+OH3rTBCbMSILJa0FCBM5oY1X2nIYdHG
-	l2eFb4GevJeSaAAC5jieCXubo7+NvjOvWM5to1Pdk/7OseD8HtAKx2Df7vHzy+xPq2RyWyhU29uJB
-	hY54yKFFTpgtZUOGihr6vdbSwshF4EuWVcQDT+aoKgO58YjUwvk0mXiYWfXd3/eMAMBGFOQrta/jK
-	wP6eABRMv2mfrN2+yN7hF8PYvYzHoaBLB/FBlXBYjnQR+JBo1ykn4SIKd9wbj1Ec9NexumPlQ90QL
-	5Yjx4eTQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1xGX7w-0000000CEmo-13nh;
-	Tue, 13 Oct 2026 07:40:48 +0000
-Date: Tue, 13 Oct 2026 00:40:48 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Christian Brauner <brauner@kernel.org>
-Cc: Jan Kara <jack@suse.com>, Al Viro <viro@zeniv.linux.org.uk>,
-	ecryptfs@vger.kernel.org, linux-ext4@vger.kernel.org,
-	jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
-	exfat@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-	ntfs@lists.linux.dev, ocfs2-devel@lists.linux.dev,
-	linux-btrfs@vger.kernel.org, gfs2@lists.linux.dev,
-	linux-efi@vger.kernel.org, linux-mtd@lists.infradead.org,
-	linux-xfs@vger.kernel.org
-Subject: Re: [PATCH RFC 28/28] selftests/filesystems: test xfs remounts after
- a shutdown
-Message-ID: <as3ggAvyiKmCEG4v@infradead.org>
-References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org>
- <20261012-work-fs-sb_rdonly-v1-28-60743a3dc326@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Lsl0g0qk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B56671F0089A
+	for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 12:56:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791896203;
+	bh=+j2J0y/28lU7ye3epBMxr5hc7VlERZW/96Am70/hEbk=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Lsl0g0qkhifHY4hcobeDlfkAJUDfavHEJ7gPbi4+tDk5EQ0Ca7JiMYrJzKTTgIO/I
+	 PacIinj90q68JEqrV0aRWbFZBgm9I4uv+4Qp+sp0kKDnQ89xIBMZsI5tYN83TJblEZ
+	 nIdmhnmH9E2q3b5ci8FN4uDJ9jL37YdQCmxWJAMlbL/pRtF5g8lSB3bJv3RtmswBcC
+	 aMowhkxpyX9hUzEC6N4+5g+cpAcq1wM9kYvysW0Z2qkzXLnec8u2FGXJ2H/VKSJI4k
+	 rbNEd2kbQ7z9tNFeXi6161B/B4jIsx8D7omKt9IQmk208sS7ij1oCHnJyJqYNmzazt
+	 6noLAGrcycqIQ==
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-c3762b0d45aso65694266b.3
+        for <exfat@lists.linux.dev>; Tue, 13 Oct 2026 05:56:43 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxT44ypG5z14mLp57cXP0lq2QZVWv4m+3hLdu8Anogq6mXTQmw07c3cGGDH45FS4XDrzIOk0A==@lists.linux.dev
+X-Gm-Message-State: AFq9FYLuYJWXWbF06DDrt6eX6jReCaX++VgDX2y+goQte+ONkqNGmJW7
+	Yrc07OGjbAeyVKR3+nAgL+wTyvVpo8Dhln0JxlOIlkeYKVsAFGvdEyWl9g53VMO0gRUIE5a8sry
+	r2w02VtM+q5Jny8OB8FEee8DHkWzjqTw=
+X-Received: by 2002:a17:907:7ba3:b0:c29:f5d5:5aa1 with SMTP id
+ a640c23a62f3a-c31aa097acdmr1256017766b.43.1791896202356; Tue, 13 Oct 2026
+ 05:56:42 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261012-work-fs-sb_rdonly-v1-28-60743a3dc326@kernel.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+References: <20261012094046.2592731-1-hengyul@cs.unc.edu>
+In-Reply-To: <20261012094046.2592731-1-hengyul@cs.unc.edu>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Tue, 13 Oct 2026 21:56:29 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9V3oL8J+D3a9N0g-aTeOOVH+K56PDatCfPqgjkiMRMNA@mail.gmail.com>
+X-Gm-Features: AclHuK_YGwXl2gvJJzwsbFHh9MWmEy7xISbD5IppmTPVkWDT6pcKFrpr8MeVnCw
+Message-ID: <CAKYAXd9V3oL8J+D3a9N0g-aTeOOVH+K56PDatCfPqgjkiMRMNA@mail.gmail.com>
+Subject: Re: [PATCH] exfat: free clusters beyond EOF when a write fails or is short
+To: Hengyu Liang <hengyul@cs.unc.edu>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 12, 2026 at 12:21:13PM +0200, Christian Brauner wrote:
-> Add tests for remounting xfs after FS_IOC_SHUTDOWN with the default, the
-> logflush and the nologflush flags and after a shutdown that the remount
-> to read-only causes itself:
-> 
-> - option-only remount keeps it read-write
-> - remount to read-only works
-> - remount to read-write fails with EIO
-> 
-> For the last variant the image lives on a tmpfs of its own. The test
-> punches out the log and shrinks the tmpfs so the log write during the
-> remount fails with ENOSPC.
-
-Please make this a xfstests test case, which has the infrastructure
-for all this.  And make it generic, as the same shutdown ioctl is
-supported by half a dozen file systems, nothing really xfs-specific
-here.
-
+On Mon, Oct 12, 2026 at 6:41=E2=80=AFPM Hengyu Liang <hengyul@cs.unc.edu> w=
+rote:
+>
+> Commit 82a81a7352bc ("exfat: add iomap buffered I/O support") and commit
+> 867b9c96dc83 ("exfat: add iomap direct I/O support") made a write
+> allocate the clusters for its whole range in one step. They also dropped
+> exfat_write_failed(), which freed the clusters beyond the end of the
+> file after a failed or short write.
+>
+> However, a write can stop early, for example when the process is killed
+> or when a part of the buffer cannot be read. As of now, the clusters for
+> the part that was not written stay allocated beyond the end of the file.
+> exfat_cont_expand() does not expect them, so a later write or truncate
+> that extends the file fails with ENOSPC. The directory entry records
+> only the size of the file, so the space can be lost for good once the
+> volume is unmounted.
+>
+> The issue can be reproduced on a 64M volume made by mkfs.exfat and
+> mounted on /mnt, with a write of 1M from a buffer that has only its
+> first 4K mapped:
+>
+>     #include <fcntl.h>
+>     #include <stdio.h>
+>     #include <sys/mman.h>
+>     #include <sys/stat.h>
+>     #include <unistd.h>
+>
+>     int main(void)
+>     {
+>             char *p =3D mmap(NULL, 8192, PROT_READ | PROT_WRITE,
+>                            MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+>             int fd =3D open("/mnt/f", O_CREAT | O_WRONLY, 0644);
+>             struct stat st;
+>
+>             munmap(p + 4096, 4096);
+>             printf("write: %zd\n", write(fd, p, 1 << 20));
+>             fstat(fd, &st);
+>             printf("blocks: %ld\n", (long)st.st_blocks);
+>             printf("ftruncate: %d\n", ftruncate(fd, 1 << 16));
+>             return 0;
+>     }
+>
+> Before commit 82a81a7352bc ("exfat: add iomap buffered I/O support"),
+> the result is:
+>
+>     write: 4096
+>     blocks: 8
+>     ftruncate: 0
+>
+> After that commit, the result is:
+>
+>     write: 4096
+>     blocks: 2048
+>     ftruncate: -1
+>
+> This patch will bring back exfat_write_failed() and call it when a write
+> ends before the end of its range, so that the clusters beyond the end of
+> the file are freed again. It waits for direct I/O in flight first, as
+> exfat_setattr() does before it frees clusters.
+>
+> Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+> Fixes: 867b9c96dc83 ("exfat: add iomap direct I/O support")
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM
+> Signed-off-by: Hengyu Liang <hengyul@cs.unc.edu>
+Applied it to #exfat-next.
+Thanks!
