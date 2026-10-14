@@ -1,29 +1,29 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9BD7185B48
-	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 07:07:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56A4D49EC61
+	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 08:12:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791961669; cv=none; b=YONq+loywV6M5X6yqg1fYubxMq86/fAInBYkk7QPAMuOyHiB4V7+l0lyhwPCWORYCLinNZb3Nhd9bPC9EC9+xwkbVTIVMpmmFvWIi2st6MsSIM2TU3hftsbGcXdNljp/6CAv0Fe9AsI92TuDD6rnHk32d/1YDChmL9EKW4B9PxQ=
+	t=1791965541; cv=none; b=XynACAb2XBZB4T1tTkcqzxjsWxzbLkkxDRCLRyOuiKqpqgbHWpuyu+SPatl37nTY2hk3u+uS0tQJhswiwcKGmLu0Jg/wfXkCw4em7mUjV8Y/EyFICLJhqIGCjAUWpqxEPy9AG4ukhqi5pLQ59wMoBkzEJRouWdtd9J8xsvnZvZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791961669; c=relaxed/simple;
-	bh=jAN4FpmhkZCQSFafqmfkyYYv61rQJ5Lp2ji2EOpAz1M=;
+	s=arc-20240116; t=1791965541; c=relaxed/simple;
+	bh=JGcqGwBUE5iT4PuhKMKigfUdggUsfgSpmenKCJW8G9w=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=s/1GvYHMFqiFKeYiJA4bW/0gABla/+wwanxzVkPE6ExkLQqXTNRxMoAw0cU+0TZex6QngWpi3UtT97QfYLNrwFIJY48CBWeMN6IfFWsrUc+fiGfJMG3cmx4bFzFYDbOdruIfbFb96aoyM4KyQz5Jvpf8p8o6w0RMlZoVeaX5pFE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ozuFOzFe; arc=none smtp.client-ip=220.197.31.5
+	 In-Reply-To:Content-Type; b=O3kshW3klT1QqtRs22h2BMjEQjkKxSEqNehODZZ2uDDnCH4lCAVMLm0OKBDhkyy0DwuDoJwNvnkbDLkQzE2Qb2fAUb3e5D2sBwlisei3KXZZ80Jp7LaomiP5VXY9hEn3M/20TgDdE2P1UJXwOS6HTCF/nuCQGQtEsu1I1IkJuRY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=KXb548I1; arc=none smtp.client-ip=220.197.31.3
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ozuFOzFe"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="KXb548I1"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
 	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
-	Content-Type; bh=cN52U4M/akNKSi2TPwUFS588/SgQwjQ7WAsKS9tCPEc=;
-	b=ozuFOzFeYTGg1HfHwli+qm2pMBl7yU5XD9tH9Lo2RVN5LTAR+JwUgY61ElK8+j
-	XbnsMiTuRNxJ8tZaL/u7KUypXqQSPIEr4RoATahJxnwFLj1Fc1W6/CcsxXSrV8tZ
-	ibmg1PnIBL+tj6HQiNp41Tas2Vgcnaga2FJRY1/37Tq9A=
-Message-ID: <17da8380-6087-4cf3-8850-336dcf76f919@163.com>
-Date: Wed, 14 Oct 2026 15:07:13 +0800
+	Content-Type; bh=bJMTlEhOQmjpDyXiQUhJm1mKByD3aMro94dbh75mtTw=;
+	b=KXb548I19YxyxUxg6BQ4kAvj6kn2clFeVq8S7N3eF8ih7bK/nvYjZSkmnIfft0
+	JGGUoYhbWamI1TXfqvAMk725UyUGfeuTR631P22G/yJ03+PtJnid9d+eSIMqcPLL
+	qzyBrOz5aHPfvS/C4gzRAf2rYETpQwExOOBf99OPXD1Fo=
+Message-ID: <07bfc007-145b-4ec5-a94e-c9f7bc3eedad@163.com>
+Date: Wed, 14 Oct 2026 16:11:41 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -31,82 +31,95 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] exfat: validate cached iomaps during buffered
- writes
+Subject: Re: [PATCH v2 4/7] exfat: drop i_rwsem from exfat_page_mkwrite
 To: Namjae Jeon <linkinjeon@kernel.org>
 Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org,
  Yuezhang.Mo@sony.com, dxdt@dev.snart.me, sj1557.seo@samsung.com,
  Chi Zhiling <chizhiling@kylinos.cn>
 References: <20261013033837.2748258-1-chizhiling@163.com>
- <20261013033837.2748258-4-chizhiling@163.com>
- <CAKYAXd-NdwvD9OO+_5UC5yVLp1OYf3KUFvPe_LRUkNjd9vuxvQ@mail.gmail.com>
+ <20261013033837.2748258-5-chizhiling@163.com>
+ <CAKYAXd-+whfZ9_Zrgi0awH2tPxuVLW2O7=6e-w5JcBNBMRrSbw@mail.gmail.com>
 From: Chi Zhiling <chizhiling@163.com>
-In-Reply-To: <CAKYAXd-NdwvD9OO+_5UC5yVLp1OYf3KUFvPe_LRUkNjd9vuxvQ@mail.gmail.com>
+In-Reply-To: <CAKYAXd-+whfZ9_Zrgi0awH2tPxuVLW2O7=6e-w5JcBNBMRrSbw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:_____wDX36UhKs9q1K_mEA--.42514S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7CF1rtr1xKr17Kr1xGry3Arb_yoW8Cr4UpF
-	W3KwsxGrWkKw17ur18Jry5ZFyY9rZagr4xGas8G3s8Arnava18KF17Ga4a9FyrJw1q9w10
-	vw4vyrs5WryDJ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U3-BiUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3AQiv2rPKiS81wAA3F
+X-CM-TRANSID:_____wD3v6E+Oc9qRdrZEA--.5933S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxZFyUuFy5GFW5ZF4UJF4UCFg_yoW5JFWDpF
+	Wak34rCFZxAw129rn7uFnYya48Gw1fXr4xGF98uw40vr9Fyw1jgFWxKrZ5uFW5Zwn3X3W7
+	tFsYvF97J34DW3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zRP73dUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3AHsimrPOUENCQAA3i
 
 On 10/14/2026 9:19 AM, Namjae Jeon wrote:
->> +static bool exfat_iomap_valid(struct inode *inode, const struct iomap *iomap)
->> +{
->> +       struct folio *folio = iomap->private;
->> +       loff_t old_valid_size = iomap->validity_cookie;
->> +       loff_t valid_size = exfat_get_valid_size(EXFAT_I(inode));
->> +
->> +       if (valid_size == old_valid_size)
-> exfat_write_iomap_begin() reads valid_size before
-> __exfat_iomap_begin() records the validity cookie. concurrent mmap
-> fault can advance valid_size between those reads, allowing the stale
-> value to zero mmap data before iomap_valid() is called:
+>> @@ -969,8 +969,9 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
+>>          loff_t new_valid_size, mmap_valid_size, fault_page_start;
+>>          bool dirty = false;
+>>
+>> -       if (!inode_trylock(inode))
+>> -               return VM_FAULT_RETRY;
+> exfat_page_mkwrite() reads the file size before iomap_page_mkwrite()
+> locks the page. Because inode_trylock was removed, another thread can
+> grow the file in between. exfat_cont_expand() does not take
+> invalidate_lock, so the shared lock does not stop it.
 > 
-> buffered write [0,128)                       mmap fault
-> Reads valid_size = 256
->                                                Raises valid_size to 4096
->                                                Stores 'X' at offset 400
-> Records cookie = 4096
-> Zeroes [256,512), erasing 'X'
-> iomap_valid() sees cookie = 4096 and accepts
+> mmap write fault                              ftruncate/fallocate
+> Snapshot i_size = 1000
+> new_valid_size = 1000
+> dirty = false
+>                                                Extend i_size to 3000
+>                                                valid_size stays 1000
+> iomap_page_mkwrite() locks folio
+> Checks the current i_size (3000) and succeeds
+> dirty is still false, so VDL is not advanced
 > 
-> The validation runs too late to prevent this data loss. Could we
-> recheck or serialize valid_size before zeroing?
+> MM makes the page writable
+> Store at offset 2000, no new page_mkwrite()
+> 
+> The data at offset 2000 is beyond valid_size, so it can later be read
+> as zero. Could you check and fix this race?
 
-Sorry, I forgot to address this issue, even though I had it in mind:
+This is the issue Yuezhang mentioned earlier, and he has already 
+submitted a fix:
 
-https://lore.kernel.org/exfat/7250425f-8626-4e8d-ab5a-32d9d4588ba9@163.com/
+https://lore.kernel.org/exfat/20261010101200.1211462-2-Yuezhang.Mo@sony.com/
 
-This is because the valid_size read in exfat_write_iomap_begin() can 
-become stale.
+> 
+> +       sb_start_pagefault(inode->i_sb);
+> +       file_update_time(vmf->vma->vm_file);
+> +       filemap_invalidate_lock_shared(inode->i_mapping);
+> 
+> With i_size = 12 KB and valid_size = 0, DIO write to [0, 4 KiB  can
+> race with an mmap write fault at offset 8 KB. The fault zeroes and
+> dirties the gap [0, 8 KiB), then advances valid_size.
+> 
+> DIO write [0,4 KiB)                         mmap fault at 8 KiB
+> Starts writing data
+>                                               Reads the gap as zero
+>                                               Dirties pages 0 and 1
+>                                               Advances valid_size
+> Completes
+> Post-DIO invalidation cannot remove
+> the dirty page
+> Writeback can overwrite DIO data with zeros
+> 
+> Removing  inode_trylock()  from exfat_page_mkwrite() can introduce
+> several racy issues. Could you check that the affected paths are
+> properly synchronized?
 
-I spent quite a while looking into this today and realized that I had 
-oversimplified the problem. Moving the zeroing logic from 
-exfat_write_iomap_begin() to ->put_folio won't solve it, because the 
-folio has already been marked uptodate before ->put_folio is called.
+Concurrent DIO and mmap writes are undefined behavior, and other 
+filesystems may have similar issues.
 
-I'll fix this in the next version, and hopefully the fix won't require 
-more extensive changes.
+I've spent quite a while thinking about this, but I still don't have a 
+good solution. So I added the following patch to the patch series:
+
+"exfat: publish i_size and valid_size on direct I/O completion".
+
+The purpose of this patch is to prevent stale on-disk data from being 
+exposed when DIO and mmap writes happen concurrently. However, the 
+trade-off is that concurrent DIO writes may have their data unexpectedly 
+zeroed.
+
+Do you have any thoughts on this?
 
 Thanks!
-
-> 
-> 
->> +               return true;
->> +
->> +       if (!folio)
->> +               return false;
->> +
->> +       /* Still valid for this folio. */
->> +       if (old_valid_size >= folio_next_pos(folio))
->> +               return true;
->> +
->> +       if (valid_size <= folio_pos(folio))
->> +               return true;
->> +
->> +       return false;
->> +}
->> +
 
