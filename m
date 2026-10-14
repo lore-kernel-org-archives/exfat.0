@@ -1,396 +1,135 @@
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3663F5275A1
-	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 15:32:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 300984A2E1C
+	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 23:30:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791991934; cv=none; b=cPt8dqjdvTDqw0ErFVPB5rg1rs2H7kDaEsWZoZyAKXDe09ZCxColxnDZRuxEPccMeZKYBJDxCLrjSImG0vrHhulRzP/+UhSBw5/NinXfup8rGEHibUouaVCqGuHhKzVgFGVCViYOnCNrJeGjTQS51mGrVYRnmJoFJtvrD1DyQpE=
+	t=1792020609; cv=none; b=pK2PmbjC5YC6W19TfCOpAEn/VVm+ZtA6vbxNutidCzREO1POzI2Khr26pKRBGnGUkDvF7H3RAQ6t6wvidpSIJPuPYLRFatyD9rdM83VSa84+u1Nvsc8NrIPWwpf5+jwXnCcl3xIa1C6LpbUthgAsBKPWJyvDRZLh7VHwBSFZvMw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791991934; c=relaxed/simple;
-	bh=XQsneU3xqmTVNbKsfGxKF7tM9c8BtVYj+AuD/RC2FWQ=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=NzbxRBOsd4W8lPrkGlI66KgatTcUDyFsPCEAhSxl94VVqiJ4ms/cHawSrvNHCc1JPZ0uzsscU71ju6+uLesb2ewU6a87kPEvX+VDWlqyJIKZaxtNX1bfN18TY+eqrmUkW2waxT1G2uoxCsn/aYAlHHCCXcKq3ywwcCFM+TjQFNg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dY75SAa+; arc=none smtp.client-ip=209.85.210.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792020609; c=relaxed/simple;
+	bh=ooFfoXuxO7m582/nXtDkjaE2ul/5TklQZU1eox80nH4=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=JwdMw/RRxpDUyCbT6lP0fNulqMf8De3iAzcZONZwfjlZ2PqAxTfcEnwaQycV7Q0c4KLToaLF7Z31+WLxWVCxZxaXbBUYD9L0KLql1n26oxD7rm2tBKlyMeNZF4u51mllZ4snTGmat9Y9ZRtp9mR+aYkMXImh3ank1wFMHZXGaBg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=fb9zkxgP; arc=none smtp.client-ip=117.135.210.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dY75SAa+"
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-887a58523e6so1280753b3a.3
-        for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 08:32:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791991931; x=1792596731; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=H4gwh2fQvNe08kbDMKrdanW71GXiZ18Ym48/T8PhpJo=;
-        b=dY75SAa+AIMejEtWzo9dtGxCBXuKYmOgjY70KipwbThl7WslSxbaw1ufBvjY49L8nk
-         IrfGJ4kk18a9w5U2pz0K6cLYwLXuFoBH5yF74Mimn0NPLBWPmsBy8ZNKBHS1N3/K5d+o
-         OtD1xdV7PEl9td7OK/Q7ZDQAU0zN3AwnsfObYROZgt2f1fMSNoazfjV/5RRyHMKOzuof
-         QxvxzypKTDjP1TE2Bh4QHBoaFh2+FGWcSZwUUav6H64Jj2dBcazKeu0NAAl9eGC3+7d2
-         2j8ORKPKf/4kIIbGimjS21xHgnD08kEI3jxv6/e4JyCaooGeRhluf9XTsMq89sUoQTlE
-         FmFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791991931; x=1792596731;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=H4gwh2fQvNe08kbDMKrdanW71GXiZ18Ym48/T8PhpJo=;
-        b=qFD4RPLfydLJXl4HY/RWFmx556vGIHERPfU9nBgU7wIa6DPKjyJnHvSHpqewIwqkvy
-         XU9BvYwZOTpcluhttO+W6TKkbLxcCOh4AIJ6fQeMPH2RB1FAVQanBTUPzHDtmy+D8Ikm
-         mc+B/aJfKpKG7QWs8C2HeS1ZQHq0/mP7t5I2VI+aLOjR5iRBILMkQbtrQktkGC5dEfEa
-         nQtmVXx2Vte611ke5TWNv4nVAofF9/kAVGv+j6IcMfsL+hEIRkcDaIfX+r9zQtJqquOY
-         YCwGbMjqz8yN4RbWItE1ffVevASD9K3ntMasfo0ByiY7CJDfoc8MqqTX7LYrwh1RmYgX
-         uFjw==
-X-Forwarded-Encrypted: i=1; AKwUvByw9JPVTK5cJPYbS1WSP54o92hZmBzJLz2jaFFmgvN2aoP+pMMBFIj1WRSluDdh2+zRmyimBg==@lists.linux.dev
-X-Gm-Message-State: AFq9FYLjJtRoOX2tuA9aVXTw3kFvLgT0tOUXJY4eveh0EVNckIsp9mPM
-	HZ/Tq4zEwg26HvqrXMCitIaaWRBscYUEWdLmHjMBSLtw9Et2Yf6WB9mZ
-X-Gm-Gg: AYBFou2+RtyGAUrtUHtYz6wM2jbdAXj68AFjV7M0+bFIrCASu6zpyHVq8UvadNxeVJN
-	vzu0ddbdTGFlR44sj2Z7GBu16klRtDy8Tztny82DxkT9QfBpjJZLMnqiSsWXTxk592fCetDKMz0
-	rjJmxs9U13V52/psfYt9ftw4OYhQqPHPGr6naiexhCfe5vT5NqVp/KzkvzJ8ZhxWKMOCFUqz75r
-	vwy+k884+kDBxoCEwUsUPAqgB3B1FlKdZaPCVajKUpWpQ8+kWgBImqP1YtUR2W7L+OYqd7J6zrZ
-	n/3S4K9lDFWHBU3d4At36WPdhEbBaEa3ZYc87RS8F+Ck5es8SKVlHT8O656hFZ2XC9Wh/SIJd+5
-	+UfBCbhO7godJHWNVJDK8W32efxP5SnJhgUPtXXhyb8E8k0vI7YrPv8nEIVzUyYDHQncIGe08ii
-	EJSksfKy3qbl+73duTuECYCmTvrzzMQIJEBC/INgM8VzoCEp6njSFtcL/etgPUzq75LkKmf7Nee
-	MWF4slHNoD3Mxly6H1w6q4=
-X-Received: by 2002:a05:6a00:218e:b0:891:6d3e:3992 with SMTP id d2e1a72fcca58-897c7ccb7dcmr12544259b3a.46.1791991931331;
-        Wed, 14 Oct 2026 08:32:11 -0700 (PDT)
-Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d7f51f452sm1221941b3a.1.2026.10.14.08.32.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 08:32:07 -0700 (PDT)
-From: Yang Wen <anmuxixixi@gmail.com>
-To: linkinjeon@kernel.org,
-	sj1557.seo@samsung.com,
-	chizhiling@163.com
-Cc: yuezhang.mo@sony.com,
-	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Yang Wen <anmuxixixi@gmail.com>
-Subject: [PATCH v8 3/3] exfat: reclaim name filters under memory pressure
-Date: Wed, 14 Oct 2026 23:31:30 +0800
-Message-Id: <20261014153130.2111500-4-anmuxixixi@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261014153130.2111500-1-anmuxixixi@gmail.com>
-References: <20261014153130.2111500-1-anmuxixixi@gmail.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="fb9zkxgP"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:From:To:
+	Content-Type; bh=U0eU2EDnQnBU/CSAxUC5m8k6ykkFO1pNn8qYzB+Mv6E=;
+	b=fb9zkxgPxb8q1Ko+oW/BGXiJ3htilo2BVBiSkikMcFCpNzU0XshOp6cjBOO4/v
+	DBx2TwYrGlbRJ/fcQWsgF4x7LToav1FJ66VtIvEfi4ogSPnkv6oIQgz86ZktIPut
+	ewcnwQ0l5CGfjrOfRtl+WFJkzk9Ny/vwdO8GheGibob8k=
+Message-ID: <ca6b0f0a-e872-489d-843d-a457faa8d8d4@163.com>
+Date: Thu, 15 Oct 2026 07:29:26 +0800
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/7] exfat: drop i_rwsem from exfat_page_mkwrite
+From: Chi Zhiling <chizhiling@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: exfat@lists.linux.dev, linux-kernel@vger.kernel.org,
+ Yuezhang.Mo@sony.com, dxdt@dev.snart.me, sj1557.seo@samsung.com,
+ Chi Zhiling <chizhiling@kylinos.cn>
+References: <20261013033837.2748258-1-chizhiling@163.com>
+ <20261013033837.2748258-5-chizhiling@163.com>
+ <CAKYAXd-+whfZ9_Zrgi0awH2tPxuVLW2O7=6e-w5JcBNBMRrSbw@mail.gmail.com>
+ <07bfc007-145b-4ec5-a94e-c9f7bc3eedad@163.com>
+In-Reply-To: <07bfc007-145b-4ec5-a94e-c9f7bc3eedad@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wCX3YdXENBqVehpEQ--.56376S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxCF1xKw18uw4fXw17tw1kZrb_yoW5XFyrpF
+	WYya4rKFZ8Jw12kFn29FsYya48Kw1SqrWxGF98W3y0vryqvF1UtFWxKrW8uFZ0vwn7X3W2
+	qF4qyr93X34DW3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U8pndUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC9xfnhWrQEFcjaQAA31
 
-Each active large directory can hold a dynamically sized name filter with a
-bitmap of up to 4 MiB. Add a per-superblock LRU and shrinker so filters can
-be reclaimed when memory is tight. Account reclaimable filters in pages so
-reclaim cost tracks their differing allocation sizes.
+On 10/14/26 4:11 PM, Chi Zhiling wrote:
+> On 10/14/2026 9:19 AM, Namjae Jeon wrote:
+>>> @@ -969,8 +969,9 @@ static vm_fault_t exfat_page_mkwrite(struct 
+>>> vm_fault *vmf)
+>>>          loff_t new_valid_size, mmap_valid_size, fault_page_start;
+>>>          bool dirty = false;
+>>>
+>>> -       if (!inode_trylock(inode))
+>>> -               return VM_FAULT_RETRY;
+>> exfat_page_mkwrite() reads the file size before iomap_page_mkwrite()
+>> locks the page. Because inode_trylock was removed, another thread can
+>> grow the file in between. exfat_cont_expand() does not take
+>> invalidate_lock, so the shared lock does not stop it.
+>>
+>> mmap write fault                              ftruncate/fallocate
+>> Snapshot i_size = 1000
+>> new_valid_size = 1000
+>> dirty = false
+>>                                                Extend i_size to 3000
+>>                                                valid_size stays 1000
+>> iomap_page_mkwrite() locks folio
+>> Checks the current i_size (3000) and succeeds
+>> dirty is still false, so VDL is not advanced
+>>
+>> MM makes the page writable
+>> Store at offset 2000, no new page_mkwrite()
+>>
+>> The data at offset 2000 is beyond valid_size, so it can later be read
+>> as zero. Could you check and fix this race?
+> 
+> This is the issue Yuezhang mentioned earlier, and he has already 
+> submitted a fix:
+> 
+> https://lore.kernel.org/exfat/20261010101200.1211462-2- 
+> Yuezhang.Mo@sony.com/
 
-Keep the scan budget initialized by the shrinker core instead of replacing
-it with the number of filters freed. If the LRU is already empty, return
-SHRINK_STOP. This guarantees that do_shrink_slab() either consumes its scan
-budget or stops, even when the LRU becomes empty before nr_to_scan is
-satisfied.
+I misunderstood. This is a different issue. I’ll fix this bug as soon as 
+possible.
 
-Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
----
- fs/exfat/dir.c      | 159 +++++++++++++++++++++++++++++++++++++++++++-
- fs/exfat/exfat_fs.h |  10 +++
- fs/exfat/super.c    |   8 +++
- 3 files changed, 174 insertions(+), 3 deletions(-)
+Thanks!
 
-diff --git a/fs/exfat/dir.c b/fs/exfat/dir.c
-index 4c36fded2412..bc99f2d6739e 100644
---- a/fs/exfat/dir.c
-+++ b/fs/exfat/dir.c
-@@ -10,6 +10,7 @@
- #include <linux/filelock.h>
- #include <linux/hash.h>
- #include <linux/log2.h>
-+#include <linux/shrinker.h>
- #include <linux/stringhash.h>
- 
- #include "exfat_raw.h"
-@@ -127,12 +128,158 @@ static bool exfat_name_filter_set(struct exfat_name_filter *filter,
- 	return filter->nr_set_bits >= nr_bits / 3;
- }
- 
-+static unsigned long
-+exfat_name_filter_nr_pages(const struct exfat_name_filter *filter)
-+{
-+	size_t size = struct_size(filter, bitmap,
-+				  BITS_TO_LONGS(BIT(filter->order)));
-+
-+	return DIV_ROUND_UP(size, PAGE_SIZE);
-+}
-+
-+static struct exfat_name_filter *
-+exfat_name_filter_detach_locked(struct exfat_sb_info *sbi,
-+				struct exfat_inode_info *ei)
-+{
-+	struct exfat_name_filter *filter = ei->name_filter;
-+
-+	if (!filter)
-+		return NULL;
-+
-+	list_del_init(&ei->name_filter_lru);
-+	ei->name_filter = NULL;
-+	sbi->name_filter_pages -= exfat_name_filter_nr_pages(filter);
-+	return filter;
-+}
-+
-+static void exfat_name_filter_touch(struct exfat_inode_info *ei)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(ei->vfs_inode.i_sb);
-+
-+	spin_lock(&sbi->name_filter_lock);
-+	if (ei->name_filter)
-+		list_move_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
-+	spin_unlock(&sbi->name_filter_lock);
-+}
-+
- void exfat_name_filter_free(struct inode *inode)
- {
- 	struct exfat_inode_info *ei = EXFAT_I(inode);
-+	struct exfat_sb_info *sbi;
-+	struct exfat_name_filter *filter;
- 
--	kvfree(ei->name_filter);
--	ei->name_filter = NULL;
-+	if (!READ_ONCE(ei->name_filter))
-+		return;
-+
-+	sbi = EXFAT_SB(inode->i_sb);
-+	spin_lock(&sbi->name_filter_lock);
-+	filter = exfat_name_filter_detach_locked(sbi, ei);
-+	spin_unlock(&sbi->name_filter_lock);
-+	kvfree(filter);
-+}
-+
-+static unsigned long
-+exfat_name_filter_count_objects(struct shrinker *shrinker,
-+				struct shrink_control *sc)
-+{
-+	struct exfat_sb_info *sbi = shrinker->private_data;
-+	unsigned long pages;
-+
-+	spin_lock(&sbi->name_filter_lock);
-+	pages = sbi->name_filter_pages;
-+	spin_unlock(&sbi->name_filter_lock);
-+
-+	return pages ? pages : SHRINK_EMPTY;
-+}
-+
-+static unsigned long
-+exfat_name_filter_scan_objects(struct shrinker *shrinker,
-+			       struct shrink_control *sc)
-+{
-+	struct exfat_sb_info *sbi = shrinker->private_data;
-+	unsigned long freed = 0;
-+	bool empty = false;
-+
-+	/* Avoid reclaim recursion from a GFP_NOFS allocation under s_lock. */
-+	if (!mutex_trylock(&sbi->s_lock)) {
-+		sc->nr_scanned = 0;
-+		return SHRINK_STOP;
-+	}
-+
-+	while (freed < sc->nr_to_scan) {
-+		struct exfat_inode_info *ei;
-+		struct exfat_name_filter *filter;
-+
-+		spin_lock(&sbi->name_filter_lock);
-+		if (list_empty(&sbi->name_filter_lru)) {
-+			spin_unlock(&sbi->name_filter_lock);
-+			empty = true;
-+			break;
-+		}
-+
-+		ei = list_first_entry(&sbi->name_filter_lru,
-+				      struct exfat_inode_info,
-+				      name_filter_lru);
-+		filter = exfat_name_filter_detach_locked(sbi, ei);
-+		spin_unlock(&sbi->name_filter_lock);
-+
-+		freed += exfat_name_filter_nr_pages(filter);
-+		kvfree(filter);
-+		cond_resched();
-+	}
-+
-+	mutex_unlock(&sbi->s_lock);
-+	if (empty && !freed) {
-+		sc->nr_scanned = 0;
-+		return SHRINK_STOP;
-+	}
-+	return freed;
-+}
-+
-+void exfat_name_filter_shrinker_register(struct super_block *sb)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
-+	struct shrinker *shrinker;
-+
-+	shrinker = shrinker_alloc(SHRINKER_NONSLAB,
-+				  "exfat-name-filter:%s", sb->s_id);
-+	if (!shrinker) {
-+		exfat_warn(sb, "failed to allocate name filter shrinker");
-+		return;
-+	}
-+
-+	shrinker->count_objects = exfat_name_filter_count_objects;
-+	shrinker->scan_objects = exfat_name_filter_scan_objects;
-+	shrinker->private_data = sbi;
-+	shrinker_register(shrinker);
-+	sbi->name_filter_shrinker = shrinker;
-+}
-+
-+void exfat_name_filter_shrinker_unregister(struct super_block *sb)
-+{
-+	struct exfat_sb_info *sbi = EXFAT_SB(sb);
-+	struct shrinker *shrinker = sbi->name_filter_shrinker;
-+
-+	sbi->name_filter_shrinker = NULL;
-+	shrinker_free(shrinker);
-+
-+	for (;;) {
-+		struct exfat_inode_info *ei;
-+		struct exfat_name_filter *filter;
-+
-+		spin_lock(&sbi->name_filter_lock);
-+		if (list_empty(&sbi->name_filter_lru)) {
-+			spin_unlock(&sbi->name_filter_lock);
-+			break;
-+		}
-+
-+		ei = list_first_entry(&sbi->name_filter_lru,
-+				      struct exfat_inode_info,
-+				      name_filter_lru);
-+		filter = exfat_name_filter_detach_locked(sbi, ei);
-+		spin_unlock(&sbi->name_filter_lock);
-+		kvfree(filter);
-+	}
- }
- 
- bool exfat_name_filter_maybe_contains(struct inode *inode,
-@@ -145,6 +292,7 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
- 	if (!filter)
- 		return true;
- 
-+	exfat_name_filter_touch(ei);
- 	exfat_name_filter_indexes(inode->i_sb, name, filter->order, indexes);
- 	return test_bit(indexes[0], filter->bitmap) &&
- 	       test_bit(indexes[1], filter->bitmap) &&
-@@ -161,6 +309,7 @@ void exfat_name_filter_add(struct inode *inode,
- 	if (!filter)
- 		return;
- 
-+	exfat_name_filter_touch(ei);
- 	if (exfat_name_filter_order(inode) > filter->order) {
- 		exfat_name_filter_free(inode);
- 		return;
-@@ -188,7 +337,7 @@ static void exfat_build_name_filter(struct super_block *sb,
- 	u8 order;
- 	int i;
- 
--	if (ei->name_filter ||
-+	if (!sbi->name_filter_shrinker || ei->name_filter ||
- 	    exfat_bytes_to_dentries(i_size_read(inode)) <
- 					EXFAT_NAME_FILTER_MIN_DENTRIES)
- 		return;
-@@ -240,7 +389,11 @@ static void exfat_build_name_filter(struct super_block *sb,
- 	}
- 
- complete:
-+	spin_lock(&sbi->name_filter_lock);
- 	ei->name_filter = filter;
-+	list_add_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
-+	sbi->name_filter_pages += exfat_name_filter_nr_pages(filter);
-+	spin_unlock(&sbi->name_filter_lock);
- 	return;
- abort:
- 	kvfree(filter);
-diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
-index d00b3235cee9..472e341e4d7d 100644
---- a/fs/exfat/exfat_fs.h
-+++ b/fs/exfat/exfat_fs.h
-@@ -15,6 +15,8 @@
- #include <uapi/linux/exfat.h>
- #include <linux/buffer_head.h>
- 
-+struct shrinker;
-+
- #define EXFAT_ROOT_INO		1
- 
- /*
-@@ -266,6 +268,11 @@ struct exfat_sb_info {
- 
- 	spinlock_t inode_hash_lock;
- 	struct hlist_head inode_hashtable[EXFAT_HASH_SIZE];
-+	/* Protects name_filter_lru and name_filter_pages. */
-+	spinlock_t name_filter_lock;
-+	struct list_head name_filter_lru;
-+	unsigned long name_filter_pages;
-+	struct shrinker *name_filter_shrinker;
- 	struct rcu_head rcu;
- };
- 
-@@ -297,6 +304,7 @@ struct exfat_inode_info {
- 	struct exfat_hint_femp hint_femp;
- 	/* Complete, in-memory Bloom filter of directory names */
- 	struct exfat_name_filter *name_filter;
-+	struct list_head name_filter_lru;
- 
- 	spinlock_t cache_lru_lock;
- 	struct list_head cache_lru;
-@@ -693,6 +701,8 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
- void exfat_name_filter_add(struct inode *inode,
- 			   const struct exfat_uni_name *name);
- void exfat_name_filter_free(struct inode *inode);
-+void exfat_name_filter_shrinker_register(struct super_block *sb);
-+void exfat_name_filter_shrinker_unregister(struct super_block *sb);
- 
- static inline int exfat_chain_advance(struct super_block *sb,
- 		struct exfat_chain *chain, unsigned int step)
-diff --git a/fs/exfat/super.c b/fs/exfat/super.c
-index 4924f0fad836..26b25cc86d1c 100644
---- a/fs/exfat/super.c
-+++ b/fs/exfat/super.c
-@@ -46,6 +46,7 @@ static void exfat_put_super(struct super_block *sb)
- {
- 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
- 
-+	exfat_name_filter_shrinker_unregister(sb);
- 	mutex_lock(&sbi->s_lock);
- 	exfat_clear_volume_dirty(sb);
- 	exfat_free_bitmap(sbi);
-@@ -210,6 +211,7 @@ static struct inode *exfat_alloc_inode(struct super_block *sb)
- 		return NULL;
- 
- 	ei->name_filter = NULL;
-+	INIT_LIST_HEAD(&ei->name_filter_lru);
- 	return &ei->vfs_inode;
- }
- 
-@@ -746,6 +748,8 @@ static int exfat_fill_super(struct super_block *sb, struct fs_context *fc)
- 		goto free_table;
- 	}
- 
-+	exfat_name_filter_shrinker_register(sb);
-+
- 	return 0;
- 
- put_inode:
-@@ -845,6 +849,10 @@ static int exfat_init_fs_context(struct fs_context *fc)
- 
- 	mutex_init(&sbi->s_lock);
- 	mutex_init(&sbi->bitmap_lock);
-+	spin_lock_init(&sbi->name_filter_lock);
-+	INIT_LIST_HEAD(&sbi->name_filter_lru);
-+	sbi->name_filter_pages = 0;
-+	sbi->name_filter_shrinker = NULL;
- 	ratelimit_state_init(&sbi->ratelimit, DEFAULT_RATELIMIT_INTERVAL,
- 			DEFAULT_RATELIMIT_BURST);
- 
--- 
-2.34.1
+> 
+>>
+>> +       sb_start_pagefault(inode->i_sb);
+>> +       file_update_time(vmf->vma->vm_file);
+>> +       filemap_invalidate_lock_shared(inode->i_mapping);
+>>
+>> With i_size = 12 KB and valid_size = 0, DIO write to [0, 4 KiB  can
+>> race with an mmap write fault at offset 8 KB. The fault zeroes and
+>> dirties the gap [0, 8 KiB), then advances valid_size.
+>>
+>> DIO write [0,4 KiB)                         mmap fault at 8 KiB
+>> Starts writing data
+>>                                               Reads the gap as zero
+>>                                               Dirties pages 0 and 1
+>>                                               Advances valid_size
+>> Completes
+>> Post-DIO invalidation cannot remove
+>> the dirty page
+>> Writeback can overwrite DIO data with zeros
+>>
+>> Removing  inode_trylock()  from exfat_page_mkwrite() can introduce
+>> several racy issues. Could you check that the affected paths are
+>> properly synchronized?
+> 
+> Concurrent DIO and mmap writes are undefined behavior, and other 
+> filesystems may have similar issues.
+> 
+> I've spent quite a while thinking about this, but I still don't have a 
+> good solution. So I added the following patch to the patch series:
+> 
+> "exfat: publish i_size and valid_size on direct I/O completion".
+> 
+> The purpose of this patch is to prevent stale on-disk data from being 
+> exposed when DIO and mmap writes happen concurrently. However, the 
+> trade-off is that concurrent DIO writes may have their data unexpectedly 
+> zeroed.
+> 
+> Do you have any thoughts on this?
+> 
+> Thanks!
 
