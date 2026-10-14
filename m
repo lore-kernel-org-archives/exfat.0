@@ -1,203 +1,173 @@
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EADF530DF7;
-	Wed, 14 Oct 2026 13:47:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E730550DAF
+	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 15:31:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791985663; cv=none; b=rOZcUCwf0LuOStKrxgzW0pYCfgewfM/Kodm3ZyXH+m8mNws6+nTZ0dUTy0quiUnn/3x6tqplTh6+h0KSsnVbMFD6h0ZHvUnCaGnM8JdViRqS70gS1bdnZ88yHSLvnDxC2lP1YS5do0g+/pGfSiKNKqLroedZRIOSTdvE1PXPEcM=
+	t=1791991916; cv=none; b=XBUmQmtw7f/mFzDlJMI5A3fVF7DhE/uRcQBlJ08LlQhVJ/EDkH2YPh20rrtB12vRevD488Xj3S88pDzTKg+ZtUjfMXQcI/RH4iZGBQaUKvaxnLSPpb7vfkaPkfjHMTqQ5syqSpDF5XAuJoIfegw188i5fpBJ+WIItXgXNtM0ouY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791985663; c=relaxed/simple;
-	bh=uLec5Ms1kEItxT/9M3m+iatVoLfvlo+Ku3r+6YxXaVo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=phCBR6//HXrne9fXQuP5Y8SlKSN8HTEjA2q3Jc4Sajhj8+u1uUOHMyUHoTWCDTdEAzUTBJE3/IZJndBSh1RxXY2sWaD31bfg76jprO9ONdpaNf+CJguXn6+qH+rNM0OxUhvPqk7EUsm6GBMbQIaANXa0Vvd+R0yHPNISsRLC1lg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=KER6SV+3; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=5kV45Nl3; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=S0AnEx52; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=gG1ABpRO; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
+	s=arc-20240116; t=1791991916; c=relaxed/simple;
+	bh=GWS96uhwvjD8pBeUxeNzx3Q9nm3IjXH+MmITVGTRSps=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=U/THbJBwsEN85ZpMBbAqGEO1Lrfyyd33oYRkD/vgAmKmif4VjQU+Sq2ae0mZL28tJmOrmMQZg/ze6vSLLDVk2hfYfC1JTX3YSQokiwSKCh3/LBr+HE+TVgKvWglvM/URurK9tAa1VFcvn2Q99NRGzcrYSCs5Q/R/UP6SsWLLuFo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QVCdO7yu; arc=none smtp.client-ip=209.85.210.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="KER6SV+3";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="5kV45Nl3";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="S0AnEx52";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="gG1ABpRO"
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id D252822258;
-	Wed, 14 Oct 2026 13:47:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1791985659; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DY9RqNIokuQ1DH3X9Yc1BCOmA2bOCbyTbnsYeJcms7U=;
-	b=KER6SV+3E5T8faaU3djQpSC8B9QPNgiQOksk9btYa1oyN+g/YdhOBY6t1StzY1g3bSF0IJ
-	zd1FvSem8kaP2TbkqojJhhhFOthOVUjirK7sCmgbkHZZx82aJ9Io4OE8IvNRplBb+KGXEf
-	1xnlhspPxY1CCNo9bMSSg22YlcPY1WI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1791985659;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DY9RqNIokuQ1DH3X9Yc1BCOmA2bOCbyTbnsYeJcms7U=;
-	b=5kV45Nl3phoxgImBDhEqInuMMmAek0XiQQPFlXI/cnE3ZS5Quvx+F2axMbnAyEMUB1fkx3
-	FIYEJ2frN9CQ5KBA==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=S0AnEx52;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=gG1ABpRO
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1791985657; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DY9RqNIokuQ1DH3X9Yc1BCOmA2bOCbyTbnsYeJcms7U=;
-	b=S0AnEx52KGncKxtGJdhOJnkNKWblqAhU1fDfPojL39mMiKeDrabTNcq7zrzX9j4BiwbLyH
-	OakWO7MFjbmum5NnwrDWXKsOJm95K6rjrzLtmGKio9hh9a9ZDKInBQ8G3OJJr2jLduCpIm
-	cY4ShwlOEbCtlHljqjRWtydkmyqg6nY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1791985657;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DY9RqNIokuQ1DH3X9Yc1BCOmA2bOCbyTbnsYeJcms7U=;
-	b=gG1ABpROq+bYTWDuUnYSBShOJ9fbmudAese1phkK/c9rHSbMI+6wnPeO8BO8ATprL8kHK6
-	exH5zVUd6CuBDKDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9348F133F1;
-	Wed, 14 Oct 2026 13:47:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id ACfUG/mHz2oSUQAAD6G6ig
-	(envelope-from <jack@suse.cz>); Wed, 14 Oct 2026 13:47:37 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
-	id 84A41A140F; Wed, 14 Oct 2026 15:47:36 +0200 (CEST)
-Date: Wed, 14 Oct 2026 15:47:36 +0200
-From: Jan Kara <jack@suse.cz>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Cc: Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
-	Jan Kara <jack@suse.com>, Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
-	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
-	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, linux-fsdevel@vger.kernel.org, 
-	ntfs@lists.linux.dev, ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org, 
-	gfs2@lists.linux.dev, linux-efi@vger.kernel.org, linux-mtd@lists.infradead.org, 
-	linux-xfs@vger.kernel.org, stable@vger.kernel.org, 
-	Karl Mehltretter <kmehltretter@gmail.com>
-Subject: Re: [PATCH RFC 00/28] fs: don't set SB_RDONLY after filesystem errors
-Message-ID: <k7zduo2ewgvrmic2gc4wssakq4ystwqpuwo6a5llx2gzc64xzl@k2pjjijh5kye>
-References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org>
- <my2k7257m265fp5ad77n5hfndl23i56gsog3jwnsyocp3yxbnj@aphfqdiej2hs>
- <20261013-forsten-ammoniak-geknackt-fefec366cc97@brauner>
- <CAHc6FU5JuYU8R4=agxgWBoEKrUGyWiitzRn5MwXiV7NZYt=_ag@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QVCdO7yu"
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-887fb6c0ad1so251527b3a.0
+        for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 08:31:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791991913; x=1792596713; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=yA0cwHPsMUsglcT0cBHl9/S80mGW6LWbt4CaYradWFw=;
+        b=QVCdO7yuDUUcKeLm0Cj25+wydzk2/nB54W98hHe3hKCDe8zKVN8SKGinWHka2bdEKU
+         iN/pUEepLNn7LkKqYwtrmQTQnsHU3EQvKABWDpVl7yqvEhnDozql7Hv+Ja3jCU1L5XJG
+         AT1WF/Hpln+00F4Hq0KG38bGUxZnP7mqc6abtbIhflCZ990XrehDsgwJ51dvmn798xUE
+         w+gslvYxP1dRPdL6u5qtWAQzMiKEWX42wwrxtOGB4vgydTqUV9GuAWgxSm2It89l73lT
+         rcoWlHQ87utrWBCVU3Gdx+bNMBEwQYITRTeoZQpi887Y+P4LV+vbMcqeN4JxMlb83w0d
+         D/Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791991913; x=1792596713;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yA0cwHPsMUsglcT0cBHl9/S80mGW6LWbt4CaYradWFw=;
+        b=JiRT2+ycqTyW0p7AsZdV4Ej6YOGai8SqFJ6MeiN+M2ENKbC6yoWttF1B0owZKFhGR1
+         /JZ3532W7mVKVDArPJADk14dpB1GmGkJbbaDCuFIO95HEcvrh9QNyVQ5//zHIjVwo1Ef
+         J1i/4lDBTKSkc8AdNo0JRcRSmVWlm4YAmtHj6fPxMNQ7W1j9HIkJh+if22SBcLmJI3uF
+         cppG3tXGBa6M8Z3p9oHNLYI1KkMgx1JtoKlDwPids3K4I/NCA0IS0pPPtadvo6VugAOW
+         FkjRlyk4WL79FHqspxlDDA7qYCuflRbb2aZEMyuxC/Yfp1L/wTun4Wv81tz+GyrSN0lI
+         bMjw==
+X-Forwarded-Encrypted: i=1; AKwUvByhQnG++sK+FBIqM6OSiCxUy152GyKfPicpDRxPaoF/DIgB52ZK7a0qw6wuyBsHWSomH8IZJQ==@lists.linux.dev
+X-Gm-Message-State: AFq9FYIdXTZoLdgFXSt2uZZN8wYiiFYgd/vYyke7urhpA/EhlzkFES/B
+	o8XYh7LBPhQLcw4ssrpASZgT5pOk27EVYxaUohCNwFGlMCDi/Evd/XND
+X-Gm-Gg: AYBFou2obBoUAglF3aZDQqIpNMS9bZFcDClMGAJGAxNIzX8aARJ8jRcUF9Bc/BI2Usg
+	phSc0m14vyDhASUfoDCg171LVay87iKOA9l/om4/6s84j4R488eibD6up5NEuYxreCnNC/nM0+b
+	mRlWnw0fz9865LPYDW9bQ8rQhchRXP+ay7EUGyJR8WSAFj+xCuYuUDMmd2t+p4MN++k7KK6qBcY
+	7jVg18sQBM1YBvEnNzgyYjABIcvpZVgutSYKcSYOKAAQw+IxfxTxqdxPT6pl1gzlJJjCuAM1yks
+	rY4IpOIF30lBpjVdBr1MN0dCSGhnd5lpI1xdj/oJpCR+pw8GRt2rmY75vIw4hONjLpqbqNdQ+s1
+	8BdOhrYpdkBcqgK6jmXODS7h6Modk3ZBRPfndOn1pA3cvxiT5dnJ0nEQgvT1zRM1frtgnHm3llE
+	poxLP/tAA9YPP8bSq1WA6d0pNK0Nt1933IJHJk/lODnll+eGJwZptYm+Clo7npJ+aUe8wAHN3A9
+	79dUbCoBttE
+X-Received: by 2002:a05:6a00:4c08:b0:891:3e34:e080 with SMTP id d2e1a72fcca58-897c6c248f5mr14126170b3a.24.1791991912400;
+        Wed, 14 Oct 2026 08:31:52 -0700 (PDT)
+Received: from localhost.localdomain ([47.100.192.162])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d7f51f452sm1221941b3a.1.2026.10.14.08.31.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2026 08:31:51 -0700 (PDT)
+From: Yang Wen <anmuxixixi@gmail.com>
+To: linkinjeon@kernel.org,
+	sj1557.seo@samsung.com,
+	chizhiling@163.com
+Cc: yuezhang.mo@sony.com,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Yang Wen <anmuxixixi@gmail.com>
+Subject: [PATCH v8 0/3] exfat: speed up file creation in large directories
+Date: Wed, 14 Oct 2026 23:31:27 +0800
+Message-Id: <20261014153130.2111500-1-anmuxixixi@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAHc6FU5JuYU8R4=agxgWBoEKrUGyWiitzRn5MwXiV7NZYt=_ag@mail.gmail.com>
-X-Rspamd-Action: no action
-X-Spam-Score: -4.01
-X-Spam-Flag: NO
-X-Spamd-Result: default: False [-4.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	RCVD_COUNT_THREE(0.00)[3];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[suse.cz:+];
-	MISSING_XM_UA(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,suse.cz,suse.com,zeniv.linux.org.uk,vger.kernel.org,lists.sourceforge.net,lists.linux.dev,lists.infradead.org,gmail.com];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:dkim,suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns]
-X-Spam-Level: 
-X-Rspamd-Queue-Id: D252822258
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 
-On Wed 14-10-26 12:04:08, Andreas Gruenbacher wrote:
-> On Wed, Oct 14, 2026 at 12:20 AM Christian Brauner <brauner@kernel.org> wrote:
-> > > I'm in favor of this. Just after checking couple of filesystem changes -
-> > > won't we be better off by using a generic flag in super_block for this so
-> > > that VFS can check for it? Then each filesystem won't have to implement
-> > > its own wrapper for simple_fsync(), quota operations, and whatever other
-> > > generic operations that need to bail on shutdown filesystem...
-> >
-> > Do you mean something like?:
-> >
-> > From 28c97f2142e255eb835d26deb97b00afccfb7c4a Mon Sep 17 00:00:00 2001
-> > From: Christian Brauner <brauner@kernel.org>
-> > Date: Tue, 13 Oct 2026 21:15:36 +0200
-> > Subject: [PATCH] fs: add a generic emergency read-only state
-> >
-> > The filesystems that stopped setting SB_RDONLY after an error refuse
-> > modifications themselves now. Each of them grew the same checks in
-> > ->open, ->setattr, ->fsync, ->write_inode, the directory operations, the
-> > quota operations and ->reconfigure. Jan suggested a generic flag so the
-> > VFS can do that once (cf. [1]).
-> >
-> > So add SB_STATE_EMERGENCY_RO in a new sb->s_state word. It is only ever
-> > set with set_bit() and never cleared so it can be tested anywhere
-> > without any ordering against the setter. A filesystem calls
-> > sb_set_emergency_ro() where it used to set SB_RDONLY. SB_RDONLY itself
-> > stays untouched so freeze_super() and thaw_super() keep seeing a
-> > consistent superblock.
-> >
-> > The VFS then checks it wherever sb_rdonly() gates a write:
-> >
-> > - __mnt_is_readonly() so mnt_want_write(), opening files for writing,
-> >   access(W_OK), nfsd and overlayfs see a read-only superblock
-> > - sb_permission() for vfs_create(), vfs_unlink() and friends
-> > - notify_change(), rw_verify_area(), vfs_fallocate(), vfs_fsync_range()
-> >   and do_page_mkwrite() for files that were opened before the error
-> > - reconfigure_super() refuses going read-write
-> > - sync_filesystem(), sync(2) and write_inode() don't write anymore
-> > - the dquot code doesn't write the quota files anymore and quotactl(2)
-> >   refuses to change anything
-> > - "emergency_ro" is shown in the mount options, /proc/mounts shows the
-> >   superblock as "ro" and statfs() reports ST_RDONLY like they did when
-> >   SB_RDONLY was set
-> >
-> > What reaches the filesystem without passing through the VFS it still has
-> > to refuse itself. That's its allocators, its journal, its own writeback
-> > and the deletion of unlinked inodes.
-> 
-> For shared filesystems like gfs2, the concept of an emergency
-> read-only state doesn't make sense because in that state (in gfs2
-> terms, a withdrawn filesystem), we cannot do any more cluster-wide
-> locking and so we cannot allow any more reads, either. Could we define
-> the new flag in a way that would allow filesystems to enforce stronger
-> guarantees? This would suggest a flag name other than
-> SB_STATE_EMERGENCY_RO, though.
+Negative name lookups and empty-entry allocation can repeatedly scan a
+directory from the beginning. Bulk creation in a large directory therefore
+approaches O(N^2).
 
-The problem is that a lot of local filesystems really want the emergency
-read-only state (and not full fs shutdown). So if you want to fully
-shutdown the fs on error, either gfs2 has to do it on it's own or we could
-introduce another sb state for that. But I think emergency-ro state needs
-to stay...
+This series separates the optimization into three independently reviewable
+steps. Patch 1 adds the Bloom filter used to reject definite name misses.
+Patch 2 retains and correctly invalidates the next-empty-entry hint.
+Patch 3 adds the LRU and shrinker used to reclaim filters under memory
+pressure.
 
-								Honza
+Test environment:
+  QEMU TCG multi-thread, 4 vCPUs, 6 GiB RAM
+  4 GiB exFAT image, 32 KiB clusters
+
+                         Previous baseline   Patched v8
+  real                   589.48 s            30.27 s
+  user                     4.72 s             3.40 s
+  sys                    584.63 s            26.83 s
+
+The unpatched baseline is a previously recorded result and was not rerun.
+The patched run created 20,000 files; fsck.exfat reported a clean image.
+
+Changes in v8:
+- Rebase the series onto exfat/dev at 8e431c3bce0b.
+- Drop unrelated blank-line changes from the Bloom-filter patch.
+- Discard empty-entry hints collected by positive name lookups, since a
+  lookup can start at hint_stat and return before scanning the directory
+  prefix.
+- Track the remaining root-directory chain length during volume-label scans
+  so their empty-entry hints remain valid across cluster boundaries.
+- Remove a reclaimed filter from the LRU before clearing the inode pointer,
+  so the lockless free fast path cannot observe a linked but pointerless
+  filter during teardown.
+
+Changes in v7:
+- Size each Bloom filter from the allocated directory size, using four bits
+  per on-disk entry and clamping the bitmap between 512 bytes and 4 MiB.
+- Track set bits and discard a filter when one third of its bits are set or
+  directory growth requires a larger bitmap. Rebuild it lazily after a
+  later complete negative lookup.
+- Account reclaimable filters in pages so shrinker accounting follows their
+  dynamic allocation sizes.
+- Preserve the shrinker core's scan budget and return SHRINK_STOP when the
+  LRU is already empty, preventing repeated no-progress scans.
+
+Changes in v6:
+- Invalidate the name filter when committing a new entry set fails, before
+  attempting rollback. Despite the reported write error, the new name may
+  already have reached disk.
+- Move rename/move error invalidation into the Bloom filter patch so that
+  each patch remains correct when applied independently.
+
+Changes in v5:
+- Rebase the series onto the exFAT maintainer's dev branch.
+- Treat every non-negative exfat_find_empty_entry() return value as a
+  successful allocation in the volume-label path.
+- Record the minimum entry-set size for which a saved empty-entry hint is
+  valid. A shorter entry set now rescans from the beginning and can reuse a
+  smaller hole that an earlier, longer entry set could not use.
+
+Changes in v4:
+- Publish the next-empty-entry hint only after the directory entry set is
+  successfully committed, so post-allocation failures cannot skip an unused
+  slot.
+- Invalidate the destination name filter when rename or move fails because
+  the new entry may already exist on disk.
+
+Changes in v3:
+- Split the change into Bloom filter, empty-entry hint, and shrinker
+  patches.
+- Accept filenames containing exactly 255 UTF-16 code units while building
+  the Bloom filter.
+- Invalidate the empty-entry hint in every path that can free directory
+  entries, preventing stale hints from skipping earlier holes.
+
+Changes in v2:
+- Move exfat_name_filter_free() to exfat_evict_inode() because
+  ->free_inode() may run from an RCU callback in softirq context.
+
+Yang Wen (3):
+  exfat: add a Bloom filter for negative name lookups
+  exfat: retain the next empty directory entry hint
+  exfat: reclaim name filters under memory pressure
+
+ fs/exfat/dir.c      | 363 +++++++++++++++++++++++++++++++++++++++++++-
+ fs/exfat/exfat_fs.h |  30 +++-
+ fs/exfat/inode.c    |   1 +
+ fs/exfat/namei.c    |  87 ++++++++++-
+ fs/exfat/super.c    |   9 ++
+ 5 files changed, 478 insertions(+), 12 deletions(-)
+
+base-commit: 8e431c3bce0bb51802fc79b10225cc90a15f15d1
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.34.1
