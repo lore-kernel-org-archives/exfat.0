@@ -1,64 +1,64 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 514B0559C83
-	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 15:32:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3663F5275A1
+	for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 15:32:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791991931; cv=none; b=bnUkwSeB8dpH2vzfIT3xV2tTGAlJg68TtLqa9Oh/rN9FOibh6OzQwGazWFHUvZbb/PIxQobNdCVKY0DqD2n5CUjvV8xH/JWZjESSdXIvuJiVrkHotP/2cg456jq74R5CfZczV/uTbgKycHA50FUCZmo9au9Lg6Er2582OATmT1s=
+	t=1791991934; cv=none; b=cPt8dqjdvTDqw0ErFVPB5rg1rs2H7kDaEsWZoZyAKXDe09ZCxColxnDZRuxEPccMeZKYBJDxCLrjSImG0vrHhulRzP/+UhSBw5/NinXfup8rGEHibUouaVCqGuHhKzVgFGVCViYOnCNrJeGjTQS51mGrVYRnmJoFJtvrD1DyQpE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791991931; c=relaxed/simple;
-	bh=QOC45dyZRhk1gCm/AFuq8p8kaRK5WcH7tS1tOotGQFA=;
+	s=arc-20240116; t=1791991934; c=relaxed/simple;
+	bh=XQsneU3xqmTVNbKsfGxKF7tM9c8BtVYj+AuD/RC2FWQ=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=UjSDLNVJM3jvSGu6v7I7SXCBvW0xtOtCuYZWqNf/JDfWzeGmsjz6Y3OMYzp85CeRJivbzXPKedqRsit6CDXpqq6fX5DvRdihKoqMdUJmryGzJjvZpFTUnVPOd3428mGLBCGT0M/CWsHmWT+/13w0GR9asGqUjxQ0Yif7I05p79Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RJLVPhD/; arc=none smtp.client-ip=209.85.210.180
+	 MIME-Version; b=NzbxRBOsd4W8lPrkGlI66KgatTcUDyFsPCEAhSxl94VVqiJ4ms/cHawSrvNHCc1JPZ0uzsscU71ju6+uLesb2ewU6a87kPEvX+VDWlqyJIKZaxtNX1bfN18TY+eqrmUkW2waxT1G2uoxCsn/aYAlHHCCXcKq3ywwcCFM+TjQFNg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dY75SAa+; arc=none smtp.client-ip=209.85.210.182
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RJLVPhD/"
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-8875d220446so2215860b3a.3
-        for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 08:32:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dY75SAa+"
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-887a58523e6so1280753b3a.3
+        for <exfat@lists.linux.dev>; Wed, 14 Oct 2026 08:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791991924; x=1792596724; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1791991931; x=1792596731; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aqYQDNtbsbcUiDgoE4djRgnqQUZJDbIyNNQhRZYOJpY=;
-        b=RJLVPhD/6aeM3dHv/La8sPkgN1FXi1TbCOU3jJ836uxWPBteC2d6Uk2ShIFi+BfT+M
-         1VKwxT1+sQdR2QuBl1tamph2x9z0mA/TBEvCv1Tc3J1ookJ9/UE+Xj4q0AAR7qBDDET7
-         ZQnACHuY7592m6G2zjNC2h8RJebD04D8eKvvymqOEd/XpoV3C6rNMzc1E1HZoMfOcJhb
-         26rIy80U5pqSH5lTXAN9rE/j1794+7y35FUVrEykRyuwgLkzzspDS0+9j+YdKq22M0xj
-         /6XWYfMdZVSOrrXbCuyXlIu5E32nGBHT6Ht/hjAYUj1rnk0XmQlt+zS7+Bg0rQ2MZSps
-         y0hA==
+        bh=H4gwh2fQvNe08kbDMKrdanW71GXiZ18Ym48/T8PhpJo=;
+        b=dY75SAa+AIMejEtWzo9dtGxCBXuKYmOgjY70KipwbThl7WslSxbaw1ufBvjY49L8nk
+         IrfGJ4kk18a9w5U2pz0K6cLYwLXuFoBH5yF74Mimn0NPLBWPmsBy8ZNKBHS1N3/K5d+o
+         OtD1xdV7PEl9td7OK/Q7ZDQAU0zN3AwnsfObYROZgt2f1fMSNoazfjV/5RRyHMKOzuof
+         QxvxzypKTDjP1TE2Bh4QHBoaFh2+FGWcSZwUUav6H64Jj2dBcazKeu0NAAl9eGC3+7d2
+         2j8ORKPKf/4kIIbGimjS21xHgnD08kEI3jxv6/e4JyCaooGeRhluf9XTsMq89sUoQTlE
+         FmFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791991924; x=1792596724;
+        d=1e100.net; s=20260707; t=1791991931; x=1792596731;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aqYQDNtbsbcUiDgoE4djRgnqQUZJDbIyNNQhRZYOJpY=;
-        b=IPPSEJohRm1LXze1M7wGxVjscgQfqu5FeyqpgXVO0V0303vMUTn4tpj1qYFsLVp6mJ
-         jEnIfoO2U4tC3TNKds7aDVJF6KViDBNgkI/OKiAaW6kODIK0YB3Rs7CAQVdEQN8HXwKE
-         G5pDKmm9S9gMmryhCXRCUbBZ5d7zMGloDHU3vcqhdyfr4cp5k2Rdgh1oJZdxyAv5rz+M
-         508x3TPSyXqZootOSxRUia24VEhI8ARITrA+ywkyGTxmi0hy1IzZ/oFc9TMosTaWiT3S
-         /pa7zcVXV5gY5efPc1kxE2bDJKr5Wheo4dKokVjO0gL/ElyOtfT7bpvQ7/lftx6NZnTn
-         TVag==
-X-Forwarded-Encrypted: i=1; AKwUvBywa2YJyE49GMuu49Ygwg0GB/XkeRJDWoX8jKuxyuOJ5Y6Rq3EKolqbqDmihs8gqhqQAu/4pQ==@lists.linux.dev
-X-Gm-Message-State: AFq9FYI9+OUdUfYQJJuEcqpXEFuLJY4vXOzSVnzDef1thWnV8C4aW212
-	J1uDZs6QVJFmLhz3GGutdCXiJZoECj9gf2W08pyxhgcnaV7zzXUy+pll
-X-Gm-Gg: AYBFou0QglKQH/ElSRdQ4oVBxwUsoPTutZy6r9NFFKEfuOOfSBFLzYg2hM+GlqI6+2P
-	t9lsvBSHQTcrRCVlbxI2i5AUgO5KmB/cCQYgosDaefKdev+yvP5qxubBHiogHLkaVyirzqWKd35
-	cAbZ0LYK7KSJqZTQAIlxU7XWLCz13WWiS6JFKSn4A6vkBm2I2iNuqNKFYUgUV5jeVjPhYDIapLQ
-	iDyvz1Q00W0edAfMCHxoZ96BxHJ3cB9FdKs0TlFxie5pwD40VZNiOy6wwZoJmVPbW8KtT2UfGFu
-	liAdvo4FxPaOg0/vf3EHOgfDUAyF7HGKlSWQTfRSGFZ5cpa7rL3nDPdRSphsmJeUaK57GGTdC4t
-	8aZzANCIkpKTXK2B4kfXG4OnvO8DBQyqgeqGln7SEG285TdNNc909QdtG1XXP3QMUozB0tZMlwj
-	Q2Zk6Nrnddk753/ZerI+z7mgFR/4/+KVbjVgLWpdZUoeaRodbZDUA+LhFnvitBBZW7Pz/HKc89Q
-	5SptHawbQ+AaQ==
-X-Received: by 2002:a05:6a00:181b:b0:873:e3b4:5d4 with SMTP id d2e1a72fcca58-897c3e03dc9mr13580216b3a.2.1791991923406;
-        Wed, 14 Oct 2026 08:32:03 -0700 (PDT)
+        bh=H4gwh2fQvNe08kbDMKrdanW71GXiZ18Ym48/T8PhpJo=;
+        b=qFD4RPLfydLJXl4HY/RWFmx556vGIHERPfU9nBgU7wIa6DPKjyJnHvSHpqewIwqkvy
+         XU9BvYwZOTpcluhttO+W6TKkbLxcCOh4AIJ6fQeMPH2RB1FAVQanBTUPzHDtmy+D8Ikm
+         mc+B/aJfKpKG7QWs8C2HeS1ZQHq0/mP7t5I2VI+aLOjR5iRBILMkQbtrQktkGC5dEfEa
+         nQtmVXx2Vte611ke5TWNv4nVAofF9/kAVGv+j6IcMfsL+hEIRkcDaIfX+r9zQtJqquOY
+         YCwGbMjqz8yN4RbWItE1ffVevASD9K3ntMasfo0ByiY7CJDfoc8MqqTX7LYrwh1RmYgX
+         uFjw==
+X-Forwarded-Encrypted: i=1; AKwUvByw9JPVTK5cJPYbS1WSP54o92hZmBzJLz2jaFFmgvN2aoP+pMMBFIj1WRSluDdh2+zRmyimBg==@lists.linux.dev
+X-Gm-Message-State: AFq9FYLjJtRoOX2tuA9aVXTw3kFvLgT0tOUXJY4eveh0EVNckIsp9mPM
+	HZ/Tq4zEwg26HvqrXMCitIaaWRBscYUEWdLmHjMBSLtw9Et2Yf6WB9mZ
+X-Gm-Gg: AYBFou2+RtyGAUrtUHtYz6wM2jbdAXj68AFjV7M0+bFIrCASu6zpyHVq8UvadNxeVJN
+	vzu0ddbdTGFlR44sj2Z7GBu16klRtDy8Tztny82DxkT9QfBpjJZLMnqiSsWXTxk592fCetDKMz0
+	rjJmxs9U13V52/psfYt9ftw4OYhQqPHPGr6naiexhCfe5vT5NqVp/KzkvzJ8ZhxWKMOCFUqz75r
+	vwy+k884+kDBxoCEwUsUPAqgB3B1FlKdZaPCVajKUpWpQ8+kWgBImqP1YtUR2W7L+OYqd7J6zrZ
+	n/3S4K9lDFWHBU3d4At36WPdhEbBaEa3ZYc87RS8F+Ck5es8SKVlHT8O656hFZ2XC9Wh/SIJd+5
+	+UfBCbhO7godJHWNVJDK8W32efxP5SnJhgUPtXXhyb8E8k0vI7YrPv8nEIVzUyYDHQncIGe08ii
+	EJSksfKy3qbl+73duTuECYCmTvrzzMQIJEBC/INgM8VzoCEp6njSFtcL/etgPUzq75LkKmf7Nee
+	MWF4slHNoD3Mxly6H1w6q4=
+X-Received: by 2002:a05:6a00:218e:b0:891:6d3e:3992 with SMTP id d2e1a72fcca58-897c7ccb7dcmr12544259b3a.46.1791991931331;
+        Wed, 14 Oct 2026 08:32:11 -0700 (PDT)
 Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d7f51f452sm1221941b3a.1.2026.10.14.08.32.00
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-89d7f51f452sm1221941b3a.1.2026.10.14.08.32.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2026 08:32:03 -0700 (PDT)
+        Wed, 14 Oct 2026 08:32:07 -0700 (PDT)
 From: Yang Wen <anmuxixixi@gmail.com>
 To: linkinjeon@kernel.org,
 	sj1557.seo@samsung.com,
@@ -67,9 +67,9 @@ Cc: yuezhang.mo@sony.com,
 	exfat@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	Yang Wen <anmuxixixi@gmail.com>
-Subject: [PATCH v8 2/3] exfat: retain the next empty directory entry hint
-Date: Wed, 14 Oct 2026 23:31:29 +0800
-Message-Id: <20261014153130.2111500-3-anmuxixixi@gmail.com>
+Subject: [PATCH v8 3/3] exfat: reclaim name filters under memory pressure
+Date: Wed, 14 Oct 2026 23:31:30 +0800
+Message-Id: <20261014153130.2111500-4-anmuxixixi@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261014153130.2111500-1-anmuxixixi@gmail.com>
 References: <20261014153130.2111500-1-anmuxixixi@gmail.com>
@@ -81,389 +81,316 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-After a Bloom filter miss skips the name scan, empty-entry allocation can
-still rescan the directory from the beginning.
+Each active large directory can hold a dynamically sized name filter with a
+bitmap of up to 4 MiB. Add a per-superblock LRU and shrinker so filters can
+be reclaimed when memory is tight. Account reclaimable filters in pages so
+reclaim cost tracks their differing allocation sizes.
 
-Calculate the next empty-entry hint when a free entry set is found, but
-publish it only after the entry set is committed. Record the minimum
-entry-set size for which a saved hint is valid, so a later shorter name
-rescans earlier entries and can reuse smaller holes.
-
-Retain the hint while the name filter is active and invalidate it whenever
-create rollback, unlink, rmdir, rename, or move can free entries. Also
-discard hints collected by positive name lookups, since such lookups can
-start at hint_stat and return before scanning the beginning of the
-directory.
-
-Track the remaining root-directory chain length during volume-label scans
-so any empty-entry hint published by that path remains usable across a
-cluster boundary.
-
-This preserves the fast append path during bulk creation without allowing
-partial or stale hints to skip reusable directory entries.
+Keep the scan budget initialized by the shrinker core instead of replacing
+it with the number of filters freed. If the LRU is already empty, return
+SHRINK_STOP. This guarantees that do_shrink_slab() either consumes its scan
+budget or stops, even when the LRU becomes empty before nr_to_scan is
+satisfied.
 
 Signed-off-by: Yang Wen <anmuxixixi@gmail.com>
 ---
- fs/exfat/dir.c      | 25 +++++++++++---
- fs/exfat/exfat_fs.h |  5 ++-
- fs/exfat/namei.c    | 81 +++++++++++++++++++++++++++++++++++++++++----
- 3 files changed, 99 insertions(+), 12 deletions(-)
+ fs/exfat/dir.c      | 159 +++++++++++++++++++++++++++++++++++++++++++-
+ fs/exfat/exfat_fs.h |  10 +++
+ fs/exfat/super.c    |   8 +++
+ 3 files changed, 174 insertions(+), 3 deletions(-)
 
 diff --git a/fs/exfat/dir.c b/fs/exfat/dir.c
-index dcfaccdef2d8..4c36fded2412 100644
+index 4c36fded2412..bc99f2d6739e 100644
 --- a/fs/exfat/dir.c
 +++ b/fs/exfat/dir.c
-@@ -1154,6 +1154,7 @@ static inline void exfat_reset_empty_hint(struct exfat_hint_femp *hint_femp)
- {
- 	hint_femp->eidx = EXFAT_HINT_NONE;
- 	hint_femp->count = 0;
-+	hint_femp->min_entries = 0;
+@@ -10,6 +10,7 @@
+ #include <linux/filelock.h>
+ #include <linux/hash.h>
+ #include <linux/log2.h>
++#include <linux/shrinker.h>
+ #include <linux/stringhash.h>
+ 
+ #include "exfat_raw.h"
+@@ -127,12 +128,158 @@ static bool exfat_name_filter_set(struct exfat_name_filter *filter,
+ 	return filter->nr_set_bits >= nr_bits / 3;
  }
  
- static inline void exfat_set_empty_hint(struct exfat_inode_info *ei,
-@@ -1167,6 +1168,7 @@ static inline void exfat_set_empty_hint(struct exfat_inode_info *ei,
- 		if (candi_empty->count == 0) {
- 			candi_empty->cur = *clu;
- 			candi_empty->eidx = dentry;
-+			candi_empty->min_entries = num_entries;
- 		}
- 
- 		if (entry_type == TYPE_UNUSED)
-@@ -1377,6 +1379,7 @@ int exfat_find_dir_entry(struct super_block *sb, struct exfat_inode_info *ei,
- 		ei->hint_femp.cur.dir = EXFAT_EOF_CLUSTER;
- 		ei->hint_femp.eidx = p_dir->size * dentries_per_clu;
- 		ei->hint_femp.count = 0;
-+		ei->hint_femp.min_entries = num_entries;
- 	}
- 
- 	exfat_build_name_filter(sb, ei, p_dir);
-@@ -1387,6 +1390,8 @@ int exfat_find_dir_entry(struct super_block *sb, struct exfat_inode_info *ei,
- 	return -ENOENT;
- 
- found:
-+	exfat_reset_empty_hint(&ei->hint_femp);
-+
- 	/* next dentry we'll find is out of this cluster */
- 	if (!((dentry + 1) & (dentries_per_clu - 1))) {
- 		int ret = 0;
-@@ -1453,16 +1458,19 @@ static int exfat_get_volume_label_dentry(struct super_block *sb,
- {
- 	int i;
- 	int dentry = 0;
-+	struct inode *inode = sb->s_root->d_inode;
- 	unsigned int type;
- 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
- 	struct exfat_hint_femp hint_femp;
--	struct exfat_inode_info *ei = EXFAT_I(sb->s_root->d_inode);
-+	struct exfat_inode_info *ei = EXFAT_I(inode);
- 	struct exfat_chain clu;
- 	struct exfat_dentry *ep;
- 	struct buffer_head *bh;
- 
- 	hint_femp.eidx = EXFAT_HINT_NONE;
--	exfat_chain_set(&clu, sbi->root_dir, 0, ALLOC_FAT_CHAIN);
-+	exfat_chain_set(&clu, sbi->root_dir,
-+			exfat_bytes_to_cluster(sbi, i_size_read(inode)),
-+			ALLOC_FAT_CHAIN);
- 
- 	while (clu.dir != EXFAT_EOF_CLUSTER) {
- 		for (i = 0; i < sbi->dentries_per_clu; i++, dentry++) {
-@@ -1476,6 +1484,7 @@ static int exfat_get_volume_label_dentry(struct super_block *sb,
- 					hint_femp.cur = clu;
- 					hint_femp.eidx = dentry;
- 					hint_femp.count = 1;
-+					hint_femp.min_entries = 1;
- 				}
- 			}
- 
-@@ -1500,7 +1509,7 @@ static int exfat_get_volume_label_dentry(struct super_block *sb,
- 			return 0;
- 		}
- 
--		if (exfat_get_next_cluster(sb, &(clu.dir)))
-+		if (exfat_chain_advance(sb, &clu, 1))
- 			return -EIO;
- 	}
- 
-@@ -1509,6 +1518,7 @@ static int exfat_get_volume_label_dentry(struct super_block *sb,
- 		hint_femp.cur.dir = EXFAT_EOF_CLUSTER;
- 		hint_femp.eidx = dentry;
- 		hint_femp.count = 0;
-+		hint_femp.min_entries = 1;
- 	}
- 
- 	ei->hint_femp = hint_femp;
-@@ -1563,7 +1573,9 @@ int exfat_write_volume_label(struct super_block *sb,
- 	struct inode *root_inode = sb->s_root->d_inode;
- 	struct exfat_entry_set_cache es;
- 	struct exfat_chain clu;
-+	struct exfat_hint_femp next_hint;
- 	struct exfat_dentry *ep;
-+	bool entry_allocated = false;
- 
- 	if (label->name_len > EXFAT_VOLUME_LABEL_LEN)
- 		return -EINVAL;
-@@ -1578,7 +1590,10 @@ int exfat_write_volume_label(struct super_block *sb,
- 			goto unlock;
- 		}
- 
--		ret = exfat_find_empty_entry(root_inode, &clu, 1, &es);
-+		ret = exfat_find_empty_entry(root_inode, &clu, 1, &es,
-+					     &next_hint);
-+		if (ret >= 0)
-+			entry_allocated = true;
- 	}
- 
- 	if (ret < 0)
-@@ -1603,6 +1618,8 @@ int exfat_write_volume_label(struct super_block *sb,
- 	es.modified = true;
- 
- 	ret = exfat_put_dentry_set(&es, IS_DIRSYNC(root_inode));
-+	if (!ret && entry_allocated)
-+		EXFAT_I(root_inode)->hint_femp = next_hint;
- 
- unlock:
- 	mutex_unlock(&sbi->s_lock);
-diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
-index 015860883fa8..d00b3235cee9 100644
---- a/fs/exfat/exfat_fs.h
-+++ b/fs/exfat/exfat_fs.h
-@@ -157,6 +157,8 @@ struct exfat_hint_femp {
- 	int eidx;
- 	/* count of continuous empty entry */
- 	int count;
-+	/* minimum entry-set size for which this hint is safe */
-+	int min_entries;
- 	/* the cluster that first empty slot exists in */
- 	struct exfat_chain cur;
- };
-@@ -639,7 +641,8 @@ extern const struct dentry_operations exfat_dentry_ops;
- extern const struct dentry_operations exfat_utf8_dentry_ops;
- int exfat_find_empty_entry(struct inode *inode,
- 		struct exfat_chain *p_dir, int num_entries,
--			   struct exfat_entry_set_cache *es);
-+			   struct exfat_entry_set_cache *es,
-+			   struct exfat_hint_femp *next_hint);
- 
- /* cache.c */
- int exfat_cache_init(void);
-diff --git a/fs/exfat/namei.c b/fs/exfat/namei.c
-index 5e47ca1bf722..d8ddfc8fff2a 100644
---- a/fs/exfat/namei.c
-+++ b/fs/exfat/namei.c
-@@ -199,6 +199,54 @@ const struct dentry_operations exfat_utf8_dentry_ops = {
- 	.d_compare	= exfat_utf8_d_cmp,
- };
- 
-+static void exfat_set_next_empty_hint(struct inode *inode,
-+				      struct exfat_chain *p_dir, int dentry,
-+				      int num_entries,
-+				      struct exfat_entry_set_cache *es,
-+				      struct exfat_hint_femp *hint_femp)
++static unsigned long
++exfat_name_filter_nr_pages(const struct exfat_name_filter *filter)
 +{
-+	struct exfat_sb_info *sbi = EXFAT_SB(inode->i_sb);
-+	unsigned int next = dentry + num_entries;
-+	unsigned int total = exfat_cluster_to_dentries(sbi, p_dir->size);
-+	struct exfat_chain cur;
++	size_t size = struct_size(filter, bitmap,
++				  BITS_TO_LONGS(BIT(filter->order)));
 +
-+	hint_femp->min_entries = num_entries;
++	return DIV_ROUND_UP(size, PAGE_SIZE);
++}
 +
-+	if (next >= total) {
-+		exfat_chain_set(&hint_femp->cur, EXFAT_EOF_CLUSTER, 0,
-+				p_dir->flags);
-+		hint_femp->eidx = total;
-+		hint_femp->count = 0;
++static struct exfat_name_filter *
++exfat_name_filter_detach_locked(struct exfat_sb_info *sbi,
++				struct exfat_inode_info *ei)
++{
++	struct exfat_name_filter *filter = ei->name_filter;
++
++	if (!filter)
++		return NULL;
++
++	list_del_init(&ei->name_filter_lru);
++	ei->name_filter = NULL;
++	sbi->name_filter_pages -= exfat_name_filter_nr_pages(filter);
++	return filter;
++}
++
++static void exfat_name_filter_touch(struct exfat_inode_info *ei)
++{
++	struct exfat_sb_info *sbi = EXFAT_SB(ei->vfs_inode.i_sb);
++
++	spin_lock(&sbi->name_filter_lock);
++	if (ei->name_filter)
++		list_move_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
++	spin_unlock(&sbi->name_filter_lock);
++}
++
+ void exfat_name_filter_free(struct inode *inode)
+ {
+ 	struct exfat_inode_info *ei = EXFAT_I(inode);
++	struct exfat_sb_info *sbi;
++	struct exfat_name_filter *filter;
+ 
+-	kvfree(ei->name_filter);
+-	ei->name_filter = NULL;
++	if (!READ_ONCE(ei->name_filter))
++		return;
++
++	sbi = EXFAT_SB(inode->i_sb);
++	spin_lock(&sbi->name_filter_lock);
++	filter = exfat_name_filter_detach_locked(sbi, ei);
++	spin_unlock(&sbi->name_filter_lock);
++	kvfree(filter);
++}
++
++static unsigned long
++exfat_name_filter_count_objects(struct shrinker *shrinker,
++				struct shrink_control *sc)
++{
++	struct exfat_sb_info *sbi = shrinker->private_data;
++	unsigned long pages;
++
++	spin_lock(&sbi->name_filter_lock);
++	pages = sbi->name_filter_pages;
++	spin_unlock(&sbi->name_filter_lock);
++
++	return pages ? pages : SHRINK_EMPTY;
++}
++
++static unsigned long
++exfat_name_filter_scan_objects(struct shrinker *shrinker,
++			       struct shrink_control *sc)
++{
++	struct exfat_sb_info *sbi = shrinker->private_data;
++	unsigned long freed = 0;
++	bool empty = false;
++
++	/* Avoid reclaim recursion from a GFP_NOFS allocation under s_lock. */
++	if (!mutex_trylock(&sbi->s_lock)) {
++		sc->nr_scanned = 0;
++		return SHRINK_STOP;
++	}
++
++	while (freed < sc->nr_to_scan) {
++		struct exfat_inode_info *ei;
++		struct exfat_name_filter *filter;
++
++		spin_lock(&sbi->name_filter_lock);
++		if (list_empty(&sbi->name_filter_lru)) {
++			spin_unlock(&sbi->name_filter_lock);
++			empty = true;
++			break;
++		}
++
++		ei = list_first_entry(&sbi->name_filter_lru,
++				      struct exfat_inode_info,
++				      name_filter_lru);
++		filter = exfat_name_filter_detach_locked(sbi, ei);
++		spin_unlock(&sbi->name_filter_lock);
++
++		freed += exfat_name_filter_nr_pages(filter);
++		kvfree(filter);
++		cond_resched();
++	}
++
++	mutex_unlock(&sbi->s_lock);
++	if (empty && !freed) {
++		sc->nr_scanned = 0;
++		return SHRINK_STOP;
++	}
++	return freed;
++}
++
++void exfat_name_filter_shrinker_register(struct super_block *sb)
++{
++	struct exfat_sb_info *sbi = EXFAT_SB(sb);
++	struct shrinker *shrinker;
++
++	shrinker = shrinker_alloc(SHRINKER_NONSLAB,
++				  "exfat-name-filter:%s", sb->s_id);
++	if (!shrinker) {
++		exfat_warn(sb, "failed to allocate name filter shrinker");
 +		return;
 +	}
 +
-+	cur.dir = exfat_sector_to_cluster(sbi,
-+					  es->bh[es->num_bh - 1]->b_blocknr);
-+	cur.flags = p_dir->flags;
-+	cur.size = p_dir->size - exfat_dentries_to_cluster(sbi, next);
-+	if (!(next & (sbi->dentries_per_clu - 1))) {
-+		cur.size++;
-+		if (exfat_chain_advance(inode->i_sb, &cur, 1)) {
-+			hint_femp->eidx = EXFAT_HINT_NONE;
-+			hint_femp->count = 0;
-+			return;
-+		}
-+	}
-+
-+	hint_femp->cur = cur;
-+	hint_femp->eidx = next;
-+	hint_femp->count = 0;
++	shrinker->count_objects = exfat_name_filter_count_objects;
++	shrinker->scan_objects = exfat_name_filter_scan_objects;
++	shrinker->private_data = sbi;
++	shrinker_register(shrinker);
++	sbi->name_filter_shrinker = shrinker;
 +}
 +
-+static void exfat_invalidate_empty_hint(struct inode *inode)
++void exfat_name_filter_shrinker_unregister(struct super_block *sb)
 +{
-+	struct exfat_inode_info *ei = EXFAT_I(inode);
++	struct exfat_sb_info *sbi = EXFAT_SB(sb);
++	struct shrinker *shrinker = sbi->name_filter_shrinker;
 +
-+	ei->hint_femp.eidx = EXFAT_HINT_NONE;
-+	ei->hint_femp.count = 0;
-+	ei->hint_femp.min_entries = 0;
-+}
++	sbi->name_filter_shrinker = NULL;
++	shrinker_free(shrinker);
 +
- /* search EMPTY CONTINUOUS "num_entries" entries */
- static int exfat_search_empty_slot(struct super_block *sb,
- 		struct exfat_hint_femp *hint_femp, struct exfat_chain *p_dir,
-@@ -295,7 +343,8 @@ static int exfat_check_max_dentries(struct inode *inode)
-  */
- int exfat_find_empty_entry(struct inode *inode,
- 		struct exfat_chain *p_dir, int num_entries,
--		struct exfat_entry_set_cache *es)
-+		struct exfat_entry_set_cache *es,
-+		struct exfat_hint_femp *next_hint)
++	for (;;) {
++		struct exfat_inode_info *ei;
++		struct exfat_name_filter *filter;
++
++		spin_lock(&sbi->name_filter_lock);
++		if (list_empty(&sbi->name_filter_lru)) {
++			spin_unlock(&sbi->name_filter_lock);
++			break;
++		}
++
++		ei = list_first_entry(&sbi->name_filter_lru,
++				      struct exfat_inode_info,
++				      name_filter_lru);
++		filter = exfat_name_filter_detach_locked(sbi, ei);
++		spin_unlock(&sbi->name_filter_lock);
++		kvfree(filter);
++	}
+ }
+ 
+ bool exfat_name_filter_maybe_contains(struct inode *inode,
+@@ -145,6 +292,7 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
+ 	if (!filter)
+ 		return true;
+ 
++	exfat_name_filter_touch(ei);
+ 	exfat_name_filter_indexes(inode->i_sb, name, filter->order, indexes);
+ 	return test_bit(indexes[0], filter->bitmap) &&
+ 	       test_bit(indexes[1], filter->bitmap) &&
+@@ -161,6 +309,7 @@ void exfat_name_filter_add(struct inode *inode,
+ 	if (!filter)
+ 		return;
+ 
++	exfat_name_filter_touch(ei);
+ 	if (exfat_name_filter_order(inode) > filter->order) {
+ 		exfat_name_filter_free(inode);
+ 		return;
+@@ -188,7 +337,7 @@ static void exfat_build_name_filter(struct super_block *sb,
+ 	u8 order;
+ 	int i;
+ 
+-	if (ei->name_filter ||
++	if (!sbi->name_filter_shrinker || ei->name_filter ||
+ 	    exfat_bytes_to_dentries(i_size_read(inode)) <
+ 					EXFAT_NAME_FILTER_MIN_DENTRIES)
+ 		return;
+@@ -240,7 +389,11 @@ static void exfat_build_name_filter(struct super_block *sb,
+ 	}
+ 
+ complete:
++	spin_lock(&sbi->name_filter_lock);
+ 	ei->name_filter = filter;
++	list_add_tail(&ei->name_filter_lru, &sbi->name_filter_lru);
++	sbi->name_filter_pages += exfat_name_filter_nr_pages(filter);
++	spin_unlock(&sbi->name_filter_lock);
+ 	return;
+ abort:
+ 	kvfree(filter);
+diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
+index d00b3235cee9..472e341e4d7d 100644
+--- a/fs/exfat/exfat_fs.h
++++ b/fs/exfat/exfat_fs.h
+@@ -15,6 +15,8 @@
+ #include <uapi/linux/exfat.h>
+ #include <linux/buffer_head.h>
+ 
++struct shrinker;
++
+ #define EXFAT_ROOT_INO		1
+ 
+ /*
+@@ -266,6 +268,11 @@ struct exfat_sb_info {
+ 
+ 	spinlock_t inode_hash_lock;
+ 	struct hlist_head inode_hashtable[EXFAT_HASH_SIZE];
++	/* Protects name_filter_lru and name_filter_pages. */
++	spinlock_t name_filter_lock;
++	struct list_head name_filter_lru;
++	unsigned long name_filter_pages;
++	struct shrinker *name_filter_shrinker;
+ 	struct rcu_head rcu;
+ };
+ 
+@@ -297,6 +304,7 @@ struct exfat_inode_info {
+ 	struct exfat_hint_femp hint_femp;
+ 	/* Complete, in-memory Bloom filter of directory names */
+ 	struct exfat_name_filter *name_filter;
++	struct list_head name_filter_lru;
+ 
+ 	spinlock_t cache_lru_lock;
+ 	struct list_head cache_lru;
+@@ -693,6 +701,8 @@ bool exfat_name_filter_maybe_contains(struct inode *inode,
+ void exfat_name_filter_add(struct inode *inode,
+ 			   const struct exfat_uni_name *name);
+ void exfat_name_filter_free(struct inode *inode);
++void exfat_name_filter_shrinker_register(struct super_block *sb);
++void exfat_name_filter_shrinker_unregister(struct super_block *sb);
+ 
+ static inline int exfat_chain_advance(struct super_block *sb,
+ 		struct exfat_chain *chain, unsigned int step)
+diff --git a/fs/exfat/super.c b/fs/exfat/super.c
+index 4924f0fad836..26b25cc86d1c 100644
+--- a/fs/exfat/super.c
++++ b/fs/exfat/super.c
+@@ -46,6 +46,7 @@ static void exfat_put_super(struct super_block *sb)
  {
- 	int dentry, ret;
- 	unsigned int last_clu;
-@@ -309,8 +358,9 @@ int exfat_find_empty_entry(struct inode *inode,
- 	hint_femp.eidx = EXFAT_HINT_NONE;
+ 	struct exfat_sb_info *sbi = EXFAT_SB(sb);
  
- 	if (ei->hint_femp.eidx != EXFAT_HINT_NONE) {
--		hint_femp = ei->hint_femp;
--		ei->hint_femp.eidx = EXFAT_HINT_NONE;
-+		if (num_entries >= ei->hint_femp.min_entries)
-+			hint_femp = ei->hint_femp;
-+		exfat_invalidate_empty_hint(inode);
++	exfat_name_filter_shrinker_unregister(sb);
+ 	mutex_lock(&sbi->s_lock);
+ 	exfat_clear_volume_dirty(sb);
+ 	exfat_free_bitmap(sbi);
+@@ -210,6 +211,7 @@ static struct inode *exfat_alloc_inode(struct super_block *sb)
+ 		return NULL;
+ 
+ 	ei->name_filter = NULL;
++	INIT_LIST_HEAD(&ei->name_filter_lru);
+ 	return &ei->vfs_inode;
+ }
+ 
+@@ -746,6 +748,8 @@ static int exfat_fill_super(struct super_block *sb, struct fs_context *fc)
+ 		goto free_table;
  	}
  
- 	exfat_chain_set(p_dir, ei->start_clu,
-@@ -385,6 +435,9 @@ int exfat_find_empty_entry(struct inode *inode,
- 		inode->i_blocks += sbi->cluster_size >> 9;
- 	}
- 
-+	exfat_set_next_empty_hint(inode, p_dir, dentry, num_entries, es,
-+				  next_hint);
++	exfat_name_filter_shrinker_register(sb);
 +
- 	p_dir->dir = exfat_sector_to_cluster(sbi, es->bh[0]->b_blocknr);
- 	p_dir->size -= dentry >> sbi->dentries_per_clu_bits;
+ 	return 0;
  
-@@ -469,6 +522,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
- 	struct exfat_chain clu;
- 	struct timespec64 ts = current_time(inode);
- 	struct exfat_entry_set_cache es;
-+	struct exfat_hint_femp next_hint;
- 	int clu_size = 0;
- 	unsigned int start_clu = EXFAT_FREE_CLUSTER;
- 	bool dir_allocated = false;
-@@ -484,7 +538,8 @@ static int exfat_add_entry(struct inode *inode, const char *path,
- 	}
+ put_inode:
+@@ -845,6 +849,10 @@ static int exfat_init_fs_context(struct fs_context *fc)
  
- 	/* exfat_find_empty_entry must be called before alloc_cluster() */
--	dentry = exfat_find_empty_entry(inode, &info->dir, num_entries, &es);
-+	dentry = exfat_find_empty_entry(inode, &info->dir, num_entries, &es,
-+					&next_hint);
- 	if (dentry < 0) {
- 		ret = dentry; /* -EIO or -ENOSPC */
- 		goto out;
-@@ -517,6 +572,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
- 						   dentry, ES_ALL_ENTRIES);
- 		if (!cleanup_ret) {
- 			exfat_remove_entries(inode, &es, ES_IDX_FILE, false);
-+			exfat_invalidate_empty_hint(inode);
- 			cleanup_ret = exfat_put_dentry_set(&es,
- 							   IS_DIRSYNC(inode));
- 		}
-@@ -525,6 +581,7 @@ static int exfat_add_entry(struct inode *inode, const char *path,
- 			exfat_free_cluster(inode, &clu);
- 		goto out;
- 	}
-+	EXFAT_I(inode)->hint_femp = next_hint;
+ 	mutex_init(&sbi->s_lock);
+ 	mutex_init(&sbi->bitmap_lock);
++	spin_lock_init(&sbi->name_filter_lock);
++	INIT_LIST_HEAD(&sbi->name_filter_lru);
++	sbi->name_filter_pages = 0;
++	sbi->name_filter_shrinker = NULL;
+ 	ratelimit_state_init(&sbi->ratelimit, DEFAULT_RATELIMIT_INTERVAL,
+ 			DEFAULT_RATELIMIT_BURST);
  
- 	info->entry = dentry;
- 	exfat_name_filter_add(inode, &uniname);
-@@ -629,7 +686,8 @@ static int exfat_find(struct inode *dir, const struct qstr *qname,
- 		ei->hint_stat.clu = cdir.dir;
- 		ei->hint_stat.eidx = 0;
- 		ei->version = (inode_peek_iversion_raw(dir) & 0xffffffff);
--		ei->hint_femp.eidx = EXFAT_HINT_NONE;
-+		if (!ei->name_filter)
-+			ei->hint_femp.eidx = EXFAT_HINT_NONE;
- 	}
- 
- 	/* search the file name for directories */
-@@ -805,6 +863,7 @@ static int exfat_unlink(struct inode *dir, struct dentry *dentry)
- 
- 	/* update the directory entry */
- 	exfat_remove_entries(inode, &es, ES_IDX_FILE, true);
-+	exfat_invalidate_empty_hint(dir);
- 
- 	err = exfat_put_dentry_set(&es, IS_DIRSYNC(inode));
- 	if (err)
-@@ -960,6 +1019,7 @@ static int exfat_rmdir(struct inode *dir, struct dentry *dentry)
- 	exfat_set_volume_dirty(sb);
- 
- 	exfat_remove_entries(inode, &es, ES_IDX_FILE, true);
-+	exfat_invalidate_empty_hint(dir);
- 
- 	err = exfat_put_dentry_set(&es, IS_DIRSYNC(dir));
- 	if (err)
-@@ -1035,9 +1095,10 @@ static int exfat_rename_file(struct inode *parent_inode,
- 	if (old_es.num_entries < num_total_entries) {
- 		int newentry;
- 		struct exfat_chain dir;
-+		struct exfat_hint_femp next_hint;
- 
- 		newentry = exfat_find_empty_entry(parent_inode, &dir,
--				num_total_entries, &new_es);
-+				num_total_entries, &new_es, &next_hint);
- 		if (newentry < 0) {
- 			ret = newentry; /* -EIO or -ENOSPC */
- 			goto put_old_es;
-@@ -1069,6 +1130,7 @@ static int exfat_rename_file(struct inode *parent_inode,
- 			}
- 			goto put_old_es;
- 		}
-+		EXFAT_I(parent_inode)->hint_femp = next_hint;
- 
- 		exfat_remove_entries(parent_inode, &old_es, ES_IDX_FILE, false);
- 		ei->dir = dir;
-@@ -1096,6 +1158,7 @@ static int exfat_move_file(struct inode *parent_inode,
- 	struct exfat_dentry *epmov, *epnew;
- 	struct exfat_entry_set_cache mov_es, new_es;
- 	struct exfat_chain newdir;
-+	struct exfat_hint_femp next_hint;
- 	unsigned int num_extra_entries, num_total_entries;
- 
- 	num_new_entries = exfat_calc_num_entries(p_uniname);
-@@ -1113,7 +1176,7 @@ static int exfat_move_file(struct inode *parent_inode,
- 	num_total_entries = num_new_entries + num_extra_entries;
- 
- 	newentry = exfat_find_empty_entry(parent_inode, &newdir,
--			num_total_entries, &new_es);
-+			num_total_entries, &new_es, &next_hint);
- 	if (newentry < 0) {
- 		ret = newentry; /* -EIO or -ENOSPC */
- 		goto put_mov_es;
-@@ -1142,10 +1205,12 @@ static int exfat_move_file(struct inode *parent_inode,
- 					  ES_ALL_ENTRIES)) {
- 			exfat_remove_entries(parent_inode, &new_es,
- 					    ES_IDX_FILE, false);
-+			exfat_invalidate_empty_hint(parent_inode);
- 			exfat_put_dentry_set(&new_es, false);
- 		}
- 		goto put_mov_es;
- 	}
-+	EXFAT_I(parent_inode)->hint_femp = next_hint;
- 
- 	exfat_remove_entries(parent_inode, &mov_es, ES_IDX_FILE, false);
- 
-@@ -1218,6 +1283,7 @@ static int __exfat_rename(struct inode *old_parent_inode,
- 		ret = exfat_rename_file(new_parent_inode, &uni_name, ei);
- 	else
- 		ret = exfat_move_file(new_parent_inode, &uni_name, ei);
-+	exfat_invalidate_empty_hint(old_parent_inode);
- 	if (!ret)
- 		exfat_name_filter_add(new_parent_inode, &uni_name);
- 	else
-@@ -1234,6 +1300,7 @@ static int __exfat_rename(struct inode *old_parent_inode,
- 		}
- 
- 		exfat_remove_entries(new_inode, &es, ES_IDX_FILE, true);
-+		exfat_invalidate_empty_hint(new_parent_inode);
- 
- 		ret = exfat_put_dentry_set(&es, IS_DIRSYNC(new_inode));
- 		if (ret)
 -- 
 2.34.1
 
