@@ -1,184 +1,164 @@
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CB64525A90;
-	Thu, 15 Oct 2026 12:21:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B4EF3C553A
+	for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 14:49:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792066880; cv=none; b=uZCkteXwzPIlHVDdZ469U3BWTCw5a62rXSYXyUZq9TNklKK+QbJpfEbzgV/StWZp1DVkcrdWrHPF3TIDNAtDw5VW7uJUy77jGlNXh7ESatpnpGaiCG61Yef/VW0KUiu27perpUamDPpmHsU/eM8iF+O2lSnAwuq6VdkZUvQiDI8=
+	t=1792075785; cv=none; b=a262sVligqqqPK+3j9GbsrPsCUxy0HkYmk0oBXDja1jVV+/3xqXaArJpcqeRWqWIlFynPbNHgFabNBvtpqyhljio+WsNtdFlbk9mn97z9vwy1ZOdleL+G8gOf6QrKnrPVzREkwn7muKJPF2pjchEOdVsOCum7St+ApkgniQdjAQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792066880; c=relaxed/simple;
-	bh=FLFyRRHhJi6tZU18s+v2YoKZn2fIoW7LNdezj0jo31A=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Ih/iVxSniI+ZHczuNwAJ/3yQlPIh6Zewba/gTrmq3Am/UMsSlrxaaccBYu5SuSAN2crV/G22/xS11UT07JqTU4HJGj6c7QyjDFNH69aCy42SuwRv5W/jwDExmqobpHdSdvn5syRD14fXlhd+GauHhMuZoyLKLmOWuiMSJv/PJ9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=wNSiwWKR; arc=none smtp.client-ip=113.46.200.217
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	s=arc-20240116; t=1792075785; c=relaxed/simple;
+	bh=kAMB98C2TO+dg0RpAZ18Gg4F2DJAMfSCQrSzGZazOmA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bJnFYieY1CMLAl+uUu3lLyVD98Ih2JZPEuwQTiha+dr3XnRUm+62qTh7As+pEjwOL+JA+ku3sU0X9cwpvfLcWrmvcPJtJBTHVRYT6/B1RcS+/7n2s2AAidWJqeMj3e7MI8O79TjFrWyndxjv6SbWgkOhfvt6oWF80tm02/Z7xB8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu; spf=pass smtp.mailfrom=cs.unc.edu; dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b=EB2O6gTI; arc=none smtp.client-ip=209.85.219.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.unc.edu
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="wNSiwWKR"
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=VESGW3TkU2bTfPpPgP4UR7E6JTjX0tkAQhUuZU9C/tM=;
-	b=wNSiwWKRvOV1fjcErXNkqErXQUmQG3eZuwQkj3Zu6VFMiHhxXORXqjDrFe8LUISRsPYsZW2e2
-	XQPGavZQkQgiZRnvDs0uHkrRCuZtCv9Ii/3WQe+SgmFIlieaRlAE3u38ZstYmsJIs87/e1uCN43
-	22ZWBtq2ZdGrbDeJX79IZTo=
-Received: from mail.maildlp.com (unknown [172.19.163.104])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4j56Lb1Ppmzcb1H;
-	Thu, 15 Oct 2026 20:09:11 +0800 (CST)
-Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
-	by mail.maildlp.com (Postfix) with ESMTPS id E96A04056E;
-	Thu, 15 Oct 2026 20:21:15 +0800 (CST)
-Received: from octopus.huawei.com (10.67.174.191) by
- whupemk100010.china.huawei.com (7.152.184.41) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45; Thu, 15 Oct 2026 20:21:10 +0800
-From: Cai Xinchen <caixinchen1@huawei.com>
-To: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
-	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>
-CC: <ast@kernel.org>, <daniel@iogearbox.net>, <andrii@kernel.org>,
-	<eddyz87@gmail.com>, <memxor@gmail.com>, <martin.lau@linux.dev>,
-	<song@kernel.org>, <yonghong.song@linux.dev>, <jolsa@kernel.org>,
-	<emil@etsalapatis.com>, <ihor.solodrai@linux.dev>, <rdunlap@infradead.org>,
-	<gregkh@linuxfoundation.org>, <rafael@kernel.org>, <dakr@kernel.org>,
-	<johan@kernel.org>, <dlemoal@kernel.org>, <hch@lst.de>, <axboe@kernel.dk>,
-	<viro@zeniv.linux.org.uk>, <brauner@kernel.org>, <jack@suse.cz>,
-	<dhowells@redhat.com>, <code@tyhicks.com>, <linkinjeon@kernel.org>,
-	<sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
-	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
-	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
-	<tom@talpey.com>, <hyc.lee@gmail.com>, <miklos@szeredi.hu>,
-	<amir73il@gmail.com>, <senozhatsky@chromium.org>,
-	<chenxiaosong@chenxiaosong.com>, <kpsingh@kernel.org>, <matt@bobrowski.net>,
-	<rostedt@goodmis.org>, <mhiramat@kernel.org>,
-	<mathieu.desnoyers@efficios.com>, <john.johansen@canonical.com>,
-	<georgia.garcia@canonical.com>, <zohar@linux.ibm.com>,
-	<roberto.sassu@huawei.com>, <dmitry.kasatkin@gmail.com>,
-	<eric.snowberg@oracle.com>, <stephen.smalley.work@gmail.com>,
-	<omosnacek@gmail.com>, <casey@schaufler-ca.com>, <takedakn@nttdata.co.jp>,
-	<penguin-kernel@I-love.SAKURA.ne.jp>, <xiujianfeng@huawei.com>,
-	<nanx95726@gmail.com>, <djwong@kernel.org>, <lujialin4@huawei.com>,
-	<bpf@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-security-module@vger.kernel.org>,
-	<driver-core@lists.linux.dev>, <linux-block@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>, <netfs@lists.linux.dev>,
-	<ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
-	<linux-nfs@vger.kernel.org>, <ntfs@lists.linux.dev>,
-	<linux-unionfs@vger.kernel.org>, <linux-cifs@vger.kernel.org>,
-	<linux-trace-kernel@vger.kernel.org>, <apparmor@lists.ubuntu.com>,
-	<linux-integrity@vger.kernel.org>, <selinux@vger.kernel.org>,
-	<linux-kselftest@vger.kernel.org>
-Subject: [PATCH v2 -next 18/18] Documentation: Update landlock doc for metadata rights
-Date: Thu, 15 Oct 2026 20:54:24 +0800
-Message-ID: <20261015125425.3246251-19-caixinchen1@huawei.com>
-X-Mailer: git-send-email 2.18.0.huawei.25
-In-Reply-To: <20261015125425.3246251-1-caixinchen1@huawei.com>
-References: <20261015125425.3246251-1-caixinchen1@huawei.com>
+	dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b="EB2O6gTI"
+Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-91b63bd2030so64650426d6.3
+        for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 07:49:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cs.unc.edu; s=google; t=1792075782; x=1792680582; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=WAcdpcTpnQbvHYYEUHq7bhjUU7mNPvOKc1GObp15GFQ=;
+        b=EB2O6gTIfmushcqlp9DzFBnPUfxxMp5FZh6ykztY6ecUlKdWeSFMp/Smjl4fz5fpl4
+         4O2IrqEMb1ENvIaCWKy01/eWzdbXth3jA5+CnYxldSA+3SzxYAMI152N8VLigVQH5pb4
+         LXymj6rQ7tmEOS6WYU43ZIZBmMHWsVrd5VFsBPYmnQAsillIOUFrkvo3RbibhPfAhCyN
+         mLuJ7vnP1vE940ZfZsRtTbEJLG8zZdjiRE42Q4iCE7u1gQibIi4hzT9icWnuimNquOt2
+         DR6npJnrM3HGI6zzhMvqc3ZpmDMGYwm1SSqlurFyOLj1IdZF9s63SDBwBlbjeCLbztyV
+         KK3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792075782; x=1792680582;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WAcdpcTpnQbvHYYEUHq7bhjUU7mNPvOKc1GObp15GFQ=;
+        b=UNfl/g9tNP40cvIeV1yE9ygfRa4GNok68gqnIwVoCoHuHw9aVFNtK/FZRhniGb2z7+
+         b8kD8nEwydbrsQhA4ntPp9x+ZagNSy3x2SeHTKSO7j9qkZD8BPqQaOwbuzkT7FirqBSO
+         aCV0oXcK5DuvPhUqrvWTInQOYgQleXXJ03U+tsL895tiIW3MdQy8Os964SVSWx+8qcZS
+         5Mh9kH0zLnay3XNqcV5vWWtqBI6oOdJLPz9vWqyH+5Rhj1rpu9vKrpxPEpBhovaXwu/Q
+         RfJnm61Zryr2QZAqsM6SSQX2dE46MD1m9d9wrVB6hcKEhEIsquPapW8bUVn4dTN+ojAi
+         lKsg==
+X-Forwarded-Encrypted: i=1; AKwUvBzL02HETN89ZhzBN9c+z3WXBlL7w6/Kkir0v3/Wxdb8yz4Cl6WY1TUamTZoJL5q4Piy/K1KDw==@lists.linux.dev
+X-Gm-Message-State: AFq9FYIlxzp2Bj4Y0wzOG5ja4W1wwzjbzwfJcNV7RIl4Tb2IrWU6tFnH
+	D8cLlBMd7oIz8ewnSaKGRSiCWQcuK2QbUao9R6BZ0/RRFoKKwpaRVKasyRPmhOksRQ==
+X-Gm-Gg: AYBFou3VKmFcApSxvELewz3XelpriBvX+YdPFeAUadObtZJAwXcNd4lxoD9wWVaP6Vl
+	dqputHhfBgUTBHkS74/VmtGc31Y8zVyEr6SeH0Rt+bcTeJbT6ivlywkl/EWJPgLME2DH/1hgQ3K
+	dpVDUq35Zw+VIh4M9hxkVqRVLS9ri9KotbMhOuBK4iglpZGnboloxcA9+mEWYfdQDw/0owZappV
+	nZUixUGpKyF+NH3OPQj5dkvcFaoiV1KCWc6d8kRRMwlr1xBViAiZFQVPlTSOssgnsW8QgWwc9y5
+	i949vpeX5MTqynKCu1mW4uCS7/s+LrIbwPcMtG9p+877pabeCPYMkP+CM3vSwfFf9p/vZskLgmK
+	/c68ywiAVqJaiJ0cMBTB3DwCxAi36IXyAU+VFygBLKEWvkYhQbxKnvjA5D+JQLP6NgExaRgjKn6
+	FF99vlVFDkvIkMFLFRLZy4fqrfS6VqyAr0qE29vqXaFLyj3TlSLyuhi8NSTZGZKP59nzVKENL9F
+	h/4JugASBucd6LbRboy
+X-Received: by 2002:a05:620a:4454:b0:939:6dea:374d with SMTP id af79cd13be357-93ebd22f201mr3559144585a.49.1792075781768;
+        Thu, 15 Oct 2026 07:49:41 -0700 (PDT)
+Received: from cobra01.cs.unc.edu (cobra01.cs.unc.edu. [152.2.130.143])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93ef50295edsm790347085a.22.2026.10.15.07.49.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Oct 2026 07:49:41 -0700 (PDT)
+From: Hengyu Liang <hengyul@cs.unc.edu>
+To: linkinjeon@kernel.org,
+	sj1557.seo@samsung.com
+Cc: yuezhang.mo@sony.com,
+	chizhiling@kylinos.cn,
+	exfat@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH] exfat: fix reading a directory whose FAT chain is longer than its size
+Date: Thu, 15 Oct 2026 10:49:34 -0400
+Message-ID: <20261015144934.1800240-1-hengyul@cs.unc.edu>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
- whupemk100010.china.huawei.com (7.152.184.41)
+Content-Transfer-Encoding: 8bit
 
-Update the user space documentation for the new
-LANDLOCK_ACCESS_FS_READ_METADATA and
-LANDLOCK_ACCESS_FS_WRITE_METADATA access rights: add them to the
-example ruleset attributes, extend the ABI version fallback switch
-to remove them for ABI < 13, and document their semantics in a new
-"File metadata" section, including the fact that only explicit
-metadata changes requested by user space are restricted.
+Commit 08cf4a8181b4 ("exfat: use exfat_chain_advance helper") made the
+directory code walk the clusters of a directory with
+exfat_chain_advance().
 
-The new section also warns that most of the time,
-LANDLOCK_ACCESS_FS_READ_METADATA should be granted together with
-LANDLOCK_ACCESS_FS_READ_FILE and LANDLOCK_ACCESS_FS_READ_DIR:
-programs commonly read metadata alongside file contents and
-directory listings (e.g. with stat(2)) and do not expect such calls
-to fail, while denying only READ_FILE or READ_DIR does not hide
-metadata.
+However, exfat_chain_advance() returns -EIO once it has walked as many
+clusters as the size of the directory says. The FAT chain of a directory
+can be longer than that, because some cameras stop updating the size,
+see commit 1e5654de0f51 ("exfat: handle wrong stream entry size in
+exfat_readdir()"). As of now, opening such a directory fails with EIO as
+soon as the chain is two clusters longer than the size. Reading a
+directory that has a FAT chain after a seek past its end fails with EIO
+too.
 
-Assisted-by: opencode: glm-5.3
-Signed-off-by: Cai Xinchen <caixinchen1@huawei.com>
+The issue can be reproduced with an image in which the size of a
+directory with 200 files and 7 clusters is lowered to 2 clusters:
+
+    mount -o loop exfat.img /mnt
+    ls /mnt/d | wc -l
+
+Before commit 08cf4a8181b4 ("exfat: use exfat_chain_advance helper"),
+the result is:
+
+    200
+
+After that commit, ls fails with "Input/output error" and the result is:
+
+    0
+
+This patch will make exfat_chain_advance() follow the FAT to its end
+when the directory has a FAT chain, as the code did before, and keep the
+size check for a directory without one.
+
+Fixes: 08cf4a8181b4 ("exfat: use exfat_chain_advance helper")
+Cc: stable@vger.kernel.org
+Signed-off-by: Hengyu Liang <hengyul@cs.unc.edu>
 ---
- Documentation/userspace-api/landlock.rst | 47 +++++++++++++++++++++++-
- 1 file changed, 46 insertions(+), 1 deletion(-)
+ fs/exfat/exfat_fs.h | 28 +++++++++++++++++++---------
+ 1 file changed, 19 insertions(+), 9 deletions(-)
 
-diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
-index 3d45b956b640..62fe39a8b61e 100644
---- a/Documentation/userspace-api/landlock.rst
-+++ b/Documentation/userspace-api/landlock.rst
-@@ -87,7 +87,9 @@ to be explicit about the denied-by-default access rights.
-             LANDLOCK_ACCESS_FS_REFER |
-             LANDLOCK_ACCESS_FS_TRUNCATE |
-             LANDLOCK_ACCESS_FS_IOCTL_DEV |
--            LANDLOCK_ACCESS_FS_RESOLVE_UNIX,
-+            LANDLOCK_ACCESS_FS_RESOLVE_UNIX |
-+            LANDLOCK_ACCESS_FS_READ_METADATA |
-+            LANDLOCK_ACCESS_FS_WRITE_METADATA,
-         .handled_access_net =
-             LANDLOCK_ACCESS_NET_BIND_TCP |
-             LANDLOCK_ACCESS_NET_CONNECT_TCP |
-@@ -159,6 +161,10 @@ version, and only use the available subset of access rights:
-         ruleset_attr.handled_permissions &=
-             ~(LANDLOCK_PERMISSION_NAMESPACE_USE |
-               LANDLOCK_PERMISSION_CAPABILITY_USE);
-+        /* Removes metadata rights for ABI < 13 */
-+        ruleset_attr.handled_access_fs &=
-+            ~(LANDLOCK_ACCESS_FS_READ_METADATA |
-+              LANDLOCK_ACCESS_FS_WRITE_METADATA);
-     }
+diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
+index a9131fe03302..f324c4cba26a 100644
+--- a/fs/exfat/exfat_fs.h
++++ b/fs/exfat/exfat_fs.h
+@@ -623,19 +623,29 @@ static inline int exfat_chain_advance(struct super_block *sb,
+ 		struct exfat_chain *chain, unsigned int step)
+ {
+ 	unsigned int clu = chain->dir;
++	unsigned int i;
  
- This enables the creation of an inclusive ruleset that will contain our rules.
-@@ -669,6 +675,45 @@ for writing, sidestepping the ``LANDLOCK_ACCESS_FS_TRUNCATE`` right.
+-	if (unlikely(chain->size < step))
+-		return -EIO;
++	if (chain->flags == ALLOC_NO_FAT_CHAIN) {
++		if (unlikely(chain->size < step))
++			return -EIO;
  
- The truncate right is associated with the opened file (see below).
+-	if (exfat_cluster_walk(sb, &clu, step, chain->flags))
+-		return -EIO;
++		chain->size -= step;
++		chain->dir = chain->size ? clu + step : EXFAT_EOF_CLUSTER;
++		return 0;
++	}
  
-+File metadata
-+-------------
-+
-+The ``LANDLOCK_ACCESS_FS_READ_METADATA`` right governs reading file and
-+directory metadata: :manpage:`stat(2)` and friends,
-+:manpage:`getxattr(2)`, :manpage:`listxattr(2)` and friends, and POSIX ACL
-+reads.
-+
-+The ``LANDLOCK_ACCESS_FS_WRITE_METADATA`` right governs explicit changes to
-+file and directory metadata: :manpage:`chmod(2)` and friends,
-+:manpage:`chown(2)` and friends, :manpage:`utimensat(2)`,
-+:manpage:`setxattr(2)`, :manpage:`removexattr(2)` and friends, and POSIX ACL
-+changes.  Both rights apply to files and directories alike.
-+
-+Implicit metadata changes performed by the kernel are not restricted by
-+``LANDLOCK_ACCESS_FS_WRITE_METADATA``: reading a file may update its access
-+time, writing a file updates its modification and change times and may change
-+the file size, and writing to or truncating a file with a set-user-ID or
-+set-group-ID bit clears these bits.  File size changes through
-+:manpage:`truncate(2)` and friends are governed by
-+``LANDLOCK_ACCESS_FS_TRUNCATE`` instead.  Metadata change requests that do
-+not change any attribute (e.g. :manpage:`chown(2)` with owner and group
-+``-1``) are not restricted either.
-+
-+.. warning::
-+
-+   Many programs read metadata as part of reading file contents or listing
-+   directories (e.g. calling :manpage:`stat(2)` before or after
-+   :manpage:`open(2)`), and do not expect such calls to fail with
-+   ``EACCES``.  Most of the time, ``LANDLOCK_ACCESS_FS_READ_METADATA``
-+   should therefore be granted together with
-+   ``LANDLOCK_ACCESS_FS_READ_FILE`` and ``LANDLOCK_ACCESS_FS_READ_DIR``.
-+   Conversely, denying only ``LANDLOCK_ACCESS_FS_READ_FILE`` or
-+   ``LANDLOCK_ACCESS_FS_READ_DIR`` does not hide metadata: it remains
-+   readable through :manpage:`stat(2)` and friends unless
-+   ``LANDLOCK_ACCESS_FS_READ_METADATA`` is denied as well.  Tailored
-+   programs that do not read metadata at all can still deny this right to
-+   further restrict their sandbox.
-+
- Rights associated with file descriptors
- ---------------------------------------
+-	chain->size -= step;
++	/*
++	 * Only the FAT tells where a chain of this kind ends. The size can be
++	 * smaller than the chain, see commit 1e5654de0f51 ("exfat: handle
++	 * wrong stream entry size in exfat_readdir()").
++	 */
++	for (i = 0; i < step && clu != EXFAT_EOF_CLUSTER; i++) {
++		if (exfat_get_next_cluster(sb, &clu))
++			return -EIO;
++	}
  
+-	if (chain->size == 0 && chain->flags == ALLOC_NO_FAT_CHAIN)
+-		chain->dir = EXFAT_EOF_CLUSTER;
+-	else
+-		chain->dir = clu;
++	chain->size -= min(chain->size, step);
++	chain->dir = clu;
+ 
+ 	return 0;
+ }
 -- 
-2.18.0.huawei.25
+2.53.0
 
