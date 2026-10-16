@@ -1,29 +1,29 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52D9F190462
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A34D337BB8
 	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 03:34:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792121678; cv=none; b=p7kNO0IU51dmhz1PLTulO2/thj2YBu5y8S76yrD5/kxAOMZQcjqE6X8uhzGJVQlKSs4xZ8ZWCjKSnT2Z66yHwWhT5/KFaBhMQ4KhLguYdShuoLN/haYZtrtqvfpS5e2I1X4vxE4dyN3cdDnQQVyE2rBbSS8jpo8z1MLlVL8X9+U=
+	t=1792121678; cv=none; b=r5ZsdO/c3HSbyWcWG9TKkgZoO/eoBrOyQUj0BnFM7ECssai7jIhRccNSb93XyZEzuhe1vwhIcMH9DBOlW/Pl7MyBdBN17mJiQoAp6rIYUr78xpQdvm3t6lFT5wIVCmqpwlxpmUpfUoUT8aC2PlasC7UJPWOmf3sWsmcb/SDWi54=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1792121678; c=relaxed/simple;
-	bh=vAHxlKValuzrf7fHdjJyLINvsVocAWsyJuxqCU924rs=;
+	bh=ZBDyCsfrGJJ7CeUhJ3bGLxrWyesVx2Ngz1AaSt/ZcgI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=c5OjWHEw7qYQJvjb+BFDYh8tbhqnNwbJkIPt48yyoHDBYy6AsQvZldzRORupWZPAgimGSZgLpNxQwneoYY4msVN0c+b4oTyicfBYezh7IM53g+ewdNbCZ7iidZd7YMxKrXwrh1ISPKhHGzBNv8cJ+ysTwqPJSGQBmJCSGJCJEq4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=g6Q6tq9r; arc=none smtp.client-ip=220.197.31.4
+	 MIME-Version; b=UGIyZEM4Y4yAWTGVbYE5H4kFgVOJeOEKCYNhTgesbjE9yf+EEAcL7CX6nXAYMF3fDNpyEms0OFHg1XfyhssAIOLC/P36zCqIidQKLKDua7KVmN77Ku1LoivkyMJaPdmAfiNdKosmu7zRAFxq8PBnCny91yPtRliidakHduxgSZI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=G40Ip9K0; arc=none smtp.client-ip=117.135.210.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="g6Q6tq9r"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="G40Ip9K0"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=wV
-	g6dh31gWOkXJkdICl6ryGnaGtJLOBkftSZV8P268Y=; b=g6Q6tq9raSWShaYMfH
-	cewNIfycktr89QMwHfCUu4XvTrs0OFkhlIxyHVKr0bWjfnyiDKVThKTHxG+W3amt
-	mtmixD6utL8plCfwqpZb92qEVuNLW49ZwUj7a03IOsVQC3Tt0wgpqLWjeY7ZSYkp
-	fRjVhUgYd2/636JfvVgH9weUs=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=jD
+	ayvfln/LmxGvZbz0jQEEsK7It1kszTqv6nnrCql18=; b=G40Ip9K02GhvJPn3ZU
+	M/0KIBYQKEBxfMblGY+3r98Rl7829DQ52kWg8405FiCd+mdcaeaWllrbxIjI7e5o
+	V12Q6c35lY3UMJpT0qx3A7w7MAZb5mu54RqXqkAm4CdsXWWQGJRVpDrt37PbiByV
+	/5Hxuntg+5+9nuvFtRpMPGGyM=
 Received: from czl-pc (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgDnU5c7m9Fqw1V+AA--.15038S5;
+	by gzsmtp4 (Coremail) with SMTP id PygvCgDnU5c7m9Fqw1V+AA--.15038S6;
 	Fri, 16 Oct 2026 11:34:22 +0800 (CST)
 From: Chi Zhiling <chizhiling@163.com>
 To: linux-kernel@vger.kernel.org,
@@ -37,9 +37,9 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>,
 	"Darrick J. Wong" <djwong@kernel.org>,
 	Christoph Hellwig <hch@lst.de>,
 	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH v3 3/8] exfat: advance valid_size under the folio lock for buffered writes
-Date: Fri, 16 Oct 2026 11:33:44 +0800
-Message-ID: <20261016033349.3104509-4-chizhiling@163.com>
+Subject: [PATCH v3 4/8] exfat: advance valid_size while zeroing new ranges
+Date: Fri, 16 Oct 2026 11:33:45 +0800
+Message-ID: <20261016033349.3104509-5-chizhiling@163.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261016033349.3104509-1-chizhiling@163.com>
 References: <20261016033349.3104509-1-chizhiling@163.com>
@@ -50,85 +50,198 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgDnU5c7m9Fqw1V+AA--.15038S5
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Cw47tF45KF4kXFW8AF18Krg_yoW5JFW5p3
-	98Kay5GrZ7Xay3Wr1DGFy5X34Y9a4fWr4fCr98GanxZFnIyw1IkF18KFy2kFW5Jwn8GF1F
-	qFs09348XFnrCw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jgF4_UUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3B4FomrRmz4mkAAA3N
+X-CM-TRANSID:PygvCgDnU5c7m9Fqw1V+AA--.15038S6
+X-Coremail-Antispam: 1Uf129KBjvJXoWxtFyDuryxXrW7KF17XrWxCrg_yoWxWrW5pr
+	W3Cwn5J39rZ3yUWrnaqr15ZFyYk3WfXF4rur95Aa4kZrnrA34akFyUKrWxWFW3t39agw1Y
+	va1qyrW8Wr9rG3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07je_M3UUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC+B8FomrRmz-iXAAA3h
 
 From: Chi Zhiling <chizhiling@kylinos.cn>
 
-Buffered writes currently advance valid_size in
-exfat_write_iomap_end(), which runs after the folio has been unlocked.
-As a result, a folio beyond valid_size can become uptodate and dirty,
-and be observed by writeback or reclaim while valid_size still points
-to an earlier position.
+valid_size is currently updated only after the range has been zeroed, so
+it lags the folios that were just marked uptodate and dirty.
 
-If reclaim drops such a folio before valid_size covers its range, a
-subsequent read treats the range as unwritten and zero-fills it without
-reading from disk. When this zero-filled page is later written back,
-the zeros overwrite the data that was just written, silently losing
-the write even if valid_size has since been advanced.
+Advance it from exfat_prepare_valid_range() page by page, under the folio
+lock and right after each folio is marked dirty; the same helper advances
+zeroed_size and dirties the inode once the range is prepared.
 
-Advance valid_size from the buffered write path via an iomap
-put_folio callback while the folio is still locked. This ensures
-valid_size is updated before the folio becomes visible to writeback,
-preventing the written data from being lost. Mark the inode dirty
-whenever valid_size advances.
+When the gap is already covered by zeroed_size no folio work is needed
+and the helper publishes valid_size up to end directly, so callers can
+rely on valid_size reaching end on success and exfat_extend_valid_size()
+no longer publishes it itself.  Callers guarantee that end lies within
+i_size, so valid_size never overtakes i_size here.
 
-Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+exfat_page_mkwrite() is adapted to the new helper: it now calls it
+unconditionally, and publishes valid_size and zeroed_size only after
+iomap_page_mkwrite() has returned the locked folio instead of up front,
+so a failed fault no longer advances valid_size and the publication
+happens under the folio lock.
+
+Fixes: 1135704ed22f ("exfat: fix valid_size extension over a shared writable mapping")
 Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
 ---
- fs/exfat/file.c  |  3 +++
- fs/exfat/iomap.c | 13 +++++++++++++
- 2 files changed, 16 insertions(+)
+ fs/exfat/file.c | 89 +++++++++++++++++++++++++------------------------
+ 1 file changed, 45 insertions(+), 44 deletions(-)
 
 diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index aa0e1e47e3d1..49c63364f747 100644
+index 49c63364f747..6d4f50795332 100644
 --- a/fs/exfat/file.c
 +++ b/fs/exfat/file.c
-@@ -929,6 +929,9 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
- 	if (ret < 0)
- 		goto unlock;
- 
-+	if (exfat_get_valid_size(ei) > valid_size)
-+		mark_inode_dirty(inode);
-+
- 	inode_unlock(inode);
- 
- 	if (iocb->ki_pos > pos) {
-diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
-index 32ca90b61b1a..10416335e8ee 100644
---- a/fs/exfat/iomap.c
-+++ b/fs/exfat/iomap.c
-@@ -232,6 +232,18 @@ const struct iomap_ops exfat_write_iomap_ops = {
- 	.iomap_next	= exfat_write_iomap_next,
- };
- 
-+static void exfat_iomap_put_folio(struct inode *inode, loff_t pos,
-+		unsigned int copied, struct folio *folio)
-+{
-+	struct exfat_inode_info *ei = EXFAT_I(inode);
-+
-+	if (copied)
-+		exfat_advance_valid_size(ei, pos + copied);
-+
-+	folio_unlock(folio);
-+	folio_put(folio);
-+}
-+
- /*
-  * exfat_iomap_read_folio_range - Read a block range during a buffered write
-  *
-@@ -261,6 +273,7 @@ static int exfat_iomap_read_folio_range(const struct iomap_iter *iter,
+@@ -712,24 +712,30 @@ int exfat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
  }
  
- const struct iomap_write_ops exfat_iomap_write_ops = {
-+	.put_folio	= exfat_iomap_put_folio,
- 	.read_folio_range = exfat_iomap_read_folio_range,
- };
+ /*
+- * exfat_prepare_valid_range - populate and dirty folios covering [start, end)
++ * exfat_prepare_valid_range - populate and dirty folios covering [valid_size, end)
+  *
+  * Populate missing blocks via the read path, which zero-fills data
+  * beyond the current valid_size and skips uptodate blocks.
+  * Mark entire folios dirty so the newly valid range is written back.
+  *
+- * Call before advancing valid_size.
++ * Advance valid_size up to end, publishing it directly when the gap is
++ * already covered by zeroed_size.
+  */
+-static int exfat_prepare_valid_range(struct inode *inode, loff_t start,
+-				    loff_t end)
++static int exfat_prepare_valid_range(struct inode *inode, loff_t end)
+ {
+ 	struct address_space *mapping = inode->i_mapping;
+-	loff_t next, pos = start;
++	struct exfat_inode_info *ei = EXFAT_I(inode);
++	loff_t zeroed_size = exfat_get_zeroed_size(ei);
++	loff_t next, pos;
+ 	struct folio *folio;
+ 	pgoff_t index;
  
+-	if (pos >= end)
++	pos = max(zeroed_size, exfat_get_valid_size(ei));
++	if (pos >= end) {
++		if (exfat_advance_valid_size(ei, end))
++			mark_inode_dirty(inode);
+ 		return 0;
++	}
+ 
+ 	while (pos < end) {
+ 		index = pos >> PAGE_SHIFT;
+@@ -744,12 +750,21 @@ static int exfat_prepare_valid_range(struct inode *inode, loff_t start,
+ 		folio_lock(folio);
+ 		if (folio->mapping == mapping) {
+ 			folio_mark_dirty(folio);
++			exfat_advance_valid_size(ei, next);
+ 			pos = next;
+ 		}
+ 		folio_unlock(folio);
+ 		folio_put(folio);
+ 	}
+ 
++	/*
++	 * Track zeroed_size by block, not page, because writeback stops
++	 * at i_size recording blocks wholly beyond it could skip a
++	 * later required zeroing.
++	 */
++	exfat_advance_zeroed_size(ei, round_up(next, i_blocksize(inode)));
++	mark_inode_dirty(inode);
++
+ 	return 0;
+ }
+ 
+@@ -785,20 +800,14 @@ static int exfat_extend_valid_size(struct inode *inode, loff_t new_valid_size)
+ 		if (gap_start < new_valid_size)
+ 			unmap_mapping_range(inode->i_mapping, gap_start,
+ 					new_valid_size - gap_start, 0);
+-		ret = exfat_prepare_valid_range(inode, gap_start, new_valid_size);
+-		filemap_invalidate_unlock(inode->i_mapping);
++		ret = exfat_prepare_valid_range(inode, new_valid_size);
+ 		if (ret) {
+-			filemap_invalidate_lock(inode->i_mapping);
+ 			truncate_setsize(inode, old_valid_size);
+ 			exfat_truncate(inode);
+ 			filemap_invalidate_unlock(inode->i_mapping);
+ 			return ret;
+ 		}
+-
+-		exfat_set_valid_size(ei, new_valid_size);
+-		exfat_advance_zeroed_size(ei,
+-				round_up(new_valid_size, i_blocksize(inode)));
+-		mark_inode_dirty(inode);
++		filemap_invalidate_unlock(inode->i_mapping);
+ 	}
+ 
+ 	return ret;
+@@ -978,42 +987,22 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
+ 	struct exfat_inode_info *ei = EXFAT_I(inode);
+ 	vm_fault_t ret;
+ 	loff_t new_valid_size, mmap_valid_size, fault_page_start;
++	int err;
+ 
+ 	if (!inode_trylock(inode))
+ 		return VM_FAULT_RETRY;
+ 
+-	mmap_valid_size = ((loff_t)vmf->pgoff + 1) << PAGE_SHIFT;
+ 	fault_page_start = ((loff_t)vmf->pgoff) << PAGE_SHIFT;
+-	new_valid_size = min(mmap_valid_size, i_size_read(inode));
+-
+-	if (exfat_get_valid_size(ei) < new_valid_size) {
+-		loff_t zeroed_size = exfat_get_zeroed_size(ei);
+-
+-		if (zeroed_size < fault_page_start) {
+-			int err;
+-
+-			/*
+-			 * Zero only the gap below the faulting page. The read
+-			 * fault populated its folio and iomap_page_mkwrite()
+-			 * will dirty it.
+-			 */
+-			err = exfat_prepare_valid_range(inode, zeroed_size,
+-					fault_page_start);
+-			if (err < 0) {
+-				inode_unlock(inode);
+-				return vmf_fs_error(err);
+-			}
+-		}
+ 
+-		/*
+-		 * Track zeroed_size by block, not page, because writeback stops
+-		 * at i_size recording blocks wholly beyond it could skip a
+-		 * later required zeroing.
+-		 */
+-		exfat_advance_zeroed_size(ei,
+-				round_up(new_valid_size, i_blocksize(inode)));
+-		exfat_set_valid_size(ei, new_valid_size);
+-		mark_inode_dirty(inode);
++	/*
++	 * Zero only the gap below the faulting page. The read
++	 * fault populated its folio and iomap_page_mkwrite()
++	 * will dirty it.
++	 */
++	err = exfat_prepare_valid_range(inode, fault_page_start);
++	if (err < 0) {
++		inode_unlock(inode);
++		return vmf_fs_error(err);
+ 	}
+ 
+ 	sb_start_pagefault(inode->i_sb);
+@@ -1021,6 +1010,18 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
+ 
+ 	filemap_invalidate_lock_shared(inode->i_mapping);
+ 	ret = iomap_page_mkwrite(vmf, &exfat_iomap_ops, NULL);
++
++	if (ret == VM_FAULT_LOCKED) {
++		mmap_valid_size = ((loff_t)vmf->pgoff + 1) << PAGE_SHIFT;
++		new_valid_size = min(mmap_valid_size, i_size_read(inode));
++
++		if (exfat_advance_valid_size(ei, new_valid_size))
++			mark_inode_dirty(inode);
++
++		exfat_advance_zeroed_size(ei,
++				round_up(new_valid_size, i_blocksize(inode)));
++	}
++
+ 	filemap_invalidate_unlock_shared(inode->i_mapping);
+ 	sb_end_pagefault(inode->i_sb);
+ 	inode_unlock(inode);
 -- 
 2.53.0
 
