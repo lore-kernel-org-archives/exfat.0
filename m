@@ -1,223 +1,134 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE0961A9FBA
-	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 00:32:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52D9F190462
+	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 03:34:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792110739; cv=none; b=hpJMz7VVG8UwzyJU/YfcWd1rKQrkH+fBS88hYgQ/smR7C0t60bmeE7/qyVmrTMRAgaL18rTgS37Y5Inko4SCdQaOK21UynJ7WPjM3b0WYEffSNkYmMI/Ow6TMeGRUAsHyXuEDEOl9tSkaLvoSNXV4HPcGh1LexySGZNuLJsJoCY=
+	t=1792121678; cv=none; b=p7kNO0IU51dmhz1PLTulO2/thj2YBu5y8S76yrD5/kxAOMZQcjqE6X8uhzGJVQlKSs4xZ8ZWCjKSnT2Z66yHwWhT5/KFaBhMQ4KhLguYdShuoLN/haYZtrtqvfpS5e2I1X4vxE4dyN3cdDnQQVyE2rBbSS8jpo8z1MLlVL8X9+U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792110739; c=relaxed/simple;
-	bh=HxZt08dVRw4ejTWE+FGXV5r0nmHjM+0lQhVW4+dpeTE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=OSbnsKMKj4qEtHJbrTRusIgdhdYZEWg+jW/2c8uOImdZPa+7IUKAGx/D8uELADYETaPl45UdeV0GyUOEhHvWjcAXqizIVYKnhpTSU/4Mzjhvle6Xrbv16ojciSxQh2vfW/QhkBg3D9JI9MICW/FFNXEJIuZTp48+Oanwms4N49M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=OMi03vrw; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1792121678; c=relaxed/simple;
+	bh=vAHxlKValuzrf7fHdjJyLINvsVocAWsyJuxqCU924rs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=c5OjWHEw7qYQJvjb+BFDYh8tbhqnNwbJkIPt48yyoHDBYy6AsQvZldzRORupWZPAgimGSZgLpNxQwneoYY4msVN0c+b4oTyicfBYezh7IM53g+ewdNbCZ7iidZd7YMxKrXwrh1ISPKhHGzBNv8cJ+ysTwqPJSGQBmJCSGJCJEq4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=g6Q6tq9r; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="OMi03vrw"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792110735;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=2PpmzonvJ+GFyXX1ccvr8BDAPumMVPYHB7D08eoJkdk=;
-	b=OMi03vrwiksem2U41TCFBpUAaYtOZu+lGZOzQNCPnbZbJzhol7uqK7YGClwnyJrFYP7ZvB
-	XuiMXVbpxX9CP5a1piIHy0xC5qZ6xdSYcBrXoms3/U4sR8cR+kr8KrpKQcTPzttb0PiRWY
-	wj4ZU8y3W/z/IQVJFmLs9cARieZ3mzo=
-Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
- [74.125.224.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-84-D5gzY-spM4KfDl9kmturIQ-1; Fri, 16 Oct 2026 00:32:14 +0000
-X-MC-Unique: D5gzY-spM4KfDl9kmturIQ-1
-X-Mimecast-MFC-AGG-ID: D5gzY-spM4KfDl9kmturIQ_1792110734
-Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-677d10671b7so7501824d50.1
-        for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 17:32:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792110734; x=1792715534;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2PpmzonvJ+GFyXX1ccvr8BDAPumMVPYHB7D08eoJkdk=;
-        b=NEFEHx2WjBMLisc/xf40RyQNMta6fYa/W6yC8efO+pS/ODMBSW1CV2MoiaA+j7RB8O
-         1U8B4+pVUUyWxv3WSkKUPgxdxV6yvINUmvGp1hPdh39DC4Yf5UbHkfEKE+Xg8PVPxX2Z
-         wJn9Ya2FwrQf59q1wMxnO1nmllnx0U09TvWZHhL20Py6qYiamyTkcumMekXVuXi/fyCN
-         eQYg5OOfMofe7cGAwkQamV5JZkvyaYw8T3duZTlS5YgYDo9j1VWrTqmBwqbWu/ZFZ0Cs
-         pRLvzptv2aCC3T6h1fdDRwypAJiHAOsJYBP11NvZMSIEyfZ3/iNIUkCdexLNo9rzsUaR
-         Pv7Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxpiAxFRqtEy+DVCfVfVAnrd955ntyajCF52v07QyTu4x0oOyH3cnXJnfR2vEZGYD53dNXv9w==@lists.linux.dev
-X-Gm-Message-State: AFq9FYIakML4rtigmC0HFilQ2jpiYMN2OxBBJxUa5P8ptR/iVRrIoRh8
-	qQO8yZCCTsL2KjpfLQ8jv1xfKtqFvTGrKKYxXD4woiziYunU2APiwEsVu1yY7UK8zBHZRSgztQR
-	cAoGePQBAsY8vrqbupn/VQZffRcfjX16oFsaFqo7jgNetx2aMH4EoAzRLyerq3bkedQEv2gij1/
-	urukNLOsDdKIMaZXMszC2RKuXNgw1oNZI=
-X-Gm-Gg: AYBFou18McCr7ebDIHCDrEDj+GHjP/wmkg5QkcOlhSCzmu3C/Wy0MO3JBzCTNVHwDBY
-	k9RYqGOjsDRo9TU+b37BYklpspMlQTK0KYm7NXxKgnV9BrhASeq3cZRWHMvIbuRM3/JPiVi3KuP
-	DZXPjXT4m5VI5IRA5+7k6mP7PG287zTgxMyoarVn+hrOGtHuT9MWurMu7hLVTTgFZ6kySphTKBa
-	Kcs5H6SfZx0EbB/y1TSLMp7SCXxm+XNyLpSxGOgUlRxCQ==
-X-Received: by 2002:a05:690e:12cf:b0:677:c92e:eee4 with SMTP id 956f58d0204a3-67936ac0905mr8161312d50.86.1792110733452;
-        Thu, 15 Oct 2026 17:32:13 -0700 (PDT)
-X-Received: by 2002:a05:690e:12cf:b0:677:c92e:eee4 with SMTP id
- 956f58d0204a3-67936ac0905mr8161290d50.86.1792110732554; Thu, 15 Oct 2026
- 17:32:12 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="g6Q6tq9r"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=wV
+	g6dh31gWOkXJkdICl6ryGnaGtJLOBkftSZV8P268Y=; b=g6Q6tq9raSWShaYMfH
+	cewNIfycktr89QMwHfCUu4XvTrs0OFkhlIxyHVKr0bWjfnyiDKVThKTHxG+W3amt
+	mtmixD6utL8plCfwqpZb92qEVuNLW49ZwUj7a03IOsVQC3Tt0wgpqLWjeY7ZSYkp
+	fRjVhUgYd2/636JfvVgH9weUs=
+Received: from czl-pc (unknown [])
+	by gzsmtp4 (Coremail) with SMTP id PygvCgDnU5c7m9Fqw1V+AA--.15038S5;
+	Fri, 16 Oct 2026 11:34:22 +0800 (CST)
+From: Chi Zhiling <chizhiling@163.com>
+To: linux-kernel@vger.kernel.org,
+	linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	exfat@lists.linux.dev
+Cc: Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Christian Brauner <brauner@kernel.org>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	Christoph Hellwig <hch@lst.de>,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [PATCH v3 3/8] exfat: advance valid_size under the folio lock for buffered writes
+Date: Fri, 16 Oct 2026 11:33:44 +0800
+Message-ID: <20261016033349.3104509-4-chizhiling@163.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261016033349.3104509-1-chizhiling@163.com>
+References: <20261016033349.3104509-1-chizhiling@163.com>
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org> <20261012-work-fs-sb_rdonly-v1-20-60743a3dc326@kernel.org>
-In-Reply-To: <20261012-work-fs-sb_rdonly-v1-20-60743a3dc326@kernel.org>
-From: Andreas Gruenbacher <agruenba@redhat.com>
-Date: Fri, 16 Oct 2026 02:32:01 +0200
-X-Gm-Features: AclHuK8NmKT3H02cx2l9pkluaZaWRnSiR4jZEUSx8b1tH5UXdD0FGyrgWytahmA
-Message-ID: <CAHc6FU5bdAjABRm=bnH68b2f66TZTDZ8sPdatLB2fS7-55U=yw@mail.gmail.com>
-Subject: Re: [PATCH RFC 20/28] gfs2: wait for a pending withdraw before
- remounting read-only
-To: Christian Brauner <brauner@kernel.org>
-Cc: Jan Kara <jack@suse.com>, Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
-	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
-	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, 
-	linux-fsdevel@vger.kernel.org, ntfs@lists.linux.dev, 
-	ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org, 
-	gfs2@lists.linux.dev, linux-efi@vger.kernel.org, 
-	linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org, 
-	stable@vger.kernel.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: yfXHbyL_2yLbzB1jg0Kv0tKY-Nq40XzeEGNF50AhURQ_1792110734
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PygvCgDnU5c7m9Fqw1V+AA--.15038S5
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Cw47tF45KF4kXFW8AF18Krg_yoW5JFW5p3
+	98Kay5GrZ7Xay3Wr1DGFy5X34Y9a4fWr4fCr98GanxZFnIyw1IkF18KFy2kFW5Jwn8GF1F
+	qFs09348XFnrCw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jgF4_UUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3B4FomrRmz4mkAAA3N
 
-Christian,
+From: Chi Zhiling <chizhiling@kylinos.cn>
 
-On Mon, Oct 12, 2026 at 1:27=E2=80=AFPM Christian Brauner <brauner@kernel.o=
-rg> wrote:
-> Since commit 9c4a3de6cd5b ("gfs2: Asynchronous withdraw") most of a
-> withdraw happens in do_withdraw() from a work item and SDF_JOURNAL_LIVE
-> stays set until it ran. A remount to read-only in that window goes
-> through gfs2_make_fs_ro(). Its log flushes bail out early on the
-> withdrawn filesystem before FLUSH_SHUTDOWN can clear SDF_JOURNAL_LIVE
-> and then gfs2_quota_cleanup() hits its BUG_ON():
->
->   kernel BUG at fs/gfs2/quota.c:1532!
->   RIP: 0010:gfs2_quota_cleanup+0x562/0x6b0
->    gfs2_make_fs_ro+0xf3/0x2e0
->    gfs2_reconfigure+0x42e/0xfd0
->    reconfigure_super+0x437/0xb20
->
-> Just flushing the withdraw work before the remount isn't enough.
-> gfs2_withdraw() sets SDF_WITHDRAWN, calls dump_stack() and only then
-> queues the work. So a remount can see a withdrawn filesystem while
-> there's nothing to flush yet. And a withdraw can also start in the
-> middle of gfs2_make_fs_ro().
->
-> So let do_withdraw() wake up waiters when it clears SDF_JOURNAL_LIVE and
-> let gfs2_make_fs_ro() wait for the bit after its log flushes, right
-> before gfs2_quota_cleanup(). On a healthy filesystem the shutdown flush
-> already cleared it. umount doesn't need to wait. gfs2_put_super() sets
-> SDF_NORECOVERY first and gfs2_quota_cleanup() only BUGs without it. Once
-> the bit is clear the journal isn't live anymore and gfs2_make_fs_ro()
-> doesn't write anything.
->
-> gfs2_make_fs_rw() can leave the bit set on a withdrawn filesystem as
-> well. It checks for a withdraw and then sets SDF_JOURNAL_LIVE. If
-> do_withdraw() runs in between it finds the journal not live yet and
-> returns. Nothing clears the bit then and the next remount to read-only
-> waits for it forever. So check for the withdraw and set the bit under
-> sd_log_flush_lock, which do_withdraw() holds while it tests the bit.
-> Then either the remount sees the withdraw or do_withdraw() sees the live
-> journal.
->
-> Reproducer, lock_nolock: a SCHED_FIFO task writes 1 to the withdraw
-> sysfs knob from cpu 1 and keeps cpu 1 busy (RT throttling and cpu 1's
-> fair server disabled) so do_withdraw() can't run, then from cpu 2:
->
->   mount -o remount,ro /mnt
->
-> On lock_dlm the window lasts as long as the withdraw helper runs. The
-> window before the work is queued can be widened with a kprobe on
-> dump_stack_lvl() that delays the task writing to the withdraw knob by a
-> few seconds. A remount to read-only or sysrq u in that window hits the
-> same BUG_ON().
->
-> Fixes: 9c4a3de6cd5b ("gfs2: Asynchronous withdraw")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
-> ---
->  fs/gfs2/super.c | 22 ++++++++++++++++++----
->  fs/gfs2/util.c  |  2 +-
->  2 files changed, 19 insertions(+), 5 deletions(-)
->
-> diff --git a/fs/gfs2/super.c b/fs/gfs2/super.c
-> index 06302c29340f..1d7b39354d65 100644
-> --- a/fs/gfs2/super.c
-> +++ b/fs/gfs2/super.c
-> @@ -147,12 +147,23 @@ int gfs2_make_fs_rw(struct gfs2_sbd *sdp)
->         }
->
->         error =3D gfs2_quota_init(sdp);
-> -       if (!error && gfs2_withdrawn(sdp)) {
-> -               gfs2_quota_cleanup(sdp);
-> +       if (error)
-> +               return error;
-> +
-> +       /*
-> +        * do_withdraw() only takes a live journal down. Check for a with=
-draw
-> +        * under the lock it holds for that so that either we see the wit=
-hdraw
-> +        * or it sees the journal live. Otherwise gfs2_make_fs_ro() waits=
- for
-> +        * the bit forever.
-> +        */
-> +       down_write(&sdp->sd_log_flush_lock);
-> +       if (gfs2_withdrawn(sdp))
->                 error =3D -EIO;
-> -       }
-> -       if (!error)
-> +       else
->                 set_bit(SDF_JOURNAL_LIVE, &sdp->sd_flags);
-> +       up_write(&sdp->sd_log_flush_lock);
-> +       if (error)
-> +               gfs2_quota_cleanup(sdp);
->         return error;
->  }
->
-> @@ -565,6 +576,9 @@ void gfs2_make_fs_ro(struct gfs2_sbd *sdp)
->                                    HZ * 5);
->                 gfs2_assert_warn(sdp, gfs2_log_is_empty(sdp));
->         }
-> +       /* A withdraw that do_withdraw() didn't finish yet leaves it live=
-. */
-> +       if (!test_bit(SDF_NORECOVERY, &sdp->sd_flags))
-> +               wait_on_bit(&sdp->sd_flags, SDF_JOURNAL_LIVE, TASK_UNINTE=
-RRUPTIBLE);
->         gfs2_quota_cleanup(sdp);
->  }
->
-> diff --git a/fs/gfs2/util.c b/fs/gfs2/util.c
-> index 83b8bb6446e5..1535ce2b7aa8 100644
-> --- a/fs/gfs2/util.c
-> +++ b/fs/gfs2/util.c
-> @@ -122,7 +122,7 @@ static void do_withdraw(struct gfs2_sbd *sdp)
->                 up_write(&sdp->sd_log_flush_lock);
->                 return;
->         }
-> -       clear_bit(SDF_JOURNAL_LIVE, &sdp->sd_flags);
-> +       clear_and_wake_up_bit(SDF_JOURNAL_LIVE, &sdp->sd_flags);
->         gfs2_ail_drain(sdp); /* frees all transactions */
->         up_write(&sdp->sd_log_flush_lock);
->
->
-> --
-> 2.53.0
->
+Buffered writes currently advance valid_size in
+exfat_write_iomap_end(), which runs after the folio has been unlocked.
+As a result, a folio beyond valid_size can become uptodate and dirty,
+and be observed by writeback or reclaim while valid_size still points
+to an earlier position.
 
-this looks good all around, thank you very much. Can I add it to my gfs2 qu=
-eue?
+If reclaim drops such a folio before valid_size covers its range, a
+subsequent read treats the range as unwritten and zero-fills it without
+reading from disk. When this zero-filled page is later written back,
+the zeros overwrite the data that was just written, silently losing
+the write even if valid_size has since been advanced.
 
-Thanks,
-Andreas
+Advance valid_size from the buffered write path via an iomap
+put_folio callback while the folio is still locked. This ensures
+valid_size is updated before the folio becomes visible to writeback,
+preventing the written data from being lost. Mark the inode dirty
+whenever valid_size advances.
+
+Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+---
+ fs/exfat/file.c  |  3 +++
+ fs/exfat/iomap.c | 13 +++++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index aa0e1e47e3d1..49c63364f747 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -929,6 +929,9 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 	if (ret < 0)
+ 		goto unlock;
+ 
++	if (exfat_get_valid_size(ei) > valid_size)
++		mark_inode_dirty(inode);
++
+ 	inode_unlock(inode);
+ 
+ 	if (iocb->ki_pos > pos) {
+diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+index 32ca90b61b1a..10416335e8ee 100644
+--- a/fs/exfat/iomap.c
++++ b/fs/exfat/iomap.c
+@@ -232,6 +232,18 @@ const struct iomap_ops exfat_write_iomap_ops = {
+ 	.iomap_next	= exfat_write_iomap_next,
+ };
+ 
++static void exfat_iomap_put_folio(struct inode *inode, loff_t pos,
++		unsigned int copied, struct folio *folio)
++{
++	struct exfat_inode_info *ei = EXFAT_I(inode);
++
++	if (copied)
++		exfat_advance_valid_size(ei, pos + copied);
++
++	folio_unlock(folio);
++	folio_put(folio);
++}
++
+ /*
+  * exfat_iomap_read_folio_range - Read a block range during a buffered write
+  *
+@@ -261,6 +273,7 @@ static int exfat_iomap_read_folio_range(const struct iomap_iter *iter,
+ }
+ 
+ const struct iomap_write_ops exfat_iomap_write_ops = {
++	.put_folio	= exfat_iomap_put_folio,
+ 	.read_folio_range = exfat_iomap_read_folio_range,
+ };
+ 
+-- 
+2.53.0
 
