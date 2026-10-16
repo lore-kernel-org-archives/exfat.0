@@ -1,164 +1,395 @@
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B4EF3C553A
-	for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 14:49:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55FA1238159
+	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 00:01:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792075785; cv=none; b=a262sVligqqqPK+3j9GbsrPsCUxy0HkYmk0oBXDja1jVV+/3xqXaArJpcqeRWqWIlFynPbNHgFabNBvtpqyhljio+WsNtdFlbk9mn97z9vwy1ZOdleL+G8gOf6QrKnrPVzREkwn7muKJPF2pjchEOdVsOCum7St+ApkgniQdjAQ=
+	t=1792108883; cv=none; b=b2ihZ+O9P3iB1qqJdj45h65iK/9yIrGwNYN+2WBOGp8Pj89a33LewJrCpUG/eOcmfErr5bAvmvFM+M6P/2O9/O51qDPRSCqlOSfjnwDm4bKG5OvvFF9hOzv/muN2A6DNHx10t71AjR2N4W0L9jcYF4fchVVsrudc5vYsyFw1+cc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792075785; c=relaxed/simple;
-	bh=kAMB98C2TO+dg0RpAZ18Gg4F2DJAMfSCQrSzGZazOmA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bJnFYieY1CMLAl+uUu3lLyVD98Ih2JZPEuwQTiha+dr3XnRUm+62qTh7As+pEjwOL+JA+ku3sU0X9cwpvfLcWrmvcPJtJBTHVRYT6/B1RcS+/7n2s2AAidWJqeMj3e7MI8O79TjFrWyndxjv6SbWgkOhfvt6oWF80tm02/Z7xB8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu; spf=pass smtp.mailfrom=cs.unc.edu; dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b=EB2O6gTI; arc=none smtp.client-ip=209.85.219.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cs.unc.edu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.unc.edu
+	s=arc-20240116; t=1792108883; c=relaxed/simple;
+	bh=cDzYndgVLHSlgLhviEcKgLhvTsb8mhyEeRWsU/W6ToA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=XI3A+IhCRlk3tiWIAtukHs5099WcFXzDEEZkzSK6QdCNEoenuSycZ76g7gfupZVHQgNdO7Yh0kgDpNPNsk+SPdXI/ZMc6/NmUOcDqMvRBQ+5TDyxzmSjUiJe7tN7E6NsDl3oh73qqxp3N55kbX6UOd8ZKzezSVkZm2d7x1o/6KU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=XaavN6xs; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cs.unc.edu header.i=@cs.unc.edu header.b="EB2O6gTI"
-Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-91b63bd2030so64650426d6.3
-        for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 07:49:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cs.unc.edu; s=google; t=1792075782; x=1792680582; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WAcdpcTpnQbvHYYEUHq7bhjUU7mNPvOKc1GObp15GFQ=;
-        b=EB2O6gTIfmushcqlp9DzFBnPUfxxMp5FZh6ykztY6ecUlKdWeSFMp/Smjl4fz5fpl4
-         4O2IrqEMb1ENvIaCWKy01/eWzdbXth3jA5+CnYxldSA+3SzxYAMI152N8VLigVQH5pb4
-         LXymj6rQ7tmEOS6WYU43ZIZBmMHWsVrd5VFsBPYmnQAsillIOUFrkvo3RbibhPfAhCyN
-         mLuJ7vnP1vE940ZfZsRtTbEJLG8zZdjiRE42Q4iCE7u1gQibIi4hzT9icWnuimNquOt2
-         DR6npJnrM3HGI6zzhMvqc3ZpmDMGYwm1SSqlurFyOLj1IdZF9s63SDBwBlbjeCLbztyV
-         KK3A==
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="XaavN6xs"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792108880;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+iJ5ftvCuZ0dzn9DuBnu06m+Dldzk+vmqioG+hhsp4M=;
+	b=XaavN6xsYkpOWZ78a07GON0uMnm1aFIR+SjMM5aIdOOnmHOHRSwNRUmQjcsgYeiqN0ZZ9w
+	4UhYEjcHgRObBUejX8sfWc9gzep9GL0MIx9EnR0TsBza9djcDefe59IJOKpVNJgyclxoNH
+	Fp6awmOccjVUgmtpdeGzA6BfmNx94Co=
+Received: from mail-yx1-f72.google.com (mail-yx1-f72.google.com
+ [74.125.224.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-465-NEqu-ukeNvy5Y2CnPV4iyw-1; Fri, 16 Oct 2026 00:01:19 +0000
+X-MC-Unique: NEqu-ukeNvy5Y2CnPV4iyw-1
+X-Mimecast-MFC-AGG-ID: NEqu-ukeNvy5Y2CnPV4iyw_1792108878
+Received: by mail-yx1-f72.google.com with SMTP id 956f58d0204a3-6755fef4f96so2542181d50.0
+        for <exfat@lists.linux.dev>; Thu, 15 Oct 2026 17:01:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792075782; x=1792680582;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WAcdpcTpnQbvHYYEUHq7bhjUU7mNPvOKc1GObp15GFQ=;
-        b=UNfl/g9tNP40cvIeV1yE9ygfRa4GNok68gqnIwVoCoHuHw9aVFNtK/FZRhniGb2z7+
-         b8kD8nEwydbrsQhA4ntPp9x+ZagNSy3x2SeHTKSO7j9qkZD8BPqQaOwbuzkT7FirqBSO
-         aCV0oXcK5DuvPhUqrvWTInQOYgQleXXJ03U+tsL895tiIW3MdQy8Os964SVSWx+8qcZS
-         5Mh9kH0zLnay3XNqcV5vWWtqBI6oOdJLPz9vWqyH+5Rhj1rpu9vKrpxPEpBhovaXwu/Q
-         RfJnm61Zryr2QZAqsM6SSQX2dE46MD1m9d9wrVB6hcKEhEIsquPapW8bUVn4dTN+ojAi
-         lKsg==
-X-Forwarded-Encrypted: i=1; AKwUvBzL02HETN89ZhzBN9c+z3WXBlL7w6/Kkir0v3/Wxdb8yz4Cl6WY1TUamTZoJL5q4Piy/K1KDw==@lists.linux.dev
-X-Gm-Message-State: AFq9FYIlxzp2Bj4Y0wzOG5ja4W1wwzjbzwfJcNV7RIl4Tb2IrWU6tFnH
-	D8cLlBMd7oIz8ewnSaKGRSiCWQcuK2QbUao9R6BZ0/RRFoKKwpaRVKasyRPmhOksRQ==
-X-Gm-Gg: AYBFou3VKmFcApSxvELewz3XelpriBvX+YdPFeAUadObtZJAwXcNd4lxoD9wWVaP6Vl
-	dqputHhfBgUTBHkS74/VmtGc31Y8zVyEr6SeH0Rt+bcTeJbT6ivlywkl/EWJPgLME2DH/1hgQ3K
-	dpVDUq35Zw+VIh4M9hxkVqRVLS9ri9KotbMhOuBK4iglpZGnboloxcA9+mEWYfdQDw/0owZappV
-	nZUixUGpKyF+NH3OPQj5dkvcFaoiV1KCWc6d8kRRMwlr1xBViAiZFQVPlTSOssgnsW8QgWwc9y5
-	i949vpeX5MTqynKCu1mW4uCS7/s+LrIbwPcMtG9p+877pabeCPYMkP+CM3vSwfFf9p/vZskLgmK
-	/c68ywiAVqJaiJ0cMBTB3DwCxAi36IXyAU+VFygBLKEWvkYhQbxKnvjA5D+JQLP6NgExaRgjKn6
-	FF99vlVFDkvIkMFLFRLZy4fqrfS6VqyAr0qE29vqXaFLyj3TlSLyuhi8NSTZGZKP59nzVKENL9F
-	h/4JugASBucd6LbRboy
-X-Received: by 2002:a05:620a:4454:b0:939:6dea:374d with SMTP id af79cd13be357-93ebd22f201mr3559144585a.49.1792075781768;
-        Thu, 15 Oct 2026 07:49:41 -0700 (PDT)
-Received: from cobra01.cs.unc.edu (cobra01.cs.unc.edu. [152.2.130.143])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-93ef50295edsm790347085a.22.2026.10.15.07.49.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Oct 2026 07:49:41 -0700 (PDT)
-From: Hengyu Liang <hengyul@cs.unc.edu>
-To: linkinjeon@kernel.org,
-	sj1557.seo@samsung.com
-Cc: yuezhang.mo@sony.com,
-	chizhiling@kylinos.cn,
-	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH] exfat: fix reading a directory whose FAT chain is longer than its size
-Date: Thu, 15 Oct 2026 10:49:34 -0400
-Message-ID: <20261015144934.1800240-1-hengyul@cs.unc.edu>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20260707; t=1792108878; x=1792713678;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+iJ5ftvCuZ0dzn9DuBnu06m+Dldzk+vmqioG+hhsp4M=;
+        b=C3dy8i5EJxCGLEkIBYKAm3ePzxwbspYWz+xdYc1diwzQbuqUNRLBZ4DhjncZ/FxZY8
+         JA7EF1PLfUwW+hTVObsTUmL2oBRh63g2cG4nZ86u1xE+8fxe3VJQEsJEnN3OcVYpwQZv
+         O/ASa0Epb6o3OrtEaVRGqsuZcPOQi3eL/NZNzV0oLJdXeXSNFqffrgC1ekt3xQGp5K0G
+         3hN0VkUHsCeHciMjvzyRz9Adgj6tlMWgf1Ekk3yVEu4nzZQbaU90faeUcapUGYAtzLOS
+         C08OoViZUjlgroeYB4ZW8Q/Gpv4ZDr0pItUFtMvIXFtD4zLTh5IVO9J/AAszr5OaeyCb
+         o2Tw==
+X-Forwarded-Encrypted: i=1; AKwUvBxQzjGIRW682HY3IiJDLh0PCmNOhAZQQ806XOsdmGMjAv2icnxqBGpacYAA1GYe/2fE+SuOew==@lists.linux.dev
+X-Gm-Message-State: AFq9FYKLgzaYUodFOTIejkYTviehn0HGIzNEyFAqD4nog2W8wy5zTo0w
+	YOSbn2NIouqR/ObzMXh34wbA7QtV2NKZf06rr1W2iusSgXjRD2n9p0D1fYRPzGZ8IL/ZmZpmGIT
+	RjZ9JeG6iPGIRu524Uz0T4E3ahkpBq/t2BaOhd1yPu9O0is2xfi0hGPHGHh1YnwiYkkNAqZmNG3
+	rP9Dm4OCtsj8VPd1J742KORWg5rYH0NdQ=
+X-Gm-Gg: AYBFou1fu1Bkc6oOdAJvUrPy6/fhg+HxLa0ErVWsVjPH8Ry2WgnxPc2g4uFjpIUyq7o
+	lv2VRBprUikOfClBoTeBpFpLCF1VDD2aAqHA3viY+baWWSy7FigIfaya5BF4gvXSBxdzdLxpYr1
+	igQyLCCJlqQGyLZ+/CY3XXvHzQtMZq89guwCjUK4dyFYAz2G63jNBYxKugnGdVtWsLX4TEpgpt2
+	t3kGu9Ga6a+z727Y4VDE84yHCzgxiQspnjERjk5swWh+w==
+X-Received: by 2002:a05:690e:b8c:b0:679:980d:996a with SMTP id 956f58d0204a3-679980da3fcmr1447559d50.33.1792108873303;
+        Thu, 15 Oct 2026 17:01:13 -0700 (PDT)
+X-Received: by 2002:a05:690e:b8c:b0:679:980d:996a with SMTP id
+ 956f58d0204a3-679980da3fcmr1447535d50.33.1792108871774; Thu, 15 Oct 2026
+ 17:01:11 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org> <20261012-work-fs-sb_rdonly-v1-21-60743a3dc326@kernel.org>
+In-Reply-To: <20261012-work-fs-sb_rdonly-v1-21-60743a3dc326@kernel.org>
+From: Andreas Gruenbacher <agruenba@redhat.com>
+Date: Fri, 16 Oct 2026 02:01:00 +0200
+X-Gm-Features: AclHuK-sAjCgZe2jZlpOS_f9wdrUdBca6HiO3TEkm1pT3ImiObIJ5_3wwDvQKVU
+Message-ID: <CAHc6FU6z4kX5R3Og8m0dYOHsjFcw+4Btvfe87AGPxy_EWs0E7A@mail.gmail.com>
+Subject: Re: [PATCH RFC 21/28] gfs2: don't set SB_RDONLY on withdraw
+To: Christian Brauner <brauner@kernel.org>
+Cc: Jan Kara <jack@suse.com>, Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
+	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
+	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, 
+	linux-fsdevel@vger.kernel.org, ntfs@lists.linux.dev, 
+	ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org, 
+	gfs2@lists.linux.dev, linux-efi@vger.kernel.org, 
+	linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org, 
+	stable@vger.kernel.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: ETBIbV9hYn8hNbVRw7nhAogLpp6gAcG6YEqxkeTBqXk_1792108878
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Commit 08cf4a8181b4 ("exfat: use exfat_chain_advance helper") made the
-directory code walk the clusters of a directory with
-exfat_chain_advance().
+Christian,
 
-However, exfat_chain_advance() returns -EIO once it has walked as many
-clusters as the size of the directory says. The FAT chain of a directory
-can be longer than that, because some cameras stop updating the size,
-see commit 1e5654de0f51 ("exfat: handle wrong stream entry size in
-exfat_readdir()"). As of now, opening such a directory fails with EIO as
-soon as the chain is two clusters longer than the size. Reading a
-directory that has a FAT chain after a seek past its end fails with EIO
-too.
+thanks for looking into this. I agree with a lot of the points you are
+making. This message is still difficult to reply to because it
+conflates multiple problems.
 
-The issue can be reproduced with an image in which the size of a
-directory with 200 files and 7 clusters is lowered to 2 clusters:
+On Mon, Oct 12, 2026 at 1:06=E2=80=AFPM Christian Brauner <brauner@kernel.o=
+rg> wrote:
+> do_withdraw() sets SB_RDONLY from the withdraw work item without holding
+> sb->s_umount. gfs2_withdraw() sets SDF_WITHDRAWN right away and queues
+> gfs2_withdraw_func() which runs do_withdraw(). That also happens on a
+> frozen filesystem. SDF_JOURNAL_LIVE is still set then because the
+> freeze log flush doesn't clear it.
 
-    mount -o loop exfat.img /mnt
-    ls /mnt/d | wc -l
+Agreed, do_withdraw() shouldn't set SB_RDONLY.
 
-Before commit 08cf4a8181b4 ("exfat: use exfat_chain_advance helper"),
-the result is:
+> freeze_super() and thaw_super() both look at sb_rdonly() to figure out
+> whether the s_writers rwsems need to be taken or released. gfs2 doesn't
+> even get that far. FITHAW goes through gfs2_thaw_super() to
+> gfs2_do_thaw() whose gfs2_freeze_lock_shared() fails with -EIO for a
+> withdrawn filesystem. So FITHAW never gets to thaw_super() and the
+> filesystem stays frozen.
 
-    200
+So when gfs2_thaw_super() is called on a withdrawn filesystem, it
+should still call thaw_super(). Fair enough.
 
-After that commit, ls fails with "Input/output error" and the result is:
+> The only ways out are emergency thaw, which
+> calls thaw_super_locked() directly, and writing 0 to the gfs2 "freeze"
+> sysfs file, which calls thaw_super() directly. Both see SB_RDONLY and
+> skip sb_freeze_unlock(). The rwsems stay write-locked, writes through
+> file descriptors opened before the withdraw hang and umount warns:
+>
+>   gfs2: fsid=3Ds2test:s2fs.0: can't lock the freeze glock: -5
+>   gfs2: fsid=3Ds2test:s2fs.0: GFS2: couldn't thaw filesystem: -5
+>   sysrq: Emergency Thaw of all frozen filesystems
+>   WARNING: kernel/rcu/sync.c:177 at rcu_sync_dtor+0x143/0x190
+>
+>   [<0>] percpu_rwsem_wait+0x203/0x500
+>   [<0>] vfs_write+0xb57/0xfa0
 
-    0
+According to commit d564053f0746 ("GFS2: Clean up freeze code"), the
+idea of the freeze sysfs file was to make it behave like the FIFREEZE
+/ FITHAW ioctls. This isn't what the code is doing at all.
 
-This patch will make exfat_chain_advance() follow the FAT to its end
-when the directory has a FAT chain, as the code did before, and keep the
-size check for a directory without one.
+> Withdrawing first and freezing afterwards isn't any better.
+> freeze_super() freezes the read-only superblock without the rwsems,
+> gfs2_lock_fs_check_clean() fails with -EIO and gfs2_do_thaw() can't get
+> the freeze glock. FIFREEZE fails with -EIO and the superblock stays
+> frozen and pinned for good.
+>
+> SDF_WITHDRAWN already stops all modifications. Glocks fail with -EIO,
+> gfs2_trans_begin() with -EROFS and log flushes and metadata reads are
+> refused. So stop setting SB_RDONLY in do_withdraw() like ext4 did in
+> commit d3476f3dad4a ("ext4: don't set SB_RDONLY after filesystem
+> errors").
 
-Fixes: 08cf4a8181b4 ("exfat: use exfat_chain_advance helper")
-Cc: stable@vger.kernel.org
-Signed-off-by: Hengyu Liang <hengyul@cs.unc.edu>
----
- fs/exfat/exfat_fs.h | 28 +++++++++++++++++++---------
- 1 file changed, 19 insertions(+), 9 deletions(-)
+Yes, do_withdraw() shouldn't set SB_RDONLY.
 
-diff --git a/fs/exfat/exfat_fs.h b/fs/exfat/exfat_fs.h
-index a9131fe03302..f324c4cba26a 100644
---- a/fs/exfat/exfat_fs.h
-+++ b/fs/exfat/exfat_fs.h
-@@ -623,19 +623,29 @@ static inline int exfat_chain_advance(struct super_block *sb,
- 		struct exfat_chain *chain, unsigned int step)
- {
- 	unsigned int clu = chain->dir;
-+	unsigned int i;
- 
--	if (unlikely(chain->size < step))
--		return -EIO;
-+	if (chain->flags == ALLOC_NO_FAT_CHAIN) {
-+		if (unlikely(chain->size < step))
-+			return -EIO;
- 
--	if (exfat_cluster_walk(sb, &clu, step, chain->flags))
--		return -EIO;
-+		chain->size -= step;
-+		chain->dir = chain->size ? clu + step : EXFAT_EOF_CLUSTER;
-+		return 0;
-+	}
- 
--	chain->size -= step;
-+	/*
-+	 * Only the FAT tells where a chain of this kind ends. The size can be
-+	 * smaller than the chain, see commit 1e5654de0f51 ("exfat: handle
-+	 * wrong stream entry size in exfat_readdir()").
-+	 */
-+	for (i = 0; i < step && clu != EXFAT_EOF_CLUSTER; i++) {
-+		if (exfat_get_next_cluster(sb, &clu))
-+			return -EIO;
-+	}
- 
--	if (chain->size == 0 && chain->flags == ALLOC_NO_FAT_CHAIN)
--		chain->dir = EXFAT_EOF_CLUSTER;
--	else
--		chain->dir = clu;
-+	chain->size -= min(chain->size, step);
-+	chain->dir = clu;
- 
- 	return 0;
- }
--- 
-2.53.0
+> A few things have to come with that:
+>
+> (1) gfs2_evict_inode() and gfs2_quota_sync() check gfs2_withdrawn() next
+>     to sb_rdonly(). Eviction writes the inode glock's metadata in place
+>     and umount evicts everything.
+>
+> (2) gfs2_write_inode() returns -EIO once withdrawn. sync(2), syncfs(2),
+>     freeze and umount skipped writeback for the read-only superblock.
+>     Now they reach ->write_inode() which writes the glock address space
+>     in place without a withdrawn check, and gfs2_ail_drain() leaves
+>     committed buffers dirty. Data writeback needs no check because the
+>     block mapping goes through gfs2_meta_read() which fails once
+>     withdrawn.
+
+Okay, (1) and (2) are related to the SB_RDONLY change.
+
+> (3) gfs2_do_thaw() thaws even if the freeze glock can't be taken again
+>     because the filesystem withdrew. A withdrawn filesystem can't write
+>     anything and its lockspace is gone anyway.
+>
+> (4) gfs2_freeze_super() refuses a withdrawn filesystem with -EIO before
+>     calling freeze_super(). It can't take the freeze glock anymore and
+>     freeze_super() would now take the rwsems of the read-write
+>     superblock before gfs2_lock_fs_check_clean() fails.
+
+And (3) and (4) are related to thawing a withdrawn filesystem.
+
+> Note that the SB_RDONLY change and (3) have to go in together and the
+> rest has to be in place by then. With only the SB_RDONLY change a freeze
+> after a withdraw takes the rwsems of the now read-write superblock and
+> stays frozen for good with writers blocked. With only (3) FITHAW reaches
+> thaw_super() on the read-only superblock and leaks the rwsems. And
+> without (4) a freeze after a withdraw goes through the error path of
+> gfs2_freeze_super() which re-locks sd_freeze_gh while
+> gfs2_lock_fs_check_clean() still holds it. The umount that is now
+> possible then hangs in gfs2_wait_glocks().
+
+Not sure what should prevent us from fixing withdrawn filesystem
+thawing and the SB_RDONLY issue in separate commits. Both need fixing
+in the end, but that's okay.
+
+> While withdrawn a remount to read-write fails with -EROFS instead of the
+> -EIO from gfs2_make_fs_rw().
+
+So before this patch, 'mount -o remount,rw' of a withdrawn filesystem
+fails with -EIO, and this patch changes it to -EROFS. What's wrong
+with -EIO? Once do_withdraw() doesn't set SB_RDONLY anymore, the
+filesystem will remain read-write mounted; getting an -EROFS error in
+that state seems odd.
+
+> A remount to read-only goes through
+> gfs2_make_fs_ro() which writes nothing once do_withdraw() has run, and
+> since the previous patch gfs2_make_fs_ro() waits for that. So emergency
+> remount (sysrq u), which now forces every withdrawn gfs2 read-only,
+> works without a WARN.
+
+Alright.
+
+> We show "withdrawn" in the mount options next to the existing
+> "demote_interface_used". A withdrawn filesystem stays "rw" so statfs()
+> doesn't report ST_RDONLY anymore, and the "Mounted RO" line in the sysfs
+> status file and the RDONLY=3D uevent field read 0 too. A second mount of
+> the device and a gfs2meta mount have to be read-write now. And like with
+> "emergency_ro" on ext4, remount helpers that pass the shown options back
+> fail. busybox mount for example now gets "Unknown parameter
+> 'withdrawn'".
+>
+> Path based operations fail with -EIO as before. The mount root is the
+> exception because it isn't looked up. So operations on it now fail with
+> -EIO from the glocks instead of -EROFS from mnt_want_write(), and the
+> same goes for fd based chmod, chown, utimes, setxattr and fileattr
+> changes. syncfs(2) on a withdrawn filesystem returns gfs2_sync_fs()'s
+> sd_log_error, e.g. -EIO, instead of 0. FITHAW of a filesystem that
+> withdrew while frozen works now and FIFREEZE of a withdrawn filesystem
+> fails with -EIO without freezing it.
+>
+> Reproducer (the sb_rdonly selftest at the end of this series covers it
+> as well):
+>
+>   mkfs.gfs2 -O -p lock_nolock -j 1 -t test:fs img; mount -o loop img /mnt
+>   exec 3>>/mnt/a 4</mnt          # paths stop working after the withdraw
+>   fsfreeze -f /mnt
+>   echo 1 > /sys/fs/gfs2/test:fs/withdraw; sleep 8
+>   <FITHAW on fd 4>               # before: EIO, stays frozen; after: thaw=
+ed
+>   echo j > /proc/sysrq-trigger   # before: the only way out, leaks the rw=
+sems
+>   echo x >&3                     # before: hangs in percpu_rwsem_wait(); =
+after: EIO
+>   umount /mnt                    # before: WARNING at rcu_sync_dtor()
+>
+> Fixes: 601ef0d52e96 ("gfs2: Force withdraw to replay journals and wait fo=
+r it to finish")
+> Fixes: b77b4a4815a9 ("gfs2: Rework freeze / thaw logic")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+>  fs/gfs2/ops_fstype.c |  6 +++++-
+>  fs/gfs2/quota.c      |  2 +-
+>  fs/gfs2/super.c      | 19 +++++++++++++++++--
+>  fs/gfs2/util.c       |  6 ++++--
+>  4 files changed, 27 insertions(+), 6 deletions(-)
+>
+> diff --git a/fs/gfs2/ops_fstype.c b/fs/gfs2/ops_fstype.c
+> index 718e0da7dfce..d7f7e8b75971 100644
+> --- a/fs/gfs2/ops_fstype.c
+> +++ b/fs/gfs2/ops_fstype.c
+> @@ -1594,7 +1594,11 @@ static int gfs2_reconfigure(struct fs_context *fc)
+>                 if (fc->sb_flags & SB_RDONLY) {
+>                         gfs2_make_fs_ro(sdp);
+>                 } else {
+> -                       error =3D gfs2_make_fs_rw(sdp);
+> +                       /* A withdrawn filesystem can't go back to read-w=
+rite. */
+> +                       if (gfs2_withdrawn(sdp))
+> +                               error =3D -EROFS;
+> +                       else
+> +                               error =3D gfs2_make_fs_rw(sdp);
+>
+>                         if (error)
+>                                 errorfc(fc, "unable to remount read-write=
+");
+>                 }
+> diff --git a/fs/gfs2/quota.c b/fs/gfs2/quota.c
+> index 001c8b39ca55..7fac70bae129 100644
+> --- a/fs/gfs2/quota.c
+> +++ b/fs/gfs2/quota.c
+> @@ -1329,7 +1329,7 @@ int gfs2_quota_sync(struct super_block *sb, int typ=
+e)
+>         u64 sync_gen;
+>         int error =3D 0;
+>
+> -       if (sb_rdonly(sdp->sd_vfs))
+> +       if (sb_rdonly(sdp->sd_vfs) || gfs2_withdrawn(sdp))
+>                 return 0;
+>
+>         qda =3D kzalloc_objs(struct gfs2_quota_data *, max_qd);
+> diff --git a/fs/gfs2/super.c b/fs/gfs2/super.c
+> index 1d7b39354d65..ec7bce124376 100644
+> --- a/fs/gfs2/super.c
+> +++ b/fs/gfs2/super.c
+> @@ -456,6 +456,9 @@ static int gfs2_write_inode(struct inode *inode, stru=
+ct writeback_control *wbc)
+>         int ret =3D 0;
+>         bool flush_all =3D (wbc->sync_mode =3D=3D WB_SYNC_ALL || gfs2_is_=
+jdata(ip));
+>
+> +       if (gfs2_withdrawn(sdp))
+> +               return -EIO;
+> +
+>         if (flush_all)
+>                 gfs2_log_flush(GFS2_SB(inode), ip->i_gl,
+>                                GFS2_LOG_HEAD_FLUSH_NORMAL |
+> @@ -686,7 +689,12 @@ static int gfs2_do_thaw(struct gfs2_sbd *sdp, enum f=
+reeze_holder who, const void
+>         int error;
+>
+>         error =3D gfs2_freeze_lock_shared(sdp);
+> -       if (error)
+> +       /*
+> +        * A withdrawn filesystem can't get the freeze glock back, but it=
+ won't
+> +        * write anything either. Thaw it anyway instead of leaving it fr=
+ozen
+> +        * for good.
+> +        */
+> +       if (error && !gfs2_withdrawn(sdp))
+>                 goto fail;
+>         error =3D thaw_super(sb, who, freeze_owner);
+>         if (!error)
+> @@ -751,6 +759,11 @@ static int gfs2_freeze_super(struct super_block *sb,=
+ enum freeze_holder who,
+>                 mutex_unlock(&sdp->sd_freeze_mutex);
+>                 return -EBUSY;
+>         }
+> +       /* A withdrawn filesystem can't take the freeze glock anymore. */
+> +       if (gfs2_withdrawn(sdp)) {
+> +               mutex_unlock(&sdp->sd_freeze_mutex);
+> +               return -EIO;
+> +       }
+
+This is racy; the filesystem can still be withdrawn after this
+gfs2_withdrawn() check. It should make more sense to bail out of the
+for loop in gfs2_freeze_super() on withdrawn filesystems.
+
+>         for (;;) {
+>                 error =3D freeze_super(sb, who, freeze_owner);
+> @@ -1165,6 +1178,8 @@ static int gfs2_show_options(struct seq_file *s, st=
+ruct dentry *root)
+>                 seq_puts(s, ",nobarrier");
+>         if (test_bit(SDF_DEMOTE, &sdp->sd_flags))
+>                 seq_puts(s, ",demote_interface_used");
+> +       if (gfs2_withdrawn(sdp))
+> +               seq_puts(s, ",withdrawn");
+
+I'm not a fan of those fake mount options. It doesn't matter all that
+much for "withdrawn" because remounting will fail anyway, but it's
+still messy.
+
+Filesystems with "demote_interface_used" can be remounted, so that
+fake option is worse.
+
+"demote_rq" and "demote_interface_used" should never have been added
+in the first place, but here we are.
+
+>         if (args->ar_rgrplvb)
+>                 seq_puts(s, ",rgrplvb");
+>         if (args->ar_loccookie)
+> @@ -1466,7 +1481,7 @@ static void gfs2_evict_inode(struct inode *inode)
+>         int ret;
+>
+>         gfs2_holder_mark_uninitialized(&gh);
+> -       if (sb_rdonly(sb) || !ip->i_no_addr || !ip->i_gl)
+> +       if (sb_rdonly(sb) || gfs2_withdrawn(sdp) || !ip->i_no_addr || !ip=
+->i_gl)
+>                 goto out;
+>
+>         /*
+> diff --git a/fs/gfs2/util.c b/fs/gfs2/util.c
+> index 1535ce2b7aa8..990552f42a0b 100644
+> --- a/fs/gfs2/util.c
+> +++ b/fs/gfs2/util.c
+> @@ -133,9 +133,11 @@ static void do_withdraw(struct gfs2_sbd *sdp)
+>                            gfs2_log_is_empty(sdp),
+>                            HZ * 5);
+>
+> -       sdp->sd_vfs->s_flags |=3D SB_RDONLY;
+> -
+>         /*
+> +        * We don't set SB_RDONLY. That requires sb->s_umount, and changi=
+ng it
+> +        * under freeze_super() and thaw_super() leaves the freeze protec=
+tion
+> +        * unbalanced. SDF_WITHDRAWN already stops all modifications.
+> +        *
+>          * Dequeue any pending non-system glock holders that can no
+>          * longer be granted because the file system is withdrawn.
+>          */
+>
+> --
+> 2.53.0
+>
+
+Thanks,
+Andreas
 
