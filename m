@@ -1,29 +1,29 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CFDD372B3C
-	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 03:34:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64C78376BC1
+	for <exfat@lists.linux.dev>; Fri, 16 Oct 2026 03:34:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792121681; cv=none; b=Ap627Fcr5APh0RiUmQZkEEBGJ1Rw7kWd3vtHoPt5YY7QJ9HzMzQ0rnhEdoW3XJ/0+BY4wk87uOXpUbwOtSukHqJ743tmuxdyIGiRneHU+noieqJ2gUBbZGLlyPbM9F+Dm7dTmy9WIRIVSK3EnzCVuRk6dpVUrf4qfHiGF6O4aHg=
+	t=1792121681; cv=none; b=A2Wdrk7lZLxNXRH+nOChbsXmR1WRXs5Mwr1dqCe0fEjtrwHBS5aRsFQ70TutYeeRz6DBHeZcdDcW3rY15Q8zaqPUCviTwI8XCmNE+HvdBc+ftY67/PO8dHhaKpdNUFKEZYeA8LlY+7dcXBFaAnqpg+vQ4J9fu4VtmGXHxSMaXio=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1792121681; c=relaxed/simple;
-	bh=GI4uW1biJCwRcv236sumjEXh9TE1xK13bLC45NlIVpE=;
+	bh=ezLljHoNB3dpMc21EGWjEBhp1r00/FX0/xgsQ0AkJ8M=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Trr5H9UCbIy4GBNxMImC2PGXIl0+fsCyA4e+XHPmiqXAdfTLAoFBFGU6d6X0qxhgsUFWshZK+U95oR/j133LJ4DIBwS4eCQSg3HoH3AKq3T/dymasOA3IWOcusggy8n2fx7PM6f/f9GfpLHndkBNyheR1VU+OcHPTz39VCKuogM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Ct4RlcMp; arc=none smtp.client-ip=220.197.31.2
+	 MIME-Version; b=fN93CxGL7ddTiN2VczqW+mDw4mG6gwDzC+fnXKnMjBNyv9BPFloYWGeyM94bUll5wTzTm98y14zxZPz0x/ENg8pcvY06hMWU9YIudcsNKeUymZxvOdyue7kzJ1K3NU9iCeLdM2FKpRedS6JLTPPy6U9psNNvDBdmDKIo+0aW6iw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=etj+7qco; arc=none smtp.client-ip=117.135.210.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Ct4RlcMp"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="etj+7qco"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=JE
-	ckqeMbM8QJx/dbwfWdJKJGqcYLg0iquPq0z23nLoM=; b=Ct4RlcMp5SjtBF2gWw
-	j3o/3EHLBh+rkZFQCFMZ+sB9Hz59S9iF9jtOkPL+mJVs+bQJefWIPZPcolRZMWhv
-	m4Nd3cWbcTR5vQP8vEhn954HwrBdsCysZtMk54mbJavh++GUIg4loyymFg64MVNq
-	dvnbmFsGvII7/f568kCUHAihM=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=/d
+	BrDuY+/9lz/3o82z218CPpZVY4QP5e5ObYzT/IukI=; b=etj+7qcoeZ/7Mgm3YN
+	XeoaSZp0ZfwejWyPJBZYHNnh6ww9VTKlW43TZXWb+HuHbZ8hqhMkkibEoJ7KoDDv
+	vHk2vtIkbxE9qnr4qBNjk3jcXNeuZkJrUsk7k9ujIKVpc3kSeXJFLJJszYsXxcfJ
+	gVtWqIDbVU6nC8Qlfc+HGIKgY=
 Received: from czl-pc (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgDnU5c7m9Fqw1V+AA--.15038S3;
+	by gzsmtp4 (Coremail) with SMTP id PygvCgDnU5c7m9Fqw1V+AA--.15038S4;
 	Fri, 16 Oct 2026 11:34:22 +0800 (CST)
 From: Chi Zhiling <chizhiling@163.com>
 To: linux-kernel@vger.kernel.org,
@@ -37,9 +37,9 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>,
 	"Darrick J. Wong" <djwong@kernel.org>,
 	Christoph Hellwig <hch@lst.de>,
 	Chi Zhiling <chizhiling@kylinos.cn>
-Subject: [PATCH v3 1/8] iomap: export iomap_bio_read_folio_range_sync()
-Date: Fri, 16 Oct 2026 11:33:42 +0800
-Message-ID: <20261016033349.3104509-2-chizhiling@163.com>
+Subject: [PATCH v3 2/8] exfat: zero the invalid tail of the straddle block under the folio lock
+Date: Fri, 16 Oct 2026 11:33:43 +0800
+Message-ID: <20261016033349.3104509-3-chizhiling@163.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261016033349.3104509-1-chizhiling@163.com>
 References: <20261016033349.3104509-1-chizhiling@163.com>
@@ -50,89 +50,151 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgDnU5c7m9Fqw1V+AA--.15038S3
-X-Coremail-Antispam: 1Uf129KBjvJXoWxCF18Zw4UWF1xXw4rWFyxuFg_yoW5AF17pF
-	yDKF98Gr48Xr47W34DGryDA3yakrW5Jr48AFWUW3sIy3Z0yr47Ka4kK3WY9Fy5G3s7CF4x
-	ur1vv34rZr15AF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UtrchUUUUU=
-X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC2x4FomrRmz6AlgAA3q
+X-CM-TRANSID:PygvCgDnU5c7m9Fqw1V+AA--.15038S4
+X-Coremail-Antispam: 1Uf129KBjvJXoWxtFWrZryxXFyrKFWDtr1DWrg_yoW7WryDp3
+	90ka45GFZ7X3W7ur1DGFy5Z3WYkw1ftFWxWryfG3sxZryqyrW2ka4jgFyj9Fy5J3sFyr4j
+	gF4vgry8JrnrCr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jztC7UUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC3B4FomrRmz4mjAAA3R
 
 From: Chi Zhiling <chizhiling@kylinos.cn>
 
-Filesystems that provide a buffered write ->read_folio_range handler
-need to perform the same synchronous bio read as the default handler.
-Move the declaration of iomap_bio_read_folio_range_sync() from the
-internal header to <linux/iomap.h>, together with the !CONFIG_BLOCK
-fallback, and export it so that modular filesystems can call it.
+A buffered write that does not fully cover the block containing
+valid_size makes iomap read that block from disk, loading the stale
+bytes beyond valid_size into the page cache.  exfat_write_iomap_begin()
+zeroes them with iomap_truncate_page() before iomap locks the write
+folio.
 
-exfat will call it from its own ->read_folio_range handler to zero
-the stale bytes between valid_size and the end of the block under
-the folio lock during buffered writes.
+That relied on i_rwsem serializing valid_size against page_mkwrite().
+Once exfat_page_mkwrite() stops taking i_rwsem, a fault can advance
+valid_size and store data into the tail after exfat_write_iomap_begin()
+read valid_size but before iomap_truncate_page() zeroes it, erasing the
+stored data.
+
+Moving the zeroing logic from exfat_write_iomap_begin() to ->put_folio
+won't solve it, because the folio has already been marked uptodate
+before ->put_folio is called.
+
+Do the zeroing from an ->read_folio_range handler instead.  iomap calls
+it with the folio locked, so reading valid_size and zeroing
+[valid_size, end) is serialized against page_mkwrite() advancing
+valid_size for the same folio.  This mirrors the read path, which
+already zeroes the invalid tail in exfat_iomap_read_end_io().
 
 Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
 ---
- fs/iomap/bio.c        |  1 +
- fs/iomap/internal.h   | 12 ------------
- include/linux/iomap.h |  9 +++++++++
- 3 files changed, 10 insertions(+), 12 deletions(-)
+ fs/exfat/file.c  |  5 +++--
+ fs/exfat/iomap.c | 54 +++++++++++++++++++++++++++++-------------------
+ fs/exfat/iomap.h |  1 +
+ 3 files changed, 37 insertions(+), 23 deletions(-)
 
-diff --git a/fs/iomap/bio.c b/fs/iomap/bio.c
-index 48100c614431..abb649f024a3 100644
---- a/fs/iomap/bio.c
-+++ b/fs/iomap/bio.c
-@@ -187,3 +187,4 @@ int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
- 	bio_uninit(&bio);
- 	return error;
- }
-+EXPORT_SYMBOL_GPL(iomap_bio_read_folio_range_sync);
-diff --git a/fs/iomap/internal.h b/fs/iomap/internal.h
-index 74e898b196dc..d13aff5e1e91 100644
---- a/fs/iomap/internal.h
-+++ b/fs/iomap/internal.h
-@@ -20,16 +20,4 @@ static inline size_t iomap_max_bio_size(const struct iomap *iomap)
- u32 iomap_finish_ioend_buffered_read(struct iomap_ioend *ioend);
- u32 iomap_finish_ioend_direct(struct iomap_ioend *ioend);
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index dc57d2c2f0f0..aa0e1e47e3d1 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -829,7 +829,7 @@ static ssize_t exfat_fallback_buffered_write(struct kiocb *iocb,
+ 	inode_dio_wait(file_inode(iocb->ki_filp));
  
--#ifdef CONFIG_BLOCK
--int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
--		struct folio *folio, loff_t pos, size_t len);
--#else
--static inline int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
--		struct folio *folio, loff_t pos, size_t len)
--{
--	WARN_ON_ONCE(1);
--	return -EIO;
--}
--#endif /* CONFIG_BLOCK */
+ 	written = iomap_file_buffered_write(iocb, from, &exfat_write_iomap_ops,
+-			NULL, NULL);
++			&exfat_iomap_write_ops, NULL);
+ 	if (written < 0)
+ 		return written;
+ 
+@@ -921,7 +921,8 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+ 		 */
+ 		inode_dio_wait(inode);
+ 		ret = iomap_file_buffered_write(iocb, iter,
+-				&exfat_write_iomap_ops, NULL, NULL);
++				&exfat_write_iomap_ops, &exfat_iomap_write_ops,
++				NULL);
+ 	}
+ 	if (ret != -EIOCBQUEUED && end > i_size_read(inode))
+ 		exfat_write_failed(inode);
+diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+index e50ecbfbfbe0..32ca90b61b1a 100644
+--- a/fs/exfat/iomap.c
++++ b/fs/exfat/iomap.c
+@@ -160,27 +160,7 @@ static int exfat_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+ static int exfat_write_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+ 		unsigned int flags, struct iomap *iomap, struct iomap *srcmap)
+ {
+-	struct exfat_inode_info *ei = EXFAT_I(inode);
+-	loff_t valid_size = exfat_get_valid_size(ei);
+-	loff_t end;
+-	int err;
 -
- #endif /* _IOMAP_INTERNAL_H */
-diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-index bc7ae6327dbf..35b686cbb586 100644
---- a/include/linux/iomap.h
-+++ b/include/linux/iomap.h
-@@ -763,6 +763,8 @@ extern struct bio_set iomap_ioend_bioset;
- #ifdef CONFIG_BLOCK
- int iomap_bio_read_folio_range(const struct iomap_iter *iter,
- 		struct iomap_read_folio_ctx *ctx, size_t plen);
-+int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
-+		struct folio *folio, loff_t pos, size_t len);
- void iomap_bio_submit_read_endio(const struct iomap_iter *iter,
- 		struct iomap_read_folio_ctx *ctx, bio_end_io_t end_io);
- 
-@@ -789,6 +791,13 @@ static inline void iomap_bio_readahead(struct readahead_control *rac,
- 
- 	iomap_readahead(ops, &ctx, NULL);
+-	err = __exfat_iomap_begin(inode, offset, length, flags, iomap, true);
+-	if (err || flags & (IOMAP_DIRECT | IOMAP_FAULT) ||
+-	    iomap->flags & IOMAP_F_NEW)
+-		return err;
+-
+-	end = iomap->offset + iomap->length;
+-	if (end >= valid_size ||
+-	    round_up(end, i_blocksize(inode)) <= valid_size)
+-		return 0;
+-
+-	/*
+-	 * Zero the invalid bytes from valid_size to the end of the block
+-	 * to prevent stale data from being exposed through the page cache.
+-	 */
+-	return iomap_truncate_page(inode, valid_size, NULL, &exfat_iomap_ops,
+-				   NULL, NULL);
++	return __exfat_iomap_begin(inode, offset, length, flags, iomap, true);
  }
-+#else /* !CONFIG_BLOCK */
-+static inline int iomap_bio_read_folio_range_sync(const struct iomap_iter *iter,
+ 
+ static DEFINE_IOMAP_ITER_NEXT(exfat_iomap_next, exfat_iomap_begin);
+@@ -252,6 +232,38 @@ const struct iomap_ops exfat_write_iomap_ops = {
+ 	.iomap_next	= exfat_write_iomap_next,
+ };
+ 
++/*
++ * exfat_iomap_read_folio_range - Read a block range during a buffered write
++ *
++ * A buffered write that does not fully cover the block containing
++ * valid_size makes iomap read that "straddle block" from disk.  The bytes
++ * beyond valid_size in this block are stale and must be zeroed to prevent
++ * them from being exposed through the page cache, like the read path does
++ * in exfat_iomap_read_end_io().
++ */
++static int exfat_iomap_read_folio_range(const struct iomap_iter *iter,
 +		struct folio *folio, loff_t pos, size_t len)
 +{
-+	WARN_ON_ONCE(1);
-+	return -EIO;
++	loff_t valid_size;
++	int ret;
++
++	ret = iomap_bio_read_folio_range_sync(iter, folio, pos, len);
++	if (ret)
++		return ret;
++
++	valid_size = exfat_get_valid_size(EXFAT_I(iter->inode));
++	if (pos <= valid_size && valid_size < pos + len)
++		folio_zero_segment(folio,
++				offset_in_folio(folio, valid_size),
++				offset_in_folio(folio, pos + len));
++
++	return 0;
 +}
- #endif /* CONFIG_BLOCK */
++
++const struct iomap_write_ops exfat_iomap_write_ops = {
++	.read_folio_range = exfat_iomap_read_folio_range,
++};
++
+ /*
+  * exfat_writeback_range - Map folio during writeback
+  *
+diff --git a/fs/exfat/iomap.h b/fs/exfat/iomap.h
+index fd8a913f7794..39c93f8cd790 100644
+--- a/fs/exfat/iomap.h
++++ b/fs/exfat/iomap.h
+@@ -9,6 +9,7 @@
+ extern const struct iomap_dio_ops exfat_write_dio_ops;
+ extern const struct iomap_ops exfat_iomap_ops;
+ extern const struct iomap_ops exfat_write_iomap_ops;
++extern const struct iomap_write_ops exfat_iomap_write_ops;
+ extern const struct iomap_writeback_ops exfat_writeback_ops;
+ extern const struct iomap_read_ops exfat_iomap_bio_read_ops;
  
- #endif /* LINUX_IOMAP_H */
 -- 
 2.53.0
 
