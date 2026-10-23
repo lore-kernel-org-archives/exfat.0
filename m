@@ -1,76 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=113.46.200.222
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792578331;
-	b=EjVzvbXI2YAzzrCLsIYrfiWEnd927BfHxKr3trAVqtA0xeUH1X+eY+ZQ1tNmQ3/oZkd/
-	 AG6Rvngehp2HdbB6EBonC6VPmHMZzSOXETGaIjq26xWm/q0yBcFeF1qHDxx1/UIZ3I3D+
-	 c+KoYKbiTwjqnvGMdwegLkRdjWMC2j4bqjZyAv3Y9g6ZxOGMRhl9FtHHvRJ4FXwAleb2E
-	 f/8UKmzHMwmX/BmfSz1Bp2elPrNlryd3/Umz/s+7XVGaUWow0rdSCbYxixeJ5koIbMd5S
-	 1WsRw1qGpd9BSWZ6OJEuUmouul55SxUcpEuCK95De5AM/rqx85QPKe0sLZYtVOdFxVw==
+	t=1792737104;
+	b=wz1O1oU9t8WyYRNfhgFrNx4PaWJ9lSeiiEqzfl94xJNFzvWVaoc7f05KNmGLLxEprZw5
+	 zrScWO1E0U8fIQ8wXLF7quZSW8ZjS7g5t5F2tbFKny7XiP1FMZa5qodjVFeJKG/BrHoHt
+	 f8FKIuriiS7qhpRNmG8PpWl3+DVWw7S5OWXCyqpPmIrNGk6HqRJzJdTTY01HdYxyvpXbj
+	 6HaDmVi6W7VHUZOsoaYYi+WoO3IRzu9per+z+Es271qTWBP3tI05b9houS1QJ7wpWEzKU
+	 7sexeHy1KzHl6mSPQdRrjE7AvM9v6HagVfA0/FcXwT3dEgh3Z8MgXpd0K/iV6lmcioQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792578331;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=fyUFCbuePzC+XG2QW79bsjnDsYBX6lH465Zgu9TmAmA=;
-	b=T2aptLONDZ2m5Bod8KFCpux1s6M9OaOa1yPs22mnoS5ue0+JTk1mN0AnlVruz1JdNdjn
-	 KD9IO4KYJJyJAXQHgBhVaRFTDfaSCx9MGomCYtaD9fze25gP5h4wPjoICXDw5B0FkjLnG
-	 Vxl+ptGIJe3wpnkY7i6mKdzZcSE8WozuQaWKTGgAiD3ImJYPHrHD35yWs6/Pkr8oC9IlF
-	 rLpYm4t4wUI5AVjaAWUHwbM2zDC5cvQaX3bk6tUsIYdjUobyk7L1UBUXbhA/B5/xwqQsn
-	 rBg3fzJU42xxXsK970nb2+gAtg4Di8dKSVJymu4mO4lJ6I9uNmdO51icOjAzRRKa4hQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792737104;
+	h=DMARC-Filter:dkim-signature:Received:Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:CC:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
+	bh=33tGxL4pQ37PAm6R2PA7y86/iQoPs+fP5QCASbIaiW4=;
+	b=jyCfNX/9+H5yQkwskBT3ZGARxUxA/9LCOy0PtjrR0VTahkyNjJqWt4F1t38TgyEvzc/L
+	 re1tYzsgmu3Ancoz2sLPQa1ehdGLnD7/zmfUiD/br4LxDDN4CX0nYEWsru9+p+xe/3WwU
+	 CG4kGC1V+4ky9hHrkA0v4LoZHlXjHw7hmB/plee2NdU4JZVhJ051iLxlvN5Aa6SnxlDeT
+	 61c+Ck0Vkwsp8NR6ByAdByfFZDJnUmHPvWLEPjbpbuJ0m17wbn2CJo2qZe/B7R0TJ4cLs
+	 t0ALNuQOmIPsM1BKXhfjWyPcqb82zE+hSEkTKPyKMWPxuhy//yn7QtgK0/CTDzA7SOQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WN+IUwrT;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=huawei.com;
+	spf=pass smtp.mailfrom=huawei.com;
+	dkim=pass header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=fjsQ8MHy;
+	arc=none smtp.remote-ip=113.46.200.222
+Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DB99606A319;
-	Wed, 21 Oct 2026 10:25:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B3E8606A31A;
+	Fri, 23 Oct 2026 06:31:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6B3E8606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WN+IUwrT
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B4A41F000C9;
-	Wed, 21 Oct 2026 10:25:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792578330;
-	bh=fyUFCbuePzC+XG2QW79bsjnDsYBX6lH465Zgu9TmAmA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=WN+IUwrT7l8rUPNHcaU/+gEKsExM+ioOu7ktOtPja5M+dDNUVwHb0vzRVzDdLmi2l
-	 ZVZx7zVWlmJhAl69UxYI+zhszNbxVxTNXOBiS7d6CtNd6WfNLIPJPJhmVTj0hz17Wh
-	 CBPrxhvYRreyd+T8w2TaPEcsFSkV4dKf9ocMHO00y4EhqsJSxfLpthpPmknHsz6GHD
-	 XVMxmeCP5wmxvrqe1pag4NI9ASSec8djC8iso0wCeNRusCl3OXQPYTQT30aPNOVjPM
-	 aOLdakMoHfKRaCd3xb8lP0LDs+OVib+4+C4N3+fUQQocX68feX4bzSiBxNtciCBsuG
-	 N0l+7t93qoF8A==
-Date: Wed, 21 Oct 2026 12:25:10 +0200
-From: Christian Brauner <brauner@kernel.org>
-To: Cai Xinchen <caixinchen1@huawei.com>
-Cc: mic@digikod.net, gnoack@google.com, paul@paul-moore.com, 
-	jmorris@namei.org, serge@hallyn.com, corbet@lwn.net, skhan@linuxfoundation.org, 
-	ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, eddyz87@gmail.com, 
-	memxor@gmail.com, martin.lau@linux.dev, song@kernel.org, yonghong.song@linux.dev, 
-	jolsa@kernel.org, emil@etsalapatis.com, ihor.solodrai@linux.dev, 
-	rdunlap@infradead.org, gregkh@linuxfoundation.org, rafael@kernel.org, dakr@kernel.org, 
-	johan@kernel.org, dlemoal@kernel.org, hch@lst.de, axboe@kernel.dk, 
-	viro@zeniv.linux.org.uk, jack@suse.cz, dhowells@redhat.com, code@tyhicks.com, 
-	linkinjeon@kernel.org, sj1557.seo@samsung.com, yuezhang.mo@sony.com, 
-	hirofumi@mail.parknet.co.jp, cel@kernel.org, jlayton@kernel.org, neil@brown.name, 
-	okorniev@redhat.com, Dai.Ngo@oracle.com, tom@talpey.com, hyc.lee@gmail.com, 
-	miklos@szeredi.hu, amir73il@gmail.com, senozhatsky@chromium.org, 
-	chenxiaosong@chenxiaosong.com, kpsingh@kernel.org, matt@bobrowski.net, rostedt@goodmis.org, 
-	mhiramat@kernel.org, mathieu.desnoyers@efficios.com, john.johansen@canonical.com, 
-	georgia.garcia@canonical.com, zohar@linux.ibm.com, roberto.sassu@huawei.com, 
-	dmitry.kasatkin@gmail.com, eric.snowberg@oracle.com, stephen.smalley.work@gmail.com, 
-	omosnacek@gmail.com, casey@schaufler-ca.com, takedakn@nttdata.co.jp, 
-	penguin-kernel@i-love.sakura.ne.jp, xiujianfeng@huawei.com, nanx95726@gmail.com, djwong@kernel.org, 
-	lujialin4@huawei.com, bpf@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org, 
-	driver-core@lists.linux.dev, linux-block@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	netfs@lists.linux.dev, ecryptfs@vger.kernel.org, exfat@lists.linux.dev, 
-	linux-nfs@vger.kernel.org, ntfs@lists.linux.dev, linux-unionfs@vger.kernel.org, 
-	linux-cifs@vger.kernel.org, linux-trace-kernel@vger.kernel.org, apparmor@lists.ubuntu.com, 
-	linux-integrity@vger.kernel.org, selinux@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v2 -next 00/18] landlock: Add READ_METADATA and
- WRITE_METADATA access rights
-Message-ID: <20261021-neugierig-abgemacht-umbenannt-c77d1addf517@brauner>
-References: <20261015125425.3246251-1-caixinchen1@huawei.com>
+	dkim=pass (1024-bit key, unprotected) header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=fjsQ8MHy
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=33tGxL4pQ37PAm6R2PA7y86/iQoPs+fP5QCASbIaiW4=;
+	b=fjsQ8MHyFLg2DKpb+rChWOhrQ6Agx+aJ4B3WloBfzhk5I42lfFR8N28XAuSRbTqFZgHgChm3O
+	4OwNSVOJK87cDrNiMupTVhF9pAM7IdBGhA0OswOr1fHmf/8LmJiA8sNJ5JxoASQ+9LC7G7GDo6P
+	DlcW4ZEJB+N+XLWejTOA2kU=
+Received: from mail.maildlp.com (unknown [172.19.163.163])
+	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4j9tTJ65BLzLlX6;
+	Fri, 23 Oct 2026 14:31:32 +0800 (CST)
+Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
+	by mail.maildlp.com (Postfix) with ESMTPS id 10C6B40594;
+	Fri, 23 Oct 2026 14:31:36 +0800 (CST)
+Received: from [10.67.110.140] (10.67.110.140) by
+ whupemk100010.china.huawei.com (7.152.184.41) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.45; Fri, 23 Oct 2026 14:31:29 +0800
+Message-ID: <a2832263-3e3b-4d05-98bd-dc006d5be689@huawei.com>
+Date: Fri, 23 Oct 2026 14:31:28 +0800
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -80,28 +62,66 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261015125425.3246251-1-caixinchen1@huawei.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 -next 01/18] fs: pass struct path to notify_change()
+To: Christian Brauner <brauner@kernel.org>
+CC: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
+	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
+	<skhan@linuxfoundation.org>, <ast@kernel.org>, <daniel@iogearbox.net>,
+	<andrii@kernel.org>, <eddyz87@gmail.com>, <memxor@gmail.com>,
+	<martin.lau@linux.dev>, <song@kernel.org>, <yonghong.song@linux.dev>,
+	<jolsa@kernel.org>, <emil@etsalapatis.com>, <ihor.solodrai@linux.dev>,
+	<rdunlap@infradead.org>, <gregkh@linuxfoundation.org>, <rafael@kernel.org>,
+	<dakr@kernel.org>, <johan@kernel.org>, <dlemoal@kernel.org>, <hch@lst.de>,
+	<axboe@kernel.dk>, <viro@zeniv.linux.org.uk>, <jack@suse.cz>,
+	<dhowells@redhat.com>, <code@tyhicks.com>, <linkinjeon@kernel.org>,
+	<sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
+	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
+	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
+	<tom@talpey.com>, <hyc.lee@gmail.com>, <miklos@szeredi.hu>,
+	<amir73il@gmail.com>, <senozhatsky@chromium.org>,
+	<chenxiaosong@chenxiaosong.com>, <kpsingh@kernel.org>, <matt@bobrowski.net>,
+	<rostedt@goodmis.org>, <mhiramat@kernel.org>,
+	<mathieu.desnoyers@efficios.com>, <john.johansen@canonical.com>,
+	<georgia.garcia@canonical.com>, <zohar@linux.ibm.com>,
+	<roberto.sassu@huawei.com>, <dmitry.kasatkin@gmail.com>,
+	<eric.snowberg@oracle.com>, <stephen.smalley.work@gmail.com>,
+	<omosnacek@gmail.com>, <casey@schaufler-ca.com>, <takedakn@nttdata.co.jp>,
+	<penguin-kernel@i-love.sakura.ne.jp>, <xiujianfeng@huawei.com>,
+	<nanx95726@gmail.com>, <djwong@kernel.org>, <lujialin4@huawei.com>,
+	<bpf@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-security-module@vger.kernel.org>,
+	<driver-core@lists.linux.dev>, <linux-block@vger.kernel.org>,
+	<linux-fsdevel@vger.kernel.org>, <netfs@lists.linux.dev>,
+	<ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
+	<linux-nfs@vger.kernel.org>, <ntfs@lists.linux.dev>,
+	<linux-unionfs@vger.kernel.org>, <linux-cifs@vger.kernel.org>,
+	<linux-trace-kernel@vger.kernel.org>, <apparmor@lists.ubuntu.com>,
+	<linux-integrity@vger.kernel.org>, <selinux@vger.kernel.org>,
+	<linux-kselftest@vger.kernel.org>
+References: <20261015125425.3246251-1-caixinchen1@huawei.com>
+ <20261015125425.3246251-2-caixinchen1@huawei.com>
+ <20261021-nanotechnologie-gebadet-gepaukt-52a950759f0a@brauner>
+Content-Language: en-US
+From: Cai Xinchen <caixinchen1@huawei.com>
+In-Reply-To: <20261021-nanotechnologie-gebadet-gepaukt-52a950759f0a@brauner>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
+ whupemk100010.china.huawei.com (7.152.184.41)
 
-> - The hooks consistently take struct path rather than struct file.  The
->   VFS call sites involved (chmod(2), chown(2), utimensat(2), xattr(2)
->   and ACL syscalls) operate on paths, and several of them (lstat(2),
->   lchown(2), llistxattr(2), ...) have no struct file to begin with.
-> 
-> - struct inode_operations->setattr still receives (idmap, dentry, attr).
->   Only the VFS boundary (notify_change()) and the LSM hook layer see the
->   path, which keeps the refactor contained to fs/attr.c and the LSM
->   infrastructure instead of touching every filesystem.
+Thanks for the explanation, you are right.  I will restore the idmap as 
+a separate argument
 
-I have no problem with that provided:
-
-* all hooks take a const struct path argument
-* idmaps are passed separately so that VFS and filesystems are
-  guaranteed to see the same idmap
-* nobody gets any guarantees whatsoever wrt to path->mnt aka vfsmount
-
-  layout and implementation details might change tomorrow and mounts are
-  subtle beasts so the security layer gets to keep pieces if it does
-  things that the VFS hasn't explicitly sanctioned as a guaranteed
-  property. Things continue to be in flux.
+On 10/21/2026 6:21 PM, Christian Brauner wrote:
+> On Thu, Oct 15, 2026 at 08:54:07PM +0800, Cai Xinchen wrote:
+>> notify_change() takes a struct mnt_idmap and a struct dentry even
+>> though all of its callers either already hold a struct path (or a
+>> struct file) or have to pass &nop_mnt_idmap because no idmapped
+>> mount is involved.  Switch the helper and its declaration to take a
+>> struct path instead and derive the idmap and dentry from it.
+> No, the idmap needs to be passed separately. The whole point is that
+> during path lookup mnt->mnt_idmap can change. So mnt->mnt_idmap is taken
+> of the mount at the time it was checked and passed down to the
+> filesystem so that the VFS and the filesystem are guaranteed to see the
+> same idmap.
