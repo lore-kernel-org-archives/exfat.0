@@ -1,58 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=113.46.200.222
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792737104;
-	b=wz1O1oU9t8WyYRNfhgFrNx4PaWJ9lSeiiEqzfl94xJNFzvWVaoc7f05KNmGLLxEprZw5
-	 zrScWO1E0U8fIQ8wXLF7quZSW8ZjS7g5t5F2tbFKny7XiP1FMZa5qodjVFeJKG/BrHoHt
-	 f8FKIuriiS7qhpRNmG8PpWl3+DVWw7S5OWXCyqpPmIrNGk6HqRJzJdTTY01HdYxyvpXbj
-	 6HaDmVi6W7VHUZOsoaYYi+WoO3IRzu9per+z+Es271qTWBP3tI05b9houS1QJ7wpWEzKU
-	 7sexeHy1KzHl6mSPQdRrjE7AvM9v6HagVfA0/FcXwT3dEgh3Z8MgXpd0K/iV6lmcioQ==
+	t=1792815371;
+	b=hg8UCmsF/sgQBpwXRYUqKYJOyjKBakIQXXKJn9KXASqOCN8ZqDFU3Xpkc8qTgdTKs6Pm
+	 gr0vZrNrIhaKarko62GJmsVVbowA5f7mS6Yq3aQjiwEzerM4baKNxOsgbpqnV/8ecdfpS
+	 3N3Vd7EFYYVhnDFq6KeWkBVDjw5RpwzqWigCU6VsNVaWFgydJj3L7u/zxn0dzAYlZopv0
+	 hqHixAJD/GlyO7+0hk8m7rI+ZGdzUwUNI7BPzi4H3bLjo564ps0tX7knqvFI/QKN8BkQd
+	 b3zYjWNZtEWsTH5zH84DyulU5EIA33bE3bvsDSMZQe7fgQEs0FYhrHLGNNtkhJK1fSQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792737104;
-	h=DMARC-Filter:dkim-signature:Received:Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:CC:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
-	bh=33tGxL4pQ37PAm6R2PA7y86/iQoPs+fP5QCASbIaiW4=;
-	b=jyCfNX/9+H5yQkwskBT3ZGARxUxA/9LCOy0PtjrR0VTahkyNjJqWt4F1t38TgyEvzc/L
-	 re1tYzsgmu3Ancoz2sLPQa1ehdGLnD7/zmfUiD/br4LxDDN4CX0nYEWsru9+p+xe/3WwU
-	 CG4kGC1V+4ky9hHrkA0v4LoZHlXjHw7hmB/plee2NdU4JZVhJ051iLxlvN5Aa6SnxlDeT
-	 61c+Ck0Vkwsp8NR6ByAdByfFZDJnUmHPvWLEPjbpbuJ0m17wbn2CJo2qZe/B7R0TJ4cLs
-	 t0ALNuQOmIPsM1BKXhfjWyPcqb82zE+hSEkTKPyKMWPxuhy//yn7QtgK0/CTDzA7SOQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792815371;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:From:Date:
+	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type;
+	bh=SXl4qXucUpO2nRk0H166peGBD4WqAsS2yMHoUvCRwQg=;
+	b=bgb+x9+bsZCWYhrw18vYZdgF1aIR6FZWCGulAb7L8uqv8/zeaMQ2dQc/hi/K9rJw4bZK
+	 ozvK1fDFTnMNj8WSRyJ2jArk54kbWjZmhjFeYwdk0KkPU5PQUacE7lTSvV5RRYO7fMReu
+	 DCBreSi7B9SiMJWvK3Nf1f4LBRAaFK25O5CadTQemzRBpikx8B2OWoujy7iUFh7+4PClh
+	 n1DTUACLrc/3Y9k4B1Xfu2jxrOFZGlr07Wvgety+30k9llUOKdBVk895wssVXkHCXOXex
+	 JcRq7cG1o8mBoXfQ7qh34Zh637rtL29s9hskDF+4E29B4r0fwbzKh14A4ItMYRuri/A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=huawei.com;
-	spf=pass smtp.mailfrom=huawei.com;
-	dkim=pass header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=fjsQ8MHy;
-	arc=none smtp.remote-ip=113.46.200.222
-Received: from canpmsgout07.his.huawei.com (canpmsgout07.his.huawei.com [113.46.200.222])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z0mT3LLS;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B3E8606A31A;
-	Fri, 23 Oct 2026 06:31:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6B3E8606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C24D606A31A
+	for <exfat@lists.linux.dev>; Sat, 24 Oct 2026 04:16:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=fjsQ8MHy
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=33tGxL4pQ37PAm6R2PA7y86/iQoPs+fP5QCASbIaiW4=;
-	b=fjsQ8MHyFLg2DKpb+rChWOhrQ6Agx+aJ4B3WloBfzhk5I42lfFR8N28XAuSRbTqFZgHgChm3O
-	4OwNSVOJK87cDrNiMupTVhF9pAM7IdBGhA0OswOr1fHmf/8LmJiA8sNJ5JxoASQ+9LC7G7GDo6P
-	DlcW4ZEJB+N+XLWejTOA2kU=
-Received: from mail.maildlp.com (unknown [172.19.163.163])
-	by canpmsgout07.his.huawei.com (SkyGuard) with ESMTPS id 4j9tTJ65BLzLlX6;
-	Fri, 23 Oct 2026 14:31:32 +0800 (CST)
-Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
-	by mail.maildlp.com (Postfix) with ESMTPS id 10C6B40594;
-	Fri, 23 Oct 2026 14:31:36 +0800 (CST)
-Received: from [10.67.110.140] (10.67.110.140) by
- whupemk100010.china.huawei.com (7.152.184.41) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45; Fri, 23 Oct 2026 14:31:29 +0800
-Message-ID: <a2832263-3e3b-4d05-98bd-dc006d5be689@huawei.com>
-Date: Fri, 23 Oct 2026 14:31:28 +0800
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z0mT3LLS
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6CDB1F031E0
+	for <exfat@lists.linux.dev>; Sat, 24 Oct 2026 04:16:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792815369;
+	bh=SXl4qXucUpO2nRk0H166peGBD4WqAsS2yMHoUvCRwQg=;
+	h=From:Date:Subject:To:Cc;
+	b=Z0mT3LLSeT6yje8JLdBIclFMFTrObCGmlEEl0wms4Z1ArBshq/rV9L+kZ4FpjwLRD
+	 Jl4OckrDOvjhlyJfz5SA1KkHuCSzfrrnohXHBK8fJMPrCb2cjvnTlS2jkLLBULTeG/
+	 mOiNkvo4Rfxlwkt0XVRgoNau4a5lcUomF8EBnsgmWb+ced1lnfpXGfFlkMO5VeGfkZ
+	 81DUoiURec6ZRWxB7t+oG0VWdz7RUId6M/uKAS8m7o2JUrUzBAXydL4MEK8utfMU/3
+	 Ce0oYRr1PkSsr3IFMyo8uPjop3bY3RmvOvehv4x4QItB4TC2CqRMQNqT2eJ7KvwhKx
+	 QJrpaBvMCGK8Q==
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6a0794669a6so1934257a12.2
+        for <exfat@lists.linux.dev>; Fri, 23 Oct 2026 21:16:09 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBx7zBcRu4mUfGYOH98zQOQ2k21o8rFkjWhOkr2Mg6HDKiS4B3j40naqUmCSSBHPyhe+W1uOuw==@lists.linux.dev
+X-Gm-Message-State: AFq9FYKEIUAC4oXQIN47cLHn9ZLDWXIVgjP+NP49vhlZf86SDr73z61D
+	kJud5C2f0PuFHviabCVVcOO3utWw02VAqoa4VEZcduvf3h98kGLwrv9Sl7ePZYkHYtLrMgzK+oo
+	SPfWgLqdo0cFAyntaWT9r5YQGjm8zqw4=
+X-Received: by 2002:a17:907:3f12:b0:c42:3a77:80e5 with SMTP id
+ a640c23a62f3a-c46bde874e3mr100513066b.29.1792815368522; Fri, 23 Oct 2026
+ 21:16:08 -0700 (PDT)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -62,66 +59,138 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 -next 01/18] fs: pass struct path to notify_change()
-To: Christian Brauner <brauner@kernel.org>
-CC: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
-	<jmorris@namei.org>, <serge@hallyn.com>, <corbet@lwn.net>,
-	<skhan@linuxfoundation.org>, <ast@kernel.org>, <daniel@iogearbox.net>,
-	<andrii@kernel.org>, <eddyz87@gmail.com>, <memxor@gmail.com>,
-	<martin.lau@linux.dev>, <song@kernel.org>, <yonghong.song@linux.dev>,
-	<jolsa@kernel.org>, <emil@etsalapatis.com>, <ihor.solodrai@linux.dev>,
-	<rdunlap@infradead.org>, <gregkh@linuxfoundation.org>, <rafael@kernel.org>,
-	<dakr@kernel.org>, <johan@kernel.org>, <dlemoal@kernel.org>, <hch@lst.de>,
-	<axboe@kernel.dk>, <viro@zeniv.linux.org.uk>, <jack@suse.cz>,
-	<dhowells@redhat.com>, <code@tyhicks.com>, <linkinjeon@kernel.org>,
-	<sj1557.seo@samsung.com>, <yuezhang.mo@sony.com>,
-	<hirofumi@mail.parknet.co.jp>, <cel@kernel.org>, <jlayton@kernel.org>,
-	<neil@brown.name>, <okorniev@redhat.com>, <Dai.Ngo@oracle.com>,
-	<tom@talpey.com>, <hyc.lee@gmail.com>, <miklos@szeredi.hu>,
-	<amir73il@gmail.com>, <senozhatsky@chromium.org>,
-	<chenxiaosong@chenxiaosong.com>, <kpsingh@kernel.org>, <matt@bobrowski.net>,
-	<rostedt@goodmis.org>, <mhiramat@kernel.org>,
-	<mathieu.desnoyers@efficios.com>, <john.johansen@canonical.com>,
-	<georgia.garcia@canonical.com>, <zohar@linux.ibm.com>,
-	<roberto.sassu@huawei.com>, <dmitry.kasatkin@gmail.com>,
-	<eric.snowberg@oracle.com>, <stephen.smalley.work@gmail.com>,
-	<omosnacek@gmail.com>, <casey@schaufler-ca.com>, <takedakn@nttdata.co.jp>,
-	<penguin-kernel@i-love.sakura.ne.jp>, <xiujianfeng@huawei.com>,
-	<nanx95726@gmail.com>, <djwong@kernel.org>, <lujialin4@huawei.com>,
-	<bpf@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-security-module@vger.kernel.org>,
-	<driver-core@lists.linux.dev>, <linux-block@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>, <netfs@lists.linux.dev>,
-	<ecryptfs@vger.kernel.org>, <exfat@lists.linux.dev>,
-	<linux-nfs@vger.kernel.org>, <ntfs@lists.linux.dev>,
-	<linux-unionfs@vger.kernel.org>, <linux-cifs@vger.kernel.org>,
-	<linux-trace-kernel@vger.kernel.org>, <apparmor@lists.ubuntu.com>,
-	<linux-integrity@vger.kernel.org>, <selinux@vger.kernel.org>,
-	<linux-kselftest@vger.kernel.org>
-References: <20261015125425.3246251-1-caixinchen1@huawei.com>
- <20261015125425.3246251-2-caixinchen1@huawei.com>
- <20261021-nanotechnologie-gebadet-gepaukt-52a950759f0a@brauner>
-Content-Language: en-US
-From: Cai Xinchen <caixinchen1@huawei.com>
-In-Reply-To: <20261021-nanotechnologie-gebadet-gepaukt-52a950759f0a@brauner>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
- whupemk100010.china.huawei.com (7.152.184.41)
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Sat, 24 Oct 2026 13:15:56 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-2zfKDx1oKG7f1d=xo+ptVN-NiWGuhON-JvCmcDipLRg@mail.gmail.com>
+X-Gm-Features: AclHuK9pUClzoJ27m0y6KV8X9QDCEne1rP3ViC8dAZ3mP8-yh8GHc1Mm5R-Zc1E
+Message-ID: <CAKYAXd-2zfKDx1oKG7f1d=xo+ptVN-NiWGuhON-JvCmcDipLRg@mail.gmail.com>
+Subject: [GIT PULL] exfat update for 7.4-rc1
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, "Yuezhang.Mo" <Yuezhang.Mo@sony.com>, 
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, exfat@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
 
-Thanks for the explanation, you are right.  I will restore the idmap as 
-a separate argument
+Hi Linus,
 
-On 10/21/2026 6:21 PM, Christian Brauner wrote:
-> On Thu, Oct 15, 2026 at 08:54:07PM +0800, Cai Xinchen wrote:
->> notify_change() takes a struct mnt_idmap and a struct dentry even
->> though all of its callers either already hold a struct path (or a
->> struct file) or have to pass &nop_mnt_idmap because no idmapped
->> mount is involved.  Switch the helper and its declaration to take a
->> struct path instead and derive the idmap and dentry from it.
-> No, the idmap needs to be passed separately. The whole point is that
-> during path lookup mnt->mnt_idmap can change. So mnt->mnt_idmap is taken
-> of the mount at the time it was checked and passed down to the
-> filesystem so that the VFS and the filesystem are guaranteed to see the
-> same idmap.
+This is exfat update pull request for v7.4-rc1. I add a description of
+this pull request below. Please pull exfat with following ones.
+
+Thanks!
+
+The following changes since commit 4a8bdffce502d70405391a7ac38bac6dcef94749:
+
+  Merge tag 'x86_tdx_for_7.4-rc1' of
+git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip (2026-10-20
+12:17:47 -1000)
+
+are available in the Git repository at:
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/linkinjeon/exfat.git
+tags/exfat-for-7.4-rc1
+
+for you to fetch changes up to 8534eb11ac056dc2ca08007cf76d3ae7cbe42684:
+
+  exfat: fix reading a directory whose FAT chain is longer than its
+size (2026-10-21 08:28:32 +0900)
+
+----------------------------------------------------------------
+- Use the recalculated append position when advancing valid_size, dirty
+  all pages involved in valid-data extension, and zero invalid tails on
+  partial overwrites. Write-protect the folio spanning the old EOF and
+  zero its post-EOF range when extending a file, ensuring subsequent mmap
+  writes advance valid_size.
+
+- Make valid_size and zeroed_size atomic to prevent torn reads and lost
+  updates. Hold the invalidate lock during truncation, and drain in-flight
+  direct I/O before buffered writes, buffered fallback, and page-cache
+  operations that extend valid_size.
+
+- Fall back to single-cluster allocation when a buffered write cannot
+  allocate its entire range, allowing writes to consume the remaining
+  free space and return a short count.
+
+- Free clusters allocated beyond EOF after failed or short writes to
+  prevent leaked space and spurious ENOSPC errors on later writes or
+  file extensions.
+
+- Clean block-device buffer aliases when allocating clusters so delayed
+  directory metadata writeback cannot overwrite file data after cluster
+  reuse.
+
+- Update used_clusters as each cluster is allocated so partial-allocation
+  cleanup keeps free-space accounting consistent. Acquire bitmap_lock
+  before checking available space to serialize the check with allocation.
+
+- Use swap-specific iomap operations to report allocated extents beyond
+  valid_size as unwritten during swap activation, retaining byte-accurate
+  SEEK_HOLE and SEEK_DATA reporting in regular I/O.
+
+- Check allocation flags, vendor GUIDs, cluster numbers, data lengths,
+  and contiguous extents in Vendor Allocation directory entries. Read
+  complete entry sets during lookup so malformed trailing entries cannot
+  bypass validation.
+
+- Follow directory FAT chains to their actual end when the recorded size
+  is too small, supporting devices that leave directory sizes stale.
+  Handle reads after seeking past the directory end.
+
+- Clear the volume dirty flag during remount only when switching to
+  read-only without SB_FORCE. Update percent_in_use when changing volume
+  flags, reporting unknown usage while the volume is dirty or persistent
+  flags prevent marking it clean.
+
+- Replace runtime division by powers of two with bit operations.
+
+- Document supported mount options, and exfatprogs, and add
+  the documentation path to MAINTAINERS.
+
+----------------------------------------------------------------
+Chi Zhiling (7):
+      exfat: fix used_clusters accounting during cluster allocation
+      exfat: take bitmap_lock at the start of exfat_alloc_cluster()
+      exfat: clear the volume dirty flag only when remounting read-only
+      exfat: advance valid_size to EOF for append writes
+      exfat: hold the invalidate lock while truncating
+      exfat: dirty all new pages when extending valid_size
+      exfat: make valid_size and zeroed_size atomic
+
+David Timber (2):
+      exfat: update percent_in_use field when updating volume flags
+      exfat: remove runtime integer division
+
+Hengyu Liang (3):
+      exfat: fix a large buffered write failing when the volume is nearly full
+      exfat: free clusters beyond EOF when a write fails or is short
+      exfat: fix reading a directory whose FAT chain is longer than its size
+
+Jiale Yao (1):
+      exfat: drain in-flight DIO before buffered writes
+
+Namjae Jeon (4):
+      exfat: map allocated extents for swap activation
+      exfat: doc: add documentation
+      MAINTAINERS: add exFAT documentation
+      exfat: zero invalid tail on partial overwrites
+
+Nicolas Falesy (1):
+      exfat: clean stale bdev buffers of newly allocated clusters
+
+Yang Wen (1):
+      exfat: validate vendor allocation directory entries
+
+Yuezhang Mo (1):
+      exfat: mark straddling folio RO and zero the post-EOF range
+
+ Documentation/filesystems/exfat.rst | 117 ++++++++++++++++
+ Documentation/filesystems/index.rst |   1 +
+ MAINTAINERS                         |   1 +
+ fs/exfat/dir.c                      |  52 +++++++-
+ fs/exfat/exfat_fs.h                 |  89 ++++++++++--
+ fs/exfat/fatent.c                   |  46 +++++--
+ fs/exfat/file.c                     | 260 ++++++++++++++++++++----------------
+ fs/exfat/inode.c                    |  16 ++-
+ fs/exfat/iomap.c                    |  81 +++++++++--
+ fs/exfat/namei.c                    |  11 +-
+ fs/exfat/super.c                    |  30 ++++-
+ 11 files changed, 535 insertions(+), 169 deletions(-)
+ create mode 100644 Documentation/filesystems/exfat.rst
