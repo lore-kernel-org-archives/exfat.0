@@ -1,55 +1,131 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793094672;
-	b=fNhIiABIj4lmWj15yQd0pLqS3cAZlllUjom1Xkp71Kkbql65MORTi9s+qrWMOw9dxVHa
-	 2n6iZn28wgh6/7jE8lfIrZrKodVLL3a/sQ22pfAr1VMKMdI0kzzZOwMyD4bFTp34a83ya
-	 1JmeODb3Z5iYg4ic/A6+jNQW8i1opXdrHMUI5Fat3h9zfWo1I2p/4/x8k28IkIWGddPSZ
-	 yfGuwWS6ZFn6FjQyiMZtQZUlxlqiTD/KI04j8JnmaOUiIAPaHcLCjEDGkuqr053d41KP0
-	 5thOQazY3QFLh+4bgT3jxxAXJ5gLqHcfmmB36pATImcMlBJZUZOyBTPCwJUwHmzi1ow==
+	t=1793097879;
+	b=H06tsJ4zIC1pkWRiVRXu5yAjA7KS6ykNoOZQ6CLm4kvpePUH7mKYqKjOxQniAa39740Q
+	 nsAAPIOvCP/zWsQl3stJWVo4tpVGR2lVnCTD72EPb8OoUCWPblcM59yOJmOmctICBlhdj
+	 16icO8NuUcpiy7ZEmPMSEoKWAvcMdE3KohB1OV5EEBqYi1yVzc5DR+muFx9oT3rFPUZs7
+	 M6G/AfiDQLdjBdX632cG9uN0JyFgXZHXHs00rV21SVwraka/6A2vnmkwRO6zpl5nPYoXQ
+	 CpJOvKEgNR+FGqBiB5w7pPpAYyaDNNU6lDRaMGy7luEK0kP4AkNiF3TLRnaVMa05f7Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793094672;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=/Iui7zPu8QJA3RmxnGQty59dKNObjBKm8upySczrz4Q=;
-	b=w6M5ZVrs4QzMAauwiiPu6LGX+IjyZ4+YKsywrl5nl7gMKhlg1R2qeBl1UyfFgbYBEDa9
-	 FO//WYnpFDGdvtTA4hTDSJ7KwM2rlUdFyWCZ68pcXiXgViYLRDy0dMbYQHFES0fW2qSai
-	 Zifv6rnFALk4xSxvUbojE+GcVHrx/f7jrbRAPMetU4g6xQwJVbvLFqYUyZEgNZ5hAUBue
-	 5sfLZZiK+RShtDCywwNtg3d/2kmMA3a72ijI06fdB1JBtxT8hQ0Qnl1o7l1W0/uCXgVOv
-	 uQs7knVykqEb4ZsGo4/tt7ln/U1KlxMlozZkFUBJYVAeMukRrPPeSSutsB0kiO4P4GA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793097879;
+	h=Received:DKIM-Signature:Message-ID:Subject:From:To:Cc:Date:
+	 In-Reply-To:References:Autocrypt:Content-Type:
+	 Content-Transfer-Encoding:User-Agent:MIME-Version;
+	bh=VOku0TcLYfrW/DAPJZMDLhq37sTK+7BPMQhK2+Un/Hs=;
+	b=FiMGakAnN1s+0wGU1fP1ztqwV3Gh4BcyrNMJ8fTQDuKJKO3q5NYAwiE6EKCpG9ffxWaT
+	 p3ZzADlXSn6s8q1c2TpZtXAi8oYWipR7djXNsl79M6gHc3G1BIrIylcPKKF48+PkATp+V
+	 Btu73fwwfKxEGCbs1ZjGYpfGyg2mX0ALV/QZBvZwc4OufWTB0tRqNdvUPLzBqFHmArVqs
+	 1xWibLs5r5oLC3BDzbS4k44ddUxQEMrzfMIMtxGUtfxnbfjOkAwfZHVyQUZLM4uXFndwu
+	 ehsDeDH2//8i2ErAgmwaQmGxKNggps77m8iHpb62tEkBUIwCcaj/WXiIJNVVVqpxscg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="VioNUpK/";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="m7UU5Oy/";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89211606A31A
-	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 09:51:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B769606A31B;
+	Tue, 27 Oct 2026 10:44:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VioNUpK/
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6202D1F031E8
-	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 09:51:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m7UU5Oy/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DC4B1F01828;
+	Tue, 27 Oct 2026 10:44:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793094672;
-	bh=/Iui7zPu8QJA3RmxnGQty59dKNObjBKm8upySczrz4Q=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=VioNUpK/J5UmltJNCQOJ2haIDjRswQMIRtBqtnld16byc5fxifBNY4w4YWQTjHMri
-	 +GF3mlNLA5eaRmBa0lvBIsV2dZiuBelvPsS6sXuzamJSGXhjbQDW9HHhKTf0aZ94pw
-	 j6VogmSO7ejmBVuSn9vgFBYyhWROuVtMNcjw4awLErISZ1dHnbc6UIQ9TboT2SJZp2
-	 sLeMb8Sy5ST3GHrP7C0sgXUpG/CocjpzW74HnAsW0YPspjOSRqO1jlOcSyhtOx9dxT
-	 oNNAjKQw2nwO+u8yqDN1+CXgtO/nUvuLa39wFTRKte22kmqqwQ/aaOpsdQbO1tg+lI
-	 bpZRecEwIgNfw==
-Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-679aeeddc6bso4406144d50.2
-        for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 02:51:12 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzpkMZhFx0lYEfRX7ki8gMUb4gZCCJyVKHpNagN7TL9Zta4PvJ2D+XLKLuCMJe5SHLgVKCtww==@lists.linux.dev
-X-Gm-Message-State: AFq9FYKV7k3F0KbzHqdii0dPAbHKK159LkYSw+oMx9eONFsJbZewxhRR
-	gV5Rfw+JpM2uOq8w33NZ56bI10pR8nFUreH/ONIAkTxzNoq6lTAooq/dHg/5EOZ1UmVtrKtWOMt
-	riTy4pad8xyECqgCt/ekwE1bczGFbG30=
-X-Received: by 2002:a05:690e:b82:b0:66d:28d7:c33b with SMTP id
- 956f58d0204a3-67a6c56e468mr1319238d50.40.1793094671748; Tue, 27 Oct 2026
- 02:51:11 -0700 (PDT)
+	s=k20260515; t=1793097878;
+	bh=VOku0TcLYfrW/DAPJZMDLhq37sTK+7BPMQhK2+Un/Hs=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=m7UU5Oy/pq0zI0KSlgl/SZSQTVBA3saxOHZUT3N69jbt9iLfC7VDCsyjTqcSrwlee
+	 INR1zC/TXcKJba7WR0MdpzLA1LTKulOg/FUTN4lmdSizfIt6EpRIAQVa4eozT+Y6ah
+	 SbdvXS/fRNRoikk1W4EJXpNxKSckKilFFkdKhW8NoVOkHXi0efLv2bOTRqV5uKUgAx
+	 IzaRTKqHSJo9gW8sRkrB4wiJ1BX71AxuderZj0AWb8PfUxa4wMcUn68cVrh5LZaUeN
+	 M/TmulNzqX7jOqzj7X3KSDjMlW3hNGO7BT0TtlJ3bU5WAi956xh8Iod10802v/OeLD
+	 ngfWGk2LRX10g==
+Message-ID: <54dd1452c761cbeb9555b6ef5c8411aab0ac8001.camel@kernel.org>
+Subject: Re: [PATCH] exfat: preserve creation times during rename
+From: Jeff Layton <jlayton@kernel.org>
+To: Hungyu Lin <dennylin0707@gmail.com>, linkinjeon@kernel.org
+Cc: sj1557.seo@samsung.com, yuezhang.mo@sony.com, exfat@lists.linux.dev, 
+	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, jack@suse.cz
+Date: Tue, 27 Oct 2026 06:44:35 -0400
+In-Reply-To: <20261027091353.74642-1-dennylin0707@gmail.com>
+References: <20261027091353.74642-1-dennylin0707@gmail.com>
+Autocrypt: addr=jlayton@kernel.org; prefer-encrypt=mutual;
+ keydata=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
+ QZIQXVeAA+smfTT0tDrisj1U5x6ZB9b3nBg65kc=
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.2 (3.60.2-2.fc44) 
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -59,55 +135,56 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261027054740.1148201-1-chizhiling@163.com>
-In-Reply-To: <20261027054740.1148201-1-chizhiling@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Tue, 27 Oct 2026 18:50:57 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-W3xJqhcCdGmPvfmdVjsd5Y4BtUq3rDAwLHPodFMaP_g@mail.gmail.com>
-X-Gm-Features: AclHuK_akNj_NgVMQhdJeP82brdHyOSpzi_QEGSFy-4Pi_aOTIgOVcfj-Zrgaxc
-Message-ID: <CAKYAXd-W3xJqhcCdGmPvfmdVjsd5Y4BtUq3rDAwLHPodFMaP_g@mail.gmail.com>
-Subject: Re: [PATCH v2] exfat: drain dirty pages after forced shutdown
-To: Chi Zhiling <chizhiling@163.com>
-Cc: linux-kernel@vger.kernel.org, exfat@lists.linux.dev, 
-	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
-	Chi Zhiling <chizhiling@kylinos.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 27, 2026 at 2:47=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wr=
-ote:
->
-> From: Chi Zhiling <chizhiling@kylinos.cn>
->
-> A forced shutdown sets EXFAT_FLAGS_SHUTDOWN, after which
-> exfat_writepages() returns -EIO.  Pages dirtied before the shutdown can
-> then never be written back, so a writer throttled in
-> balance_dirty_pages() while extending valid_size sleeps forever.
->
-> Stuck stack:
->   balance_dirty_pages+0x4f0/0xb40
->   exfat_prepare_valid_range+0x43/0x140
->   exfat_file_write_iter+0x413/0x520
->   iter_file_splice_write+0x32d/0x5a0
->   direct_splice_actor+0x51/0x270
->   splice_direct_to_actor+0xf5/0x270
->   do_splice_direct+0x76/0xc0
->   vfs_copy_file_range+0x244/0x710
->   __do_sys_copy_file_range+0xe6/0x240
->   do_syscall_64+0x106/0x5f0
->   entry_SYSCALL_64_after_hwframe+0x77/0x7f
->
-> Do not reject writeback up front.  Reject it per folio from
-> ->writeback_range() instead: iomap then ends writeback and clears the
-> dirty state without issuing I/O, which lets the dirty limits drain and
-> unblocks the writer.
->
-> Write syscalls and page faults are still rejected in
-> exfat_file_write_iter() and exfat_page_mkwrite().  A write that is
-> already in progress may continue to dirty folios; writeback retires
-> them without I/O as described above.
->
-> Fixes: f761fcdd289d0 ("exfat: Implement sops->shutdown and ioctl")
-> Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
-Applied it to #dev.
-Thanks!
+On Tue, 2026-10-27 at 09:13 +0000, Hungyu Lin wrote:
+> exfat_rename() resets the destination parent directory's i_crtime after
+> every successful rename. A normal mv within that directory therefore
+> changes its STATX_BTIME, and the new creation time is also written to
+> disk. Moving a child does not recreate its parent directory.
+>=20
+> The function also resets i_crtime on an overwritten target inode. An
+> application holding an open file descriptor can observe its birth time
+> change even though it still refers to the same inode.
+>=20
+> Remove both creation-time updates. simple_rename_timestamp() already
+> updates the modification and change times required by rename, while
+> creation times should remain unchanged. Jeff Layton questioned these
+> updates during the timestamp accessor conversion, but they remain in
+> the current implementation.
+>=20
+> Fixes: 5f2aa075070c ("exfat: add inode operations")
+> Suggested-by: Jeff Layton <jlayton@kernel.org>
+> Link: https://lore.kernel.org/r/bb698e294b0d4dbbbad4b94048693360010b8010.=
+camel@kernel.org
+> Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+> ---
+>  fs/exfat/namei.c | 2 --
+>  1 file changed, 2 deletions(-)
+>=20
+> diff --git a/fs/exfat/namei.c b/fs/exfat/namei.c
+> index 68ddb9c5504f..d01280570f70 100644
+> --- a/fs/exfat/namei.c
+> +++ b/fs/exfat/namei.c
+> @@ -1293,7 +1293,6 @@ static int exfat_rename(const struct mnt_idmap *idm=
+ap,
+> =20
+>  	inode_inc_iversion(new_dir);
+>  	simple_rename_timestamp(old_dir, old_dentry, new_dir, new_dentry);
+> -	EXFAT_I(new_dir)->i_crtime =3D current_time(new_dir);
+>  	exfat_truncate_inode_atime(new_dir);
+>  	if (IS_DIRSYNC(new_dir) && size !=3D i_size_read(new_dir))
+>  		exfat_sync_inode(new_dir);
+> @@ -1331,7 +1330,6 @@ static int exfat_rename(const struct mnt_idmap *idm=
+ap,
+>  			exfat_warn(sb, "abnormal access to an inode dropped");
+>  			WARN_ON(new_inode->i_nlink =3D=3D 0);
+>  		}
+> -		EXFAT_I(new_inode)->i_crtime =3D current_time(new_inode);
+>  	}
+> =20
+>  unlock:
+
+To be clear, i_crtime is equivalent to the btime, so it shouldn't
+change on a rename.
+
+Reviewed-by: Jeff Layton <jlayton@kernel.org>
