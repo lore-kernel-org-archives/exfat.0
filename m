@@ -1,52 +1,52 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.252.183.203
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793088415;
-	b=BePJFftnGbfKF1fSMjgl58jen4tpaqJscxz3PNIK1GyyXEUXj+3ZBLEAjGqLLS7Hd4cH
-	 UpY/UAvguvfbSxyv0YmBm/NkyDUrp6AAnpe4TGsm+Z1CCsSj0iJ945pmY4iciKR9Ub/b4
-	 Ox/Z38J18NjzWQMf94rm3ksMx6i4BGapNZkIVlnI34niOwUR8FBbPS7XzJyco/fvmgflW
-	 c98ORW3CMX52EYHUgvLrmOGcAE89t5hxmWF8hTkYzO0doCjzDaBYB5xIL7dhIavjQkcfJ
-	 5XTUJEYV1okaa6oaUB14r6+P1yi8dN9QZoBW3CzvtmRbHv6EBz26yqJ7KCnseLMRgjg==
+	t=1793088417;
+	b=f2DF/XgPN26HfPJmS25f9hv+s/3G0tCsjtwXC8iLfcMJMcSAdxZmmLEbknexCPfHYpfi
+	 TV1So2LltBhdut49o9qxYF68HL1j/HtmZkKOE9IfILldfkfOFHMwp1E5TUk4nuHwdOH2J
+	 n5wGL7YQTJeD8iY8OTExu9E5Bj009rFD3mzQoI2nav73dvDVtqyJJ6tZ69Eo9T4mswBbh
+	 ITeccU/LEpHfEcK322HgSK863NOoefStZ1l+orWoNSqgkbCsrbG59G+KVtx0F8ajVoZ6M
+	 S8wqwsReoBR01Prb3QFafc7GTieO1GrjvObwtCHFn5MArW5ocg6ePUZGuB9Ee8zxBOA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793088415;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793088417;
 	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=tLeirfuubrcFgrIJlZqKJt3CMJCh/u/E9u/xwoGnin0=;
-	b=HKHRLt5fyn/BtwDVsvJzsHmh3luwkIuBmYY/QjUAk8z0McrNvZroSs8ctLEC1jcWeuPV
-	 49L2QCKyt2ejucX/Gyuvx/vVVJ3m4rtkqF0bikPoE0jvUr0yiMZhk/F7UGbDNWHmDzKSu
-	 xeTc7scp2C6TnCqcRPs0uUpxBdYJw5XU5ZxsYzIRMT2cBNjjyzC0R63SWfGyFbIEmrDXj
-	 txnBuU1imJT/giYBxnR5FhAE7awWqhKS07Ai5mYm5yjUsmJoILuJ8paGTR3flB+ABZpkU
-	 cixBOOa4uUw8WjrZhzWtJ3l6sh8B8BBPlw7OAlON7nHDa6NAdYWl/9dwzYQmVUAmNhA==
+	 Content-Transfer-Encoding;
+	bh=2genvBb+VE97dCUafXd1HmiNadZz7xFkkCm0mbZYDVM=;
+	b=DzaYCvUhiAMAU/CQ5Ij4IGMKYHQN7llup2o/ceiEokqpyqhxhbY1pvN0MuZYb03sVGTN
+	 PmsqZe1JJcP9i8FKsd1gT+GD6f/xPaZEFLutXu8rsNXqwz6HOTHW16eZGw1U3NuI4JFFP
+	 G4VOx8zXcUBGHnlrT7GRx8QBTk3huCeHznk/4hqhZzJasQJZBQ+XpdSeibMOOfg4NJoEb
+	 cE9EDyKL8Vec48QPuA2JQh4AH9Umljyq7WKC3sYgKr3PBBuz+o2F+L8NJSGf93nsnw8lM
+	 WKywNbGtA83Q5VGtZPUB0bzi38rVgV1ntA5Ghz3uW4cdl2g6iudSGmDn15fkPGiEmsg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=dev.snart.me;
 	spf=pass smtp.mailfrom=dev.snart.me;
-	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=kuc8BDaM;
+	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=a5KNUCr8;
 	arc=none smtp.remote-ip=54.252.183.203
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3FFE606A31E
-	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 08:06:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F3FFE606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 967B8606A326
+	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 08:06:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 967B8606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=kuc8BDaM
+	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=a5KNUCr8
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 8F74C1D47B;
-	Tue, 27 Oct 2026 08:06:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 8F74C1D47B
+	by embla.dev.snart.me (Postfix) with ESMTP id 225C71D47C;
+	Tue, 27 Oct 2026 08:06:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 225C71D47C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1793088413; bh=L7iQcsvaZZpKfAtuHbpO6pu9WxMNP8mQu0cfXz2iIjg=;
+	t=1793088415; bh=crqdj5hcbB/wKd7Njw7op5pGsjaKpcwTftNfj2+0SUc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=kuc8BDaMXbU2ZAj96Vxf74Phf4QieXV2M+AwH8oNjneAcu4cp0o9Qjr2fjkPC8+6n
-	 J/jnezCE1y+Ue+saFKVbFQzFx5ZBWy4gaWZwkAHtgPzpScJjdfBoZs0HiX+dBua1+x
-	 Rsdttfti2jsUgetYqi5dGMePS3Iv3QwcoZgGtdY8=
+	b=a5KNUCr8BiyAGrrWjh0407bWFHJb4t8ftqX17LXgUIKeoJPEPyzbkZoSbW+2g4Lr9
+	 JvLXwBfo+NhAlkCLp7td4Dt2NPA3HL/lya2j8muPeBGFb08yZNsBBveXH+RBETQChu
+	 2VqH9BEFTfYgeLrx7jAxYUlTcDBLS9ixx7T3a0ow=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id LI3iAZZb4Gr2bwEA8KYfjw:T5
-	(envelope-from <dxdt@dev.snart.me>); Tue, 27 Oct 2026 08:06:52 +0000
+	id LI3iAZZb4Gr2bwEA8KYfjw:T6
+	(envelope-from <dxdt@dev.snart.me>); Tue, 27 Oct 2026 08:06:53 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Hyunchul Lee <hyc.lee@gmail.com>
@@ -54,9 +54,9 @@ Cc: exfat@lists.linux.dev,
 	Yang Wen <anmuxixixi@gmail.com>,
 	"sofine . ljm" <sofine.ljm@gmail.com>,
 	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH 5/7] fsck: add test script for EIO handling
-Date: Tue, 27 Oct 2026 08:06:22 +0000
-Message-ID: <20261027080628.82069-5-dxdt@dev.snart.me>
+Subject: [PATCH 6/7] tests: add suite0000-dump-arch for CPU arch info
+Date: Tue, 27 Oct 2026 08:06:23 +0000
+Message-ID: <20261027080628.82069-6-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261027080628.82069-1-dxdt@dev.snart.me>
 References: <20261027080628.82069-1-dxdt@dev.snart.me>
@@ -69,194 +69,84 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-To test the feature introduced in commit 949da8b46e3f ("libexfat, fsck:
-exit() upon I/O error during fsck"), add a script to test if fsck.exfat
-leaves the contents of the filesystem intact upon encountering EIO.
-
-Prior to the patch, where EIO is not handled properly, fsck.exfat
-modified the filesystem which resulted in the volume in a broken state
-or, in some cases, data loss. The script tests fsck.exfat by setting
-each sector of the test device bad.
-
-The script is not integrated to the CI due to performance issues. On a
-reasonably prices machine, the script finishes in 12 hours or even more.
+Add a dummy test suite for recording information on the CPU arch being
+tested on the CI pipeline. This is for porting the project to new
+hardware platforms.
 
 Signed-off-by: David Timber <dxdt@dev.snart.me>
 ---
- scripts/test-bads.sh | 161 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 161 insertions(+)
- create mode 100755 scripts/test-bads.sh
+ lib/Makefile.am                 |  7 ++++--
+ lib/tests/suite0000-dump-arch.c | 41 +++++++++++++++++++++++++++++++++
+ 2 files changed, 46 insertions(+), 2 deletions(-)
+ create mode 100644 lib/tests/suite0000-dump-arch.c
 
-diff --git a/scripts/test-bads.sh b/scripts/test-bads.sh
-new file mode 100755
-index 0000000..978efb7
+diff --git a/lib/Makefile.am b/lib/Makefile.am
+index 4e9a183..484f0b2 100644
+--- a/lib/Makefile.am
++++ b/lib/Makefile.am
+@@ -3,8 +3,11 @@ noinst_LIBRARIES = libexfat.a
+ 
+ libexfat_a_SOURCES = libexfat.c exfat_fs.c exfat_dir.c utils.c
+ 
+-check_PROGRAMS = tests/suite0000-bitmap tests/suite0001-parse
+-TESTS = tests/suite0000-bitmap tests/suite0001-parse
++check_PROGRAMS = tests/suite0000-bitmap tests/suite0000-dump-arch tests/suite0001-parse
++TESTS = tests/suite0000-bitmap tests/suite0000-dump-arch tests/suite0001-parse
++
++tests_suite0000_dump_arch_SOURCES = tests/suite0000-dump-arch.c
++tests_suite0000_dump_arch_LDADD = libexfat.a
+ 
+ tests_suite0000_bitmap_SOURCES = tests/suite0000-bitmap.c
+ tests_suite0000_bitmap_LDADD = libexfat.a
+diff --git a/lib/tests/suite0000-dump-arch.c b/lib/tests/suite0000-dump-arch.c
+new file mode 100644
+index 0000000..a658013
 --- /dev/null
-+++ b/scripts/test-bads.sh
-@@ -0,0 +1,161 @@
-+#!/bin/bash
-+# Test EIO bail out behaviour of fsck.exfat: fsck.exfat mustn't modify the
-+# volume with no issues just because the underlying hardware is faulty. The
-+# script requires root privileges for dmsetup. Please run it on a VM.
-+#
-+#   1. Set up a loop device
-+#   2. Format the loop device
-+#   3. Mount the loop device
-+#   4. Populate a deep directory structure on the device
-+#   5. Unmount the device
-+#   6. Control run: run fsck.exfat on the device(expect exit code 0)
-+#   7. Hash the loop device (to ensure no modification of the filesystem upon EIO)
-+#   8. Set up a dm-dust device
-+#   9. For each logical sector of the device
-+#      a. Set the sector "read" bad (write should succeed)
-+#      b. Run fsck.exfat ...
-+#      c. Hash the loop device and confirm no modification of the device contents
-+#
-+# This is brute force testing so the script is quite slow even on
-+# enterprise-grade machines. To run the test in parallel, use the 1st and the
-+# 2nd args, which are the badblock offset and the step, respectively. For
-+# example, to run two instances in parallel,
-+#
-+#   ./test-bads.sh 0 2 &
-+#   ./test-bads.sh 1 2 &
-+#
-+set -e
-+declare -r PRINTABLES=( {a..z} {A..Z} {0..9} )
-+declare -r PRINTABLES_CNT=${#PRINTABLES[@]}
-+# parallel run params
-+[ -z "$1" ] && declare -r RUN_OFS="0" || declare -r RUN_OFS="$1"
-+[ -z "$2" ] && declare -r RUN_STEP="1" || declare -r RUN_STEP="$2"
++++ b/lib/tests/suite0000-dump-arch.c
+@@ -0,0 +1,41 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Prints attributes like integer widths and endianness to record the arch being
++ * tested. The actual CPU arch being tested is not identified and the code is
++ * arch agnostic for future proofing.
++ *
++ * The program always returns zero.
++ */
++#include <stdio.h>
++#include <inttypes.h>
++#include <limits.h>
++#include <config.h>
 +
-+declare -r IMG_FILE="$(mktemp)"
-+declare -r IMG_BACKUP="$(mktemp)"
-+declare -r IMG_SIZE="67108864"
-+declare -r IMG_SS=$((IMG_SIZE / 512))
-+declare -r LOOP="/dev/disk/by-loop-inode/$(stat -c '%Hd:%Ld-%i' "$IMG_FILE")"
-+[ -z "$MKFS_EXFAT" ] && MKFS_EXFAT="mkfs.exfat"
-+[ -z "$FSCK_EXFAT" ] && FSCK_EXFAT="fsck.exfat"
-+declare -r DUST_NAME="dustexfatbads$RUN_OFS"
++#ifdef WORDS_BIGENDIAN
++#define IS_BIGENDIAN	(1)
++#else
++#define IS_BIGENDIAN	(0)
++#endif
 +
-+hash_img()
++int main(void)
 +{
-+	# Use CRC32C for speed. Ignore LBA 0 which contains volume dirty flag
-+	dd status=none if="$1" skip=1 | rhash --one-hash -C -
++	printf(	"\n"
++		"CHAR_BIT:  %d\n"
++		"BIGENDIAN: %d\n"
++		"uintptr_t: %zu\n"
++		"size_t:    %zu\n"
++		"short:     %zu\n"
++		"int:       %zu\n"
++		"long:      %zu\n" /* for detecting LLP64 model(MSVC) */
++		"long long: %zu\n",
++		CHAR_BIT,
++		IS_BIGENDIAN,
++		sizeof(uintptr_t),
++		sizeof(size_t),
++		sizeof(short),
++		sizeof(int),
++		sizeof(long),
++		sizeof(long long));
++
++	return 0;
 +}
-+
-+get_rand_name()
-+{
-+	local cnt="$1"
-+	local ret=""
-+
-+	for (( i = 0; i < cnt; i++ ))
-+	do
-+		ret="$ret${PRINTABLES[RANDOM % PRINTABLES_CNT]}"
-+	done
-+
-+	echo "$ret"
-+}
-+
-+bomb_dir()
-+{
-+	local -r TLDS=(
-+		"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-+		"天下皆知美之為美，斯惡已；皆知善之為善，斯不善已。故有無相生，難易相成，長短相形，高下相傾，音聲相和，前後相隨。"
-+		"吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。"
-+		"모든인간은태어날때부터자유로우며그존엄과권리에있어동등하다.인간은천부적으로이성과양심을부여받았으며서로형제애의정신으로행동하여야한다."
-+	)
-+
-+	for tld in "${TLDS[@]}"
-+	do
-+		mkdir -p "$tld"
-+		pushd "$tld" > /dev/null
-+
-+		mkdir -p {a,b,c}/{1,2,3}/{X,Y,Z}
-+		set -o pipefail
-+		find -mindepth 1 -type d | while read dir
-+		do
-+			pushd "$dir" > /dev/null
-+			for (( i = 0; i < 64; i++ ))
-+			do
-+				truncate -s $((i + 1)) "f-$(get_rand_name $i)"
-+			done
-+			popd > /dev/null
-+		done
-+		set +o pipefail
-+
-+		popd > /dev/null
-+	done
-+}
-+
-+cleanup()
-+{
-+	dmsetup remove "$DUST_NAME"
-+	udisksctl loop-delete -b "$LOOP"
-+	rm -f "$IMG_FILE" "$IMG_BACKUP"
-+}
-+
-+dmsetup remove "$DUST_NAME" > /dev/null 2> /dev/null || true
-+
-+fallocate -l "$IMG_SIZE" "$IMG_FILE"
-+"$MKFS_EXFAT" "$IMG_FILE"
-+
-+set +e
-+udisksctl loop-setup --file "$IMG_FILE"
-+ec=$?
-+if [ "$ec" -ne 0 ]; then
-+	exit "$ec"
-+fi
-+set -e
-+
-+udisksctl mount -b "$LOOP"
-+declare -r MP="$(findmnt "$LOOP" -no TARGET)"
-+
-+pushd "$MP"
-+bomb_dir
-+popd
-+
-+udisksctl unmount -b "$LOOP"
-+
-+cat "$IMG_FILE" > "$IMG_BACKUP"
-+declare -r HASH="$(hash_img "$LOOP")"
-+echo "image: $IMG_FILE"
-+echo "backup: $IMG_BACKUP"
-+
-+"$FSCK_EXFAT" -y "$IMG_FILE"
-+
-+if [ "$HASH" != "$(hash_img "$LOOP")" ]
-+then
-+	echo "FAIL: the filesystem implementation corrupted the filesystem or there's a problem in fsck.exfat" >&2
-+	exit 1
-+fi
-+
-+dmsetup create "$DUST_NAME" --table "0 $IMG_SS dust $LOOP 0 512"
-+dmsetup message "$DUST_NAME" 0 enable
-+
-+set +e
-+
-+for (( i = RUN_OFS; i < IMG_SS; i += RUN_STEP ))
-+do
-+	dmsetup message "$DUST_NAME" 0 addbadblock "$i"
-+	valgrind -q --error-exitcode=100 "$FSCK_EXFAT" -y "/dev/mapper/$DUST_NAME" > /dev/null
-+	ec=$?
-+	dmsetup message "$DUST_NAME" 0 removebadblock "$i" > /dev/null 2> /dev/null
-+	sync "/dev/mapper/$DUST_NAME"
-+
-+	if [ "$HASH" != "$(hash_img "$LOOP")" ]
-+	then
-+		echo "FAIL: fsck.exfat modified the filesystem (badblock: $i)" >&2
-+		exit 1
-+	elif [ "$ec" -eq 100 ]
-+	then
-+		# Didn't modify the volume but there's a memory bug??
-+		echo "FAIL: fsck.exfat experienced memory error (badblock: $i)" >&2
-+		exit 1
-+	fi
-+done
-+
-+echo "OK: fsck.exfat does not modify the filesystem on EIO"
-+cleanup
 -- 
 2.56.0
 
