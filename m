@@ -1,52 +1,52 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.252.183.203
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793088417;
-	b=f2DF/XgPN26HfPJmS25f9hv+s/3G0tCsjtwXC8iLfcMJMcSAdxZmmLEbknexCPfHYpfi
-	 TV1So2LltBhdut49o9qxYF68HL1j/HtmZkKOE9IfILldfkfOFHMwp1E5TUk4nuHwdOH2J
-	 n5wGL7YQTJeD8iY8OTExu9E5Bj009rFD3mzQoI2nav73dvDVtqyJJ6tZ69Eo9T4mswBbh
-	 ITeccU/LEpHfEcK322HgSK863NOoefStZ1l+orWoNSqgkbCsrbG59G+KVtx0F8ajVoZ6M
-	 S8wqwsReoBR01Prb3QFafc7GTieO1GrjvObwtCHFn5MArW5ocg6ePUZGuB9Ee8zxBOA==
+	t=1793088418;
+	b=SNTJXTZlJy4zIUO9bR3NURN3ULeRcT8tzHXq/ml6QkKA3HraEvp/zjqqUlu/Mk57lRNs
+	 YW3GMqQvpyzF8VxK0CUpdC9ijnFhdff0ovq4jHWKrZhc8JO/Wx9VhSezCK+4ZpET2i9Nr
+	 hK4KOF4RiT5QIofd54ntiPAzYWaFHmC8jLUojziSxu2Mnm++pqhogxL0QFj8Y8TBjblt2
+	 h/j8SlpGuDNgCH7xtCMf6J9A0Dt47ndbtnkejOrdrk8kPtowxZhvULUMPpcUZqqXiz7rg
+	 SGh31oDGWACqdUKCSx0uRUZJmCVmMu16RkvSKCcXBHdI957TenOKenM5Cm5a2+gcZ7A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793088417;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793088418;
 	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:From:To:Cc:
 	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=2genvBb+VE97dCUafXd1HmiNadZz7xFkkCm0mbZYDVM=;
-	b=DzaYCvUhiAMAU/CQ5Ij4IGMKYHQN7llup2o/ceiEokqpyqhxhbY1pvN0MuZYb03sVGTN
-	 PmsqZe1JJcP9i8FKsd1gT+GD6f/xPaZEFLutXu8rsNXqwz6HOTHW16eZGw1U3NuI4JFFP
-	 G4VOx8zXcUBGHnlrT7GRx8QBTk3huCeHznk/4hqhZzJasQJZBQ+XpdSeibMOOfg4NJoEb
-	 cE9EDyKL8Vec48QPuA2JQh4AH9Umljyq7WKC3sYgKr3PBBuz+o2F+L8NJSGf93nsnw8lM
-	 WKywNbGtA83Q5VGtZPUB0bzi38rVgV1ntA5Ghz3uW4cdl2g6iudSGmDn15fkPGiEmsg==
+	bh=VQqi7BDCI7CEW4+DA/qLdqtA4L8JZnxHXtDPC1Mvask=;
+	b=cQ3bJs0vBTglcm4OdHzIiQKjDOGoYu7I/mtuPVBbp9KleIdbSVq7fRaOaybZxBAnMs5H
+	 YSof2QcvRJ7gggIVbnrx5SYWRk6hpsi+wjqP30e9RvikPo7y3S6Sl4hk367lvjM1/9s3K
+	 ACqo6NAZQVzS1CK3oKmPUHldq7gNE9uIPvLFKCwzz41SCHcViG3r4K3Mtkobns9XKeBWh
+	 zTFVxxdoWZp67NR8VZThIqTFENgtDij3YS0NwghBx4ev4XTCbS57V71kwdQPc27/pmCVE
+	 PEfakEIWqZqdcBP2VpUoG5a7zF6SdOUuLqBGhPSt18swISK+ln0ox0D95O+T7ww5T/w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=dev.snart.me;
 	spf=pass smtp.mailfrom=dev.snart.me;
-	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=a5KNUCr8;
+	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=C6281RC1;
 	arc=none smtp.remote-ip=54.252.183.203
 Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 967B8606A326
-	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 08:06:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 967B8606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41A32606A31B
+	for <exfat@lists.linux.dev>; Tue, 27 Oct 2026 08:06:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 41A32606A31B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=a5KNUCr8
+	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=C6281RC1
 Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 225C71D47C;
-	Tue, 27 Oct 2026 08:06:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 225C71D47C
+	by embla.dev.snart.me (Postfix) with ESMTP id A8B901D485;
+	Tue, 27 Oct 2026 08:06:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me A8B901D485
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1793088415; bh=crqdj5hcbB/wKd7Njw7op5pGsjaKpcwTftNfj2+0SUc=;
+	t=1793088416; bh=Z4K4+OVWYBIxhyEDptnyCowbYzt0GRcaV4OO9W3j9AM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=a5KNUCr8BiyAGrrWjh0407bWFHJb4t8ftqX17LXgUIKeoJPEPyzbkZoSbW+2g4Lr9
-	 JvLXwBfo+NhAlkCLp7td4Dt2NPA3HL/lya2j8muPeBGFb08yZNsBBveXH+RBETQChu
-	 2VqH9BEFTfYgeLrx7jAxYUlTcDBLS9ixx7T3a0ow=
+	b=C6281RC1TKWhTJkavmFi5rUbPfxbNIei7LmRedF67ZOs3LdlGa/fmuA5NEgjV98nI
+	 Nz/c1OdFdzcmyiDg+lJTlbpv9/Cc4Z8INyya3G5ISPLsXPxZa0KP4ROGtdQ2vSIKlK
+	 knByyykoNJrB9thMviU2pQbBKOMatiipvaVnoFHo=
 Received: from maya.d.snart.me ([182.226.25.243])
 	by embla.dev.snart.me with ESMTPSA
-	id LI3iAZZb4Gr2bwEA8KYfjw:T6
-	(envelope-from <dxdt@dev.snart.me>); Tue, 27 Oct 2026 08:06:53 +0000
+	id LI3iAZZb4Gr2bwEA8KYfjw:T7
+	(envelope-from <dxdt@dev.snart.me>); Tue, 27 Oct 2026 08:06:55 +0000
 From: David Timber <dxdt@dev.snart.me>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Hyunchul Lee <hyc.lee@gmail.com>
@@ -54,9 +54,9 @@ Cc: exfat@lists.linux.dev,
 	Yang Wen <anmuxixixi@gmail.com>,
 	"sofine . ljm" <sofine.ljm@gmail.com>,
 	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH 6/7] tests: add suite0000-dump-arch for CPU arch info
-Date: Tue, 27 Oct 2026 08:06:23 +0000
-Message-ID: <20261027080628.82069-6-dxdt@dev.snart.me>
+Subject: [PATCH 7/7] Github Actions: bump to Ubuntu 26.04 runner
+Date: Tue, 27 Oct 2026 08:06:24 +0000
+Message-ID: <20261027080628.82069-7-dxdt@dev.snart.me>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261027080628.82069-1-dxdt@dev.snart.me>
 References: <20261027080628.82069-1-dxdt@dev.snart.me>
@@ -71,82 +71,94 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a dummy test suite for recording information on the CPU arch being
-tested on the CI pipeline. This is for porting the project to new
-hardware platforms.
+Github rolled out 26.04 for the "ubuntu-latest" runner, breaking the CI
+pipeline due to deprecated and missing packages used, one of which being
+MIPS.
+
+Replace MIPS emulation with SPARC64 for big-endian tests. Avoid using
+the -E option of sudo that's been removed in Ubuntu 26.04. Do not
+install other packages that have been removed.
 
 Signed-off-by: David Timber <dxdt@dev.snart.me>
 ---
- lib/Makefile.am                 |  7 ++++--
- lib/tests/suite0000-dump-arch.c | 41 +++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+), 2 deletions(-)
- create mode 100644 lib/tests/suite0000-dump-arch.c
+ .github/workflows/c-cpp.yml | 29 ++++++++++++-----------------
+ 1 file changed, 12 insertions(+), 17 deletions(-)
 
-diff --git a/lib/Makefile.am b/lib/Makefile.am
-index 4e9a183..484f0b2 100644
---- a/lib/Makefile.am
-+++ b/lib/Makefile.am
-@@ -3,8 +3,11 @@ noinst_LIBRARIES = libexfat.a
+diff --git a/.github/workflows/c-cpp.yml b/.github/workflows/c-cpp.yml
+index d2f0a5a..3cf5d63 100644
+--- a/.github/workflows/c-cpp.yml
++++ b/.github/workflows/c-cpp.yml
+@@ -64,7 +64,6 @@ jobs:
+         sudo apt-get --update --quiet --yes install \
+              linux-headers-$(uname -r) xz-utils \
+              valgrind libblkid-dev ${{ matrix.cc }}
+-        sudo apt-get install -y linux-modules-extra-$(uname -r)
+     - name: Build
+       run: |
+         export "CC=${{ matrix.cc }}"
+@@ -80,9 +79,10 @@ jobs:
+     - name: Run fsck with Valgrind
+       run: |
+         pushd tests
+-        export FSCK1="valgrind --error-exitcode=1 ../fsck/fsck.exfat"
+-        export FSCK2="valgrind --error-exitcode=1 ../fsck/fsck.exfat"
+-        sudo -E ./test_fsck.sh
++        sudo \
++          FSCK1="valgrind --error-exitcode=1 ../fsck/fsck.exfat" \
++          FSCK2="valgrind --error-exitcode=1 ../fsck/fsck.exfat" \
++            ./test_fsck.sh
+         popd
+     - name: Run the rest with Valgrind
+       shell: bash
+@@ -163,11 +163,11 @@ jobs:
+       fail-fast: false
+       matrix:
+         include:
+-          - host: mips-linux-gnu
+-            qemu: qemu-system-mips
+-            gcc:  gcc-mips-linux-gnu
+-            run:  qemu-mips
+-            name: mips
++          - host: sparc64-linux-gnu
++            qemu: qemu-system-sparc
++            gcc:  gcc-sparc64-linux-gnu
++            run:  qemu-sparc64
++            name: sparc
+           - host: x86_64-linux-gnu
+             qemu: qemu-system-x86
+             gcc:  gcc-x86-64-linux-gnu
+@@ -186,7 +186,6 @@ jobs:
+              cryptsetup parted dosfstools e2fsprogs btrfs-progs f2fs-tools ntfs-3g xfsprogs \
+              ${{ matrix.gcc }} ${{ matrix.qemu }} \
+              qemu-user qemu-utils
+-        sudo apt-get install -y linux-modules-extra-$(uname -r)
+         export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+         export PATH=/usr/local/lib:$PATH
  
- libexfat_a_SOURCES = libexfat.c exfat_fs.c exfat_dir.c utils.c
- 
--check_PROGRAMS = tests/suite0000-bitmap tests/suite0001-parse
--TESTS = tests/suite0000-bitmap tests/suite0001-parse
-+check_PROGRAMS = tests/suite0000-bitmap tests/suite0000-dump-arch tests/suite0001-parse
-+TESTS = tests/suite0000-bitmap tests/suite0000-dump-arch tests/suite0001-parse
-+
-+tests_suite0000_dump_arch_SOURCES = tests/suite0000-dump-arch.c
-+tests_suite0000_dump_arch_LDADD = libexfat.a
- 
- tests_suite0000_bitmap_SOURCES = tests/suite0000-bitmap.c
- tests_suite0000_bitmap_LDADD = libexfat.a
-diff --git a/lib/tests/suite0000-dump-arch.c b/lib/tests/suite0000-dump-arch.c
-new file mode 100644
-index 0000000..a658013
---- /dev/null
-+++ b/lib/tests/suite0000-dump-arch.c
-@@ -0,0 +1,41 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Prints attributes like integer widths and endianness to record the arch being
-+ * tested. The actual CPU arch being tested is not identified and the code is
-+ * arch agnostic for future proofing.
-+ *
-+ * The program always returns zero.
-+ */
-+#include <stdio.h>
-+#include <inttypes.h>
-+#include <limits.h>
-+#include <config.h>
-+
-+#ifdef WORDS_BIGENDIAN
-+#define IS_BIGENDIAN	(1)
-+#else
-+#define IS_BIGENDIAN	(0)
-+#endif
-+
-+int main(void)
-+{
-+	printf(	"\n"
-+		"CHAR_BIT:  %d\n"
-+		"BIGENDIAN: %d\n"
-+		"uintptr_t: %zu\n"
-+		"size_t:    %zu\n"
-+		"short:     %zu\n"
-+		"int:       %zu\n"
-+		"long:      %zu\n" /* for detecting LLP64 model(MSVC) */
-+		"long long: %zu\n",
-+		CHAR_BIT,
-+		IS_BIGENDIAN,
-+		sizeof(uintptr_t),
-+		sizeof(size_t),
-+		sizeof(short),
-+		sizeof(int),
-+		sizeof(long),
-+		sizeof(long long));
-+
-+	return 0;
-+}
+@@ -288,12 +287,8 @@ jobs:
+     - name: run fsck repair testcases
+       run: |
+         pushd tests
+-        export FSCK1="${{ matrix.run }} ../fsck/fsck.exfat"
+-        export FSCK2="fsck.exfat"
+-        sudo -E ./test_fsck.sh
+-        export FSCK1="fsck.exfat"
+-        export FSCK2="${{ matrix.run }} ../fsck/fsck.exfat"
+-        sudo -E ./test_fsck.sh
++        sudo FSCK1="${{ matrix.run }} ../fsck/fsck.exfat" FSCK2="fsck.exfat" ./test_fsck.sh
++        sudo FSCK1="fsck.exfat" FSCK2="${{ matrix.run }} ../fsck/fsck.exfat" ./test_fsck.sh
+         popd
+     - name: dentry creation/deletion stress test
+       shell: bash
+@@ -450,7 +445,7 @@ jobs:
+       fail-fast: false
+       matrix:
+         os: [windows-2022, windows-latest]
+-        name: [mips, i686, x86_64]
++        name: [sparc, i686, x86_64]
+     runs-on: ${{ matrix.os }}
+     steps:
+     - uses: actions/download-artifact@v8
 -- 
 2.56.0
 
