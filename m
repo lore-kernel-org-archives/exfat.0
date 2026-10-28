@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.170
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793196717;
-	b=z+djXIu3Znbxd8ZRTyaQMkDtirliQSEZd7ayOT31N5AC6MiMnPoA/XBJjIJg0enSi8Fn
-	 V7bB5qMBDw6NnoTpKTbXbLB6wCcqf3Y9XaToOr0CPgC3/yx3N8t4q4PViqbRPslZ634SF
-	 ouMemcbgwGkiVfT8G7jj89eJY0+unA86hjnexJLOjEz2VMrytK+Q4sP7DkNXBQ1wkSIVe
-	 +Ecy5pZwU0UDMU0vv3T4TxJC66AH9/FaTob3MWk/hLf1NHotTNTTWuPG9hHVMOjsJlGNp
-	 dJLK9IBOoGOtZAtfALswHebXsbaMZ5zNgAU+iSurYEN5JsqUKRQfQDpkI7iVI2IWFrA==
+	t=1793199463;
+	b=MLUUIoWXF9rUcXUKjbJ5C7ViFeL3YxBBU4hqGMIKWywzLpkMPwUP2gwkDZF4WMfxnH5l
+	 n9pYcNHdNR3iDpo2LfbcjDWmZ07RAxvw6x7Bz/4DussteTbDlWof98BTCPk0LeVcx0VX+
+	 RSZmIwTAEOZjIwOIU5Vc+ne7D0O3D16z8+rLyVgi8P18IYmqOr7N2JrT9b15gWURhk0Lz
+	 VT2T8EK+UnTvr82WxSvNMgz/eYV9c+8Vi/tgI1duqRY3g2XhgAfCMU5h65zrjICagEc3H
+	 mBVXTV0sC7rZV00Vo/b8j0GbYN8+6IGxB0HTlvnlH1/qHtTuBgApgDjO9KUBOLboWqg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793196717;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793199463;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=U8ZX8TANpmLVaMNSrcwf06iPcEkA3/rfw0CYh7jgRSE=;
-	b=5iZ7FRWqeQWYeeltI/LEoj/QPHD6y6SGZQKxktN7/pXCf+Tp5YfnHlCn2LDN/rNoWmIt
-	 Y/ooAtYqC64/lKDwBOD1DxYo9ncVZ6PXXCZLxAwzoziyAVCdLbuBWS13hjmR8f0NasPWu
-	 Wewcrf/y9eEI6vqYP3BpMfgDqmTH/je/RDJyr9t5KrpwG5B1gh4CbVNfP0XDVcvY5iPCc
-	 XsyVFLUKNw3xEio1mApmSSi2ZneNc7tFe+uOigW+um3oWBDtWbYZ9+8qTI25De13tB+mT
-	 D0FGQtFRY0LAXcUfcqQ1tArWQfYdw0tz4OhwwOJmOp6/pji60bBuJbHJpBw/HvMqKjQ==
+	bh=rc5w1F7Son7ubB9GUWhIyNDz9Q0K7WcSIc0D7UrpX5w=;
+	b=NTjEsYe97FF9WZO5FBVr+hN4M/bxzTQ6LN2OFgnGrlVAqR3iPqecjHUwFrMQhu+WcQNC
+	 DGM3ZPLWbeFqUywzYnua++QWGUllnjb9kBS6DTyMmJmbeTCxyVTBq/YYXWLI45zxTYMlY
+	 8WHuK+qmw93btter3ay/M59rV5YggIel3gLgUj9s8yFqcDI+kpxAU+Hj27i8fe+ThCGUw
+	 Mp1BtHqAuofprEKtS15zmRepS/yLm4DhWCydKZsuvDfab8MWSGFNZ4hGpistGAXnMPvqu
+	 uts/YY/puW8f+6tyVWrCv7VqkoD3AsJP9fLL3TnPBSShkw5wRCH01qUTFR0Hg840Msw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ll0MAUqY;
-	arc=none smtp.remote-ip=209.85.214.177
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GBAPFMY0;
+	arc=none smtp.remote-ip=209.85.210.170
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F6C4606A31C
-	for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 14:11:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9F6C4606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CA2F606A31A
+	for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 14:57:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0CA2F606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ll0MAUqY
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2e9d1114320so7383965ad.3
-        for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 07:11:56 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GBAPFMY0
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-8a070b3f44aso510949b3a.2
+        for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 07:57:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793196716; x=1793801516; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1793199462; x=1793804262; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=U8ZX8TANpmLVaMNSrcwf06iPcEkA3/rfw0CYh7jgRSE=;
-        b=ll0MAUqYYBds9UxG98ev25/L1A5pmYHx+aYIXkzIctxzhFbqa0jsuA8R1APscrGyW+
-         2lW2YyTxuCewDV0Kr2zdfbZcKoNdkAl2H9iH+uyk0LCK+WfQpumJLs7R88W/k46flz4x
-         /SDIJMr7jd+Yp40XX7eA3tgM894S+Hs63w/ZUrjiTRPmWa6miVho3WXehdV5BtpEdmPa
-         61B/aWvdfdc2Tx+Fg+6YlRTWUKzt9EOtYaeH/1HHGdd02JU+t/6Z9XkVIjLGlBkqpPJp
-         KJAY3zUkue262Zt5t1PPXCSORoV8YzVEkZ8W7XEf1ysh5MW/rBgT0ITb596/k+9Iil0K
-         92aQ==
+        bh=rc5w1F7Son7ubB9GUWhIyNDz9Q0K7WcSIc0D7UrpX5w=;
+        b=GBAPFMY000hi9wKu4jiXxmgubiGbhUOzHDVWFP78xqqRgbfx1IJ9GMlGQN67xvYtZf
+         LQzpRf0YJDj8Yg/KQKXoER3X2EIk+TWhse1WNk70vIrcz+as7Y0LQPk0/06F1FiIGC2Y
+         uGdgj9wDnXU0BfuAPcOyMwNDtqtv25ccJV5vx7pchJ2/m0j9qTAwDZwqbIBJbdYQ90lJ
+         f0niWbfPC4LJ0ztZgXuxq5kcawkXiuX3CxdVlTSpfCNIrqASgTxg6e7KP0p5ozfIRMgV
+         j0toFOr25XCU3uq7SXfwThL7GVOVNzIorqyyO+VZI9aLkUDnetLgENSyv2XsUUh9lyrN
+         T1Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793196716; x=1793801516;
+        d=1e100.net; s=20260707; t=1793199462; x=1793804262;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=U8ZX8TANpmLVaMNSrcwf06iPcEkA3/rfw0CYh7jgRSE=;
-        b=WjK83N0sN6Bnzz4nbMT+PhmMCZ98FaE/IcxXx/bOirYL2UnD7yVWtiEQGawLoOAWh1
-         9yxtn752PiCYh6JEL4TkRO/VltPBkBEFMFgXPKPdPBQ4P26yhtAK9kA7wLfwZFLEBV8Y
-         fHg2Ur6IYcUSfia6VDVT1sLXx89DIwUfEHVF6YIhVhaN1I4zorb/oeltQBQYE+i0Gx70
-         aNCt3F2T1/SMAT63ezWZI7QjRyfK8Xaki9JexFN1xwzbZrKL8Vudu81f78v4Q/36Crw4
-         ynNVuBtCUmcLQSj66ZDURe8cpI/filV83P42qWpRgwmo91rWLCBKajoBGf99a6iUe1lO
-         plvA==
-X-Forwarded-Encrypted: i=1; AKwUvBygsGP0j1aY+wLLHbvIHQPfrEa4MPqlGZKBJnt0dSrFVA0pYQoHUG789+fiZGbW4pFRBvCyyg==@lists.linux.dev
-X-Gm-Message-State: AFq9FYLWTwcqrNpisUXcu3n3N0cCSNU1eNgRQkla9crHEikS2DRF89xG
-	t+VJfuC2K+sZgm4fjNmvB5NpOld/mD+9bJtSZG1SZ/ym7NcM/JREZvL7
-X-Gm-Gg: AYBFou2x+s7FQOgpaiahGvPIL28jq+DpW6GwFMY+nKrY6n9RpukuEIsLtI6KCwx4VNf
-	sAj8EYhC+C5IL09/oJo7wDDIcSlBsDN98+3MN8/Yk9fPkJ4lA67tDNVCHB8ZiN7pE0doPo3BPsi
-	XDtp4IGoQjoW91orhluXeehsehI7nsnMUwaDuiwQJTjsij0XSl+Oiipmu+YGO9LyvVm2gH+hMGR
-	bpoK2osq+9xSsODp+65VyFLgMovhFX1PCWEtggnN+UrSpcVkGCs19tt2s+Edot9zDq8Zie9ixVB
-	VcsYLjS4CxBHqkVmUD/uRsB1CjGDifMWACp41F9yAP5SnLTHjD0SY4LbJOyDqB26pqrIu4Ln2En
-	Q5DnRK96G9kNa1J7zpvfDLhnP/v8tCIJlLwMpToIzXetTAg/WCL75jo5NAKApMkpilxUT1hEZVJ
-	NQt3IH8YtINmuVcq58g2sj5A0slOZ3BnLR0e7d12sMTGn5pb8iH7rKRaJMxA3xwcxJw4b4j1riW
-	kY9yczELWHFqx0gkw/3A+RWsEgHNIOA7BK8MZ77SQbNKLprVw7wU8WcJPu2I9WibIWlBfGRzYno
-	BlCDdmanoixOBfXKNHV0F815QLFD3+7edo7EdE68TEg=
-X-Received: by 2002:a17:903:3803:b0:2e9:568f:75bc with SMTP id d9443c01a7336-2eb00426915mr25449265ad.39.1793196715753;
-        Wed, 28 Oct 2026 07:11:55 -0700 (PDT)
+        bh=rc5w1F7Son7ubB9GUWhIyNDz9Q0K7WcSIc0D7UrpX5w=;
+        b=nWl1TzrGMRcMdIPUCZac8NctCbRGQk0PRkmv/1J+NT4l2EY+Rd4S1c3fyX8hWJDyvr
+         e2LsP7r73cYltahf6S0vGcS9dlOVu9aXwreVo/XdoSgjcH94QLobK2FAMfNSVlbMEZxu
+         aE5/jKTB97E5Y9Nrp1hyf/hXbw58++FCVba59WqEB6su4PyKmPr6FYImcblJxlvP05Ie
+         vVztEeAGwoT6YANeyzUHMb4NXzbaMTr4+j15NJ6FZBwmM/dCvYJvHXVeGvqhF9Rra0vb
+         EMF82DWeu2S0KziOr6VTR46oQA8M1pvyE+pYO7ofV4T7W/tFfobRj7wHBsjAskA8B+Lh
+         wi5g==
+X-Forwarded-Encrypted: i=1; AKwUvBxtDon4QeYX/hgS5Q2/KtZPtuiRjFh3qZ+dSPmFiRVnnJngNXf1l45Mv36YTdXvoleCw24Ahg==@lists.linux.dev
+X-Gm-Message-State: AFq9FYKQjOL2dlBV29TZmF40RnsCLNfM4XCqy5/pAo2n6wTc2DEjiAjg
+	aDc7SeD19+qledcl0TMe8PObUVUzTnCcU6sCJmOZbX8YSRWLDeNknsZFYr/dx3qy87Y=
+X-Gm-Gg: AYBFou38bZKVqFLo1lmaUUo2HdoPoAR3g521c7enRaq8uEshEB6tHCp6U112grdKuZw
+	yjixOvoipnpMiEKhJhj3ZtH0BM14Yr8cTI8Hs9mzlpEq/fm8eeq2eSLMHmslVEQHRSR60aGDdWZ
+	XwEty0X7lpJ974EFCgD0a8YnpAehl0nU5ysqjR35sU+wuZ7KiM9P3WAaUsMdAlcFyUa+E1NyoEi
+	ZtOMNU0JCX2is3G8Evhp2p3lpG1SSoR2DoIqPvpA+b6E0nyh/KuV9m8WitDEhInGIxHLU9Hldbw
+	iijgdQ4iSd3Iy+puxgjflo2wSkKO/D11y2pBN/WZ1zw8rhgM0fHgkeWu+0pWwMcjKQiEkw9T8gT
+	ZuE5syGgczS5UNFxE9ZUJRuORLn6YJZdKljZN9eQuo5fCFowgwFgMq9xgvthd2THH4vhMJTgbd/
+	6OI2W36/xQwekISzDpSIEYiabjlKAcvF9nUawNwbqPAfugWAQX5LeNP004d2yXhcFpJdn0fLfox
+	g74t7WAPzErozEGXatbWI/dV54ZzZrzH4yaIAlFdT1Ggh0BCn+LnWjccx7EoGlu06noWsY6Bmvt
+	Yew+WplDa1iVOecLOkVx/z2791nceCrVhGiO63Jymb4=
+X-Received: by 2002:a05:6a00:32cb:b0:88b:7712:6e21 with SMTP id d2e1a72fcca58-8a6e74da862mr2099968b3a.33.1793199462308;
+        Wed, 28 Oct 2026 07:57:42 -0700 (PDT)
 Received: from localhost.localdomain ([47.100.192.162])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2eae6bd60desm23059825ad.29.2026.10.28.07.11.53
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8a6a73c0e32sm1310597b3a.50.2026.10.28.07.57.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Oct 2026 07:11:55 -0700 (PDT)
+        Wed, 28 Oct 2026 07:57:42 -0700 (PDT)
 From: Yang Wen <anmuxixixi@gmail.com>
 To: dxdt@dev.snart.me
 Cc: anmuxixixi@gmail.com,
@@ -85,12 +85,12 @@ Cc: anmuxixixi@gmail.com,
 	hyc.lee@gmail.com,
 	linkinjeon@kernel.org,
 	sofine.ljm@gmail.com
-Subject: [PATCH 6/7] tests: add suite0000-dump-arch for CPU arch info
-Date: Wed, 28 Oct 2026 22:11:36 +0800
-Message-Id: <20261028141136.2287862-1-anmuxixixi@gmail.com>
+Subject: Re: [PATCH 5/7] fsck: add test script for EIO handling
+Date: Wed, 28 Oct 2026 22:57:25 +0800
+Message-Id: <20261028145725.2311237-1-anmuxixixi@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261027080628.82069-6-dxdt@dev.snart.me>
-References: <20261027080628.82069-6-dxdt@dev.snart.me>
+In-Reply-To: <20261027080628.82069-5-dxdt@dev.snart.me>
+References: <20261027080628.82069-5-dxdt@dev.snart.me>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -102,15 +102,91 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-> +tests_suite0000_dump_arch_SOURCES = tests/suite0000-dump-arch.c
-> +tests_suite0000_dump_arch_LDADD = libexfat.a
+Hi David,
 
-The dump-arch test does not reference any symbols from libexfat.a, so
-the LDADD assignment appears to be unnecessary.
+I tested this script on Ubuntu 22.04 and found a few portability and
+prerequisite issues.
 
-I also verified this by linking suite0000-dump-arch.o without
-libexfat.a. The link succeeded, the test ran successfully, and the
-resulting executable was byte-identical to the executable linked with
-libexfat.a.
+First, the script failed immediately after creating the loop device:
+
+    Mapped file /tmp/tmp.WUyy32nDsS as /dev/loop6.
+    Error looking up object for device /dev/disk/by-loop-inode/?d:?d-661642
+
+The problem is this line:
+
+> +declare -r LOOP="/dev/disk/by-loop-inode/$(stat -c '%Hd:%Ld-%i' "$IMG_FILE")"
+
+The %Hd and %Ld stat format directives were introduced in GNU coreutils
+9.0.  Ubuntu 22.04 has coreutils 8.32, with which the command produces
+"?d:?d-<inode>".  The loop device itself is created successfully, but
+the script passes a nonexistent path to udisksctl.
+
+Could we avoid that coreutils version dependency by looking up the loop
+device after udisksctl creates it?  For example:
+
+    LOOP=""
+    ...
+    udisksctl loop-setup --file "$IMG_FILE"
+    ec=$?
+    if [ "$ec" -ne 0 ]; then
+            exit "$ec"
+    fi
+
+    LOOP="$(losetup -j "$IMG_FILE" --noheadings --output NAME |
+            head -n 1 | tr -d '[:space:]')"
+    if [ -z "$LOOP" ] || [ ! -b "$LOOP" ]; then
+            echo "FAIL: cannot find loop device for $IMG_FILE" >&2
+            exit 1
+    fi
+    declare -r LOOP
+
+This also avoids depending on the /dev/disk/by-loop-inode symlink and
+uses the loop device that was actually created.
+
+After working around that issue, the hash command failed as well:
+
+    RHash: unknown option: --one-hash
+
+The installed version is RHash 1.4.2.  It supports CRC32C, but does not
+support --one-hash.  More importantly, the failure is hidden by the
+command substitution assigned through declare, so HASH becomes empty.
+The next hash calculation also produces an empty string and the test
+incorrectly treats the two failed calculations as matching hashes.
+
+This form works with RHash 1.4.2 and produces only the CRC32C value:
+
+    dd status=none if="$1" skip=1 |
+            rhash --printf='%{crc32c}' -
+
+Also, -C selects CRC32 rather than CRC32C in RHash 1.4.2, despite the
+comment saying that CRC32C is used.
+
+Finally, the script later failed while creating the dm-dust mapping:
+
+    device-mapper: reload ioctl on dustexfatbads0 failed: Invalid argument
+    Command failed.
+
+The kernel log gives the actual reason:
+
+    device-mapper: table: dust: unknown target type
+
+On this system:
+
+    $ grep CONFIG_DM_DUST /boot/config-$(uname -r)
+    # CONFIG_DM_DUST is not set
+
+    $ modinfo dm_dust
+    modinfo: ERROR: Module dm_dust not found.
+
+dmsetup targets consequently does not list the dust target.  The script
+currently documents the root requirement, but not the CONFIG_DM_DUST
+requirement.  Could it check for the dust target before creating the
+image and print a clear error or skip result?  Doing the prerequisite
+checks before allocating, formatting and mounting the image would also
+avoid spending time populating the filesystem when the test cannot run.
+
+It would also be useful to install an EXIT/INT/TERM trap for cleanup.
+Each of the failures above leaves the loop device and temporary image
+files behind because cleanup is called only on the successful path.
 
 Thanks.
