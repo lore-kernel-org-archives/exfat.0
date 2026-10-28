@@ -1,62 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.252.183.203
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793189386;
-	b=fnLWfS242nzD5eyEbJtkQYtohDttRs6cvk/QAPslfUAL1jjnDxust1RPnmYn78GvTUUP
-	 oz+hP6FjE/zA/1c4mS2DuMYq/q277qyiwzUsR5sPbhhj86doXp5LRkuNu2bd138f134Q6
-	 f/i/+Evq+fqkfEkO4CupsPMoBWmuNIlM0PjL3Daltl+LYyvZjqmFN+9bLxGSmLRBazAV1
-	 phF7tA60XnlHvpsbBx1fm4D4FTFVC56Qe8Yg+zeJgVusjGn2+U3bQMo3Aian/jL6R3CHd
-	 i8Gzy3F7SPzDsg3gzwI46bzoMJbHsg2wHKSl15kQOtUDHZQWcYichjuCkHn6pjlF2Xw==
+	t=1793196299;
+	b=o8a4xfMNs54+bwR1Al1I1UNNsQsPHPXF26NvWQB1R3YXTm+8JKMj551oHqO9bkQQ56hC
+	 CYCLt7df1oTGpCGdpMNMP5YVeMgdMVmQC9J39coMu9Fk2/AoImFTvN19loNNu25Vu6thx
+	 r8WmnTNWyAL9PPLG9AXtloLFO2nuwJRZyqfTfBZFnPT/3C2foPFVpC9WEz8xeX2RpmYCe
+	 WRHQ2xuwK4zjwybdUBrdGTPGmvl7dvGzn9MqGrjLkZ2Dcci14BbBZdKnBAZc0gQYXRmlt
+	 m+24HiuO3r1Z+aaR+yUDW1lL7JYZ9BJsP7+70TFDEzs35Pf4gsqrt9kIyYsAv9O9gxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793189386;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=FI9m/appk6qQgGlHs3P+38HJVc770BqY9QDj6fscg2w=;
-	b=A4Xt/GqKZCKQIjCYJ/nWlszpKHUsAb00aKNDgAQFYbCnSE8cYq0FEikGbF6+6SUzOkPH
-	 Ij7ytmPFuux2HPPHtcWESS3qb9E5NZeysFyUfN5amT9NTYyLLa6JvtouRUg4WOHt/S7mq
-	 ByHbIxMbDwZtETcKLarXqTG76DDERMir9kJ2HSfJehhUTH2d/Et7JSdNnMfzQk0FBcSPb
-	 bU1YN7THUW/BU6iu+GCvUZ1gyfgYrxYF6r154EWeG5yuwx+gCWXPvbKjs24wbPeD7JJ0R
-	 0CB59O75O8kxefPHwMYkcq4oGwcdYkFgJgiaSDo+4shfQykiSf75bkLBbKBR96+v8OQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793196299;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=imFHoaJpvnVOiA2ZSXX5+miSLzGB5n8SAQDIbLW1jZA=;
+	b=K4V9FBCFp9OK5c6ZBShayzg1JO4SdVPv7rrCxOLJMODpTX+GoM1lB8fDBNldVlnhb6Z6
+	 5jXOLBmrZIqyq7q8V8j3X/1dsNuB6AmjykyVQ/TWXkyCB+n0XtQbLCuLidODIwVKhvzMv
+	 HZsmgB03WUy9CBxYZwYnXS4SgAgCh51+RHgOR/YNv7BEb/OE2G8ioXG/IMmAqcxxpG2AQ
+	 h0ljnd3vykVRR9D14gAnbfEeUexvhZog+J5FXyY3e+biye+hJi6TxuR5i5LOyDU9AXYuB
+	 /tCJ7Pm3zQORmaGDtvjZl912Q36GMrGeuSTv0kVIVzLsG9/iMFUQr0goKjdvhvOpsBA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=dev.snart.me;
-	spf=pass smtp.mailfrom=dev.snart.me;
-	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=Cn25ITLY;
-	arc=none smtp.remote-ip=54.252.183.203
-Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=C7MmYz4G;
+	arc=none smtp.remote-ip=209.85.215.175
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8006606A31D
-	for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 12:09:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8006606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EE01606A31A
+	for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 14:04:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0EE01606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=Cn25ITLY
-Received: from embla.dev.snart.me (localhost [IPv6:::1])
-	by embla.dev.snart.me (Postfix) with ESMTP id 69A5E1D47B;
-	Wed, 28 Oct 2026 12:09:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me 69A5E1D47B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
-	t=1793189384; bh=N3JtQGkFPnk244DO5Y+zOZTGI/tkIfqOUfwIyVEtHrk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Cn25ITLYPQal89IZVEQnn5MclhAnYBx3m5eB9CoEt3+5TwHCZYNLElTqXKZsCYQt+
-	 n26HlItx1xNqGzKVxUAsCXKUV8Q/naeGNRjRwpzeEkjARlbw40k4iwJskVkTcLMqBy
-	 /Eb6UQ5AipBQDTq8S6Ue9QbEfa8+7qEag2NQWF9Y=
-Received: from maya.d.snart.me ([182.226.25.243])
-	by embla.dev.snart.me with ESMTPSA
-	id COfFFwXm4WpK2AEA8KYfjw:T2
-	(envelope-from <dxdt@dev.snart.me>); Wed, 28 Oct 2026 12:09:43 +0000
-From: David Timber <dxdt@dev.snart.me>
-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: exfat@lists.linux.dev,
-	David Timber <dxdt@dev.snart.me>
-Subject: [PATCH v1 1/1] Github Actions: bump to Ubuntu 26.04 runner
-Date: Wed, 28 Oct 2026 12:09:20 +0000
-Message-ID: <20261028120920.183005-2-dxdt@dev.snart.me>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261028120920.183005-1-dxdt@dev.snart.me>
-References: <20261028120920.183005-1-dxdt@dev.snart.me>
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=C7MmYz4G
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cc502d509c0so439210a12.2
+        for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 07:04:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793196298; x=1793801098; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=imFHoaJpvnVOiA2ZSXX5+miSLzGB5n8SAQDIbLW1jZA=;
+        b=C7MmYz4G6nGDIpiJMomj8k04eraxDhcPUSyXOHY3U8MDdSalOwwuM6ruhX+3tNht0L
+         JPuAfeIqOFvYNw7WDOqlps1Jikf0t50MEVqo3/p9F7thP3GT9jeP+iX8aLVd+tq8GxO6
+         5WAEGIe9sEdUOj04ejmxgy37yxZSRhI0eke0ysuFnGTj/1HpKwrAZXwTdMZ3FxXbFvQk
+         icKkV1aghAgwLNY54lAw0DjS3aREpIcWfp+9xb1xDq28YQ+rql8onbPCu4Ci8Pd/rL8/
+         KaQNYZGzs4MhFtleh0Gumm7Zmn7RPZD5Ua1V2K1sukIHlqwhYW+PX5fSBFUtO4fKRBeQ
+         zIdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793196298; x=1793801098;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=imFHoaJpvnVOiA2ZSXX5+miSLzGB5n8SAQDIbLW1jZA=;
+        b=vZjkhRmkbJPXQXuAfpWJpy+23PHbsStQ/woJHA/FarLVPKUB2ue+qcsmb1NQheGrEC
+         /EAOGVkzCYOVkcFsq7r8rAgS3IC6RfqKR+HYH/xIJXVIBGAZJ1f0Pce3tZhORdX8YQGm
+         NuSi6XCsL7GAznMi1W/N09sRqhU4bfAKEQL6fQ6laVoT8bOgwmsBlOW7InoY03GBwlFF
+         YD7mZ2xOaO9YM8m6dJ9O89N2v/w2AJ6keC7KLS/gz9WowB8oryTKA/flFwf7/oCtzRIa
+         SQsbLk6oTfQSUgqLZOf3wppRURciBBkDuYadjW6ix8KZ0BVo5dJBYm0B5ytRc+zBZotI
+         +FRQ==
+X-Forwarded-Encrypted: i=1; AKwUvByio0+pp6zLOT7gB4FbGZ9YrXiFO6gg8jH+a10r7DkOa/JWGWIsAThIcvwcTAhU9fc8CXiL8A==@lists.linux.dev
+X-Gm-Message-State: AFq9FYJfbn4vCRneUdeQ/5SkNGTV7Z/5wLKBQ5BuVdX1XjMjjHWhGmfv
+	/rCShNSXO0F2tWzK1S4hRjoQSLV9LZ5h4QtgGoBaCB+T/6b89N1N6c2ornI9S58QOyM=
+X-Gm-Gg: AYBFou1kj8QAweEoMG02BRfZXydU4ArZlYPp7yRHFwn1OZdPj740YWrbs4hKfNiw6XU
+	pJ3qx0dtt254WCk4YBdRCUYGJCMGwgUNuxNTO+pWhhGvhsNzJoAtxtYqP3gf2c687Hrj2u4SpwS
+	uW6gkNbho8bkZykZTwYJcI1zC16VhieAQ+F4Mg1iBY5KI1VyFkU7VkC3NAmGakUZ07CREPZm+1T
+	4rb8q3ynAT/q5aCqbh0stHHmMMHyUFOTGsn6vqrYyxP5RjA/ws4ieL/Iozaa+JLAV+tIOD326g2
+	ViAtjmciW3lCskNc1kIcNVyg6g6iYHkVRFOt2TjrPWoRgKQjtNnd5xQ35ACLmbSeLT4WYYsm0j8
+	AJPwYhsab5iZAJ2Uc1Nzwrm5ttuH9YFqOYV9dZSoxSkQSxWyDGK0GGmIM/+E9/TB1kWOfLxVnVj
+	mC58r7kcJqWwS+/Wt1qiFB4KeB27B62xuWa7LY0V5z127OIMzrRBS8EXV0byQHh0sfp8WD9j4PE
+	ggrjTRmk79xRV8g88jmUx+qHFCFrm7qF1HWwCvXAaTvy2tdLtio9BscAn5FPpSzDNQaj4qfConQ
+	4nIWtAiK9VyGjHAWdrG63B01sbkffwYYBnxCuOMfeRe/ruRTPBbDGHN3OwakkIXGXg==
+X-Received: by 2002:a17:90b:3b42:b0:3a8:6a04:80ef with SMTP id 98e67ed59e1d1-3ae57e357damr1827225a91.6.1793196297939;
+        Wed, 28 Oct 2026 07:04:57 -0700 (PDT)
+Received: from localhost.localdomain ([47.100.192.162])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cd8ccc90d74sm4080559a12.20.2026.10.28.07.04.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Oct 2026 07:04:57 -0700 (PDT)
+From: Yang Wen <anmuxixixi@gmail.com>
+To: dxdt@dev.snart.me
+Cc: anmuxixixi@gmail.com,
+	exfat@lists.linux.dev,
+	hyc.lee@gmail.com,
+	linkinjeon@kernel.org,
+	sofine.ljm@gmail.com
+Subject: [PATCH 3/7] fsck: fix missing line ending in error messages
+Date: Wed, 28 Oct 2026 22:04:37 +0800
+Message-Id: <20261028140437.2287517-1-anmuxixixi@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20261027080628.82069-3-dxdt@dev.snart.me>
+References: <20261027080628.82069-3-dxdt@dev.snart.me>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -68,114 +102,32 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Github rolled out 26.04 for the "ubuntu-latest" runner, breaking the CI
-pipeline due to deprecated and missing packages used, one of which being
-MIPS.
+>  		exfat_bitmap_set(exfat->alloc_bitmap, clus);
+>  
+>  		if (exfat_get_inode_next_clus(exfat, node, clus, &next)) {
+> -			exfat_err("ERROR: failed to read the fat entry of root");
+> +			exfat_err("ERROR: failed to read the fat entry of root\n");
+>  			goto out_trunc;
+>  		}
+>  
+> @@ -1790,7 +1790,7 @@ static int rescue_orphan_clusters(struct exfat_fsck *fsck)
+>  	/* build a template dentry set */
+>  	err = exfat_build_file_dentry_set(exfat, name, 0, &dset, &dcount);
+>  	if (err) {
+> -		exfat_err("failed to create a temporary file in LOST+FOUNDn");
+> +		exfat_err("failed to create a temporary file in LOST+FOUND\n");
+>  		goto out;
+>  	}
+>  	dset[1].dentry.stream.flags |= EXFAT_SF_CONTIGUOUS;
 
-The gradual roll out of Ubuntu 26.04 runner means that some CI runs will
-still be run by the old 24.04 runner, causing breakage. To workaround
-this, pin the runner to "ubuntu-26.04".
+Hi David,
 
-Replace MIPS emulation with SPARC64 for big-endian tests. Avoid using
-the -E option of sudo that's been removed in Ubuntu 26.04. Do not
-install other packages that have been removed.
+I found two more error messages that are missing a trailing newline:
 
-Link: https://github.blog/changelog/2026-09-17-ubuntu-26-generally-available-and-latest-migration/
-Signed-off-by: David Timber <dxdt@dev.snart.me>
----
- .github/workflows/c-cpp.yml | 33 ++++++++++++++-------------------
- 1 file changed, 14 insertions(+), 19 deletions(-)
+  defrag/defrag.c:
+  exfat_err("memory run out in %s", __func__);
 
-diff --git a/.github/workflows/c-cpp.yml b/.github/workflows/c-cpp.yml
-index d2f0a5a..4e5eaf1 100644
---- a/.github/workflows/c-cpp.yml
-+++ b/.github/workflows/c-cpp.yml
-@@ -52,7 +52,7 @@ env:
- 
- jobs:
-   memcheck:
--    runs-on: ubuntu-latest
-+    runs-on: ubuntu-26.04
-     strategy:
-       fail-fast: false
-       matrix:
-@@ -64,7 +64,6 @@ jobs:
-         sudo apt-get --update --quiet --yes install \
-              linux-headers-$(uname -r) xz-utils \
-              valgrind libblkid-dev ${{ matrix.cc }}
--        sudo apt-get install -y linux-modules-extra-$(uname -r)
-     - name: Build
-       run: |
-         export "CC=${{ matrix.cc }}"
-@@ -80,9 +79,10 @@ jobs:
-     - name: Run fsck with Valgrind
-       run: |
-         pushd tests
--        export FSCK1="valgrind --error-exitcode=1 ../fsck/fsck.exfat"
--        export FSCK2="valgrind --error-exitcode=1 ../fsck/fsck.exfat"
--        sudo -E ./test_fsck.sh
-+        sudo \
-+          FSCK1="valgrind --error-exitcode=1 ../fsck/fsck.exfat" \
-+          FSCK2="valgrind --error-exitcode=1 ../fsck/fsck.exfat" \
-+            ./test_fsck.sh
-         popd
-     - name: Run the rest with Valgrind
-       shell: bash
-@@ -158,16 +158,16 @@ jobs:
-         popd
-         rm -rf "$TMP_DIR"
-   tests:
--    runs-on: ubuntu-latest
-+    runs-on: ubuntu-26.04
-     strategy:
-       fail-fast: false
-       matrix:
-         include:
--          - host: mips-linux-gnu
--            qemu: qemu-system-mips
--            gcc:  gcc-mips-linux-gnu
--            run:  qemu-mips
--            name: mips
-+          - host: sparc64-linux-gnu
-+            qemu: qemu-system-sparc
-+            gcc:  gcc-sparc64-linux-gnu
-+            run:  qemu-sparc64
-+            name: sparc
-           - host: x86_64-linux-gnu
-             qemu: qemu-system-x86
-             gcc:  gcc-x86-64-linux-gnu
-@@ -186,7 +186,6 @@ jobs:
-              cryptsetup parted dosfstools e2fsprogs btrfs-progs f2fs-tools ntfs-3g xfsprogs \
-              ${{ matrix.gcc }} ${{ matrix.qemu }} \
-              qemu-user qemu-utils
--        sudo apt-get install -y linux-modules-extra-$(uname -r)
-         export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-         export PATH=/usr/local/lib:$PATH
- 
-@@ -288,12 +287,8 @@ jobs:
-     - name: run fsck repair testcases
-       run: |
-         pushd tests
--        export FSCK1="${{ matrix.run }} ../fsck/fsck.exfat"
--        export FSCK2="fsck.exfat"
--        sudo -E ./test_fsck.sh
--        export FSCK1="fsck.exfat"
--        export FSCK2="${{ matrix.run }} ../fsck/fsck.exfat"
--        sudo -E ./test_fsck.sh
-+        sudo FSCK1="${{ matrix.run }} ../fsck/fsck.exfat" FSCK2="fsck.exfat" ./test_fsck.sh
-+        sudo FSCK1="fsck.exfat" FSCK2="${{ matrix.run }} ../fsck/fsck.exfat" ./test_fsck.sh
-         popd
-     - name: dentry creation/deletion stress test
-       shell: bash
-@@ -450,7 +445,7 @@ jobs:
-       fail-fast: false
-       matrix:
-         os: [windows-2022, windows-latest]
--        name: [mips, i686, x86_64]
-+        name: [sparc, i686, x86_64]
-     runs-on: ${{ matrix.os }}
-     steps:
-     - uses: actions/download-artifact@v8
--- 
-2.56.0
+  lib/libexfat.c:
+  exfat_err("ERROR: failed to read the fat entry of root");
 
+Thanks.
