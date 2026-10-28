@@ -1,70 +1,96 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.5
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793203516;
-	b=pgT05EwDTzLWTBs1MVU39IplQlB9hFWkiIDGu8R0IQeu9+eCqPxyob7XH9enwVpLvyC+
-	 jlu4h1gZMkiPQ9xquEFCBTRpnOG/C02PEWAC21ICSLKWGaQmDoQNQCdl0tqt8Gie//n1Y
-	 T+dNs2jv6/14UnX4XBtY2FWW69lU/rv5HMmk5f9NstMEQ27rTEoV5bnVRbgnIyxzpb9e7
-	 oqbic5Vw1F17dNZVTCQh7ZzkpRzs/TyiQzJek8B9MUKaDVK+NSD6f6LTSmahQiJT/q8tX
-	 WGXGWG91lkhHzv1lR8pKmkwng+jNRUOzrE+NWiHDwX/OD2V7N/7qlGx/B1WUpk6ZEQw==
+	t=1793219627;
+	b=rRESAdoWNry7Aj9zsryiLKjSEs8iHSU1okpKm05RtLBO1emaQIBu8O1mC7vqzGKHX34Q
+	 GqgzuTawo1xRGdjAgqj52lT7ww1thEhUMDmGX7Mxygx75faIyvObielsbbFTtetdWR0AD
+	 L1Ds7ADdkPEXy7jrEKNKoLEyWT+ZIFPH2c/8qPQr23tupGlp3jWBbWxYO56PxKyOmTZHi
+	 UIszCoNLW9pa2jMZlcw2IwbQzOzTzC0iPVzc9HnVmK/ijWXxaW884/cjaPka+q9kSiSUw
+	 /yZfP0r+bq1wjvVHWx7Ql6Gzfyv15TvntIRgxFuB4xQ5MTT+uVH9W8Qfa3vXWAjWhbA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793203516;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:X-Developer-Signature:
-	 X-Developer-Key:Content-Transfer-Encoding;
-	bh=88sfbrcRMagQo5uewTZLqJVOWmvLIZ7ZDDHfajCvQ8w=;
-	b=b3efSz0M7kC/RNoRtfrO4IoFCeCwElBH+4/+7s8r/KV2dMMNRGnjOiGAxBC7QSz8cPcr
-	 xV34w14tS50zT1NyCPhR94CH4Xr3gG3hKt4qXrFoRxLp2rUygmaN6Mwm5z2VX3wOAhkJL
-	 X1/AIoPdJWKOWvgC4tG599EfVobpPrc8wCFz/GtCfQ5KMGdIGq4g5RmVdvEByQCWYG1LE
-	 nUNoMzyD/aQVSUMl3F/g5+k+AV6nxEZo+rUE77w8XtvxaBii/WOJ4kKH2+uMikiHXDaaG
-	 wNmqqgQ4y8NmbQqvwITNxLf6IN96MwxMJTTaohpGNj5QAxeYwk1oIt/CLLTQ3AyQhRg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793219627;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=Lb/W93mWkP3TBmUhejtZ18o//62t4qTaZxB1+dKBVHs=;
+	b=G0KbPuUE9aaOM3tEaos45dI2OzymYAzumD1RMCgCcUPc0FC7appCU+hNDpKk4tlwOqEK
+	 3XaVfF+yFbf5dWLkgv9Jjqz82aquhk43i+iSKUMzCSLWgAkk+pGR1jKb63PL3QCVhj0gs
+	 lAn/g5Eg0xJQK7bJH2lGG5QIBg/lLUsRHWKTRT01ywx2PR8VqOZY3CPW44069AXKzW4pU
+	 aD1jQDajUXfenIgzfElHZ9q/dZ2R3quPmeAHGJaA97NAnjbJRRHkylL/VEAjO8y90VKOQ
+	 MdtVtnGKZKBDzdnCogpEcDlz6OBAXr9PjPPVNaTwk1qu6oFMBW354oWsf17FIPal+xQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iEGdvb86;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FHuqGaPt;
+	arc=none smtp.remote-ip=74.125.229.5
+Received: from mail-dy2-f5.google.com (mail-dy2-f5.google.com [74.125.229.5])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8F2606AA59;
-	Wed, 28 Oct 2026 16:05:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC521606A31D
+	for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 20:33:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BC521606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iEGdvb86
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C57CF1F01285;
-	Wed, 28 Oct 2026 16:05:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793203515;
-	bh=88sfbrcRMagQo5uewTZLqJVOWmvLIZ7ZDDHfajCvQ8w=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=iEGdvb862gVq48UUgyRl/Xm6JMHFkS0Jzxlmh1uQ/FP154kv0/TjitiGESsor5WdQ
-	 C8Ve/mHow4xmhrJmq+PhbjqnTBi5ymT89KYt5rqJvqLtaHs91auSgZty38iRzuAaNY
-	 sGOGJMPqaSegYASCqriuMvHoyhSXhrWH0cznQKI8Z8TELXfHtMN7ZKOD1MT2ckz4xo
-	 lCT7U8xwgQPyPE/kc4kGz4PVC7PcOGpFDQc0DU1uHdID0r52NAIP/kj47a3WIfts6K
-	 K+2/BYbdOrzkQy31h86d4L7UB6r0C0qvkhbPm3Kgu+qXygGQYSsxvoxsYUNq3oppIg
-	 lKbUPV9aoH+oA==
-From: Christian Brauner <brauner@kernel.org>
-To: Hyunchul Lee <hyc.lee@gmail.com>
-Cc: Christian Brauner <brauner@kernel.org>,
-	Jan Kara <jack@suse.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	ecryptfs@vger.kernel.org,
-	linux-ext4@vger.kernel.org,
-	jfs-discussion@lists.sourceforge.net,
-	linux-nilfs@vger.kernel.org,
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FHuqGaPt
+Received: by mail-dy2-f5.google.com with SMTP id 5a478bee46e88-3535a54c09bso1071722eec.0
+        for <exfat@lists.linux.dev>; Wed, 28 Oct 2026 13:33:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793219626; x=1793824426; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Lb/W93mWkP3TBmUhejtZ18o//62t4qTaZxB1+dKBVHs=;
+        b=FHuqGaPt/1vb4b5x5K64Ge0Rckf4dNPZnBCZrxfMPUY8i8KobmgzXSf541eh5xRjio
+         US1V5VPGP2tke85buNRbKb/kmsW+MRvCfZmQY8j7oWhT/7jpSnhsWX2fl0bNtVNllEfw
+         aQcKMjp4c8xtVpXu73bABE6PlXDh2b8CL0STfPwFXSyVYiFKauy5hbzzoha36cGg82q8
+         InMA0RGUzMej3EDL9ePNLz7VgFE0x2lmL/6Xh4+qltUm5RvMt2P+WM0LqDQLnl4ENhTh
+         w5bhB/glqbV9hxJbNuTONStukv8oXMa9vZiM8kM4fbRY97EV4h8UIcOgHpLaUQ7NekWt
+         Kzjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793219626; x=1793824426;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Lb/W93mWkP3TBmUhejtZ18o//62t4qTaZxB1+dKBVHs=;
+        b=WUQg/c/aR+RccTCwD/hUO5WDgUNPxyAL3h70TqGc5JjrzykOMS3mIRHrsdnYYViI/G
+         TJwq2cIfzWMfKOm22CoVObfMggmTyUu0ar8Zt+K5Ki32y1a7+LpXbWcpF0aGPAIph1P7
+         YPCHUz0/ajUOnmnvx02McETZrCvcqtRXS5RefvWhZYNDgoDm5wS+4ErMv1KBa+RQ6j3Q
+         ME3u2Kla5UfYOXVdk93qCskV4nAduz+VTvpIdS7Zu/wSvi/4SSMAV29NGfG3jLkiSU3g
+         vRlFgQfAI3svVrJAcKwHG6x9OL4uCYm6MaXtC1N09jEsGuGakbETl3NYjJYIT7Y3Ro0M
+         Aryg==
+X-Forwarded-Encrypted: i=1; AKwUvBy1QErBl4h1yfUYGr+Vj6VP0dA9q/BWXueAVUDM8IluRHNqRA3P6R4kLmR3N4Sz2ueYkiIVjQ==@lists.linux.dev
+X-Gm-Message-State: AFq9FYIA1fcLdhkvbaB9mrOvPBU0AKlKYQAsD89I5WGLwgdo3c3I9rvM
+	5CuksM7Hc+gAuEM1QwC9CWNvpCQIA9KG2l4fwBPrWSWJuOHTBKmumomp
+X-Gm-Gg: AYBFou3+RsmmEeEWogRL1tZhgeBiJSDbn1uPuLeDYB7rDu4UkEWpNsHYeIvkK6MZ2Bq
+	2MYygt/AF8mmum6BiNF1n3BqDISc69SE7s/uUeRtpY/spalFgNSJ9aXMVMS0tspaKYxL99sXWtF
+	i7T5DC9fSnlRe3w59Mx0PJw+Gt08IpWSUND3822ij1LMBMTWIpyZA5M7eZuPBABRLpzYh8rQJPg
+	pReKOsHHntjjeUPNHH19jnWMBkLgVhDLS1A+xGV8qt5IxPJbn/oKM27o0NvnuLAkiboPF53fDjX
+	5oszH2JRBtxStqUfxmn2KNJsW1/otbm2cbIOp1yH/p07mryto+vVbQUzifcPQt4pHNf/b1zIO7l
+	ZIZGvOBq7yHZ9cNU/HbAKjUURQe98kGsSsjKkQA2CfdTlT3kyfvWQ79IonDY8FHN0jfVhE5ZkYv
+	6mlxDSmOkNOozNp4A4/Vl6124pSU7J8KOSTznQq5mvGplprTVl2WmUA0jnPtnzTdU/5tMo1jEG6
+	+tUiB8sUR34O9tgi0r/bqz2689am4NWADl0NYdh1PVhA28QjWzdDBIl0XQ0k90T03aaQIogcVlS
+	L9sezZw0GPz6IRyvDs7TKaz++M+e43C52B1HyQOf/GdgWuMwjKDxhsw+01Wxu7kMtTYBla8zjgj
+	irg==
+X-Received: by 2002:a05:701b:281c:b0:16e:c820:b20d with SMTP id a92af1059eb24-1a6c87bcdabmr3617245c88.5.1793219625684;
+        Wed, 28 Oct 2026 13:33:45 -0700 (PDT)
+Received: from localhost.localdomain ([98.148.34.5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1a75e5c6d4fsm14699522c88.14.2026.10.28.13.33.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 Oct 2026 13:33:45 -0700 (PDT)
+From: Hungyu Lin <dennylin0707@gmail.com>
+To: linkinjeon@kernel.org
+Cc: sj1557.seo@samsung.com,
+	yuezhang.mo@sony.com,
 	exfat@lists.linux.dev,
 	linux-fsdevel@vger.kernel.org,
-	ntfs@lists.linux.dev,
-	ocfs2-devel@lists.linux.dev,
-	linux-btrfs@vger.kernel.org,
-	gfs2@lists.linux.dev,
-	linux-efi@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
-	linux-xfs@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH RFC 14/28] ntfs: don't set SB_RDONLY after filesystem errors
-Date: Wed, 28 Oct 2026 17:05:06 +0100
-Message-ID: <20261028-fixstern-halunken-skelett-fb3cd0824159@brauner>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <atW1VhJXAIvtYPfd@hyunchul-PC02>
-References: <20261012-work-fs-sb_rdonly-v1-0-60743a3dc326@kernel.org> <20261012-work-fs-sb_rdonly-v1-14-60743a3dc326@kernel.org> <atW1VhJXAIvtYPfd@hyunchul-PC02>
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	dennylin0707@gmail.com
+Subject: [PATCH] exfat: fix parent link count when replacing a sibling directory
+Date: Wed, 28 Oct 2026 20:33:24 +0000
+Message-ID: <20261028203324.6073-1-dennylin0707@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -74,46 +100,39 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2009; i=brauner@kernel.org; h=from:subject:message-id; bh=p94qtq7P6Iyb9ro/ig3qsXfneKNkQl3vnYSgqxFYI4M=; b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWQ9kjX5zM8Xn3WMa65c5ROjC84Wi7I8Vdelxp8Uknu7e NHt2DMXO0pZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTACbSfZDhvxvLvOPaJy5+bO6u aPynfMBQpNjbPaLkmuimi/UFjT7r0xgZDpy9vTtgcu3kQxtM9P637q1UPByx2Tj5+w2OmuViLbe MGQA=
-X-Developer-Key: i=brauner@kernel.org; a=openpgp; fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 19, 2026 at 03:14:46PM +0900, Hyunchul Lee wrote:
-> Before this patch, SB_RDONLY is set, so remount,rw returned -EROFS. With
-> this patch, sb_rdonly(sb) is false, so remount,rw skips the check and
-> return success even though writes are rejected with -EROFS.
+exfat_rename() adjusts parent link counts only when a directory moves
+between different parents. Replacing an existing empty directory in the
+same parent also removes one subdirectory, but leaves the parent's
+link count unchanged. For example, renaming one of two sibling
+directories over the other leaves the parent with four links instead
+of three.
 
-Yes, that's intended. ntfs_reconfigure() only refuses the transition
-from ro to rw. After an error with errors=remount-ro
-ntfs_handle_error() sets NV_Errors and NV_EmergencyRO. A remount to
-read-only works and a remount to read-write after that fails with
--EROFS. A "mount -o remount,rw" of a volume that is still read-write
-isn't a transition. It returns 0 but doesn't change anything.
+Also adjust the parent count when a target inode exists in the directory
+rename case. Keep same-parent renames without replacement and the
+existing cross-parent accounting unchanged.
 
-That's how ext4 behaves since commit d3476f3dad4a ("ext4: don't set
-SB_RDONLY after filesystem errors"). __ext4_remount() only looks at
-ext4_emergency_state() if the read-only state changes. And every other
-filesystem in this series does the same.
+Fixes: 5f2aa075070c ("exfat: add inode operations")
+Cc: stable@vger.kernel.org
+Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+---
+ fs/exfat/namei.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> I think that the condition should be test NVolErrors(), for example
->
->     if ((sb_rdonly(sb) || NVolErrors(vol)) &&
->         !(fc->sb_flags & SB_RDONLY)) {
+diff --git a/fs/exfat/namei.c b/fs/exfat/namei.c
+index 68ddb9c5504f..24110e7fde47 100644
+--- a/fs/exfat/namei.c
++++ b/fs/exfat/namei.c
+@@ -1309,7 +1309,7 @@ static int exfat_rename(const struct mnt_idmap *idmap,
+ 	else
+ 		mark_inode_dirty(old_inode);
+ 
+-	if (S_ISDIR(old_inode->i_mode) && old_dir != new_dir) {
++	if (S_ISDIR(old_inode->i_mode) && (old_dir != new_dir || new_inode)) {
+ 		drop_nlink(old_dir);
+ 		if (!new_inode)
+ 			inc_nlink(new_dir);
+-- 
+2.43.0
 
-NV_Errors is the wrong bit for this. It's also set outside of
-ntfs_handle_error() no matter what errors= says. map_mft_record_folio()
-sets it when an mft record fails its checks and ntfs_read_locked_inode()
-when it marks an inode bad. So with errors=continue (which is the
-default?) a single corrupt mft record leaves NV_Errors set on a volume that is
-still writable.
-
-With your change every remount that keeps such a volume read-write, e.g. just
-to change another option, would fail with "Volume has errors and is read-only".
-
-If you really want ntfs to refuse remount,rw in the emergency state then
-NVolEmergencyRO() is the bit to test. But then ntfs would behave
-differently from ext4 and the rest of this series. So I'd rather keep it
-as is.
-
-Fwiw, in the next version reconfigure_super() refuses the transition to
-read-write itself. It uses the generic emergency read-only state Jan asked for.
