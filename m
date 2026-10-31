@@ -1,73 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=113.46.200.216
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793331744;
-	b=lp6eJzU6s5ErSwux3KrtIq5wwfn7UPlqMzSiKww6rMKbTDL454syR9xa5ML7eOvcgEUJ
-	 HSPSpwre9T35dcQ2aPtdICFLcB/EdFm/smTClfl4yRjCfcD27N171Xj+pbfkCllTK1FK2
-	 ZOI9/35QvCcnBtiKUKPIpSh5dJFCsePjH7iI9SlnASxsCzGG4QPGq7doIV5v7Eic2KzlZ
-	 7PL84LgcFKhfpr0aQLQE198oagjIALrAkGdinFhIEgGa3oPioHNr3fycH8MdEjZU6fnVM
-	 3xt3fBE5FqRupbeiA/LPwiHIYLRsavSAMqUvJmH9lPsyAx93lQrpLO0uKRr04S2KSrg==
+	t=1793485716;
+	b=A4IVEC9DMKFJFdVI2B07Sbx/anP91cJJNybfSwrvFeQkUxhWgg+CrirqfCcVb/TjVbHI
+	 yFM4+81QWIOyxjhxsjX7QdlDLWfPKJvf0VQcKrs38lDxAsJSwl0NzZ6SCe4o0sVl9xfNv
+	 dxAPonzej9tQ0k6nyD8596dvnTvbUA8kP5Se4U0bVrBFF5zSX1a5LQaDRTbbyGMkdWWjn
+	 B9AwgCl6CG9AzZfv9ny8qch7IdWG7JGHzgfIuDz8Mmd1R9QiSr/IAFBP/8XbQc+YStalR
+	 n/N6fB5ukhCB24DY0+gqbOtqtGRwqFrUOPRvEQS444nCjMZVtrlN77Rqkp81rGriRTQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793331744;
-	h=DMARC-Filter:dkim-signature:Received:Received:Received:Subject:To:CC:
-	 References:From:Message-ID:Date:User-Agent:MIME-Version:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Originating-IP:
-	 X-ClientProxiedBy;
-	bh=lyCCkGxsVqCH5Jxp2Gx73Ra2R6gYJ0X0+xLM8KV7Nyw=;
-	b=Kk288FfcczKYOlaC+Y2PreX6Ud1zWvM8rnWj5wbJ9jCuaPR8IgLMm2bZLOO5PT3HlqLm
-	 JBYCRnQNtw6zLlFHw104hBW5k5fy9+oG2A+f1JQ3AJ/ai2KM+RyL7/FaxWlLvvvi0Kdce
-	 d6bZX+oLl+YSe1NrWgivh524Kxyy4skVTeNq/GtX6XT3meCN4Git6mxG9AXTxk4UYnYdP
-	 e8/3v/hO6a5oMP0R5B0yZ5K3RvpZd2wua3KObLopcCe9Go0ToOuTKpTNFGFhnD49v/1xn
-	 5DzduuZNhZZ8apIfoBgn8xLnqGDI/miGMMWeo+qoHJv+XBGurQZ/nJ9XmFa5wFL709A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793485716;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
+	b=clCXbUr3enzUeoAwSgmkXH3rrX3qeT0R+wKNyh36k7//u/eRdDuE7KksOoDJeB6i+r2G
+	 gqYft9plb3XybK2OS0WNqCP5LzIcMqParjr2zag44LpkB1n7jlszfPsJoV9fhweFFs/4M
+	 YT7RyFfyYuqwR5A8eNUlH9mhGa6FpnrEGClsphA2SvrIi7nOMHfesVmqC/L+d9+JcgEIV
+	 XNaghbfv+3sNctfyeHGKKvtB7C2VFdb8D9kc9YvCTOfejlk9Cri5HsKG/c5FhhGbzpXOs
+	 fO/3xCUZNkicqrzgpOqcCwC/+Z1ZWQj08EH212d6SeDskaLJdUW23FvIs3sAKdrTdFQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=huawei.com;
-	spf=pass smtp.mailfrom=huawei.com;
-	dkim=pass header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=6lgTf+Ts;
-	arc=none smtp.remote-ip=113.46.200.216
-Received: from canpmsgout01.his.huawei.com (canpmsgout01.his.huawei.com [113.46.200.216])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wruhGxLB;
+	arc=none smtp.remote-ip=74.125.229.4
+Received: from mail-dy2-f4.google.com (mail-dy2-f4.google.com [74.125.229.4])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC24606A31A;
-	Fri, 30 Oct 2026 03:42:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2EC24606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCA25606A31C
+	for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 22:28:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BCA25606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=6lgTf+Ts
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=lyCCkGxsVqCH5Jxp2Gx73Ra2R6gYJ0X0+xLM8KV7Nyw=;
-	b=6lgTf+Ts1V+YHSBCrEFvDEXDhiMC9GXMq3b2wsOqtZVSt4aNi9cNouzzS6JDieVJF34tbk3Eh
-	hET2+S5R51zLlg3+fDdAp58YFcw5B6/T2rmuCau0hbz720kofk1l0vMy/ktC5xSYSNUX71IMs/h
-	Me1Uuzuu58wyIDDAb/XNnkQ=
-Received: from mail.maildlp.com (unknown [172.19.162.140])
-	by canpmsgout01.his.huawei.com (SkyGuard) with ESMTPS id 4jG6NZ0f5mz1T4G5;
-	Fri, 30 Oct 2026 11:42:06 +0800 (CST)
-Received: from whupemo200011.china.huawei.com (unknown [7.152.185.179])
-	by mail.maildlp.com (Postfix) with ESMTPS id 483B3202E6;
-	Fri, 30 Oct 2026 11:42:18 +0800 (CST)
-Received: from [10.174.178.46] (10.174.178.46) by
- whupemo200011.china.huawei.com (7.152.185.179) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45; Fri, 30 Oct 2026 11:42:16 +0800
-Subject: Re: [PATCH v2 28/34] ubifs: don't set SB_RDONLY after errors
-To: Christian Brauner <brauner@kernel.org>, <linux-fsdevel@vger.kernel.org>,
-	Jan Kara <jack@suse.com>
-CC: Al Viro <viro@zeniv.linux.org.uk>, <ecryptfs@vger.kernel.org>,
-	<linux-ext4@vger.kernel.org>, <jfs-discussion@lists.sourceforge.net>,
-	<linux-nilfs@vger.kernel.org>, <exfat@lists.linux.dev>, <linux-mm@kvack.org>,
-	<ntfs@lists.linux.dev>, <ocfs2-devel@lists.linux.dev>,
-	<linux-btrfs@vger.kernel.org>, <gfs2@lists.linux.dev>,
-	<linux-efi@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
-	<linux-xfs@vger.kernel.org>
-References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
- <20261029-work-fs-sb_rdonly-v2-28-2f44f64f0b66@kernel.org>
-From: Zhihao Cheng <chengzhihao1@huawei.com>
-Message-ID: <0d472865-6cbb-cbb5-b361-1f2bf71dd528@huawei.com>
-Date: Fri, 30 Oct 2026 11:42:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wruhGxLB
+Received: by mail-dy2-f4.google.com with SMTP id 5a478bee46e88-35af9712d88so90038eec.1
+        for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 15:28:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793485715; x=1794090515; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
+        b=wruhGxLBLohlxKsjJZR+m2oQPmA+G+wqI4IsVDOEvNloAIzpW6/FEdo9fwni+2bw/I
+         MmRI2GbjnQmdN4nUC6BrD1hqJHV0FPYQV+D3lTMLOoinvs8Fl7EmLrEUPMPi6LYV/Nyp
+         QZgBQj6CyRHoX77jKqAS95K7MLN8ouuxeafgla2rmvqC4p1kJ17dxhm2FEM1Wdl19Lib
+         XwejwgXFBY1lpdeUHkz2ZdOy3Y9Rj6YNblbJJh9+42EHBLc1tt2CgNldwwISyIDeLRMY
+         sJi0MpB8s4fKdy1F+8sZkMeXNNMl3OkJMcvwpigyo3V2OG3quBO68dhSNkyTNGOI1Hhv
+         Cw7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793485715; x=1794090515;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
+        b=PUoWW7I/KTnyPLHaPQhgf4Hn9U4+ZlVQz9mYCYyti+iMAUovNuDM+YU1jG5zxbpOWv
+         Bh8Oy9LjPDdMazYr3k/2bjzkVVR/E9f6ONQVKkGi9kWTcHmy+WxorrpdDV2CU92/slaG
+         16p0hw47IkRh27UH1Wf7Uz6fJgiJt8LlonDG1Bk8n/4YY8v60BVsUQBTceRMzwWTWjh6
+         l6vvOMWeCri0TwWGwNZDvaiLiP153TPV+6SYqsH1xrlI29cuPZ9QHb1DQbzGXC7iYg6z
+         fsTfZAuuPQHCTZ4xrsDBluMsayZ3ZZsgit3LBL1kf7awPUGienavqbPGGM6fAUM1KJ/d
+         WqWg==
+X-Forwarded-Encrypted: i=1; AKwUvBzQ0f+/HmhhMDGqHVnaktloTOZtGp7XjjL+HIpCM0XZOmAlJ7Y6sGGYBwZhko13cNyof6z+dQ==@lists.linux.dev
+X-Gm-Message-State: AFq9FYKinfqUyDRWWipY2o0n2iDgK3knX7U9gyo8uF8Vt67lU491lFDB
+	aMAked55Vt/kJ2GiwSioKLgwptGDHc++HFIu5M22TmpZBuZavXFcmdI3
+X-Gm-Gg: AYBFou1QL0qmmC/o/D1hPIW5IR5UXc+jr2JmbACxWlfhXAn/6ithkkqUDy4/oul7dWz
+	9rBrtcY1JfS5v/c275oKDuWIV1iqB5y5W4NnAW7wOF4CbI9JF3lnrLWenOx1zKBTa3s7frKKesr
+	BOmzMiSGQRcISdce9GZYpEMlHi9piRxaUr97Sd6fw9Q2o9g6xXpzZV3uCS+RH3d72Iv0AwesPyL
+	KvNXXHJZ7Xec3zAq5z0TNFrL7WYghlQVnJHgzV9to1ogmLyMggbDglVWW6koFrJqq8oSMgqP2CP
+	AGgipqcmymgBzhkMQAncLkFI4nDkwiOF8U/JIkRw6FL+2ORXSz2hLcwmYVyvIrBEu/+znRuidY/
+	Bdp8wWg1k9yIJ71qEYaR7CE8IvGn0ZirYN3CUIWPyfA/0Wy5rimxg0iMzshuPIKOfQYKO7g7rOC
+	ZIFDVFFKavbmM83Ll5mT98sorZnXuXwGGnZFtKS+HNjAAWvuR9Y1emvD31vIToOXDg4HSJ3PWpC
+	mCBtitAacuPgE8xgJKGkuj4r3gZGuM6vb0bhhxsOPyxVQbybG03DgsOEWNoX4dGuXG5v1SSsSVk
+	RLXm2AtDcWSOWO8HMYk9e1lugk/Z2Z3CRwkO22AGGTlgHGwbx4FgMsbY
+X-Received: by 2002:a05:7022:5f0a:b0:14a:a6dc:9cbf with SMTP id a92af1059eb24-1ac599f5078mr7780009c88.4.1793485714706;
+        Sat, 31 Oct 2026 15:28:34 -0700 (PDT)
+Received: from localhost.localdomain ([98.148.34.5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854d925sm33876066c88.7.2026.10.31.15.28.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 31 Oct 2026 15:28:34 -0700 (PDT)
+From: Hungyu Lin <dennylin0707@gmail.com>
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	exfat@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Hungyu Lin <dennylin0707@gmail.com>
+Subject: [PATCH] exfat: preserve the 64-bit FITRIM minimum length
+Date: Sat, 31 Oct 2026 22:28:23 +0000
+Message-ID: <20261031222823.223-1-dennylin0707@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -77,106 +99,40 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-In-Reply-To: <20261029-work-fs-sb_rdonly-v2-28-2f44f64f0b66@kernel.org>
-Content-Type: text/plain; charset="gbk"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- whupemo200011.china.huawei.com (7.152.185.179)
 
-ÔÚ 2026/10/30 0:07, Christian Brauner Ð´µÀ:
-> ubifs_ro_mode() sets c->ro_error and SB_RDONLY from whatever context hit
-> the error, e.g. a failing write, and without holding s_umount. UBIFS
-> can't be frozen but that still races with everyone else changing
-> sb->s_flags. And c->ro_error alone already makes every write fail with
-> EROFS.
-> 
-> So only set SB_RDONLY while the filesystem is still being mounted and
-> call sb_set_emergency_ro() after that. The xattr setters check
-> c->ro_error as well because ecryptfs calls them without write access on
-> the lower mount and they change the inode in memory first.
-> 
-> So far a remount to read-only after an error was refused and a remount
-> to read-write went through and cleared SB_RDONLY again because
-> c->ro_mount was never set. Now going read-only works and its writes fail
-> with EROFS before any I/O, and going read-write is refused by the VFS.
-> fsync() fails with EROFS instead of taking ubifs_fsync()'s read-only
-> shortcut.
-> 
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
-> ---
->   fs/ubifs/io.c    | 9 ++++++++-
->   fs/ubifs/super.c | 5 +----
->   fs/ubifs/xattr.c | 6 ++++++
->   3 files changed, 15 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/ubifs/io.c b/fs/ubifs/io.c
-> index 6c6d68242779..7a59aa1ea5ce 100644
-> --- a/fs/ubifs/io.c
-> +++ b/fs/ubifs/io.c
-> @@ -72,7 +72,14 @@ void ubifs_ro_mode(struct ubifs_info *c, int err)
->   	if (!c->ro_error) {
->   		c->ro_error = 1;
->   		c->no_chk_data_crc = 0;
-> -		c->vfs_sb->s_flags |= SB_RDONLY;
-> +		/*
-> +		 * Before SB_BORN the mounter holds s_umount, later see
-> +		 * sb_set_emergency_ro().
-> +		 */
-> +		if (!(c->vfs_sb->s_flags & SB_BORN))
-> +			c->vfs_sb->s_flags |= SB_RDONLY;
-> +		else
-> +			sb_set_emergency_ro(c->vfs_sb);
->   		ubifs_warn(c, "switched to read-only mode, error %d", err);
->   		dump_stack();
->   	}
-> diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-> index 38972786817e..ef39da4e780b 100644
-> --- a/fs/ubifs/super.c
-> +++ b/fs/ubifs/super.c
-> @@ -1977,10 +1977,7 @@ static int ubifs_reconfigure(struct fs_context *fc)
->   		if (err)
->   			return err;
->   	} else if (!c->ro_mount && (fc->sb_flags & SB_RDONLY)) {
-> -		if (c->ro_error) {
-> -			ubifs_msg(c, "cannot re-mount R/O due to prior errors");
-> -			return -EROFS;
-> -		}
-> +		/* After an error ubifs_remount_ro() can't write but still works. */
+The FITRIM minimum length is a 64-bit value, but exfat_ioctl_fitrim()
+uses max_t(unsigned int, ...) to compare it with the discard granularity.
+This truncates the requested minimum on both 32-bit and 64-bit kernels.
 
-Hi, Brauner
-If we remove the c->ro_error check, ubifs_remount_ro->ubifs_wbuf_sync 
-will return EROFS and trigger ubifs_ro_mode() again, I think we can 
-retain the pre-check placement to trigger more error printing.
-BTW, a remount to read-write after an error is refused too.
->   		ubifs_remount_ro(c);
->   	}
->   
-> diff --git a/fs/ubifs/xattr.c b/fs/ubifs/xattr.c
-> index 3b0e8a270f59..572f6f3e52ad 100644
-> --- a/fs/ubifs/xattr.c
-> +++ b/fs/ubifs/xattr.c
-> @@ -260,6 +260,9 @@ int ubifs_xattr_set(struct inode *host, const char *name, const void *value,
->   	if (check_lock)
->   		ubifs_assert(c, inode_is_locked(host));
->   
-> +	if (c->ro_error)
-> +		return -EROFS;
-> +
->   	if (size > UBIFS_MAX_INO_DATA)
->   		return -ERANGE;
->   
-> @@ -564,6 +567,9 @@ static int ubifs_xattr_remove(struct inode *host, const char *name)
->   
->   	ubifs_assert(c, inode_is_locked(host));
->   
-> +	if (c->ro_error)
-> +		return -EROFS;
-> +
->   	if (fname_len(&nm) > UBIFS_MAX_NLEN)
->   		return -ENAMETOOLONG;
->   
-> 
-The sb_rdonly won't affect the sync_fs_one_sb() after an error, and 
-sb_emergency_ro check in not added into sync_fs_one_sb, should we add 
-the c->ro_error check in ubifs_sync_fs() to prevent the failure 
-ubifs_wbuf_sync executing?
+For example, fstrim --minimum 4GiB can trim smaller free extents because
+the minimum wraps to zero before being raised to the device granularity.
+
+Use a u64 comparison to preserve the userspace value. exfat_trim_fs()
+already stores the minimum cluster count in a u64.
+
+Fixes: 654762df2ec7 ("exfat: add support ioctl and FITRIM function")
+Cc: stable@vger.kernel.org
+Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+---
+ fs/exfat/file.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index 1386149916bb..4e7a2fb30279 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -586,8 +586,8 @@ static int exfat_ioctl_fitrim(struct inode *inode, unsigned long arg)
+ 	if (copy_from_user(&range, (struct fstrim_range __user *)arg, sizeof(range)))
+ 		return -EFAULT;
+ 
+-	range.minlen = max_t(unsigned int, range.minlen,
+-				bdev_discard_granularity(inode->i_sb->s_bdev));
++	range.minlen = max_t(u64, range.minlen,
++			     bdev_discard_granularity(inode->i_sb->s_bdev));
+ 
+ 	ret = exfat_trim_fs(inode, &range);
+ 	if (ret < 0)
+-- 
+2.43.0
+
