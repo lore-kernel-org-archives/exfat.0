@@ -1,149 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793494173;
-	b=c7igsACXwkU09VYHjmHUCdb59IdTE/H5nKGVK29Sc4u3kLdcF3ZrSeYHKvkIS41FQBWJ
-	 IAWJf+yltTuLUY6Z9GAcObI8yaZMS6wbxxqIhNlkrclGxgW8FkxMmax4w3jBH/7Px83av
-	 73Y7X3bHnR3qg2OHrWkstVL8k5Pax9UO9d61AxYgq4xTPrz8LuwzuHm5tpy+j6AVcBtwK
-	 SR9UebaIvvoVPL48FyQjFrNAHDgVCvZJmY+qi8dSeJ+tMdsVq7AfxouDT7L5KwQK/wLyk
-	 jBouzXSH26T9eDOwtumBV0a97SQptQO2mnFnihMW63n9mK2+Dsr11lo64E54KoKLIMg==
+	t=1793498242;
+	b=sQp6ycPrg7UjHwxf/xeVy9WWuIKlPWMGu8IsAfoGgytLnHBOLH22xiKm5g4yvPvJUipI
+	 8TqUbFR7XNF8GDhiMdu7i2RP29A88qF5g2pAUe1X0rLj4nI7Wl3ncvcXrGW/qM0yJq4Ko
+	 wx2/h+pXPzv0xZu6J8Roc97tDEymda7QLNcCnSgp7RIvWoZnNNl4ZZPBNPHwrvdD2qIlX
+	 s1GeQQy8VtvZ2oLqlYGl0I1pYqWOKM3fT1KtiSs05jLUn+JrQOgUhzeLbSFbvlHEiiMj9
+	 8JAGA74uN/Vewb6t6G1g2QR+rjgl78Im3XBRDUuaxYkpL3SPMwfJXmSOo39u7wzKKWQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793494173;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793498242;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:Autocrypt:
-	 Content-Type:Content-Transfer-Encoding:User-Agent:MIME-Version;
-	bh=EUpJKvz8mlj+rANwwFPIVtc0TayK+TWucETEd0TlynI=;
-	b=mQcShcEYFBsdtAP9RiWT6TiIyDRxj99BrEx5V4AOIOIUQb2UGStGDU3btmW+1Ec2kzvy
-	 LD5LiyplZMK8AxUNT6jl1IfEAMxWD2Yj+w7jCMO229tfPc38uO0em6R+4nkTURtI/dXH7
-	 WiNvaZBIOx7tKDZrou52bqHSQR+OK5p22wsrxehOek8C9ncVt1PXbLwKOwWsQ1kv3+xPF
-	 mUDbBPc2JCYGrfygfSRh3+I5i4XAyvnbtN4auQdZmllZagOYKmV5sSU4Xawi+9SZJgpbv
-	 Ykj5oWdv6eMqv4262Br3HTxZXAZa093t4DIUIge5ZEvx+fM5D8qsh0STLrtack6+WpA==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=ldhDDTtZAE/3brSKAhksuwsG1IPpe3NESKnYVMmoFBE=;
+	b=14f4quWVATJHiVNj3ahHpV08xMlx0dDZcSV9XQZm8iYNQegTn/W477IbXE27LRoj0mmY
+	 T9NC1dBAZKiPdCNsW6xYzEXeF0cYX3vZNnzNuuCqmSGcXJj5YE/n74DnCmUKIllVK9khi
+	 EyAiK2EuFJNzL0OO4sYn0QMX2RsD8kCQu1l4QT5bBCQH5z2Mjlb7XlaacH5CiyM+SGXwk
+	 IEzgiqXu5iAqpPMTGoaZQWHqkYkzs/n586EEXbSd0jBA50yIZde6z5CTSM1WppMX6XNYr
+	 roHVTG4yW3qGLheYjjs99JVnDsFdw8yY9J7d2/mFYeNPS/lvl2mEW1G+qNmtmdfrChQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=dubeyko.com;
-	spf=pass smtp.mailfrom=dubeyko.com;
-	dkim=pass header.d=dubeyko-com.20260707.gappssmtp.com header.i=@dubeyko-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=GNR8XfGG;
-	arc=none smtp.remote-ip=209.85.128.182
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Xj7u5GNp;
+	arc=none smtp.remote-ip=209.85.221.42
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8167D606A325
-	for <exfat@lists.linux.dev>; Sun,  1 Nov 2026 00:49:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8167D606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dubeyko.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dubeyko.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F889606A326
+	for <exfat@lists.linux.dev>; Sun,  1 Nov 2026 01:57:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3F889606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=dubeyko-com.20260707.gappssmtp.com header.i=@dubeyko-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=GNR8XfGG
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-8871ada1a26so13891937b3.1
-        for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 17:49:32 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Xj7u5GNp
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48afbd2c386so1030747f8f.3
+        for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 18:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=dubeyko-com.20260707.gappssmtp.com; s=20260707; t=1793494172; x=1794098972; darn=lists.linux.dev;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=EUpJKvz8mlj+rANwwFPIVtc0TayK+TWucETEd0TlynI=;
-        b=GNR8XfGG4iR28bAHXEqIifKRc1/T0Ypim7Xdo19awjlhuyJ9cPOeQGXkHt0nZgaKVo
-         QnB6sIn+rc1C7TlFEaIb7EdPk7FQNIgwsDmAOjDwMogr3q1iT/2Dvaz7Om+FPsI4eE/d
-         ztlheGBIhPe+OuwmlgZ08/oyOChfZ6PJ1/dGncKlH2RqEZbcERn+y100b9C8uUKLyBqZ
-         jCRVfFFnS5n6Jfu/+zCWRwYA3ahg1cIa5sdVVmJaFM8Ng+k4vmEN265bPrLUjvKRW2Gx
-         rBZ5NPoqYFffvbpEizWZYZ+WN4EWhMIGTqLVvFrgluzb013hrnlUcmI5Tw8hDL112oyp
-         kjsQ==
+        d=gmail.com; s=20260707; t=1793498240; x=1794103040; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ldhDDTtZAE/3brSKAhksuwsG1IPpe3NESKnYVMmoFBE=;
+        b=Xj7u5GNpcKCX5qA/JkGtkAFDct40tMr6Xp0yTT1GLC0/Bm3LPiexMzEdEWics/YrHp
+         zBDWUEcmWnxcesEUYZ9INBUiwgLXjXOZHrSxlBnGHEmj7XvYHsY/H+bdmAkMYtH7o1P7
+         xHQ/fOEVoVZSIdjhkatGcbcJfd/ohRUREy4HkOTLKOsyo8AQ9OpaA0PnfiHvhV+scY2R
+         rNxveOpaj4CLAFhGAV4JEuHjGj6M4g9XN5qr3GxbrLtY0pWuoA5krpOndZ3J2AyqhSj0
+         UQl9Tj1FLMVmmrbMp+WT9Qk1UDemaYKPJrRKze/hWQd5BjTZI1D3CgAImaVojtMWXM8A
+         1G9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793494172; x=1794098972;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=EUpJKvz8mlj+rANwwFPIVtc0TayK+TWucETEd0TlynI=;
-        b=KPmp0InoMfbnxlhoemcxyRpulbrotQ1EXids4Fop+isvTQPegxyHpvZeuDKr+7X/sw
-         SW9av8eBeuohMZnzMWQwEB35LQhn7jUBL7oZ5awEQ4NX7FvVyanPXkd5rVkq2ZmvE8WX
-         HglyEO5WTyDpmn+iDIWFq6lOlVR1fII4ykAovTmhVFJmMjQVWnohJUzB1ZCNIKeNmPgT
-         u4xCvD5hFHRze6MF3uMYoGbI30uYvw2wlPAZZ1aL7Id5gQTXQUOorJJ/krXhKcGwu+Ni
-         CQPFtyWouYKMU56RIRpc9QM7Rera3rXh/+uNbeKoWeJSyVUzGDCcE3veidgtZdOif6fo
-         HrtA==
-X-Forwarded-Encrypted: i=1; AKwUvBzaAT9AzYt0T53I4QJdAM/JDFYHvzGhz6Z3m/Cr6hG/KQ1jrpRb9Qe/q5zTEk50XhrhXXzJSA==@lists.linux.dev
-X-Gm-Message-State: APuU4Z9Lh3IuaixS83yj9UWTei7wZOXWuMVu5YRPHKTsuPyD1cOvKdlu
-	+kEZd9xhFDJKpdiVOF8bnGWF/yGrh5joz1tejMBNUOWgkYMreNlrJ7sPz7k1z53+XO8=
-X-Gm-Gg: AYBFou0HAADfW2GfexypT6iWaC/4SNpkFrtY6KOovO/V2UqKac/1uHkWKq9Qhdf+mP2
-	G3/YPFUsK6EVmbWPwsOYuIdbFFhBZgB/wGsRlnNnetgDRw+ctTxgNWkH3IOay4BxXRVgs0GeCS/
-	fabCYVj5nhH23BLwtnXO+XtMQ2bMkhpRfqY9PZPE+cLdCUyDWlDw4Y0VrXOVFl8zdzYq6hqHblt
-	vjGXJs9M3ppOW66ncVZKlucxDbKNEbp+o3uylGv1f3EFbd4XB+jQ87tXtOPeVgfn1/RqJoi0JG0
-	R9H28HEFUl56p92nF6hdLQDMLt1uSGySO8VVfwIh14t5Fs29tIFXlkiyth/BUILzimBlkDrZ4Fc
-	uxddBkm2cdxfOmSoYGvG/4194QCuxbd04U8/g6oeeYety/CX6te7ApAgDmmqJvWnD8Ge8YDJ0P2
-	Yig4rl8TbJ4+k0oEgacWz9pGMsavPh7irTD1n9F+z2TFJFKbkEsS6noO7rcLE8HAvAf13tta92D
-	O1SWLqcI+SrAtKvFGY/Rg7n+xdgiE50JbhZE/yZg57kpzINlKhUahKJ2gfvpEkjXB8YclTz8Abw
-	QFhZnWC6f+s8FsdYduO66H2kPopt/z0aWzoMOA/7xDy5pm2z+XgVAMBeL5UmGqzYLDzZulJrmQ8
-	Hgtlb1QrQz+D2b/P+PX8MoIRcbQ6zmXVQOF2Cya527UKJlOYzZXljFgThMAjiGFYX84rdlimDMp
-	XwrAKmxQLlG6l7s+hsim0=
-X-Received: by 2002:a05:690c:6b01:b0:8b1:810d:276 with SMTP id 00721157ae682-8b2b66e9a50mr29543167b3.34.1793494172036;
-        Sat, 31 Oct 2026 17:49:32 -0700 (PDT)
-Received: from ?IPv6:2600:1700:6476:1430:6f84:fe3e:51d2:f3cd? ([2600:1700:6476:1430:6f84:fe3e:51d2:f3cd])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b2b71bd543sm29098627b3.45.2026.10.31.17.49.29
+        d=1e100.net; s=20260707; t=1793498240; x=1794103040;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ldhDDTtZAE/3brSKAhksuwsG1IPpe3NESKnYVMmoFBE=;
+        b=AxVaFpMHvaJJqGnAATVo7O9MNYg/heUVJb+Bwy1WnEYbaaUgQZ9Npay6jU5ZRMhcfQ
+         O/3KD0PWoAnYA0SqEeOn2QxCPNAfBnwgura/qSIemsLgj67/T7OzM6xpE9V6TuQ2P3Vw
+         M1e2QzkrvcsXH5YF3pRNTIt1mdh7NepS4IjWf5nRWHavl982tywehNhhOlEk+ulFgkUZ
+         sul/gHEdPzuFQWDWDJBaJOBT7VeNdSlx+jk6/JSNfROMYHJ3jaE7u/mw115fW5xNGsd9
+         UF26PunF6HBhV91AdQjzHZUu2V9DaiYXZWNL41QLdnb3TycjkvBoXYcneWJWy4y42EbT
+         mlAg==
+X-Forwarded-Encrypted: i=1; AKwUvBwyeLnxaMq5QB477Mt2DtttECq6vETXrIeyOygfiMCUodCtntt8+G75vLbED8lckgHx5v507w==@lists.linux.dev
+X-Gm-Message-State: AFq9FYIfaReezXfDU6aBzKbfh+i69M1o6jd/u2v4uIKEZoq1oYJYOqsA
+	0yd/9zG97a+2TjuGTwa7F6RLnfqzFHHdxzxKcSi+dLgL25f0EW6myXrQ
+X-Gm-Gg: AYBFou2F/TKLuGY0asd2lmIRzJ/v5JquaZJ57WKwScpI9vzpYryfdP0W68WcG+cUinW
+	MB1FSQTrb7n5jbxggsJZTRRffIMz1/P4P57JiRiV8btk/6u3+3Nhj7TF74lT/kE5Sk4yefe4GcI
+	m33U//hqaQZuodoK553SgM+xkXrJo11aeKcGnqO8eRHESBNBH2yVrwdESGW/xfoBG6PfbRlbWf+
+	Lu6ly7Xv/Q3C0Eij0AYECc2qVwzfC5Eh+pD1E8oNzST+n+NzW/VUtAkuOUm1OinRiKZyKo16cKP
+	ieRGdJ4jQDr9ImHt01DCW9Z9yK8Y32a3hzAB7NKzqtnbvpFPmmWcf3BYHcSbzQNhrP/B9pc7gx/
+	dhsd0U8zeY5vU4zsRLRb39fb3jT1TPW+p5sOyPqk2BQTHlAoKiPGA/N+C8dpqBfITO/PEfEIYz4
+	21GGPsMHu9HokuJN82oljyEQ4miFAtfXzDtcle6HnM8XN+Nn+JhH1Uca3Jd00BQ/wT64bGU65LM
+	bhbqUzKTpEy6KXmHVezzXLdrjzdPpTFmDVSXkGLwGKPUVwrfpD+tuUYY9RIWiwyQoz181fd68pv
+	prczjXY8xZtwryaY5HgtUkrI
+X-Received: by 2002:a05:600d:c:b0:4af:83ad:8f70 with SMTP id 5b1f17b1804b1-4af83ad8fa7mr31193005e9.35.1793498240391;
+        Sat, 31 Oct 2026 18:57:20 -0700 (PDT)
+Received: from infinity ([2001:b07:5d26:7a6a:365a:60ff:fe0d:cfc6])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4aa81b7fe80sm273532835e9.11.2026.10.31.18.57.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 17:49:30 -0700 (PDT)
-Message-ID: <49d219dab3cb6411a1626efe78070d1aed94e96b.camel@dubeyko.com>
-Subject: Re: [Jfs-discussion] [PATCH v2 12/34] hfs: use the generic
- emergency read-only state
-From: Viacheslav Dubeyko <slava@dubeyko.com>
-To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org, 
- Jan Kara <jack@suse.com>
-Cc: ntfs@lists.linux.dev, linux-xfs@vger.kernel.org, 
-	jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org, 
-	linux-mm@kvack.org, ocfs2-devel@lists.linux.dev, ecryptfs@vger.kernel.org, 
-	gfs2@lists.linux.dev, exfat@lists.linux.dev, linux-efi@vger.kernel.org, 
-	linux-mtd@lists.infradead.org, Al Viro <viro@zeniv.linux.org.uk>, 
-	linux-ext4@vger.kernel.org, linux-btrfs@vger.kernel.org
-Date: Sat, 31 Oct 2026 17:49:29 -0700
-In-Reply-To: <20261029-work-fs-sb_rdonly-v2-12-2f44f64f0b66@kernel.org>
-References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
-	 <20261029-work-fs-sb_rdonly-v2-12-2f44f64f0b66@kernel.org>
-Autocrypt: addr=slava@dubeyko.com; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.60.1 (by Flathub.org) 
+        Sat, 31 Oct 2026 18:57:19 -0700 (PDT)
+From: koraynilay <koray.fra@gmail.com>
+To: David Sterba <dsterba@suse.com>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>
+Cc: Chris Mason <mason@kernel.org>,
+	Jan Kara <jack@suse.cz>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Chuck Lever <cel@kernel.org>,
+	"Darrick J . Wong" <djwong@kernel.org>,
+	Sean Smith <defendthedisabled@gmail.com>,
+	Andrey Albershteyn <aalbersh@kernel.org>,
+	Pedro Falcato <pfalcato@suse.de>,
+	Amir Goldstein <amir73il@gmail.com>,
+	=?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+	linux-btrfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	exfat@lists.linux.dev,
+	ntfs3@lists.linux.dev,
+	linux-api@vger.kernel.org,
+	koraynilay <koray.fra@gmail.com>
+Subject: [RFC PATCH v3 0/5] add provenance time (ptime)
+Date: Sun,  1 Nov 2026 02:55:46 +0100
+Message-ID: <20261101015551.786044-1-koray.fra@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -153,297 +114,111 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2026-10-29 at 17:07 +0100, Christian Brauner via Jfs-discussion
-wrote:
-> Set SB_STATE_EMERGENCY_RO instead of a private bit and drop the
-> checks
-> the VFS does now. What's left is hfs_get_block(),
-> hfs_file_truncate(),
-> write_begin, O_DIRECT writes, the hfs.type and hfs.creator xattrs,
-> hfs_write_inode() which still writes the b-tree headers, and the MDB
-> commit, close and dirtying paths.
->=20
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
-> ---
-> =C2=A0fs/hfs/attr.c=C2=A0=C2=A0 |=C2=A0 2 +-
-> =C2=A0fs/hfs/dir.c=C2=A0=C2=A0=C2=A0 | 12 ------------
-> =C2=A0fs/hfs/extent.c |=C2=A0 4 ++--
-> =C2=A0fs/hfs/hfs_fs.h | 11 -----------
-> =C2=A0fs/hfs/inode.c=C2=A0 | 20 ++++----------------
-> =C2=A0fs/hfs/mdb.c=C2=A0=C2=A0=C2=A0 |=C2=A0 8 ++++----
-> =C2=A0fs/hfs/super.c=C2=A0 |=C2=A0 5 +----
-> =C2=A07 files changed, 12 insertions(+), 50 deletions(-)
->=20
-> diff --git a/fs/hfs/attr.c b/fs/hfs/attr.c
-> index bd9a1289d8c5..337b22f28208 100644
-> --- a/fs/hfs/attr.c
-> +++ b/fs/hfs/attr.c
-> @@ -129,7 +129,7 @@ static int hfs_xattr_set(const struct
-> xattr_handler *handler,
-> =C2=A0	if (!value)
-> =C2=A0		return -EOPNOTSUPP;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(inode->i_sb)))
-> +	if (unlikely(sb_emergency_ro(inode->i_sb)))
-> =C2=A0		return -EROFS;
-> =C2=A0
-> =C2=A0	return __hfs_setxattr(inode, handler->flags, value, size,
-> flags);
-> diff --git a/fs/hfs/dir.c b/fs/hfs/dir.c
-> index f0d8ddb07503..f6b97da19788 100644
-> --- a/fs/hfs/dir.c
-> +++ b/fs/hfs/dir.c
-> @@ -189,9 +189,6 @@ static int hfs_create(const struct mnt_idmap
-> *idmap, struct inode *dir,
-> =C2=A0	struct inode *inode;
-> =C2=A0	int res;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(dir->i_sb)))
-> -		return -EROFS;
-> -
-> =C2=A0	inode =3D hfs_new_inode(dir, &dentry->d_name, mode);
-> =C2=A0	if (IS_ERR(inode))
-> =C2=A0		return PTR_ERR(inode);
-> @@ -222,9 +219,6 @@ static struct dentry *hfs_mkdir(const struct
-> mnt_idmap *idmap, struct inode *dir
-> =C2=A0	struct inode *inode;
-> =C2=A0	int res;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(dir->i_sb)))
-> -		return ERR_PTR(-EROFS);
-> -
-> =C2=A0	inode =3D hfs_new_inode(dir, &dentry->d_name, mode);
-> =C2=A0	if (IS_ERR(inode))
-> =C2=A0		return ERR_CAST(inode);
-> @@ -258,9 +252,6 @@ static int hfs_remove(struct inode *dir, struct
-> dentry *dentry)
-> =C2=A0	struct inode *inode =3D d_inode(dentry);
-> =C2=A0	int res;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(sb)))
-> -		return -EROFS;
-> -
-> =C2=A0	if (S_ISDIR(inode->i_mode) && inode->i_size !=3D 2)
-> =C2=A0		return -ENOTEMPTY;
-> =C2=A0
-> @@ -299,9 +290,6 @@ static int hfs_rename(const struct mnt_idmap
-> *idmap, struct inode *old_dir,
-> =C2=A0	if (flags & ~RENAME_NOREPLACE)
-> =C2=A0		return -EINVAL;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(old_dir->i_sb)))
-> -		return -EROFS;
-> -
-> =C2=A0	/* Unlink destination if it already exists */
-> =C2=A0	if (d_really_is_positive(new_dentry)) {
-> =C2=A0		res =3D hfs_remove(new_dir, new_dentry);
-> diff --git a/fs/hfs/extent.c b/fs/hfs/extent.c
-> index dacf7ce1ffe4..fd874a93a92f 100644
-> --- a/fs/hfs/extent.c
-> +++ b/fs/hfs/extent.c
-> @@ -357,7 +357,7 @@ int hfs_get_block(struct inode *inode, sector_t
-> block,
-> =C2=A0			return -EIO;
-> =C2=A0		if (ablock >=3D HFS_I(inode)->alloc_blocks) {
-> =C2=A0			/* No new allocations after an error. */
-> -			if (unlikely(hfs_emergency_ro(sb)))
-> +			if (unlikely(sb_emergency_ro(sb)))
-> =C2=A0				return -EROFS;
-> =C2=A0			res =3D hfs_extend_file(inode);
-> =C2=A0			if (res)
-> @@ -494,7 +494,7 @@ void hfs_file_truncate(struct inode *inode)
-> =C2=A0	hfs_dbg("ino %llu, phys_size %llu -> i_size %llu\n",
-> =C2=A0		inode->i_ino, (long long)HFS_I(inode)->phys_size,
-> =C2=A0		inode->i_size);
-> -	if (unlikely(hfs_emergency_ro(sb)))
-> +	if (unlikely(sb_emergency_ro(sb)))
-> =C2=A0		return;
-> =C2=A0	if (inode->i_size > HFS_I(inode)->phys_size) {
-> =C2=A0		struct address_space *mapping =3D inode->i_mapping;
-> diff --git a/fs/hfs/hfs_fs.h b/fs/hfs/hfs_fs.h
-> index 325214573d91..fdfa5d303d5e 100644
-> --- a/fs/hfs/hfs_fs.h
-> +++ b/fs/hfs/hfs_fs.h
-> @@ -143,7 +143,6 @@ struct hfs_sb_info {
-> =C2=A0#define HFS_FLG_BITMAP_DIRTY	0
-> =C2=A0#define HFS_FLG_MDB_DIRTY	1
-> =C2=A0#define HFS_FLG_ALT_MDB_DIRTY	2
-> -#define HFS_FLG_EMERGENCY_RO	3	/* read-only after an MDB
-> write error */
-> =C2=A0
-> =C2=A0/* bitmap.c */
-> =C2=A0extern u32 hfs_vbm_search_free(struct super_block *sb, u32 goal, u3=
-2
-> *num_bits);
-> @@ -294,16 +293,6 @@ static inline const char *hfs_mdb_name(struct
-> super_block *sb)
-> =C2=A0	return sb->s_id;
-> =C2=A0}
-> =C2=A0
-> -/*
-> - * Writing back the MDB failed and the filesystem stopped all
-> modifications
-> - * until unmount. SB_RDONLY isn't used for that because it must not
-> change
-> - * without s_umount.
-> - */
-> -static inline bool hfs_emergency_ro(struct super_block *sb)
-> -{
-> -	return test_bit(HFS_FLG_EMERGENCY_RO, &HFS_SB(sb)->flags);
-> -}
-> -
-> =C2=A0static inline void hfs_bitmap_dirty(struct super_block *sb)
-> =C2=A0{
-> =C2=A0	set_bit(HFS_FLG_BITMAP_DIRTY, &HFS_SB(sb)->flags);
-> diff --git a/fs/hfs/inode.c b/fs/hfs/inode.c
-> index 6ea3b8ffb284..71f7ddf60fb2 100644
-> --- a/fs/hfs/inode.c
-> +++ b/fs/hfs/inode.c
-> @@ -54,7 +54,7 @@ int hfs_write_begin(const struct kiocb *iocb,
-> struct address_space *mapping,
-> =C2=A0	loff_t total_capacity;
-> =C2=A0	int ret;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(inode->i_sb)))
-> +	if (unlikely(sb_emergency_ro(inode->i_sb)))
-> =C2=A0		return -EROFS;
-> =C2=A0
-> =C2=A0	total_capacity =3D (loff_t)sbi->fs_ablocks * sbi->alloc_blksz;
-> @@ -143,7 +143,7 @@ static ssize_t hfs_direct_IO(struct kiocb *iocb,
-> struct iov_iter *iter)
-> =C2=A0	ssize_t ret;
-> =C2=A0
-> =C2=A0	if (iov_iter_rw(iter) =3D=3D WRITE &&
-> -	=C2=A0=C2=A0=C2=A0 unlikely(hfs_emergency_ro(inode->i_sb)))
-> +	=C2=A0=C2=A0=C2=A0 unlikely(sb_emergency_ro(inode->i_sb)))
-> =C2=A0		return -EROFS;
-> =C2=A0
-> =C2=A0	ret =3D blockdev_direct_IO(iocb, inode, iter, hfs_get_block);
-> @@ -479,11 +479,8 @@ int hfs_write_inode(struct inode *inode, struct
-> writeback_control *wbc)
-> =C2=A0	int res;
-> =C2=A0
-> =C2=A0	hfs_dbg("ino %llu\n", inode->i_ino);
-> -	if (unlikely(hfs_emergency_ro(inode->i_sb))) {
-> -		/*
-> -		 * Writeback still writes the b-tree nodes. Keep the
-> headers in
-> -		 * sync with them so the trees on disk stay intact.
-> -		 */
-> +	if (unlikely(sb_emergency_ro(inode->i_sb))) {
-> +		/* Keep the headers in sync with the nodes writeback
-> still writes. */
-> =C2=A0		if (inode->i_ino =3D=3D HFS_EXT_CNID)
-> =C2=A0			hfs_btree_write(HFS_SB(inode->i_sb)-
-> >ext_tree);
-> =C2=A0		else if (inode->i_ino =3D=3D HFS_CAT_CNID)
-> @@ -640,8 +637,6 @@ void hfs_evict_inode(struct inode *inode)
-> =C2=A0
-> =C2=A0static int hfs_file_open(struct inode *inode, struct file *file)
-> =C2=A0{
-> -	if ((file->f_mode & FMODE_WRITE) && hfs_emergency_ro(inode-
-> >i_sb))
-> -		return -EROFS;
-> =C2=A0	if (HFS_IS_RSRC(inode))
-> =C2=A0		inode =3D HFS_I(inode)->rsrc_inode;
-> =C2=A0	atomic_inc(&HFS_I(inode)->opencnt);
-> @@ -673,9 +668,6 @@ int hfs_inode_setattr(const struct mnt_idmap
-> *idmap, struct dentry *dentry,
-> =C2=A0	struct hfs_sb_info *hsb =3D HFS_SB(inode->i_sb);
-> =C2=A0	int error;
-> =C2=A0
-> -	if (unlikely(hfs_emergency_ro(inode->i_sb)))
-> -		return -EROFS;
-> -
-> =C2=A0	error =3D setattr_prepare(&nop_mnt_idmap, dentry, attr);
-> =C2=A0	if (error)
-> =C2=A0		return error;
-> @@ -727,10 +719,6 @@ static int hfs_file_fsync(struct file *filp,
-> loff_t start, loff_t end,
-> =C2=A0	struct super_block * sb;
-> =C2=A0	int ret, err;
-> =C2=A0
-> -	/* Inodes aren't written back after an error. */
-> -	if (unlikely(hfs_emergency_ro(inode->i_sb)))
-> -		return -EROFS;
-> -
-> =C2=A0	ret =3D file_write_and_wait_range(filp, start, end);
-> =C2=A0	if (ret)
-> =C2=A0		return ret;
-> diff --git a/fs/hfs/mdb.c b/fs/hfs/mdb.c
-> index 1a56cf5ea56e..b821b06121ad 100644
-> --- a/fs/hfs/mdb.c
-> +++ b/fs/hfs/mdb.c
-> @@ -338,7 +338,7 @@ int hfs_mdb_commit(struct super_block *sb)
-> =C2=A0	struct hfs_mdb *mdb =3D HFS_SB(sb)->mdb;
-> =C2=A0	int ret =3D 0;
-> =C2=A0
-> -	if (sb_rdonly(sb) || hfs_emergency_ro(sb))
-> +	if (sb_rdonly(sb) || sb_emergency_ro(sb))
-> =C2=A0		return 0;
-> =C2=A0
-> =C2=A0	/*
-> @@ -347,7 +347,7 @@ int hfs_mdb_commit(struct super_block *sb)
-> =C2=A0	 */
-> =C2=A0	if (!buffer_uptodate(HFS_SB(sb)->mdb_bh)) {
-> =C2=A0		pr_err("primary MDB is corrupt, mounting read-
-> only\n");
-> -		set_bit(HFS_FLG_EMERGENCY_RO, &HFS_SB(sb)->flags);
-> +		sb_set_emergency_ro(sb);
-> =C2=A0		return -EIO;
-> =C2=A0	}
-> =C2=A0
-> @@ -381,7 +381,7 @@ int hfs_mdb_commit(struct super_block *sb)
-> =C2=A0	=C2=A0=C2=A0=C2=A0 HFS_SB(sb)->alt_mdb) {
-> =C2=A0		if (!buffer_uptodate(HFS_SB(sb)->alt_mdb_bh)) {
-> =C2=A0			pr_err("alternate MDB is corrupt, mounting
-> read-only\n");
-> -			set_bit(HFS_FLG_EMERGENCY_RO, &HFS_SB(sb)-
-> >flags);
-> +			sb_set_emergency_ro(sb);
-> =C2=A0			ret =3D -EIO;
-> =C2=A0			goto out;
-> =C2=A0		}
-> @@ -432,7 +432,7 @@ int hfs_mdb_commit(struct super_block *sb)
-> =C2=A0void hfs_mdb_close(struct super_block *sb)
-> =C2=A0{
-> =C2=A0	/* update volume attributes */
-> -	if (sb_rdonly(sb) || hfs_emergency_ro(sb))
-> +	if (sb_rdonly(sb) || sb_emergency_ro(sb))
-> =C2=A0		return;
-> =C2=A0
-> =C2=A0	if (!buffer_uptodate(HFS_SB(sb)->mdb_bh))
-> diff --git a/fs/hfs/super.c b/fs/hfs/super.c
-> index bcc19c3a4f6b..c815d22ab900 100644
-> --- a/fs/hfs/super.c
-> +++ b/fs/hfs/super.c
-> @@ -82,7 +82,7 @@ void hfs_mark_mdb_dirty(struct super_block *sb)
-> =C2=A0	struct hfs_sb_info *sbi =3D HFS_SB(sb);
-> =C2=A0	unsigned long delay;
-> =C2=A0
-> -	if (sb_rdonly(sb) || hfs_emergency_ro(sb))
-> +	if (sb_rdonly(sb) || sb_emergency_ro(sb))
-> =C2=A0		return;
-> =C2=A0
-> =C2=A0	spin_lock(&sbi->work_lock);
-> @@ -131,9 +131,6 @@ static int hfs_reconfigure(struct fs_context *fc)
-> =C2=A0		return 0;
-> =C2=A0
-> =C2=A0	if (!(fc->sb_flags & SB_RDONLY)) {
-> -		/* After an MDB write error it stays read-only until
-> unmount. */
-> -		if (hfs_emergency_ro(sb))
-> -			return -EROFS;
-> =C2=A0		if (!(HFS_SB(sb)->mdb->drAtrb &
-> cpu_to_be16(HFS_SB_ATTRIB_UNMNT))) {
-> =C2=A0			pr_warn("filesystem was not cleanly
-> unmounted, running fsck.hfs is recommended.=C2=A0 leaving read-only.\n");
-> =C2=A0			sb->s_flags |=3D SB_RDONLY;
+This is an initial implementation of a new timestamp to indicate the
+time when a file/directory was initially created.
 
-Looks good.
+This patch series takes inspiration from the one by Sean Smith
+<defendthedisabled@gmail.com> [1], but using
+file_setattr()/file_getattr() as suggested by Darrick J. Wong
+<djwong@kernel.org> in [2].
 
-Reviewed-by: Viacheslav Dubeyko <slava@dubeyko.com>
+The semantics of this new timestamp should be at least these:
+- it should be the same as btime on a newly created file
+- it's user-settable, so it can be preserved for backups, filesystem
+  conversions, archives and any similar operation
+- it should be preserved every time mtime gets preserved
 
-Thanks,
-Slava.
+and the correspondence with the other timestamps is as follows:
+
+ctime <-> btime
+mtime <-> ptime
+
+Examples:
+1) a .zsh_history file created in 2019, then after a few years the user
+   decides to switch to another filesystem, copying the .zsh_history to
+   the new home, in that case btime would have the timestamp of the copy
+   and ptime would have the 2019 timestamp (just like mtime would have
+   been preserved)
+2) a symlink created in 2020 from the home directory to a /path going
+   through the same process as the .zsh_history, in this case it would
+   also make sense to sync the ptime to the 2020 timestamp instead of
+   keeping only the btime (so the inode creation time).
+
+The proof-of-concept code (for testing) for stat(1) and cp(1) is
+available at https://github.com/koraynilay/coreutils (master branch)
+(Note: these coreutils code changes are a prototype and won't be
+submitted upstream as-is, but they work as expected in simple stat and
+cp -a/--preserve=ptime tests)
+
+Lastly, the name "provenance" and "ptime" are not final, I personally
+don't have a strong opinion on any name, but while testing with stat(1)
+I noticed that "Provenance" is definitely too long for the normal
+output, so another option which would fit well is "Origin time",
+abbreviated as "ntime" (OrigiN time) and not as "otime", as that would
+conflict with btrfs' internal naming and create confusion.
+
+v2 changes:
+- fix permission bypass leading to ptime update on immutable and
+  append-only files (found by sashiko[3])
+- normalize ptime timestamp as done in fs/attr.c:notify_change() (found
+  by sashiko[3])
+- fix wording in vfs patch to be like the cover-letter
+
+v3 changes:
+- vfs: reject setting ptime with -EOPNOTSUPP on filesystems that do not
+  support it instead of silently ignoring it (found by sashiko[4])
+- vfs: fix not being able to clear immutable and append-only on files
+  with ptime, and allow updating immutable/append-only atomically along
+  with ptime (found by sashiko[4])
+- btrfs: validate on-disk ptime nanoseconds and reset to otime if
+  invalid (found by sashiko[4])
+- btrfs: avoid re-assigning ptime on unrelated chattr calls (found by
+  sashiko[4])
+- add ntfs3 and exfat support as suggested by Amir Goldstein[5], but no
+  vfat, smb, or nfs4 yet as they are a bit more complex
+- move the introduction of fileattr_has_fsx_mask() from the btrfs patch
+  to a standalone patch in the series
+- btrfs: add fileattr_[gs]et to symlink and special file operations
+
+Thanks.
+
+[1]: https://lore.kernel.org/20260405195007.1306-2-DefendTheDisabled@gmail.com
+[2]: https://lore.kernel.org/20260407014129.GC6192@frogsfrogsfrogs
+[3]: https://sashiko.dev/#/patchset/20261027220532.736352-1-koray.fra%40gmail.com
+[4]: https://sashiko.dev/#/patchset/20261028134728.294127-1-koray.fra%40gmail.com
+[5]: https://lore.kernel.org/linux-btrfs/CAOQ4uxiuy0VwZj+3M-zRqQ49WTpHZpiaQ+6MZ8z8WdLjyQM_zA@mail.gmail.com/
+
+koraynilay (5):
+  vfs: add provenance time (ptime)
+  vfs: add fileattr_has_fsx_mask()
+  ntfs3: make crtime user-settable using ptime
+  exfat: make crtime user-settable using ptime
+  btrfs: add provenance time (ptime)
+
+ fs/btrfs/btrfs_inode.h          |  4 ++++
+ fs/btrfs/delayed-inode.c        |  6 ++++++
+ fs/btrfs/inode.c                | 29 +++++++++++++++++++++++++-
+ fs/btrfs/ioctl.c                | 12 ++++++++++-
+ fs/btrfs/print-tree.c           |  1 +
+ fs/btrfs/tree-log.c             |  3 +++
+ fs/exfat/exfat_fs.h             |  2 ++
+ fs/exfat/file.c                 | 36 ++++++++++++++++++++++++++++++++-
+ fs/exfat/namei.c                |  1 +
+ fs/file_attr.c                  | 33 ++++++++++++++++++++++++++++--
+ fs/ntfs3/file.c                 | 14 +++++++++++--
+ fs/ntfs3/frecord.c              |  8 +++++++-
+ fs/stat.c                       |  2 ++
+ include/linux/fileattr.h        | 26 +++++++++++++++++++++---
+ include/linux/stat.h            |  1 +
+ include/uapi/linux/btrfs_tree.h |  3 ++-
+ include/uapi/linux/fs.h         |  8 +++++++-
+ include/uapi/linux/stat.h       |  7 ++++++-
+ 18 files changed, 182 insertions(+), 14 deletions(-)
+
+
+base-commit: cbbddb6b08cc9900a87cccaa9b22bbe06aa4f50a
+-- 
+2.56.0
+
