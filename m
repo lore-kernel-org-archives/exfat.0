@@ -1,95 +1,150 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793485716;
-	b=A4IVEC9DMKFJFdVI2B07Sbx/anP91cJJNybfSwrvFeQkUxhWgg+CrirqfCcVb/TjVbHI
-	 yFM4+81QWIOyxjhxsjX7QdlDLWfPKJvf0VQcKrs38lDxAsJSwl0NzZ6SCe4o0sVl9xfNv
-	 dxAPonzej9tQ0k6nyD8596dvnTvbUA8kP5Se4U0bVrBFF5zSX1a5LQaDRTbbyGMkdWWjn
-	 B9AwgCl6CG9AzZfv9ny8qch7IdWG7JGHzgfIuDz8Mmd1R9QiSr/IAFBP/8XbQc+YStalR
-	 n/N6fB5ukhCB24DY0+gqbOtqtGRwqFrUOPRvEQS444nCjMZVtrlN77Rqkp81rGriRTQ==
+	t=1793493223;
+	b=dURXTgpXbYCDXQQjJrnwJHpJZyRh6Jbadh/DQIwAiT8ygUdgjH43xHFFUXbEVqX3QpAs
+	 oBojJ8ijcqtcei/QEojFFYy59l+8w6BnSHwmJyS5S+U6n7AAZ62tm9KC5K4QDOOXyBjBq
+	 5MbYoeaf1GkSteAyGLB/OLjhgDcUFYzAFRJFRbH/Pgye3UgFB6tMggUJDPscAyKo9gE2N
+	 mbk2BTLQIq0r+Fb16Af7iR1UsLW4ge8+in8s+nBLZ4rvD/yJzCVXvJyTJhRGg0uYEp/v0
+	 Tj1viWa2s4N7H95PWK6dt5D+nu76qVJ+UGMUsyI+oZ3HJw2ak3NVTDXP1qona8pWDMw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793485716;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793493223;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
-	b=clCXbUr3enzUeoAwSgmkXH3rrX3qeT0R+wKNyh36k7//u/eRdDuE7KksOoDJeB6i+r2G
-	 gqYft9plb3XybK2OS0WNqCP5LzIcMqParjr2zag44LpkB1n7jlszfPsJoV9fhweFFs/4M
-	 YT7RyFfyYuqwR5A8eNUlH9mhGa6FpnrEGClsphA2SvrIi7nOMHfesVmqC/L+d9+JcgEIV
-	 XNaghbfv+3sNctfyeHGKKvtB7C2VFdb8D9kc9YvCTOfejlk9Cri5HsKG/c5FhhGbzpXOs
-	 fO/3xCUZNkicqrzgpOqcCwC/+Z1ZWQj08EH212d6SeDskaLJdUW23FvIs3sAKdrTdFQ==
+	 Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:Autocrypt:
+	 Content-Type:Content-Transfer-Encoding:User-Agent:MIME-Version;
+	bh=/OyNuE+u9LVqbLjPn4c642Wjld5y0QKeGGJuFQ0QfKY=;
+	b=ABSNOFlvei9CW6Qz5B5EKlD1iC7F3/Xzy+LUzx2JXr19u8RA97vep2rfsMtuuibZNsFB
+	 6ZE2P90r02Rng+yxLlCh9MwgRV9IAtWLwSnpZIEBJtfpe/emzc0FtbzkthZA8W1YzdvDO
+	 X3mT/BE5hnUGcx8klV0TKyowIjxotCfHAyGq1/dh2xILmj7NOVM5IAp25XYLsE/C8Jo00
+	 pOqF4taIet11IMKA8QHYa0hb3yaN77DgzRHMN1FekjAFIWWQQN3Agu3wk4FAiBzyAzshN
+	 rVe5tp2zBRSuCToGqD6OW9W/IzypMDsyCAIyrItpuTRC9AEkdxm0eqgCNiTWKCom+Jg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wruhGxLB;
-	arc=none smtp.remote-ip=74.125.229.4
-Received: from mail-dy2-f4.google.com (mail-dy2-f4.google.com [74.125.229.4])
+	dmarc=none header.from=dubeyko.com;
+	spf=pass smtp.mailfrom=dubeyko.com;
+	dkim=pass header.d=dubeyko-com.20260707.gappssmtp.com header.i=@dubeyko-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Nyu9pDl5;
+	arc=none smtp.remote-ip=74.125.224.54
+Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCA25606A31C
-	for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 22:28:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BCA25606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D768E606A31E
+	for <exfat@lists.linux.dev>; Sun,  1 Nov 2026 00:33:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D768E606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=dubeyko.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dubeyko.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=wruhGxLB
-Received: by mail-dy2-f4.google.com with SMTP id 5a478bee46e88-35af9712d88so90038eec.1
-        for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 15:28:35 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=dubeyko-com.20260707.gappssmtp.com header.i=@dubeyko-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Nyu9pDl5
+Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-679a420b5afso1544120d50.3
+        for <exfat@lists.linux.dev>; Sat, 31 Oct 2026 17:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793485715; x=1794090515; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
-        b=wruhGxLBLohlxKsjJZR+m2oQPmA+G+wqI4IsVDOEvNloAIzpW6/FEdo9fwni+2bw/I
-         MmRI2GbjnQmdN4nUC6BrD1hqJHV0FPYQV+D3lTMLOoinvs8Fl7EmLrEUPMPi6LYV/Nyp
-         QZgBQj6CyRHoX77jKqAS95K7MLN8ouuxeafgla2rmvqC4p1kJ17dxhm2FEM1Wdl19Lib
-         XwejwgXFBY1lpdeUHkz2ZdOy3Y9Rj6YNblbJJh9+42EHBLc1tt2CgNldwwISyIDeLRMY
-         sJi0MpB8s4fKdy1F+8sZkMeXNNMl3OkJMcvwpigyo3V2OG3quBO68dhSNkyTNGOI1Hhv
-         Cw7Q==
+        d=dubeyko-com.20260707.gappssmtp.com; s=20260707; t=1793493221; x=1794098021; darn=lists.linux.dev;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/OyNuE+u9LVqbLjPn4c642Wjld5y0QKeGGJuFQ0QfKY=;
+        b=Nyu9pDl5RAYyLcjZHkzxoDxgvvvBoMiIGD8J47kzds2AH5Jn14oTQYXDptuKQ4ImAq
+         Jgf44bJ3KEj+pJ8exgOpoKlh+nZavej70q4WQD4flfpQ8IpYY8tDxXz9cEgrFDsKEKqX
+         ZkkWZSudNGWJ9zpBDXqQ0Ei2q4wXVVA6jC/6JG75DcfbEYRsBd1Bod2/9eNWEXi7TBWa
+         h5uPjEcYBcq9m0btLP3ThyteXLaJGsLLE3hTntQs41QlW/uUZEeisJnh+2OOrh/mFeJo
+         qm3etrmlojwbvidlI52oKn6MhHjR8k4AXuoeQ/EwAwfQV9171gSb6o4PGgvgEht4J6m0
+         m90g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793485715; x=1794090515;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=m0JnkbHJkuPfCHVuDrGb2+stBd0JEX0qG9o4dkUA+8w=;
-        b=PUoWW7I/KTnyPLHaPQhgf4Hn9U4+ZlVQz9mYCYyti+iMAUovNuDM+YU1jG5zxbpOWv
-         Bh8Oy9LjPDdMazYr3k/2bjzkVVR/E9f6ONQVKkGi9kWTcHmy+WxorrpdDV2CU92/slaG
-         16p0hw47IkRh27UH1Wf7Uz6fJgiJt8LlonDG1Bk8n/4YY8v60BVsUQBTceRMzwWTWjh6
-         l6vvOMWeCri0TwWGwNZDvaiLiP153TPV+6SYqsH1xrlI29cuPZ9QHb1DQbzGXC7iYg6z
-         fsTfZAuuPQHCTZ4xrsDBluMsayZ3ZZsgit3LBL1kf7awPUGienavqbPGGM6fAUM1KJ/d
-         WqWg==
-X-Forwarded-Encrypted: i=1; AKwUvBzQ0f+/HmhhMDGqHVnaktloTOZtGp7XjjL+HIpCM0XZOmAlJ7Y6sGGYBwZhko13cNyof6z+dQ==@lists.linux.dev
-X-Gm-Message-State: AFq9FYKinfqUyDRWWipY2o0n2iDgK3knX7U9gyo8uF8Vt67lU491lFDB
-	aMAked55Vt/kJ2GiwSioKLgwptGDHc++HFIu5M22TmpZBuZavXFcmdI3
-X-Gm-Gg: AYBFou1QL0qmmC/o/D1hPIW5IR5UXc+jr2JmbACxWlfhXAn/6ithkkqUDy4/oul7dWz
-	9rBrtcY1JfS5v/c275oKDuWIV1iqB5y5W4NnAW7wOF4CbI9JF3lnrLWenOx1zKBTa3s7frKKesr
-	BOmzMiSGQRcISdce9GZYpEMlHi9piRxaUr97Sd6fw9Q2o9g6xXpzZV3uCS+RH3d72Iv0AwesPyL
-	KvNXXHJZ7Xec3zAq5z0TNFrL7WYghlQVnJHgzV9to1ogmLyMggbDglVWW6koFrJqq8oSMgqP2CP
-	AGgipqcmymgBzhkMQAncLkFI4nDkwiOF8U/JIkRw6FL+2ORXSz2hLcwmYVyvIrBEu/+znRuidY/
-	Bdp8wWg1k9yIJ71qEYaR7CE8IvGn0ZirYN3CUIWPyfA/0Wy5rimxg0iMzshuPIKOfQYKO7g7rOC
-	ZIFDVFFKavbmM83Ll5mT98sorZnXuXwGGnZFtKS+HNjAAWvuR9Y1emvD31vIToOXDg4HSJ3PWpC
-	mCBtitAacuPgE8xgJKGkuj4r3gZGuM6vb0bhhxsOPyxVQbybG03DgsOEWNoX4dGuXG5v1SSsSVk
-	RLXm2AtDcWSOWO8HMYk9e1lugk/Z2Z3CRwkO22AGGTlgHGwbx4FgMsbY
-X-Received: by 2002:a05:7022:5f0a:b0:14a:a6dc:9cbf with SMTP id a92af1059eb24-1ac599f5078mr7780009c88.4.1793485714706;
-        Sat, 31 Oct 2026 15:28:34 -0700 (PDT)
-Received: from localhost.localdomain ([98.148.34.5])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1ac1854d925sm33876066c88.7.2026.10.31.15.28.33
+        d=1e100.net; s=20260707; t=1793493221; x=1794098021;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :autocrypt:references:in-reply-to:date:cc:to:from:subject:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=/OyNuE+u9LVqbLjPn4c642Wjld5y0QKeGGJuFQ0QfKY=;
+        b=GUh/lW8zwzjY8dc2XXwWK/+ymI9pc6TYdIH5nX1vHzw5+LQ8XhGhRy6JheUyuM0o8F
+         8w2HWqoAhsVyOqIy5923vZPdUBzdSTS3HiNs5wnoPRWxCVAk8trs3/xlBfFqbb4XoCpa
+         Rnn0fcwMY5mSqKcxx0Y+9Cs1DGEf9n87FJPCHrD7oHZIJHaJy20jucUlkn0aDtThvekS
+         zsv0Yc5HYENr+ghQmnRu7jXKFN2Lg31gPKyKSJ7x50H7hT/+IV1xaON6uaDlpkMyC0QI
+         974eO3vHiILxC9j2mShYnNaDnlKLwkdKTMEGhcCEu+9Qfd5og3AbdK1w3KaZ9vFLCw1J
+         vzVg==
+X-Forwarded-Encrypted: i=1; AKwUvBzRAGkOtAuZfYxOIJ+Beh3WdjuzQEmim8K1iPGY1p6at7bFytjK66e7uJwFwFiYYtV/q+Z3yQ==@lists.linux.dev
+X-Gm-Message-State: APuU4Z9FT8SNKEH8LLRzNBc7i6vs6yGoYiZWY+3KJKZirXRYFT+l+VNr
+	lRME+CobNqkKG0jvuKpIkVj3td2nFA/RDoH/fFfeXvsmc9odp4UEqhlLMmFa3rWYU+A=
+X-Gm-Gg: AYBFou0PpOV1obb1lDDLuM4s00g0EPDOKOT2U3rt11DLAUUo+fidTLZ4Pk/fADli2jD
+	wRXzcoPpOeCMpRB0yg2bLeVku+/Zorci6hZkd9vHz/pCAsZ41vr1nTt7SzznqDcsgE1QEiUdeZe
+	Jlp71rh57ul4UFIRxNR3rmlr8K1fAbOgyFGy6MF2R2ofXbyUPex3syGtyN74BiWLcctkbgXZY48
+	eiPCpBOhCcEohyvk+8G4iZxAgEmaL1HuuBTCKoWAGfx7sS9FgDvpU5N3rRP89jKBiGOMKRou3dP
+	MOHEZgDF7g/enO0MpAhELy2sjbpRichYZ8KaiDuA8lAjtGYsvCdF/ZZR3MxQ5r2nsGNoNDlFvSN
+	RQXk9wX/DOw8N3n2yiRfQ2vAWY2cZO+6HZ6VIvDAb8E5V+6kReb4vsk6pPVfW4jMv5QD5YSf+gu
+	Q0DRhnmudhgRkrUNmG5xSxqP9LtMYuiXsTKA7k1op1dOngoU5009U5fhuzpn2nkaX2E/ksU1gXT
+	RTyhiOZBQcX5ozSsbuAkK5nkAUIrkLrPUGoevqo+s6K15q4lZFXZBzdl0dYtXDj6cUsDFvHpJC3
+	+EDNG8wXF3zv75Vvwd2ifqX7fQijbN/3+jBCd2eGX+H8RjVtXAl98SJs3t77AhbqXub6YCOQ345
+	M4wY75ZgQzIRth3kVcfoOqiolKX0wkpPqUt84+eKKVcKxONu6M/DhXFl8ueg/slXuuFjVOBXi/b
+	H5myvPj1f6nG/m8LUtGZM=
+X-Received: by 2002:a05:690e:140e:b0:675:3d40:3c34 with SMTP id 956f58d0204a3-67bb3041657mr1552875d50.68.1793493220725;
+        Sat, 31 Oct 2026 17:33:40 -0700 (PDT)
+Received: from ?IPv6:2600:1700:6476:1430:6f84:fe3e:51d2:f3cd? ([2600:1700:6476:1430:6f84:fe3e:51d2:f3cd])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b2b7198c65sm28593177b3.36.2026.10.31.17.33.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 31 Oct 2026 15:28:34 -0700 (PDT)
-From: Hungyu Lin <dennylin0707@gmail.com>
-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>,
-	Yuezhang Mo <yuezhang.mo@sony.com>,
-	exfat@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Hungyu Lin <dennylin0707@gmail.com>
-Subject: [PATCH] exfat: preserve the 64-bit FITRIM minimum length
-Date: Sat, 31 Oct 2026 22:28:23 +0000
-Message-ID: <20261031222823.223-1-dennylin0707@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        Sat, 31 Oct 2026 17:33:39 -0700 (PDT)
+Message-ID: <39d08fa0b0e45c61dbb4f57ccc911d1235ff9b5f.camel@dubeyko.com>
+Subject: Re: [PATCH v2 13/34] hfsplus: don't set SB_RDONLY when creating the
+ attributes tree
+From: Viacheslav Dubeyko <slava@dubeyko.com>
+To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org, 
+ Jan Kara <jack@suse.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
+	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
+	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, linux-mm@kvack.org, 
+	ntfs@lists.linux.dev, ocfs2-devel@lists.linux.dev,
+ linux-btrfs@vger.kernel.org, 	gfs2@lists.linux.dev,
+ linux-efi@vger.kernel.org, linux-mtd@lists.infradead.org, 
+	linux-xfs@vger.kernel.org
+Date: Sat, 31 Oct 2026 17:33:37 -0700
+In-Reply-To: <20261029-work-fs-sb_rdonly-v2-13-2f44f64f0b66@kernel.org>
+References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
+	 <20261029-work-fs-sb_rdonly-v2-13-2f44f64f0b66@kernel.org>
+Autocrypt: addr=slava@dubeyko.com; prefer-encrypt=mutual;
+ keydata=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
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.60.1 (by Flathub.org) 
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -99,40 +154,148 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-The FITRIM minimum length is a 64-bit value, but exfat_ioctl_fitrim()
-uses max_t(unsigned int, ...) to compare it with the discard granularity.
-This truncates the requested minimum on both 32-bit and 64-bit kernels.
+On Thu, 2026-10-29 at 17:07 +0100, Christian Brauner wrote:
+> hfs_btree_open() sets SB_RDONLY when the map record of a b-tree
+> doesn't
+> mark the header node as used. That's fine while mounting. But
+> hfsplus_create_attributes_file() calls it too when the first extended
+> attribute is set on a filesystem that has no attributes file yet.
+> That
+> runs on the live filesystem without s_umount and a filesystem must
+> not
+> change SB_RDONLY behind the VFS' back.
+>=20
+> hfsplus_create_attributes_file() opens a tree it has just created
+> itself
+> with the header node marked as used, so there's nothing to check
+> there.
+> Move the check into hfsplus_fill_super() and do it for every tree it
+> opens. No functional changes.
+>=20
+> Suggested-by: Viacheslav Dubeyko <slava@dubeyko.com>
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+> =C2=A0fs/hfsplus/btree.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 42 +++++++++++++=
++++++++++++++++-----------
+> ---
+> =C2=A0fs/hfsplus/hfsplus_fs.h |=C2=A0 1 +
+> =C2=A0fs/hfsplus/super.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 5 +++++
+> =C2=A03 files changed, 34 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/fs/hfsplus/btree.c b/fs/hfsplus/btree.c
+> index bd4dbdbc8f98..4a67569050e3 100644
+> --- a/fs/hfsplus/btree.c
+> +++ b/fs/hfsplus/btree.c
+> @@ -270,7 +270,6 @@ struct hfs_btree *hfs_btree_open(struct
+> super_block *sb, u32 id)
+> =C2=A0	struct hfs_btree *tree;
+> =C2=A0	struct hfs_btree_header_rec *head;
+> =C2=A0	struct address_space *mapping;
+> -	struct hfs_bnode *node;
+> =C2=A0	struct inode *inode;
+> =C2=A0	struct page *page;
+> =C2=A0	unsigned int size;
+> @@ -381,19 +380,6 @@ struct hfs_btree *hfs_btree_open(struct
+> super_block *sb, u32 id)
+> =C2=A0	kunmap_local(head);
+> =C2=A0	put_page(page);
+> =C2=A0
+> -	node =3D hfs_bnode_find(tree, HFSPLUS_TREE_HEAD);
+> -	if (IS_ERR(node))
+> -		goto free_inode;
+> -
+> -	if (!hfs_bmap_test_bit(node, 0)) {
+> -		pr_warn("(%s): %s (cnid 0x%x) map record invalid or
+> bitmap corruption detected, forcing read-only.\n",
+> -				sb->s_id, hfs_btree_name(id), id);
+> -		pr_warn("Run fsck.hfsplus to repair.\n");
+> -		sb->s_flags |=3D SB_RDONLY;
+> -	}
+> -
+> -	hfs_bnode_put(node);
+> -
+> =C2=A0	return tree;
+> =C2=A0
+> =C2=A0 fail_page:
+> @@ -407,6 +393,34 @@ struct hfs_btree *hfs_btree_open(struct
+> super_block *sb, u32 id)
+> =C2=A0	return NULL;
+> =C2=A0}
+> =C2=A0
+> +/*
+> + * Check the map record of a b-tree at mount. hfs_btree_open() can't
+> do it
+> + * because hfsplus_create_attributes_file() calls it on the live
+> filesystem
+> + * where SB_RDONLY must not be set.
+> + */
+> +int hfsplus_btree_check_map(struct hfs_btree *tree)
+> +{
+> +	struct super_block *sb =3D tree->sb;
+> +	struct hfs_bnode *node;
+> +
+> +	node =3D hfs_bnode_find(tree, HFSPLUS_TREE_HEAD);
+> +	if (IS_ERR(node)) {
+> +		pr_err("failed to load %s header node\n",
+> +		=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hfs_btree_name(tree->cnid));
+> +		return PTR_ERR(node);
+> +	}
+> +
+> +	if (!hfs_bmap_test_bit(node, 0)) {
+> +		pr_warn("(%s): %s (cnid 0x%x) map record invalid or
+> bitmap corruption detected, forcing read-only.\n",
+> +				sb->s_id, hfs_btree_name(tree-
+> >cnid), tree->cnid);
+> +		pr_warn("Run fsck.hfsplus to repair.\n");
+> +		sb->s_flags |=3D SB_RDONLY;
+> +	}
+> +
+> +	hfs_bnode_put(node);
+> +	return 0;
+> +}
+> +
+> =C2=A0/* Release resources used by a btree */
+> =C2=A0void hfs_btree_close(struct hfs_btree *tree)
+> =C2=A0{
+> diff --git a/fs/hfsplus/hfsplus_fs.h b/fs/hfsplus/hfsplus_fs.h
+> index 6f240f87f8ff..58c780b09b6f 100644
+> --- a/fs/hfsplus/hfsplus_fs.h
+> +++ b/fs/hfsplus/hfsplus_fs.h
+> @@ -362,6 +362,7 @@ int hfsplus_block_free(struct super_block *sb,
+> u32 offset, u32 count);
+> =C2=A0u32 hfsplus_calc_btree_clump_size(u32 block_size, u32 node_size, u6=
+4
+> sectors,
+> =C2=A0				=C2=A0 int file_id);
+> =C2=A0struct hfs_btree *hfs_btree_open(struct super_block *sb, u32 id);
+> +int hfsplus_btree_check_map(struct hfs_btree *tree);
+> =C2=A0void hfs_btree_close(struct hfs_btree *tree);
+> =C2=A0int hfs_btree_write(struct hfs_btree *tree);
+> =C2=A0int hfs_bmap_reserve(struct hfs_btree *tree, u32 rsvd_nodes);
+> diff --git a/fs/hfsplus/super.c b/fs/hfsplus/super.c
+> index ff7d6b3336a6..532f23502df3 100644
+> --- a/fs/hfsplus/super.c
+> +++ b/fs/hfsplus/super.c
+> @@ -564,6 +564,11 @@ static int hfsplus_fill_super(struct super_block
+> *sb, struct fs_context *fc)
+> =C2=A0	}
+> =C2=A0	sb->s_xattr =3D hfsplus_xattr_handlers;
+> =C2=A0
+> +	if (hfsplus_btree_check_map(sbi->ext_tree) ||
+> +	=C2=A0=C2=A0=C2=A0 hfsplus_btree_check_map(sbi->cat_tree) ||
+> +	=C2=A0=C2=A0=C2=A0 (sbi->attr_tree && hfsplus_btree_check_map(sbi-
+> >attr_tree)))
+> +		goto out_close_attr_tree;
+> +
+> =C2=A0	inode =3D hfsplus_iget(sb, HFSPLUS_ALLOC_CNID);
+> =C2=A0	if (IS_ERR(inode)) {
+> =C2=A0		pr_err("failed to load allocation file\n");
 
-For example, fstrim --minimum 4GiB can trim smaller free extents because
-the minimum wraps to zero before being raised to the device granularity.
 
-Use a u64 comparison to preserve the userspace value. exfat_trim_fs()
-already stores the minimum cluster count in a u64.
+Looks good.
 
-Fixes: 654762df2ec7 ("exfat: add support ioctl and FITRIM function")
-Cc: stable@vger.kernel.org
-Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
----
- fs/exfat/file.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Reviewed-by: Viacheslav Dubeyko <slava@dubeyko.com>
 
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index 1386149916bb..4e7a2fb30279 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -586,8 +586,8 @@ static int exfat_ioctl_fitrim(struct inode *inode, unsigned long arg)
- 	if (copy_from_user(&range, (struct fstrim_range __user *)arg, sizeof(range)))
- 		return -EFAULT;
- 
--	range.minlen = max_t(unsigned int, range.minlen,
--				bdev_discard_granularity(inode->i_sb->s_bdev));
-+	range.minlen = max_t(u64, range.minlen,
-+			     bdev_discard_granularity(inode->i_sb->s_bdev));
- 
- 	ret = exfat_trim_fs(inode, &range);
- 	if (ret < 0)
--- 
-2.43.0
-
+Thanks,
+Slava.
