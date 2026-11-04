@@ -1,99 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793753735;
-	b=TDTJcJgnH5S+ySoKM+feSrzSDvP3ui6h4rIcyCl0qN/mJX5qSeNsEMFYUmNxu1jbYEyb
-	 BjozSkYHSFiwxYSbKwbLmPARG4OatjzooNJFa3X1j2btjI0McDPE0pfhVVS+acWRU+xJC
-	 vd74cheVu1+mQd+ZDDr+e54p+5RfET+BYs18k9gYqhPb6/msBKLNRC2L97p8Q5YU/oEkJ
-	 +Vsb/3Bb9Ng4OCnRpy4P5n2cm0fEHWd/yK1exYi8MxpLJjnzfIP+yK468KjKk81qyycFR
-	 HYqkIZygPXd/hrKq0Vj8RxQ0wq/qVh/4NwrIHUmUg4H/mONogpuBrnTqRwk+/Iuhn8A==
+	t=1793785800;
+	b=ycHUkBcaIj/y4f3xyP1FEpw9KW+Tqlp2K5J06YKGkTrNayNpKk/8V16yZ7y0gu9AH21H
+	 AraHEERZOnu5VEryAWNFrnobzbleJjpWzfHOBAoY7TbalQ0IKCKbURmZgtLi+6l42Yv8/
+	 moyu3KahH6+lhP9RTCEzq/nmKJN3SO0UncYYmMTR84Zr6cuxhT+9NC1HwA+ibWhpaJiQ6
+	 9RwEDTFHiKOKHA47SeWoQAGe31U8aExbRqQI/eXGvaq1P7560XVjSaZybozFErDvZu76N
+	 e5HIRpZhJrwffpw1wfEXlHW7gs9QcRFehokTH9ujKtAqAkurC/chjlKnhMnCBfkhYkw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793753735;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793785800;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=xG5t3xikeZrgWEXDIQ9E66WF0APj2TRUKkrk3j8LkpE=;
-	b=o4rgyKvNFpa8uoz+EGVcLEkcMgTgRD31wYb1pZGc9aG4KWLuO8p6/RpMVzu7JlBCTCLw
-	 ttO1p11UDRerIgaJU/GYqh8S8AiXz+6LcioWUb9zv+Uud8uCfSV2bu37N/nPzP7VCVfnW
-	 U394YKzXK/46WSSZCwJhrORzBd6i/QWGWITJ/xHGrm2K0r8in9ee5Qy453gJHQXUkO+4d
-	 Wd7B0+T6+Qze8MoMZZU7MJU5koF5/4gk5qr2c/cotunARJoUU/O7HoWiLvfRYRAhUi80q
-	 DveBPVJy71zeu7PMpMwG5O6s0/MPSAyj/YMsPUaogDuNKgKEdutShOv2qlfW44Fv8pA==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=NcwS9ywJAKNcIxqmkMqTgnwEg0S9L8CF0TElYM20qnI=;
+	b=zgK/YqMr0whIdhAzAX/1xn9rLYGmmXoSBkpeAEoeKcaBBISR8U8OJLgTKwayXUJ2FUms
+	 AeNebTVCfGmXKNNScTWEWmXaTFN9QcSokZfPf0LuxqPC+8w5dfkFZjqeCyEGUMPdoMgIa
+	 5b/LICAddtBTFoKIUhjiLt1N49ei0U5KFvZGg7KjLyqLKq1ARPNGE5wbGAugIhUeWpR6/
+	 uenPI/nhKhVF6FA94grZw5UhoNvIueQ/0mBbHP652BW/kB8s6U+ApD0vM4YAHoxnJSxiA
+	 nzuhv2Bdq/FWIL5k0mx+QQxQAW6yk3jtqXKTrFsp81bloCunNOYS+sv9P2lVBd6h8AQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zuUpFt9J;
-	arc=none smtp.remote-ip=209.85.216.43
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ukL+9K4M;
+	arc=none smtp.remote-ip=74.125.82.182
+Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71D73606A332
-	for <exfat@lists.linux.dev>; Wed,  4 Nov 2026 00:55:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 71D73606A332
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A59C3606A326
+	for <exfat@lists.linux.dev>; Wed,  4 Nov 2026 09:49:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A59C3606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zuUpFt9J
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3acb512a7a0so146492a91.1
-        for <exfat@lists.linux.dev>; Tue, 03 Nov 2026 16:55:34 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ukL+9K4M
+Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-3645f0f3fcdso739419eec.0
+        for <exfat@lists.linux.dev>; Wed, 04 Nov 2026 01:49:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793753734; x=1794358534; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=xG5t3xikeZrgWEXDIQ9E66WF0APj2TRUKkrk3j8LkpE=;
-        b=zuUpFt9J/cFubDGclKYU2ivE6da2df9R+LlsyBBxaOu0Pc9ckPYqOCKPk+od+eEdQS
-         Vj2awdXKKArotuvNTgsp+OeUygUGbBjD5gI7w0wqelC8FVy61cDF8vIBT7NlJIbO6f/P
-         fgO97Xns0J3oGOHTyzGdLIGWTZFn5JIKt56sDJZWC/Sve8OFGJDdFDaw1czs5n01rKOm
-         chE1AxMCMbCl8jYcyeYll+b1NKrYFQQU00U11kFU0+Ko172o/EkR08ii/5ctiCTKHf+E
-         XUF0+Jb+L3tr6/Ju/KRPYe1q+VvkAVEdwsbMEI4pirY/eypE9cJHCYXG2+MAawscXTIe
-         GuKQ==
+        d=gmail.com; s=20260707; t=1793785799; x=1794390599; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=NcwS9ywJAKNcIxqmkMqTgnwEg0S9L8CF0TElYM20qnI=;
+        b=ukL+9K4MoLw0pHMY4Y59WlcfKPAO8U7n0k3Wx53ZLmGePLHLLOgq9tKf7efi/wvyWZ
+         mRV/PUepuwu//rZbVsNIHPzbsQiWBu5+ClQ0D7C26ey1F8QX2+0uK/kAsMj2uJ1j8n2o
+         TM/M6GI2Wr+SNj/0seMwpkfNfPniHzHs4HQQW/Ehb6+eOTfAt7vWEpqtC2cTd2CiAiok
+         ac0S8epcaYlhcT+4JSoFBai+x3pwPXJDb/FVkKbEVmzJMJbhNtIb8eDI8idqlNFFbkku
+         ZUXsC05jUCGjxO0Pi/tpSEtWr/ydiGEY275pDakoIFmISZIGeoAEGJdAxUIpg3lR0vb7
+         fR+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793753734; x=1794358534;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xG5t3xikeZrgWEXDIQ9E66WF0APj2TRUKkrk3j8LkpE=;
-        b=1cG0348u0+IB/GwtDg0ba8K8YGd6NGA2f1ZxM+L+cbBSIvwIHFqwshnehtEU9lI/1X
-         oKwWhT2aBkW2I3pbYwjlF81tGeFf6NjyBJawaLzl7CtMGKKpzF0tdjNAe9Gkp8aQbqja
-         26gvhi+sb15RRzbC4NDFVlQ7q9/t4BM5r3b4+9L0K9YX1v20YBq6rbZoATadpdCZJqRJ
-         XrA72mNnANCitLqJQSLdB/0sqczdZcwkW5rhFplmZx5d8bQ+oUzT+xoyzLBE68qAZI74
-         bcOMTh8Eq/SaGCVEimIqOxWSSR4NRNtPYkjGkUSfRn2nALolmISbxJIERoAoFVo89mqQ
-         /70w==
-X-Forwarded-Encrypted: i=1; AKwUvBzHeH9eqXSfZShmCHyWA2ReUVGzLbyAZGOSnfgnRkDyCZ6JKgR8PACUv7QDw+PYHk+LhiOCow==@lists.linux.dev
-X-Gm-Message-State: APuU4Z+pZTgBCk4yrk2hiQRWWwwhn1TB2mCZXubRvnh+rcFwnPvP+Vao
-	1n38O+zQg/d9+UruRpHzAV4suMZBfLaddmQBEGakYBXFfvcbX5KhtnMl
-X-Gm-Gg: AYBFou3O4AiNsvJYYdkQPPx6yFZVNrBrAJ+MH3cWEAP5cYTXDq7lkeD7PCwJZGMIT36
-	/BgRRgAIIZdnQnFoZhmFQLBOu0H++vtwPAkUTd60O8SLUQeSXIAg2ZCAV1YfLbPZfSTUtOnCSB6
-	mhPFg52gLzjp5YzdO7W1l/ZnC5LcPfCFg6kLhWpfu1ft/bnEQQnJbgFoXyqxOWy6bNnP2sknrqr
-	a1J3tlJG6MaAU6O/p4VX8Il7wPpec/opOuXQ60tk0H7fj/t8+lZ0yZfZtregHor2Jd4aaBuPRW8
-	mWKVokG7SsdEc9TZ9Iaj0ToC66+UOBPpWpaw0B4qRn183hjO2FDSsvmhFwXf+QXJaWmbjZ7JI5d
-	XDAsVpTpXPYTuj71e6XUJt/aY7SkMjgFJQ9HltmIdL9WOrm8PSGYVnjWGJm/kx7Xyz2r/7S+Q8J
-	ga5PBlBai5RkHbmqBBEZ8IhwNmjl+8ZqMYaInziXIuN3AGZ48OtoMKQkYfZGUp3OR2Fv4J6RRHP
-	HOoCOY/KZagbeWNTXBX6QUxu2yc+l/lhw7bgNw7TdJVZIhofm3oG6iThRPs94gaRA+0zcSmwdnx
-	cd0Ed0gasiyRHaUPNQ==
-X-Received: by 2002:a17:90b:184f:b0:3ac:83c1:2c0 with SMTP id 98e67ed59e1d1-3ae897e06efmr11479861a91.64.1793753733906;
-        Tue, 03 Nov 2026 16:55:33 -0800 (PST)
-Received: from localhost ([27.122.242.71])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b09445f7b3sm1222403a91.5.2026.11.03.16.55.32
+        d=1e100.net; s=20260707; t=1793785799; x=1794390599;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NcwS9ywJAKNcIxqmkMqTgnwEg0S9L8CF0TElYM20qnI=;
+        b=0JO26H+VjQyc/vsFZ16vMm3npf8RuUILC0ht1u7vZu042v103R5PxZP/fqzItGdQAt
+         Np/tYRd/KH7FUVoTUzbe99fIS6kB5q+5FIM2Hh0aDHzbdCuDuj01vJTPxwU2wa9M5mEl
+         MPtjD9g16MphgIHxH1y5mL3M99vvJf5C0ctvC/YiNtK9LaL4Xv7gZLD+u0Hcew9bsQ8b
+         YEqEI/E7MqBbfObtkoS7yEnkeBKaoBftSobT1F8UUHos5bQq1E5E+7T25xMvYZ5A92iG
+         HzvISDEEtQvZ5x2L/8cIJEcm7+QR5v6tFmQoibt9j7r+GUjgPDNp9ft1TkFE8KpEpObf
+         x0xw==
+X-Forwarded-Encrypted: i=1; AKwUvBwqC9qXUnejP+WIqQ16bWk/VjWHaTAaMMS3XtjnuMPowMdTfCaXlJsfi/Und58DJyinUiLtGA==@lists.linux.dev
+X-Gm-Message-State: APuU4Z8M3owvv3PHIvfjFmoBLdS0sB47dYHNFiraQgoq7nCNWMdGJZc6
+	wfBGub2rt/yxl+MfOh1+LfiT+EQvrYxJ+UPeU0KIt732GfudtnTLEJOm
+X-Gm-Gg: AYBFou3oNYmBClatU99E4P+5uNO6WlCdsNL695a9Jv+RYKok9E3FaJIo6h2DoovGnae
+	HNcfE87csrRSVHsnnL7wqxoVa6G8qmckZUAWmJLzCDmmPsObSrXFRQ1ZSVyOhVdSrNFQiNN/jUG
+	015O77F8uTpcRK4VRVZGM2iNle6jMgrzF/3zxZJSiSKMmg1SmZrXjV1w2jV8/94L+a3Yc4nvSN6
+	kKvTNIK8yoZxi4U2PwgnOmXrN38O0i4D1BO1st4+MhGb/NPyNUuBOWyxyywUVC0Kz0em6NFjJAN
+	lNfq+1QwoNtg9Gb/5v/uW3c5IXcr2ghtBceJe/K2WIYQU1G3FHPuvnR5TcABcNQZV/LfMa1AQay
+	jQz61GiYmacS4qE06IesnZ2+ahPqYNuoi5H96F3M7ZBl8vWptCR0Gai4AFkAUu0wmI0GKPyRSeK
+	rkW0wUaZ+dPl3RlL1TK0Xl9n5n26I8CzMn/2H8+IFRW9dWU2NwTP5cvTgrwdRewy8azOEiQuofy
+	e8H1tsHiv8KT3zo/hophbOvk+EAE4ZxVG/v4lOCxQS25NxK2lvX2oOzuO5tSkGVIokdvKS7btKD
+	Uz8L5UI7yMC2Zh+MRBjCzs1WVz4rygVzBiaeECagaMwJv0H1Fhkm9dXgtoNsSbg=
+X-Received: by 2002:a05:693c:2512:b0:369:fa7c:aee9 with SMTP id 5a478bee46e88-36a423f54a1mr22508608eec.19.1793785798462;
+        Wed, 04 Nov 2026 01:49:58 -0800 (PST)
+Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36ca3989670sm8205216eec.25.2026.11.04.01.49.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Nov 2026 16:55:33 -0800 (PST)
-Date: Wed, 4 Nov 2026 09:55:30 +0900
-From: Hyunchul Lee <hyc.lee@gmail.com>
-To: Christian Brauner <brauner@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, Jan Kara <jack@suse.com>,
-	Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org,
-	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net,
-	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev,
-	linux-mm@kvack.org, ntfs@lists.linux.dev,
-	ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org,
-	gfs2@lists.linux.dev, linux-efi@vger.kernel.org,
-	linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org
-Subject: Re: [PATCH v2 18/34] ntfs: use the generic emergency read-only state
-Message-ID: <auqCgguXEsKCq9p2@hyunchul-PC02>
-References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
- <20261029-work-fs-sb_rdonly-v2-18-2f44f64f0b66@kernel.org>
+        Wed, 04 Nov 2026 01:49:57 -0800 (PST)
+From: Wenjie Qi <qwjhust@gmail.com>
+To: linkinjeon@kernel.org,
+	sj1557.seo@samsung.com
+Cc: yuezhang.mo@sony.com,
+	exfat@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org,
+	qiwenjie@xiaomi.com,
+	qwjhust@gmail.com
+Subject: [PATCH] exfat: enable buffered RWF_DONTCACHE
+Date: Wed,  4 Nov 2026 17:49:51 +0800
+Message-ID: <20261104-exfat-dropbehind-v1-3caa58820a82-1-qiwenjie@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -103,23 +98,59 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261029-work-fs-sb_rdonly-v2-18-2f44f64f0b66@kernel.org>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 29, 2026 at 05:07:09PM +0100, Christian Brauner wrote:
-> Set SB_STATE_EMERGENCY_RO instead of the NV_EmergencyRO volume flag when
-> an error makes the volume read-only. ntfs_emergency_state() keeps
-> telling a shutdown (EIO) and the emergency state (EROFS) apart so all of
-> its callers stay as they are. /proc/mounts shows the volume read-only
-> again.
-> 
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+From: Wenjie Qi <qiwenjie@xiaomi.com>
 
-Looks good to me.
+exFAT uses filemap for buffered reads and iomap for buffered writes and
+writeback. These paths already handle IOCB_DONTCACHE, including marking
+new folios for dropbehind and completing writeback bios in task context
+when needed.
 
-Reviewed-by: Hyunchul Lee <hyc.lee@gmail.com>
+Advertise FOP_DONTCACHE so preadv2() and pwritev2() callers can request
+that newly instantiated page-cache folios be dropped after I/O. This is
+useful for one-pass reads and streaming writes to removable media.
 
+On an NVMe-backed exFAT image with 128-KiB clusters in QEMU with two
+vCPUs and 2 GiB RAM, disable KASAN, lockdep and tracing for measurement.
+Compare normal and dontcache I/O in three pairs with alternating order.
+Read a 4-GiB file using 1-MiB calls. Write new 1-GiB files using 8-KiB
+and 1-MiB calls in a memcg with memory.max=255852544 and no swap.
+Write throughput includes fdatasync(). Median throughput and peak cgroup
+memory were, with percentage changes relative to normal I/O:
+
+                      MiB/s                   Peak memory, MiB
+                normal/dontcache  change   normal/dontcache  change
+  read,  1 MiB    5788.4/5124.9    -11.5%      1353.3/18.9    -98.6%
+  write, 8 KiB    2924.6/3400.9    +16.3%       244.0/106.7   -56.3%
+  write, 1 MiB    3534.1/3985.0    +12.8%       244.0/188.3   -22.8%
+
+Dontcache reduced peak memory and recorded no reclaim scans or steals
+in any profile. Normal reads and writes scanned and reclaimed about
+710,000 and 200,000 pages per run, respectively. The memory-limited
+writes gained throughput. Reads reduced peak memory by 98.6%, to just
+18.9 MiB, at a modest 11.5% throughput cost. This smaller cache footprint
+can help reduce memory pressure on concurrent workloads on
+memory-constrained mobile devices.
+
+Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
+---
+ fs/exfat/file.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/fs/exfat/file.c b/fs/exfat/file.c
+index db000001c..5b67bbf81 100644
+--- a/fs/exfat/file.c
++++ b/fs/exfat/file.c
+@@ -1107,6 +1107,7 @@ const struct file_operations exfat_file_operations = {
+ 	.splice_write	= iter_file_splice_write,
+ 	.fallocate	= exfat_fallocate,
+ 	.setlease	= generic_setlease,
++	.fop_flags	= FOP_DONTCACHE,
+ };
+ 
+ const struct inode_operations exfat_file_inode_operations = {
+
+base-commit: 79130348ec29b74950e925e06c26f1a4eecea5ae
 -- 
-Thanks,
-Hyunchul
+2.43.0
