@@ -1,83 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.252.183.203
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794263700;
-	b=L24rNgECrd+/k31qifyK9sD1LFk91kBdS/z+umsS0hIRyK13kyyvdfL1VLHglIVO1+XG
-	 jLPZ+YgrQX962FMQmrpjN8CzbVwhg5mT3Wn0772XpBiLYLkNh87oSR5bT5Ny5+rbdfWad
-	 8aMIcY3GVPw/vLL2fJHYZOkOFepXLxW+CJHuIRVPi/WjGriWwfzhRjOIk4np6YJKI4o2d
-	 B/ZZwuYYRbu0qvl+0p6LezeNoi/SKEWbQljnUr8WULNfcM2Iv9npTi83X9TV2qdBEAZWN
-	 1eXZc9ju8xrRasG5OdO925XETfvCCg4Twd9dCnHx7CJTD0Tbk1QP9/M5EJ7OZaKs2Gw==
+	t=1794293728;
+	b=m7sRJK2Z4wEf0OD3TSF8y1n3gLWFgG1Od6ytPQiCBba44H6Gjy0cIPZ1LlGuEFr/U6jO
+	 kGjaXByaZUb2AF7iIim9ruuTl9+0ONQ9+50EmWcj8AsRNcRmq9jbgKN7ynV7zsQ1Cd2qG
+	 WH80f/XixWbjexILl6C8N4gE4covMKW+byd/u/8fSiD9DVePwf8lmfGuYfboQH+vDlJ8O
+	 sq2q2/MHaNid0n0BaZNq9xB9ZzGF5NI/TnRoLGfBX4gGiKQlnTzNn2ZsZxFRd1esmud6z
+	 kav5UffFdTrFmDA656jhKPrdi3PbUuQPJtpJcDxRnYixax9HJ+3GmrvfWAtXp0hqWmg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794263700;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:X-Mailer:
-	 References:In-Reply-To;
-	bh=TbeRpiMQNiT5Jtn969Ppv6Yio3qCqfnpSKR/Mo7ZTMU=;
-	b=xhe4IgvrYFlZF0KNU782GxzRatymVQaUHtIsQxgYxopiKFZFaF1+Ej3Rb6LzO3R6IvGp
-	 w1fQkzWgH4mq8RxghYB2dSuOrt2vpe4ZFTdHaVghUeA0vdCwNk9n8RkY982E7z0fK9+2A
-	 kdYNCiSBJ50JzIRMpt/xayi9v5H1DrgaKGPKWpnIsQfJAwVcLpc40P+qMV84ry3zkoVt/
-	 vDsdf++9e6qu+z82E7tjWY6EAKR8NZlbj31IRLIrfbWb39BYj6EqnliDdIoubVatAXbm0
-	 +wELTBNF/7WlFtqC9gnZKylp6z9s5fmNiPlyoSLOlZTyXxLXLKtpNMosaPz6Z068iFQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794293728;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=A93f3B/rjFmmKdpaKkv1JZPUA9u2OKwn2ltZNSl8jkE=;
+	b=OsWIc9hoJ6ARf5fewtrxq1qx5KU2f4sMpoFmav6iJF9UZz+7DOdA33liubSv45hhLX2F
+	 XbcS2nFVPYMG9ktZvtDhLp9fozB+9suIRYOFCCMq2bq5AV6/7fIesIIUWDfmBCbdb+ysT
+	 1GZqFVz885+M3kn+dKnd9joshIWBuD1xFlrYeWzQP0dngWlFCITzBHYoFRdt223tS4Wvm
+	 VoED1JWIZCWt1Nop4zwgxJe2A3629UDN7pYXXfvnXfl5oZWiNI2KpbciUv13eQm5Qnf6Z
+	 7Pgr/InaLkDFK/DVLucvD8mzEcbUbYbB3i2kyzu9q78uWLMrlPJVpbfNKat/NgUmqdg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rmZUbjfj;
-	arc=none smtp.remote-ip=209.85.221.47
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=dev.snart.me;
+	spf=pass smtp.mailfrom=dev.snart.me;
+	dkim=pass header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b="V/6Fxmvn";
+	arc=none smtp.remote-ip=54.252.183.203
+Received: from embla.dev.snart.me (embla.dev.snart.me [54.252.183.203])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 798D660A2609
-	for <exfat@lists.linux.dev>; Mon,  9 Nov 2026 22:34:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 798D660A2609
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60C16606A325
+	for <exfat@lists.linux.dev>; Tue, 10 Nov 2026 06:55:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 60C16606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dev.snart.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dev.snart.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rmZUbjfj
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-492fcbfaa88so980986f8f.3
-        for <exfat@lists.linux.dev>; Mon, 09 Nov 2026 14:34:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794263698; x=1794868498; darn=lists.linux.dev;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:mime-version:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=TbeRpiMQNiT5Jtn969Ppv6Yio3qCqfnpSKR/Mo7ZTMU=;
-        b=rmZUbjfjdJ0xs9/hm/LIKJrN8tTcd55gzp1EiYO9hmFOHRuMIwBKIEASs8hvStU5eO
-         LNvw+jaOgCA+IgkTOlQHs+zZegqSjAStQsDNkde8YZLSxnAcOQSVak5LzGyjFWg9Ri7e
-         zArgcm3J8R9mRmjEAVMK1FdgxiNFt+FLVvkZQZFcpjT2+Xz3rZkHlaArXU3/lb/2ieIG
-         Eoa4TOVURCTV45CVyZ1zZ2guTVTjv180KbDsfzctiGJtfbE4bKvkQlmhHd9cO7EixRta
-         8uPY+yZcfQi8YVj0TzNrtD5czSSG0Z2rFPQFndtpnGwHstgHVmAnajkghg6FwLzO4xIL
-         Ba3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794263698; x=1794868498;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=TbeRpiMQNiT5Jtn969Ppv6Yio3qCqfnpSKR/Mo7ZTMU=;
-        b=ods5mS1S18yumaLwSLDTGXtln6mf+FluncRJr7vvQXOuBw5j+qbU4p0vR/Npvx5+Ns
-         hSJQ7hDYPhZ+pBwfusdpw8jirRlGSQrMgK6qdipvXR5amSGuBBWXgCazraU0mNiav1yj
-         o7AZDKo8C4RT00rePt7kJtnGbzHkexYBhGG5fgYVHa+OR88OWEmMOtNXpXVNBwwpMX3s
-         JQ6worl0Chq6/7GOMWiPpE5Gvyod1EYLl2xsI0k7lKETPicWQeMalPTfhavoLjKuIyS8
-         yWGFMJueZTufShyncNl54hA9lbY/qCPUFKF+0RnC49jwKCZU2cYXLuvudyz1M3wkmTKR
-         qvNA==
-X-Forwarded-Encrypted: i=1; AL+hErEbnNvzRA1gb0IdGNJeSyl+43qdHfuIgDlzBTByCAI+UM4YyXIuy6cEwTfIwBYU93QkaeL2tg==@lists.linux.dev
-X-Gm-Message-State: APuU4Z+YMFiGPZOGrNJMl77yK9dHf7uw1SfuvIx8VCA9v5uxpNe0Ommc
-	GweI2BwBWCQg8nx3vfAeEsCPpY/LBb2zxc1IirGpd9mr9DINtlB9OsnF
-X-Gm-Gg: AYBFou1s8q7D/8ah+gjcUkVQWpMyZmFYYQSZCBgjY+Ti4mUZsWA9K4LXpH0A9aexKO3
-	uoJsAlemOCnugKUHGuFqsBb0Bn3dsk7/zfhqDhYF9AZeBssco2SY/+MwM0m7jeatlvPy5eydmda
-	a3yho0LVv7dROl2oI1EG/ECaO7ycm/QS4plCbqYkRDs91CsfpUwky6R8qFSrukJ3fzSgDe8hVn2
-	91lsEKZRP7x4xlc0EBxBzRtW2wTwhMqtdwG+315d8ajU7EcMGMp1XDoLXpGVfJa4TORWTONX/9c
-	JMzoHg1hZQfb77/yhck7t0cAFLoc0FErjLN+YJVo7wWAKVp9/4hHmKJXHr/GzCdNjyJ6znWjm3k
-	ELDl3rD6QKllVjNI+X1u8P4/ArRkeAXgjxqeSuZlsb/oBYvniEkPu4LSBh/8d7XEyjOsv1BEen7
-	DM02EZ3S6JV1FTCeYM4pXjjsF4x4pA8spL8yFL9Fuhd48bBs4nZzpxMHoe+o+F9vgxwWJ6vC/Zg
-	mLgI6dpLRQRFa08YrI5WQG7T63P/8O6sHDEJRZgndNLh4ihHlPeNKBzHCZWdX0aB8a7xpgbYtGF
-	bsMXG8ouJ7v4jjB+BxHGR6OKlw==
-X-Received: by 2002:a5d:5f47:0:b0:492:820d:1e with SMTP id ffacd0b85a97d-4982fb52472mr1381001f8f.11.1794263697601;
-        Mon, 09 Nov 2026 14:34:57 -0800 (PST)
-Received: from localhost ([2001:b07:5d26:7a6a:365a:60ff:fe0d:cfc6])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4983600bc8fsm1303661f8f.30.2026.11.09.14.34.54
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Nov 2026 14:34:55 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=dev.snart.me header.i=@dev.snart.me header.a=rsa-sha256 header.s=00 header.b=V/6Fxmvn
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+	by embla.dev.snart.me (Postfix) with ESMTP id A5AC51D47C;
+	Tue, 10 Nov 2026 06:55:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 embla.dev.snart.me A5AC51D47C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=dev.snart.me; s=00;
+	t=1794293726; bh=WvCfLbaZJ9HyJk1GA876AUCFFqrGtsTrHCeS/pYFatI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=V/6FxmvnzcbFfl1GjW1iJkQv0WHfbAhZ5VZ9nDe9pFvl1RwEFceTTjqKtVw9wOBj0
+	 Au8ctTWrsHQTxgZYP817LdDFoemqs9gHjiHgMBW/E0rSSCdEAgUmn+OL6KE9TY0es6
+	 ghM2HiNAj80aE+Na0JCvsstG/+y2SlYNp9UzNiYQ=
+Received: from maya.d.snart.me ([182.226.25.243])
+	by embla.dev.snart.me with ESMTPSA
+	id /GyMLta/8mq/UAEA8KYfjw:T4
+	(envelope-from <dxdt@dev.snart.me>); Tue, 10 Nov 2026 06:55:24 +0000
+From: David Timber <dxdt@dev.snart.me>
+To: Namjae Jeon <linkinjeon@kernel.org>,
+	Hyunchul Lee <hyc.lee@gmail.com>
+Cc: exfat@lists.linux.dev,
+	David Timber <dxdt@dev.snart.me>
+Subject: [PATCH v0 3/7] mkfs: add -i/--volume-serial, --disk-guid and --part-guid options
+Date: Tue, 10 Nov 2026 06:54:37 +0000
+Message-ID: <20261110065441.63590-4-dxdt@dev.snart.me>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261110065441.63590-1-dxdt@dev.snart.me>
+References: <20261110065441.63590-1-dxdt@dev.snart.me>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -86,400 +66,279 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=1bc85eaa38fb06f5cb938135d83b598e0e2ac0da5a561a69ab953af6626c;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Mon, 09 Nov 2026 23:34:49 +0100
-Message-Id: <DMR1E7XB3AT6.3UI3YHHBI8O9Z@gmail.com>
-Cc: "David Sterba" <dsterba@suse.com>, "Alexander Viro"
- <viro@zeniv.linux.org.uk>, "Christian Brauner" <brauner@kernel.org>,
- "Namjae Jeon" <linkinjeon@kernel.org>, "Sungjong Seo"
- <sj1557.seo@samsung.com>, "Konstantin Komarov"
- <almaz.alexandrovich@paragon-software.com>, "Chris Mason"
- <mason@kernel.org>, "Jan Kara" <jack@suse.cz>, "Yuezhang Mo"
- <yuezhang.mo@sony.com>, "Chuck Lever" <cel@kernel.org>, "Darrick J . Wong"
- <djwong@kernel.org>, "Sean Smith" <defendthedisabled@gmail.com>, "Andrey
- Albershteyn" <aalbersh@kernel.org>, "Pedro Falcato" <pfalcato@suse.de>,
- =?utf-8?q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
- <linux-btrfs@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <exfat@lists.linux.dev>,
- <ntfs3@lists.linux.dev>, <linux-api@vger.kernel.org>, "Theodore Tso"
- <tytso@mit.edu>
-Subject: Re: [RFC PATCH v3 1/5] vfs: add provenance time (ptime)
-From: "koraynilay" <koray.fra@gmail.com>
-To: "Amir Goldstein" <amir73il@gmail.com>, "koraynilay"
- <koray.fra@gmail.com>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3
-References: <20261101015551.786044-1-koray.fra@gmail.com>
- <20261101015551.786044-2-koray.fra@gmail.com>
- <CAOQ4uxiuJ=eZu28FZAUz3rpqPKqCimPxJucOnYYuBowvD09_Cw@mail.gmail.com>
- <DMP3UBB0QVOT.20HIXK7ZL6K6U@gmail.com>
- <CAOQ4uxgSVc8n1LbL_dcU-DpNN5BB-ap_vGdXEu7+d0Td7PK5Tw@mail.gmail.com>
- <DMP582BGB7DV.2U0SJLJL7A87K@gmail.com>
- <CAOQ4uxj82K4z+2OiY5W1g7NyWAFOFjqqWnZSS3prytW36j1LgA@mail.gmail.com>
-In-Reply-To: <CAOQ4uxj82K4z+2OiY5W1g7NyWAFOFjqqWnZSS3prytW36j1LgA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
---1bc85eaa38fb06f5cb938135d83b598e0e2ac0da5a561a69ab953af6626c
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+The purpose of these options is to provide a way to make fsck.exfat
+deterministic for testing purposes. For example, if the size and serial
+of the volume are constant, mkfs.exfat produces the volume with exact
+same contents. This makes it possible for tests to cache the previous
+result and the skip expensive verification process if there's no change
+in the generated images.
 
-On Mon Nov 9, 2026 at 3:35 PM CET, Amir Goldstein wrote:
-> On Sat, Nov 7, 2026 at 6:09=E2=80=AFPM koraynilay <koray.fra@gmail.com> w=
-rote:
->>
->> On Sat Nov 7, 2026 at 5:48 PM CET, Amir Goldstein wrote:
->> > On Sat, Nov 7, 2026 at 5:04=E2=80=AFPM koraynilay <koray.fra@gmail.com=
-> wrote:
->> >>
->> >> On Mon Nov 2, 2026 at 3:00 PM CET, Amir Goldstein wrote:
->> >> > On Sun, Nov 1, 2026 at 2:57=E2=80=AFAM koraynilay <koray.fra@gmail.=
-com> wrote:
->> >> >>
->> >> >> Add provenance time (ptime), indicating the time when a file or
->> >> >> directory was created. This is user-settable via file_setattr() an=
-d
->> >> >> retrievable via statx(2) (using STATX_PTIME) or file_getattr().
->> >> >>
->> >> >> The semantics of when to preserve this new timestamp are the same =
-as
->> >> >> mtime, the idea being that there is a correspondence like this:
->> >> >>
->> >> >> ctime <-> btime
->> >> >> mtime <-> ptime
->> >> >>
->> >> >> so every operation (copying, moving, ...) that currently preserves=
- mtime
->> >> >> should also preserve ptime.
->> >> >>
->> >> >> Furthermore, in order to avoid the legacy FS_IOC_FSSETXATTR accept=
-ing
->> >> >> FS_XFLAG_PTIME, add an FS_FILE_ATTR_XFLAGS_MASK mask to support ne=
-w
->> >> >> xflags, and use it in fileattr_to_file_attr()/file_attr_to_fileatt=
-r() to
->> >> >> allow ptime to be used with the file_setattr()/file_getattr() sysc=
-alls.
->> >> >>
->> >> >> [ This is a re-implementation of the initial patch[1] by Sean Smit=
-h
->> >> >>   <defendthedisabled@gmail.com>, following the advice[2] from Darr=
-ick J.
->> >> >>   Wong <djwong@kernel.org> of using file_setattr() instead of upda=
-ting
->> >> >>   utimensat() ]
->> >> >>
->> >> >> [1]: https://lore.kernel.org/20260405195007.1306-2-DefendTheDisabl=
-ed@gmail.com
->> >> >> [2]: https://lore.kernel.org/20260407014129.GC6192@frogsfrogsfrogs
->> >> >>
->> >> >> Assisted-by: Gemini:3.8-flash-high antigravity-cli-1.4.7
->> >> >> Signed-off-by: koraynilay <koray.fra@gmail.com>
->> >> >> ---
->> >> >>  fs/file_attr.c            | 33 +++++++++++++++++++++++++++++++--
->> >> >>  fs/stat.c                 |  2 ++
->> >> >>  include/linux/fileattr.h  |  5 +++++
->> >> >>  include/linux/stat.h      |  1 +
->> >> >>  include/uapi/linux/fs.h   |  8 +++++++-
->> >> >>  include/uapi/linux/stat.h |  7 ++++++-
->> >> >>  6 files changed, 52 insertions(+), 4 deletions(-)
->> >> >>
->> >> >> diff --git a/fs/file_attr.c b/fs/file_attr.c
->> >> >> index 833e03810b24..c0645cb22bf3 100644
->> >> >> --- a/fs/file_attr.c
->> >> >> +++ b/fs/file_attr.c
->> >> >> @@ -102,7 +102,7 @@ EXPORT_SYMBOL(vfs_fileattr_get);
->> >> >>  static void fileattr_to_file_attr(const struct file_kattr *fa,
->> >> >>                                   struct file_attr *fattr)
->> >> >>  {
->> >> >> -       __u32 mask =3D FS_XFLAGS_MASK;
->> >> >> +       __u32 mask =3D FS_FILE_ATTR_XFLAGS_MASK;
->> >> >>
->> >> >>         memset(fattr, 0, sizeof(struct file_attr));
->> >> >>         fattr->fa_xflags =3D fa->fsx_xflags & mask;
->> >> >> @@ -110,6 +110,8 @@ static void fileattr_to_file_attr(const struct=
- file_kattr *fa,
->> >> >>         fattr->fa_nextents =3D fa->fsx_nextents;
->> >> >>         fattr->fa_projid =3D fa->fsx_projid;
->> >> >>         fattr->fa_cowextsize =3D fa->fsx_cowextsize;
->> >> >> +       fattr->fa_ptime_sec =3D fa->fsx_ptime.tv_sec;
->> >> >> +       fattr->fa_ptime_nsec =3D fa->fsx_ptime.tv_nsec;
->> >> >>  }
->> >> >>
->> >> >>  /**
->> >> >> @@ -141,15 +143,20 @@ EXPORT_SYMBOL(copy_fsxattr_to_user);
->> >> >>  static int file_attr_to_fileattr(const struct file_attr *fattr,
->> >> >>                                  struct file_kattr *fa)
->> >> >>  {
->> >> >> -       __u64 mask =3D FS_XFLAGS_MASK;
->> >> >> +       __u64 mask =3D FS_FILE_ATTR_XFLAGS_MASK;
->> >> >
->> >> > That is not the correct way to extend this API.
->> >> > This fixed mask was added as a placeholder for
->> >> > "We intend to add support for more xflags to selective filesystems"=
-:
->> >> > https://lore.kernel.org/linux-fsdevel/20250329143312.1350603-2-amir=
-73il@gmail.com/
->> >> >
->> >> > Please see this POC patch for filesystems to publish their supporte=
-d
->> >> > xflags mask:
->> >> > https://lore.kernel.org/linux-fsdevel/20250329143312.1350603-3-amir=
-73il@gmail.com/
->> >>
->
-> Re-reading and answering your original questions:
->
->> >> Quick question, should _mask also be used for user-space -> VFS to ad=
-vertise
->> >> what it wants to change?
->
-> Yes absolutely.
->
->> >> This would be useful for on/off flags,
->
-> Exactly.
->
-> All the Windows filesystems that want ptime, would most likely want the s=
-upport
-> on/off HIDDEN/SYSTEM/ARCHIVE flags as well.
+  $ truncate -s 32M a.img
+  $ truncate -s 32M b.img
+  $ mkfs.exfat -F -i 0x12345678 a.img
+  ...
+  $ mkfs.exfat -F -i 0x12345678 b.img
+  ...
+  $ sha256sum -b a.img b.img
+  e293574fd06bfe9ed6e6d399c856387cf07dad4fe4a82f7605741e41a12ba2a5 *a.img
+  e293574fd06bfe9ed6e6d399c856387cf07dad4fe4a82f7605741e41a12ba2a5 *b.img
 
-(But these should be deferred to other patches/to the FSs themselves
-right?)
+  $ ./mkfs/mkfs.exfat -i 0x12345678 -F -Pgpt\
+      --disk-guid=9129413c-768c-416e-8212-3c0688c2b396\
+      --part-guid=dae52c4e-bb76-4759-9088-c25867217218\
+        a.img
+  ...
+  $ ./mkfs/mkfs.exfat -i 0x12345678 -F -Pgpt\
+      --disk-guid=9129413c-768c-416e-8212-3c0688c2b396\
+      --part-guid=dae52c4e-bb76-4759-9088-c25867217218\
+        b.img
+  $ sha256sum -b a.img b.img
+  b05dcf981ae6c622b07e3eb15d64fc54d7d2ffe86329a719c3001a711e719fe4 *a.img
+  b05dcf981ae6c622b07e3eb15d64fc54d7d2ffe86329a719c3001a711e719fe4 *b.img
 
->> >> but for ptime both fa->xflags and
->> >> fa->xflags_mask would have the same meaning of "I want to change ptim=
-e,
->> >> look at fa->ptime".
->
-> There needs to be no FS_XLAG_PTIME in fa->xflags,
-> just as there is no FS_XFLAG_PROJID in fa->xflags today.
->
-> However, since btrfs does not support setting projid, when we introduce
-> fa->xflags_mask, it would be elegant IMO to introduce the (new) flag
-> FS_XFLAG_PROJID which would be valid in fa->xflags_mask.
->
-> To be clear, currently upstream chattr (e2fsprogs) can set projid via
-> FS_IOC_FSSETXATTR ioctl (no xflags_mask) and upstream
-> xfs_io -c chattr (xfsprogs) can set projid via  file_setattr() syscall
-> (no xflags_mask).
->
-> But if either utils were to be modified to support setting ptime, then it
-> would need to use file_setattr() syscall and set both FS_XLAG_PTIME
-> and FS_XFLAG_PROJID in  xflags_mask when it wants to set a non-zero
-> value to those fields.
->
-> Specifically, the invocation of chattr -p <projid>, will no longer need t=
-o do
-> FS_IOC_FSGETXATTR to read all the unrelated flags for setting the projid.
+Also, fix a typo in manpages/mkfs.exfat.8 ("hypenized" -> "hyphenized").
 
-Ah yes, this would be a good change I think.
+Link: https://github.com/exfatprogs/exfatprogs/issues/392
+Signed-off-by: David Timber <dxdt@dev.snart.me>
+---
+ manpages/mkfs.exfat.8 | 26 +++++++++++++++++-
+ mkfs/mkfs.c           | 63 ++++++++++++++++++++++++++++++++++---------
+ mkfs/mkfs.h           | 14 +++++++---
+ 3 files changed, 85 insertions(+), 18 deletions(-)
 
->> >> Should we make _mask the only way to advertise what the user wants to
->> >> change,
->
-> Yes, unless _mask is zero, which then means set all the legacy values
-> which are frozen in the constant FS_XFLAGS_MASK.
->
->> >> ignore xflags | PTIME in user-space -> VFS and use it only in FS
->> >> -> VFS -> user-space to say "this fs supports PTIME for this file"
->
-> Close, but not exactly.
->
-> For GET, semantics are clear and follow statx precedents:
-> xflags_mask always means "supported" (like stx_attributes_mask).
->
-> For boolean flags, xflags is the value
-> For integer fields, an xflags bit means "value provided" (like stx_mask).
->
-> For SET, when xflags_mask!=3D0, a flag of 1 means "I want to set this val=
-ue".
->
-> For boolean flags, if the flag's bit in xflags_mask is 0, the flag is
-> left untouched
-> (e.g. a chattr -p that only sets the project ID doesn't touch IMMUTABLE).
->
-> For integer fields, the meaning of xflags_mask 1 and xflags 0 would be
-> "I want to unset the value" which is not the same as "I want to set the v=
-alue
-> to 0", because as you wrote, 0 is a valid value for ptime.
->
-> The question of whether a specific field can be unset or not is up for th=
-e
-> filesystem to decide, not the VFS.
->
-> For example, XFS already unset the value of cowextsize when flag
-> FS_XFLAG_COWEXTSIZE is 0, although the same could be done
-> with a 0 value to fa_cowextsize.
->
-> VFS does enforce that xflags & ~xflags_mask is EINVAL.
->
->> >> (which will be always once support is added to an FS, so it would jus=
-t
->> >> be "this FS supports PTIME")?
->
-> It does not have to be an FS-wide property. some fs could have ptime
-> (or another attribute) support only on some files types.
+diff --git a/manpages/mkfs.exfat.8 b/manpages/mkfs.exfat.8
+index 88085de..837ec5d 100644
+--- a/manpages/mkfs.exfat.8
++++ b/manpages/mkfs.exfat.8
+@@ -22,9 +22,16 @@ mkfs.exfat \- create an exFAT filesystem
+ .B \-U
+ .I volume_guid
+ ] [
++.B \-i
++.I volume_serial
++] [
+ .B \-P
+ .I type
+ ] [
++.B \-\-disk\-guid\fR=\fIguid\fR
++] [
++.B \-\-part\-guid\fR=\fIguid\fR
++] [
+ .B \-\-pack\-bitmap
+ ] [
+ .B \-\-upcase\fR=\fIfile\fR
+@@ -163,11 +170,28 @@ Specifies the volume label to be associated with the exFAT filesystem.
+ .TP
+ .BR \-U ", " \-\-volume\-guid =\fIguid\fR
+ Specifies the volume GUID to be associated with the exFAT filesystem.
+-It can be given in the standard, hypenized UUID format like
++It can be given in the standard, hyphenized UUID format like
+ \fBaaaabbbb-cccc-dddd-eeee-ffff00001111\fR. Note: The volume GUID cannot be used
+ to set the the 8-letter ID reported by \fIblkid\fR or used as
+ the filesystem UUID in \fB/etc/fstab\fR.
+ .TP
++.BR \-i ", " \-\-volume\-serial =\fIserial\fR
++Specifies the volume serial of the exFAT filesystem. The volume serial is an
++unsigned 32-bit integer. It can be represented either in hexadecimal or decimal
++format. In the former case, the number must be prefixed with "0x" (for example,
++0xdeedbeef). The default is a number which depends on the filesystem creation
++time.
++.TP
++.BR \-\-disk\-guid =\fIguid\fR
++Specifies the disk GUID to be associated with the GUID partition table(GPT).
++If GPT is not used for the new exFAT volume, the GUID is only validated but not
++used.
++.TP
++.BR \-\-part\-guid =\fIguid\fR
++Specifies the partition GUID to be associated with the GUID partition
++table(GPT). If GPT is not used for the new exFAT volume, the GUID is only
++validated but not used.
++.TP
+ .B \-\-pack\-bitmap
+ Attempts to relocate the exFAT allocation bitmap so that it ends at the
+ alignment boundary immediately following the FAT rather than beginning at that
+diff --git a/mkfs/mkfs.c b/mkfs/mkfs.c
+index 609654b..6c8bd76 100644
+--- a/mkfs/mkfs.c
++++ b/mkfs/mkfs.c
+@@ -36,13 +36,9 @@ static int fd_rnddev = -1;
+ /* random serial generator based on current time */
+ static unsigned int get_new_serial(void)
+ {
+-	struct timespec ts;
++	struct timespec ts = {};
+ 
+-	if (clock_gettime(CLOCK_REALTIME, &ts)) {
+-		/* set 0000-0000 on error */
+-		ts.tv_sec = 0;
+-		ts.tv_nsec = 0;
+-	}
++	clock_gettime(CLOCK_REALTIME, &ts);
+ 
+ 	return (unsigned int)(ts.tv_nsec << 12 | ts.tv_sec);
+ }
+@@ -238,14 +234,14 @@ static int build_gpt(struct exfat_blk_dev *bd, const struct exfat_user_input *ui
+ 	}
+ 
+ 	/* fill in the data */
+-
+-	exfat_open_rnddev(); /* Some good entropy, please. */
+-
+ 	/* The first GPT entry */
+ 
+ 	memcpy(&arr[0].partition_type_guid, EXFAT_GPT_PART_TYPE, 16);
+ 	memcpy(&serial, &arr[0].partition_type_guid, 2);
+-	exfat_gen_guid(&arr[0].unique_partition_guid);
++	if (finfo.gpt.has_part_guid)
++		memcpy(&arr[0].unique_partition_guid, &finfo.gpt.part_guid, EXFAT_GUID_LEN);
++	else
++		exfat_gen_guid(&arr[0].unique_partition_guid);
+ 	arr[0].starting_lba = first_aligned;
+ 	arr[0].ending_lba = last_aligned;
+ 
+@@ -276,7 +272,10 @@ static int build_gpt(struct exfat_blk_dev *bd, const struct exfat_user_input *ui
+ 	head_main->alternate_lba = bd->num_sectors - 1;
+ 	head_main->first_usable_lba = first_usable;
+ 	head_main->last_usable_lba = last_usable;
+-	exfat_gen_guid(&head_main->disk_guid);
++	if (finfo.gpt.has_disk_guid)
++		memcpy(&head_main->disk_guid, &finfo.gpt.disk_guid, EXFAT_GUID_LEN);
++	else
++		exfat_gen_guid(&head_main->disk_guid);
+ 	head_main->partition_entry_lba = regions[EXFAT_GPT_DATA_REGION_M_ARR].ofs / sector;
+ 	head_main->num_partition_entries = EXFAT_GPT_ENTRY_CNT;
+ 	head_main->sizeof_partition_entry = EXFAT_GPT_ENTRY_SIZE;
+@@ -851,6 +850,9 @@ static void usage(void)
+ 	fputs("Usage: mkfs.exfat\n"
+ 		"\t-L | --volume-label=label                 Set volume label\n"
+ 		"\t-U | --volume-guid=guid                   Set volume GUID\n"
++		"\t-i | --volume-serial=serial               Set volume serial\n"
++		"\t     --disk-guid=guid                     Set disk GUID (if GPT)\n"
++		"\t     --part-guid=guid                     Set partition GUID (if GPT)\n"
+ 		"\t-s | --sector-size=size[K]                Specify sector size\n"
+ 		"\t-c | --cluster-size=size[K|M]             Specify cluster size\n"
+ 		"\t-b | --boundary-align=size[K|M]           Specify boundary alignment\n"
+@@ -876,11 +878,16 @@ enum longopt_num {
+ 	LON_PACK_BITMAP = CHAR_MAX + 1,
+ 	LON_UPCASE_FILE,
+ 	LON_BOOTCODE_MSG,
++	LON_DISK_GUID,
++	LON_PART_GUID,
+ };
+ 
+ static const struct option opts[] = {
+ 	{"volume-label",	required_argument,	NULL,	'L' },
+ 	{"volume-guid",		required_argument,	NULL,	'U' },
++	{"volume-serial",	required_argument,	NULL,	'i' },
++	{"disk-guid",		required_argument,	NULL,	LON_DISK_GUID },
++	{"part-guid",		required_argument,	NULL,	LON_PART_GUID },
+ 	{"sector-size",		required_argument,	NULL,	's' },
+ 	{"cluster-size",	required_argument,	NULL,	'c' },
+ 	{"boundary-align",	required_argument,	NULL,	'b' },
+@@ -1131,7 +1138,6 @@ static int exfat_build_mkfs_info(struct exfat_blk_dev *bd, struct exfat_user_inp
+ 	finfo.root_start_clu = finfo.ut_start_clu + clu_len / ui->cluster_size;
+ 	finfo.root_byte_off = finfo.ut_byte_off + clu_len;
+ 	finfo.root_byte_len = sizeof(struct exfat_dentry) * 3;
+-	finfo.volume_serial = get_new_serial();
+ 
+ 	return 0;
+ }
+@@ -1545,8 +1551,10 @@ int main(int argc, char *argv[])
+ 
+ 	setlocale(LC_ALL, "");
+ 
++	finfo.volume_serial = get_new_serial();
++
+ 	opterr = 0;
+-	while ((c = getopt_long(argc, argv, "n:L:U:s:c:b:P:fFCKVqvh", opts, NULL)) != EOF)
++	while ((c = getopt_long(argc, argv, "n:L:U:s:c:b:P:fFCKVqvhi:", opts, NULL)) != EOF)
+ 		switch (c) {
+ 		/*
+ 		 * Make 'n' option fallthrough to 'L' option for for backward
+@@ -1645,6 +1653,33 @@ int main(int argc, char *argv[])
+ 				goto out;
+ 			}
+ 			break;
++		case 'i':
++		{
++			unsigned long n = 0;
++
++			if (exfat_parse_ulong(optarg, &n) || n > UINT_MAX) {
++				exfat_err("not a volume serial: %s\n", optarg);
++				ret = -EINVAL;
++				goto out;
++			}
++
++			finfo.volume_serial = (unsigned int)n;
++			break;
++		}
++		case LON_DISK_GUID:
++			if (exfat_parse_guid(finfo.gpt.disk_guid.b, optarg, "disk GUID")) {
++				ret = -EINVAL;
++				goto out;
++			}
++			finfo.gpt.has_disk_guid = true;
++			break;
++		case LON_PART_GUID:
++			if (exfat_parse_guid(finfo.gpt.part_guid.b, optarg, "partition GUID")) {
++				ret = -EINVAL;
++				goto out;
++			}
++			finfo.gpt.has_part_guid = true;
++			break;
+ 		case 'V':
+ 			version_only = true;
+ 			break;
+@@ -1920,6 +1955,8 @@ void exfat_gen_guid(void *out)
+ 	struct timespec ts[2] = { 0, };
+ 	uint8_t zm[16] = { 0, };
+ 
++	exfat_open_rnddev();
++
+ 	/* static_assert(sizeof(rnd) == 16); */
+ 
+ 	for (int i = 0; i < 10; i++) {
+diff --git a/mkfs/mkfs.h b/mkfs/mkfs.h
+index c93685d..4eadc96 100644
+--- a/mkfs/mkfs.h
++++ b/mkfs/mkfs.h
+@@ -32,6 +32,10 @@ struct exfat_mkfs_data_region {
+ 	void *data;
+ };
+ 
++struct exfat_guid {
++	uint8_t b[16];
++};
++
+ struct exfat_mkfs_info {
+ 	struct {
+ 		struct {
+@@ -62,16 +66,18 @@ struct exfat_mkfs_info {
+ 	unsigned int volume_serial;
+ 
+ 	struct {
++		struct exfat_guid disk_guid;
++		struct exfat_guid part_guid;
++
+ 		void *mbr;
+ 		struct exfat_gpt_header *head_main;
+ 		struct exfat_gpt_header *head_backup;
+ 		struct exfat_gpt_entry *arr;
+ 		struct exfat_mkfs_data_region regions[EXFAT_GPT_DATA_REGION_CNT];
+-	} gpt;
+-};
+ 
+-struct exfat_guid {
+-	uint8_t b[16];
++		bool has_disk_guid:1;
++		bool has_part_guid:1;
++	} gpt;
+ };
+ 
+ struct exfat_gpt_header {
+-- 
+2.56.0
 
-Right.
-
->> >>
->> >
->> > Sorry I was not able to parse your question.
->> >
->> > I think the mask should mean "this FS supports PTIME"
->> > regardless if the user asked to get/set it or not.
->>
->> Yeah sorry, I'm just a bit confused because of all the similar names and
->> concepts.
->
-> Me too... I needed to re-read all the threads from Feb 2025...
-
-I also had to go back to those threads, since at least those have more
-parsable function names ahah.
-
->>
->> (assuming btrfs supports ptime and ext4 doesn't)
->>
->> * filesystem -> VFS -> user-space, while in fileattr_to_file_attr():
->>
->>   for btrfs, for all files[1]:
->>         fa->fa_xflags & FS_XFLAG_PTIME =3D=3D 1
->>         fa->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 1
->
-> Yes.
->
->>
->>   for ext4, for all files:
->>         fa->fa_xflags & FS_XFLAG_PTIME =3D=3D 0
->>         fa->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 0
->
-> Yes.
->
->>
->> * user-space -> VFS -> filesystem, while in file_attr_to_fileattr():
->>
->>         fattr->fa_xflags & FS_XFLAG_PTIME =3D=3D ignored
->
-> This is debatable. IMO it should be 1 for value, 0 to unset existing valu=
-e,
-> similar to removexattr() if you want to look at it this way.
-
-So in the case of ptime, fattr->fa_xflags & FS_XFLAG_PTIME should be
-ignored, while for fattr->fa_xflags & FS_XFLAG_SOME_NEW_THING it will
-need to be handled as
-
-=3D=3D 1: set it taking the value from ->some_new_thing
-=3D=3D 0: unset the value
-
->>         fattr->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 1 if user wants to=
- set it, otherwise 0
->
-> Yes. but now the user has to set any legacy field it wants to set in
-> fa_xflags_mask as well, because fa_xflags_mask is no longer zero.
-> so we need to introduce flag constants for legacy fields that do not
-> have xflags. I think that is only FS_XFLAG_PROJID.
-
-Should this be a patch in this series, or a separate patch sent after?
-
->>
->> Would this be correct?
->>
->> Or would it be better to set FS_XFLAG_PTIME only in fa_xflags_mask, and
->> never touch fa_xflags with it, which would make the above become:
->>
->>
->> * filesystem -> VFS -> user-space, while in fileattr_to_file_attr():
->>
->>   for btrfs, for all files[1]:
->>         fa->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 1
->>
->>   for ext4, for all files:
->>         fa->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 0
->>
->>   (and always fa->fa_xflags & FS_XFLAG_PTIME =3D=3D 0)
->>
->> * user-space -> VFS -> filesystem, while in file_attr_to_fileattr():
->>
->>         (fattr->fa_xflags & FS_XFLAG_PTIME =3D=3D ignored)
->>         fattr->fa_xflags_mask & FS_XFLAG_PTIME =3D=3D 1 if user wants to=
- set it, otherwise 0
->>
->
-> I prefer the former.
->
->> This would mean that fa_xflags_mask is used like stx_mask both by the fs
->> (to let the user know what it supports (a.k.a. what it's returning)) and
->> by the user (to let the fs know what it's trying to set),
->
-> This is actually like stx_attributes_mask not stx_mask.
-
-Ah ok.
-
->> and fa_xflags
->> is used only for ON/OFF flags (like immutable).
->
-> Yes, on/off for flag values (like stx_attributes), but "value exists"
-> for field values (like stx_mask).
->
->>
->> Let me know if it's clearer.
->>
->
-> Same.
-
-Yes, I think I get it know.
-
-So, just to recap:
-
-fa->xflags_mask =3D=3D 0 -> legacy behaviour before this series
-
-
-fa->xflags_mask & FS_XFLAG_ABCD =3D=3D 1 -> "user wants to set/change abcd"
-fa->xflags & FS_XFLAG_ABCD =3D=3D 1 -> "user wants kernel to take the value=
- from fa->abcd"
-fa->xflags & FS_XFLAG_ABCD =3D=3D 0 -> "user wants kernel to unset abcd"
-
-fa->xflags_mask & FS_XFLAG_ABCD =3D=3D 0 -> "don't touch abcd"
-
-
-and in the case of ptime this means:
-
-
-fa->xflags_mask & FS_XFLAG_PTIME =3D=3D 1 -> "user wants to set/change ptim=
-e"
-fa->xflags & FS_XFLAG_PTIME =3D=3D 0/1 -> "user wants kernel to take the va=
-lue from fa->ptime" [1]
-
-fa->xflags_mask & FS_XFLAG_PTIME =3D=3D 0 -> "don't touch ptime"
-
-
-Correct?
-
-Thanks,
-koraynilay
-
-[1]: so basically ignored, it doesn't matter if the user sets xflags | PTIM=
-E
-or not, but still recommended in documentation. Tho thinking more about
-it, maybe it would be better to enforce it at the fs level with
--EOPNOTSUPP.
-
-
-> Thanks,
-> Amir.
-
-
-
---1bc85eaa38fb06f5cb938135d83b598e0e2ac0da5a561a69ab953af6626c
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSgVimKafU5DQMcjcDmj22qf5IGXAUCavJKiQAKCRDmj22qf5IG
-XFmvAQDJ5TYpkt4k3iU8vjC1XnupiucikMkdH55K6cVJ1gKQdwD/TAa5kJJuINtl
-uD988n6vHMlyrWBlrjXaxWFBiVegWQQ=
-=5ztk
------END PGP SIGNATURE-----
-
---1bc85eaa38fb06f5cb938135d83b598e0e2ac0da5a561a69ab953af6626c--
