@@ -1,55 +1,116 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=195.135.223.130
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794363260;
-	b=kLebvZlEK5Y9aA6LDyb8Bn3ybiaLu72ESCiBJrRFFA+c7ZbDbnaA3K7lRNiX37YxR3ea
-	 jy5fB9LxVsyFyKXFovTIMgVCdw8ZylFBKSqCUNt1d4TkC5y8GUfto/YfmKbGabfdZEMO3
-	 0ga7TAZoh1h4/FBzcGYQANNFrZAkr7V4lG5s8zrBZ8DftoDJt/iH8A8F6xV9IEMgcUkLN
-	 lux2BhUCfRl6xsdmm2um5qiWK4ezAwl/mLZsF5M63e6sZzXNz7ntJVx2mnHMc8N8FrRvn
-	 zl0/X/Duv8iHRm2xd6gCiSqlzMgFYMdv2xz1/MfvwOJ+ROfyTs0W5/IjXtDJW4igTMw==
+	t=1794406515;
+	b=m996nXMbKhBZyO7DThjabhd7iNyCGbs/44IO7Ryp6fkuTPGcBVUIIDBk/kLe8Y8aaVO2
+	 oGmEwjgv+JR+dPX5i7vGW3RqCQqYL/aD7vJsi51ZrAORFwiWAoEEncxynT4GI2a3lBCzM
+	 o5oZbdELjzX2PClo566MNmIHmo4cZWK8u+xwPs1XOJbwjdoOVNWw2jwmBZ6aqhpsyelgm
+	 UGk5ctTd9Sx4J1yaEAJ6BDjGr+PI5Xqr4AwXrCadGPLdhBW18MWNioKxrTAwW/MdFY8bV
+	 XQknvNFjO8AXl3o+d0QlyeabkmQ5o68TnhaD53+y62xxbNFRgusdwjdUPd4GDJ5rPQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794363260;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=qnuZ0ZDre3/op87TuQ6fMappUAJaxupV85cTaz0hk1Q=;
-	b=YMas1hNpYXiQhF0r9NLvL6zNwsM98XGavAQJOzBwUw8aX9zzKTakoYDcJzjgoMnO4h1m
-	 VHbXfTfAeRNnOYC9VDyTUCIU4JCGBDBcZPWOB4HDLMaL83flHAHhMB690GsrH4fYzCBdU
-	 aQGYJyGzDgj4+JJF8yBnRHMu/IdkneHQZ9HqEZrBv0VEjxAa9ggDZuZrBAZ9+3Ovjayou
-	 tQjMlfrcI6N2sMA6+t92bwOo4X5AG7jgf/Fo58ojV9O6CkbbP6ntKw45eS9ffgp6sgYWN
-	 gBJK3t1GdFpbT4erftLnO1VqTS41OulgxBRuCGtE/TR5TvIhopbPnX0SH4gj3w6s1iA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794406515;
+	h=DMARC-Filter:Received:DKIM-Signature:DKIM-Signature:DKIM-Signature:
+	 DKIM-Signature:Received:Received:Received:Date:From:To:Cc:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To:X-Rspamd-Queue-Id:X-Spam-Level:X-Rspamd-Server:
+	 X-Rspamd-Action:X-Spam-Flag:X-Spamd-Result:X-Spam-Score;
+	bh=iEM9kPeISwrg1hp3zFsHM5gU3S8hitOkRPQJum2vFMU=;
+	b=ZiK73kegivisxJpVK2LXkC1RYLocW5xSvj3pTcjD8448vL5b+UkV8tAvKouN6RROPVxD
+	 Vtu+r6qbw5p0Vcu1htkjyxI+kgNukTzPQPhfF36101J0drA6R8Rn3REUbUOswcf4Z/Olt
+	 Ttfok9rcej1iUYxtdyfXG1fwsE/PBE3r8CfMCmhal/NkxcH9WbHCRD85bH7KlIwJHl8dP
+	 LVPsspF4VWGjFptPweyLbNG5KwnAa/itd/JjesrWlEsKpDv4yOiev8tfS1+8OuIIJ+Ed4
+	 wLpwhmVMSq1rDdgWW1wLT6ndhk3EKtdXW6XnH+UadbirKGVzI9VfKMpyQvvzARJHFQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=isfhQgAf;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=none header.from=suse.cz;
+	spf=pass smtp.mailfrom=suse.cz;
+	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=r58BF0D8;
+	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=15TlV9Nr;
+	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=r58BF0D8;
+	dkim=neutral header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=15TlV9Nr;
+	arc=none smtp.remote-ip=195.135.223.130
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73F90606A32A
-	for <exfat@lists.linux.dev>; Wed, 11 Nov 2026 02:14:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FE34606A889;
+	Wed, 11 Nov 2026 14:15:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3FE34606A889
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=isfhQgAf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F144F1F00A07
-	for <exfat@lists.linux.dev>; Wed, 11 Nov 2026 02:14:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794363260;
-	bh=qnuZ0ZDre3/op87TuQ6fMappUAJaxupV85cTaz0hk1Q=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=isfhQgAfx6JVe8nJF4WJzOQZmEwqjMsMuamhq7uvEkuiRrO8BZW1yaVD9B2adA3xj
-	 mud60OCLxlZsKTVOKK1vUANVdhBfVOrOXMCOLdGQoBkAAKff0lnSRMObrBVFOyL7JZ
-	 kZ1RxD5+G2IaJyTgFn9W2TMauNJFPN0SDSD6HjNRzu4c37qp0mKs7F3TKYJGFTYrQK
-	 RAAjnj+R4E2guJVvHYYWJF2W58eb15i+4TFB3fxXdGqkfBS4Qqn2vTW1yAErC1Lm0F
-	 sQeByjJu/1dim0VGU4WY+Wi1PLXObTuIUWW/N7lvt7YFYA9+gVNmeZPh6HBtl1Czsk
-	 gl9sr6T9HO7ig==
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6b596569640so4356511a12.1
-        for <exfat@lists.linux.dev>; Tue, 10 Nov 2026 18:14:19 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErENT/JgWxcknRUW2oTH4B6XLs68JEQx0nT3cBhnGY1yUDjMI8U2NmAA2QBtON9vHN7iOSyp6Q==@lists.linux.dev
-X-Gm-Message-State: APuU4Z8KYNY4nIgbbSfXF999AYaGh9T/0Pupn+uOE6FI6eW9t7CL/5qH
-	/n1J70MPdhIeP3epEjk4jLfkkiI1y3o2PEC78GmftJkw7e49CdShc0RhFrSNe3HsuBDZVOiSfh5
-	dBWzTA4XmcUVdMCrujhfdUR19akX1eOo=
-X-Received: by 2002:a05:6402:51cb:b0:6b7:853d:53aa with SMTP id
- 4fb4d7f45d1cf-6b7853d5670mr64053a12.4.1794363258563; Tue, 10 Nov 2026
- 18:14:18 -0800 (PST)
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=r58BF0D8;
+	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=15TlV9Nr;
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=r58BF0D8;
+	dkim=neutral header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=15TlV9Nr
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 09F3E22A5E;
+	Wed, 11 Nov 2026 14:15:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1794406512; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=iEM9kPeISwrg1hp3zFsHM5gU3S8hitOkRPQJum2vFMU=;
+	b=r58BF0D8W8gzgIAphVb7+yXG4Wp0CzJfQUUtsAILSsDExswBBX2Vz1DZhrqDcoIpRX0ZTt
+	0gBD9RMFaruNOsM+g+SXe7YVni3W376lEjHWkMsC8cv+03B46mcbwzWMdN6eutgUbVcR1I
+	skb2yG6nBdMmWTQD7PkbKOeYbn2js8w=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1794406512;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=iEM9kPeISwrg1hp3zFsHM5gU3S8hitOkRPQJum2vFMU=;
+	b=15TlV9Nrfb6fbwPB+XQGAF9gQF4YSshvgg4Qr4JwuaNYvo4isPqFDJlR8PRYTR3/TFQArE
+	KUe4A2NvjL7x2ZAw==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=r58BF0D8;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=15TlV9Nr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1794406512; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=iEM9kPeISwrg1hp3zFsHM5gU3S8hitOkRPQJum2vFMU=;
+	b=r58BF0D8W8gzgIAphVb7+yXG4Wp0CzJfQUUtsAILSsDExswBBX2Vz1DZhrqDcoIpRX0ZTt
+	0gBD9RMFaruNOsM+g+SXe7YVni3W376lEjHWkMsC8cv+03B46mcbwzWMdN6eutgUbVcR1I
+	skb2yG6nBdMmWTQD7PkbKOeYbn2js8w=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1794406512;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=iEM9kPeISwrg1hp3zFsHM5gU3S8hitOkRPQJum2vFMU=;
+	b=15TlV9Nrfb6fbwPB+XQGAF9gQF4YSshvgg4Qr4JwuaNYvo4isPqFDJlR8PRYTR3/TFQArE
+	KUe4A2NvjL7x2ZAw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id BD61B134E5;
+	Wed, 11 Nov 2026 14:15:11 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id oMu1Jm949GpWAQAAD6G6ig
+	(envelope-from <jack@suse.cz>); Wed, 11 Nov 2026 14:15:11 +0000
+Received: by quack.suse.cz (Postfix, from userid 1000)
+	id 475D422933; Wed, 11 Nov 2026 15:15:11 +0100 (CET)
+Date: Wed, 11 Nov 2026 15:15:11 +0100
+From: Jan Kara <jack@suse.cz>
+To: Christian Brauner <brauner@kernel.org>
+Cc: Jan Kara <jack@suse.cz>, linux-fsdevel@vger.kernel.org, 
+	Jan Kara <jack@suse.com>, Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, 
+	linux-ext4@vger.kernel.org, jfs-discussion@lists.sourceforge.net, 
+	linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, linux-mm@kvack.org, ntfs@lists.linux.dev, 
+	ocfs2-devel@lists.linux.dev, linux-btrfs@vger.kernel.org, gfs2@lists.linux.dev, 
+	linux-efi@vger.kernel.org, linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org, 
+	Karl Mehltretter <kmehltretter@gmail.com>
+Subject: Re: [PATCH v2 04/34] ext2: don't set SB_RDONLY after filesystem
+ errors
+Message-ID: <za33axmgzmuzsj3zmfeh43fkphtcsqtkhhrauwuvs7aiftelgp@dzl6z322st5f>
+References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
+ <20261029-work-fs-sb_rdonly-v2-4-2f44f64f0b66@kernel.org>
+ <5qefa4mracb3x2z4vsdejmkyyfrhdcrixmmnooz4rzwcdfoejm@mqkvixj6afwp>
+ <20261110-kargheit-impfen-pausieren-881763d28b19@brauner>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -59,81 +120,92 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261110065441.63590-1-dxdt@dev.snart.me>
-In-Reply-To: <20261110065441.63590-1-dxdt@dev.snart.me>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Wed, 11 Nov 2026 11:14:06 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_8s6s5r49jXxULxuT-8x_onFNOsTgHboS-KDXpvFDMHA@mail.gmail.com>
-X-Gm-Features: AclHuK9kqN9PikLOBvMg1wWB53-HfGZVUZIhcbtf7Lp0H5a5S4ddEudz3q2RT2w
-Message-ID: <CAKYAXd_8s6s5r49jXxULxuT-8x_onFNOsTgHboS-KDXpvFDMHA@mail.gmail.com>
-Subject: Re: [PATCH v0 0/7] mkfs: make mkfs.exfat deterministic to reduce CI runtime
-To: David Timber <dxdt@dev.snart.me>
-Cc: Hyunchul Lee <hyc.lee@gmail.com>, exfat@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261110-kargheit-impfen-pausieren-881763d28b19@brauner>
+X-Rspamd-Queue-Id: 09F3E22A5E
+X-Spam-Level: 
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-Spam-Flag: NO
+X-Spamd-Result: default: False [-11.51 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	RCVD_COUNT_THREE(0.00)[3];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	MIME_TRACE(0.00)[0:+];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[suse.cz:+];
+	MISSING_XM_UA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[suse.cz,vger.kernel.org,suse.com,zeniv.linux.org.uk,lists.sourceforge.net,lists.linux.dev,kvack.org,lists.infradead.org,gmail.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.cz:dkim]
+X-Spam-Score: -11.51
 
-On Tue, Nov 10, 2026 at 3:55=E2=80=AFPM David Timber <dxdt@dev.snart.me> wr=
-ote:
->
-> This series addresses rather wasteful use of Github Actions runners.
-> mkfs.exfat can now be run in a mode that doesn't involve any randomness
-> (ie. deterministic) so that tests in the CI pipeline can expect volume
-> images with the identical contents every time. Other randomness
-> generated and tests unrelated to exfatprogs are removed. Moving forward,
-> the CI pipelines should focus on testing exfatprogs code, not other
-> external implementations like Linux kernel or Microsoft Windows.
->
-> In action:
->
->   1. https://github.com/dxdxdt/exfatprogs/actions/runs/42765932946/attemp=
-ts/1
->   2. https://github.com/dxdxdt/exfatprogs/actions/runs/42765932946
->
-> On the first run, the generated images are consolidated and then tested
-> on Windows runners. On the subsequent run, the cached images are
-> restored and diff'd. The Windows runners are not run as the diff script
-> reports that both cached and generated images are identical.
->
-> ---
->
-> The series also includes a patch that fixes a minor endianness confusion
-> in GPT structure creation code. This is only fixed to make the tests
-> work and there should be no real-life impact whatsoever(the disk
-> signature in protective MBR seems to be ignored by all OSes).
->
-> This series doesn't fix any serious bug and there are some memory errors
-> and fsck stability issues reported by users so I wouldn't recommend
-> releasing the features in a timely manner.
->
-> On removing the stress tests in CI:
->
-> I'm planning on building CI pipelines focusing on the Linux kernel fs
-> implementation that involve snooping on the
-> patches(https://git.kernel.org/pub/scm/linux/kernel/git/linkinjeon/exfat.=
-git/),
-> running xfstests and publishing the result. I've already made a couple
-> of repo mirrors using CI with other providers(just in case Github
-> decides to go kaput overnight):
->
->   - https://codeberg.org/exfat-dev/exfatprogs-releases
->   - https://codeberg.org/exfat-dev/exfatprogs
->
-> The tests should also the cover cases that are specific to exFAT in
-> addition to xfstests. That goes without saying.
->
-> The prototype will be hosted on a Github repo. However, I do strongly
-> feel that the tests deserve to be run on real hardware including USB
-> thumb drives, sdcards and external HDDs as they're the ones exFAT is
-> usually used on.
->
->
-> David Timber (7):
->   README.md: update build prerequisite packages
->   lib: make exfat_parse_guid() library function
->   mkfs: add -i/--volume-serial, --disk-guid and --part-guid options
->   mkfs: set disk signature of protective MBR to zero
->   CI: add mkfs entropy test
->   CI: generate images in deterministic manner to reduce runtime
->   CI: remove stress test
-Applied them to #exfat-next.
-Thanks.
+On Tue 10-11-26 22:50:47, Christian Brauner wrote:
+> On Thu, Nov 05, 2026 at 10:22:07AM +0100, Jan Kara wrote:
+> > So shouldn't we just modify the sb_rdonly() check in sync_filesystem() to
+> > use also sb_emergency_ro() and don't bother with modifying individual
+> > filesystems?
+> 
+> The VFS patch I posted in v1 thread did that. I dropped it because
+> of jfs. jfs keeps anonymous tlocks for every allocation that writeback
+> hasn't committed yet. If sync_filesystem() bails after the error nothing
+> commits them before evict_inodes() and jfs_evict_inode() hits the
+> BUG_ON() for a non-empty anon_inode_list on umount.
+> 
+> Which is what happened before the series because the error set
+> SB_RDONLY. jfs_reconfigure() relies on the same sync_filesystem() call
+> when going read-only after the error.
+> 
+> jfs could commit them itself before evict_inodes() but that means a
+> ->kill_sb() wrapper and a txQuiesce()-like walk over the global
+> anon_list filtered by superblock. I don't think that's worth it.
+
+OK, so instead of BUGing in jfs_evict_inode(), shouldn't JFS just do
+something like:
+
+-	BUG_ON(!list_empty(&ji->anon_inode_list));
++	if (!list_empty(&ji->anon_inode_list)) {
++		WARN_ON_ONCE(!sb_emergency_ro(inode->i_sb));
++		/* This needs helper in fs/jfs/jfs_txnmgr.c */
++		TXN_LOCK();
++		list_del_init(&ji->anon_inode_list);
++		TXN_UNLOCK();
++	}
+
+So that JFS doesn't block everybody else? Because conceptually, once sb is
+marked as emergency read-only, we really want to stop writeback so letting
+sync_inodes() run seems moot.
+
+> > Is this really needed? All the xattr operations go through mnt_want_write()
+> > / mnt_want_write_file() so this should be caught in VFS...
+> 
+> Not the ones ecryptfs does on the lower filesystem...
+> Hm, maybe we should make ecryptfs get write access to the lower mount
+> instead and drop the xattr checks from the filesystems. Not sure.
+
+Argh, also NFS I assume. OK, that won't be easy to get rid of AFAICT (we
+generally don't have mount available there).
+
+								Honza
+-- 
+Jan Kara <jack@suse.com>
+SUSE Labs, CR
