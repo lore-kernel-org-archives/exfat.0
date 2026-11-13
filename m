@@ -1,66 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.5
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794562715;
-	b=ArSFkwWTkA5eSH8iJOCpOT+tzFQIQvM84vOhCNgTvjEeGWXy024Wd9CH52JCHXmYksdA
-	 HxoIJP6CGIUKfJlqJ6Y9vC13Lh13l4XcnvFj6HxR88PszCzyo+Y4iaxDK0kftPSkJWs/9
-	 4PHxHrH1vS8f+4uqQjZdLx919ryL11vw3NOwHXrXPzNovjpKWikls7+4Er64t3/Un8OlI
-	 etwmNko7D5VKHsWE3UqTcQ5gYPyTcBZej11I8aem3fJ/vjBT76Wgms4cBc7bRo+TV4Xfs
-	 BnBzZv0MztodyDq7IRu7y01mHr8tImBWLEju5HpsskUmZJiqXq0CSklmlciBtcNg5+A==
+	t=1794564371;
+	b=drw9P7JwFQXRf686m8Dqb5IjuGzSXoUhfPG+/DQQ52gjLBOUFjdOrqtHXP4AfozRWJut
+	 PgUVUZr7lCtE83+6zWS8VxH1jifm5m3L1Ij7GftSzKMMl1YgZ0SbK6tfpOngrLmuqm1pJ
+	 9A/cpLBMOUnzWKhExKiTnmr99pa8DD9YRqGnEwnKajhR1Bb0irt79a05XEOUgHC3Vp+Mi
+	 JK7zaX2nJsUpoGWLzbUT5iajFgCT/7CqDdpf8VOuPiDjXasbGrXpud4jt/YM5Our9/Twe
+	 r6l/aJU/OEgX4up2KJ/V3hD696r+y7EPupxXbkTyMEAgtPt5NTPdgdYJmdbPfPOCRqw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794562715;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=cyYiEXj4r2TdfxUYkpb5oOHA+dMqnC/KnZCWbHMkenQ=;
-	b=JX4S6gyYbzsiSWQW4KbGL+o+bG5BZ1kHrpqtfjm1gZQKvyySj1siKm+TLw3oOKSyNmir
-	 yMhFvhEn6hoRuQHuDvIKW2iYEJQ023PlaTAg5SllPRsBamEqmcgznZsCeW+C7XI5sdok+
-	 AFHyigqjIQQCuqIYbBlEkpyQ/ae/8cZdC/NYubbyD6znGQV2z9VmpLB9zidKMoNeyubJK
-	 QROF2RPnRxVVZpljL+yp6OilrnqsbaVWs7FcbXW4b9+jYj2Kj6wkETwmVrlY7cpb0gk+C
-	 SXDDPr8Hk0vyAyhPZaEZHYlI4GSZQmfUZYmIFQjdPRM3cYdz03lEq0IJi984BoeCGYw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794564371;
+	h=DMARC-Filter:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=px/1buHh7TMXhFEIrqiyErLcAOiPn6wL2fWet4+iHOY=;
+	b=xFIj/o6QE20Ajsb1LhSpzX3mNYiBpYNebQ452hUiKeWuq3vcLvMKXeJgHZUP7Q8ar3kf
+	 1VYmg73N5mN7Wbjn2EaWx05s+mMhfGwmd9BhyLQVlLQNImJJXv/ZfNi/bSVSFDpHq5+xL
+	 Yj5bljMjbAkfkCfvoOhK0apezIgfOWAeLdIzqyPbT7OMwNDAqZr+xsJv6Y2l3Xve+mGnB
+	 Mgn0wjNRz6VWcd9/ZgB89JTf1ox4UmJkn8ER0hhij4CsJumiWE+q0Rvw3avG+Lwg+0lXw
+	 jFSN2Xm9ydNsXeliNbLTVeuIbW/pGVLyHnR3zGPU+EsGZyH9ZEaH4WLAvuBAnnbPD1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G0aoPaWB;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=LJGw1WEN;
+	arc=none smtp.remote-ip=117.135.210.5
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98344606A334;
-	Fri, 13 Nov 2026 09:38:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41900606A886
+	for <exfat@lists.linux.dev>; Fri, 13 Nov 2026 10:06:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 41900606A886
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G0aoPaWB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33F321F000C4;
-	Fri, 13 Nov 2026 09:38:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794562715;
-	bh=cyYiEXj4r2TdfxUYkpb5oOHA+dMqnC/KnZCWbHMkenQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=G0aoPaWBd72jNdaUejL1FLrAnRK3dBg7nKImNWeUFNW4z4PCgCfYTdQz1fkRwVHmb
-	 KMUT4o1pv98YTq4+sOb0DRnY5NA9AhSY9muPozYtlPKP7GITGIWVyqxlT2Lbe4gDgh
-	 DUKeiVG6uBVTl5/xgukvDHNaOL5j36fa2FQ4TKuu/sqZvneH+k7Y9Kkvsr58uzYShF
-	 m6liZNx7Yn9oUKVS6OG22zQht8IfiDOTOY2ocG2nLZ33OCWigHMStPuFGS8jRrcEDg
-	 HPmsR3svBeIaC1O1WZTEBFOuB731AaPpyqUmnt9jeKGaFcyRTBKxm1yOv1bk0r5wv1
-	 n093Q7JztiiYw==
-Date: Fri, 13 Nov 2026 10:38:28 +0100
-From: Christian Brauner <brauner@kernel.org>
-To: Jan Kara <jack@suse.cz>
-Cc: linux-fsdevel@vger.kernel.org, Jan Kara <jack@suse.com>, 
-	Al Viro <viro@zeniv.linux.org.uk>, ecryptfs@vger.kernel.org, linux-ext4@vger.kernel.org, 
-	jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org, exfat@lists.linux.dev, 
-	linux-mm@kvack.org, ntfs@lists.linux.dev, ocfs2-devel@lists.linux.dev, 
-	linux-btrfs@vger.kernel.org, gfs2@lists.linux.dev, linux-efi@vger.kernel.org, 
-	linux-mtd@lists.infradead.org, linux-xfs@vger.kernel.org, 
-	Karl Mehltretter <kmehltretter@gmail.com>, Dave Kleikamp <shaggy@kernel.org>
-Subject: Re: [PATCH v2 04/34] ext2: don't set SB_RDONLY after filesystem
- errors
-Message-ID: <20261113-hermachen-qualvoll-porzellan-adc585bf14d1@brauner>
-References: <20261029-work-fs-sb_rdonly-v2-0-2f44f64f0b66@kernel.org>
- <20261029-work-fs-sb_rdonly-v2-4-2f44f64f0b66@kernel.org>
- <5qefa4mracb3x2z4vsdejmkyyfrhdcrixmmnooz4rzwcdfoejm@mqkvixj6afwp>
- <20261110-kargheit-impfen-pausieren-881763d28b19@brauner>
- <za33axmgzmuzsj3zmfeh43fkphtcsqtkhhrauwuvs7aiftelgp@dzl6z322st5f>
- <20261112-wohncontainer-saurier-wonnen-91f30c3b3ae2@brauner>
- <20261112-besorgen-nobel-handschuhe-fb3373259b5f@brauner>
- <20261112-aktivieren-datteln-assimilieren-062b8257ed49@brauner>
- <7rm43pfkasky5th4fs65qdt4l2d6j3togha56idrqhs4524qca@u7socb57rg3v>
+	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=LJGw1WEN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=px/1buHh7TMXhFEIrqiyErLcAOiPn6wL2fWet4+iHOY=;
+	b=LJGw1WEN4suwGDDsgi+I6m9gDhFjjOCA+VvXQK9GFlniRKdcCxoUVXKvL16o0h
+	Lhw9IJuGzD/iPLjMhhVqSRj254imJM9OiUmoCbO6kMQU2Ayjc78mZKhHvoJqsPFC
+	rYzubECKLJFILU4MBXz3du7+E0h7kO3R01hoa8PItCgJk=
+Message-ID: <25aefd4f-8d1f-48b6-8915-86079cd19ed7@163.com>
+Date: Fri, 13 Nov 2026 18:05:41 +0800
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -70,57 +51,105 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <7rm43pfkasky5th4fs65qdt4l2d6j3togha56idrqhs4524qca@u7socb57rg3v>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] exfat: don't map EXFAT_EOF_CLUSTER as a physical
+ cluster
+To: Youling Tang <youling.tang@linux.dev>, Namjae Jeon
+ <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>
+Cc: Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev,
+ linux-kernel@vger.kernel.org, Youling Tang <tangyouling@kylinos.cn>,
+ stable@vger.kernel.org
+References: <20261113080658.2440516-1-youling.tang@linux.dev>
+ <20261113080658.2440516-3-youling.tang@linux.dev>
+From: Chi Zhiling <chizhiling@163.com>
+In-Reply-To: <20261113080658.2440516-3-youling.tang@linux.dev>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:_____wD3Hzz14PZqyY2jHQ--.32088S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxWFW5JF18Kr1xZw1rtryfXrb_yoW5CF4fpw
+	4DK3W5tFsxJa9rWr43XF1DX34Fkw1fKF48Jwn7Gr15GF90vr40kryqk3Wa9wn8Gw48CF1q
+	qr1Fgw17u3sxCFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UVMKtUUUUU=
+X-CM-SenderInfo: hfkl6xxlol0wi6rwjhhfrp/xtbC+BfNa2r24PfV-wAA3o
 
-On Thu, Nov 12, 2026 at 07:27:45PM +0100, Jan Kara wrote:
-> On Thu 12-11-26 18:03:55, Christian Brauner wrote:
-> > Ok, so if I understood you correctly the changes below should be
-> > implementing what you ask, @Jan.
-> > 
-> > It's a diff against v2:
-> > 
-> > - jfs: free the anonymous tlocks when evicting an inode the way
-> >   txUnlock() does. That's also a mainline fix.
-> > 
-> > - fs: sync_filesystem() and sync(2) skip a superblock in the emergency
-> >   state. syncfs(2) and Q_SYNC return EROFS.
-> > 
-> > - fs: refuse to freeze a superblock in the emergency state. Otherwise
-> >   freeze doesn't sync anything anymore and the flusher keeps writing to
-> >   the frozen filesystem.
-> > 
-> >   That means, FIFREEZE and dm suspend with lockfs now fail with EROFS on
-> >   an errored ext2, fat etc. I think you said that you expect freeze to
-> >   fail anyway. I think that's right.
-> > 
-> >   The exfat, ntfs, btrfs and ext4 shutdown ioctls then have to skip the
-> >   freeze after an error.
-> > 
-> > - ext2, fat, affs, ufs and hfs: drop the ->write_inode() refusals.
-> >   Otherwise the flusher writes data and bitmaps but never the inodes.
-> > 
-> > - ext2, jfs, nilfs2, ocfs2 and ubifs: their ->sync_fs() checks are dead
-> >   now and go.
-> > 
-> > - ubifs: drop dirty folios and inodes after an error. Without the sync
-> >   at remount the flusher otherwise hits ubifs' asserts after a remount
-> >   to read-only.
-> > 
-> > With that nothing is synced on request after an error anymore.
-> > 
-> > syncfs, fsync and Q_SYNC return EROFS without writing anything and
-> > sync(2) and umount skip the filesystem's own sync.
-> > 
-> > The flusher and the block device flushes in sync(2) and
-> > kill_block_super() still write. So what ends up on disk is the same as
-> > on mainline today:
-> > 
-> > Is that what you had in mind?
+On 11/13/26 4:06 PM, Youling Tang wrote:
+> From: Youling Tang <tangyouling@kylinos.cn>
 > 
-> Wow, that was quick! Indeed this looks like what I had in mind and I like
-> the result. Thanks for implementing it so quickly.
+> exfat_map_cluster() reports a hole by returning success with
+> *clu == EXFAT_EOF_CLUSTER for !create.  __exfat_iomap_begin() does not
+> check that sentinel and converts it into a physical address far beyond
+> the device.  A writeback that races with the i_size/i_blocks window in
+> exfat_cont_expand() can hit this: it submits a bio past the end of the
+> device, and fsync() or msync() returns -EIO.  If the resulting iomap
+> length is zero, iomap_add_to_ioend() can loop on a zero-length bio and
+> hang a concurrent truncate.
+> 
+> When a range starts before the end of the cluster chain but extends past
+> it, exfat_map_cluster() returns the sentinel for the whole range.  Map
+> the valid prefix first and only report the part beyond the chain as a
+> hole.  Otherwise a writeback that straddles the end of the chain would
+> skip valid dirty data.
+> 
+> Report the remaining range as a hole instead of turning the sentinel
+> into an address, matching the old exfat_get_block() behavior.
+> 
+> Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
+> ---
+>   fs/exfat/iomap.c | 29 +++++++++++++++++++++++++++++
+>   1 file changed, 29 insertions(+)
+> 
+> diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+> index 11823591b3a8..d6b420f615d4 100644
+> --- a/fs/exfat/iomap.c
+> +++ b/fs/exfat/iomap.c
+> @@ -74,6 +74,22 @@ static int __exfat_iomap_begin(struct inode *inode, loff_t offset, loff_t length
+>   	iomap->bdev = inode->i_sb->s_bdev;
+>   	iomap->offset = offset;
+>   
+> +	if (!may_alloc) {
+> +		unsigned int ondisk_clusters =
+> +			exfat_bytes_to_cluster(sbi, exfat_ondisk_size(inode));
+> +		unsigned int clu_offset =
+> +			exfat_bytes_to_cluster(sbi, offset);
+> +
+> +		/*
+> +		 * exfat_map_cluster() returns the EOF sentinel for the whole
+> +		 * range if it extends past the cluster chain.  Map the valid
+> +		 * prefix first so the hole only covers the part beyond it.
+> +		 */
+> +		if (clu_offset < ondisk_clusters &&
+> +		    num_clusters > ondisk_clusters - clu_offset)
+> +			num_clusters = ondisk_clusters - clu_offset;
+> +	}
 
-No problem. We're paying off technical debt, big time... So I my motto
-is "let's go", so we can focus on the fun things again.
+It would be better to put this handling in exfat_map_cluster().
+
+Thanks.
+
+> +
+>   	err = exfat_map_cluster(inode, exfat_bytes_to_cluster(sbi, offset),
+>   			&cluster, &num_clusters, may_alloc, &balloc);
+>   	if (err == -ENOSPC && !(flags & IOMAP_DIRECT)) {
+> @@ -90,6 +106,19 @@ static int __exfat_iomap_begin(struct inode *inode, loff_t offset, loff_t length
+>   	if (err)
+>   		goto out;
+>   
+> +	/*
+> +	 * exfat_map_cluster() reports a hole by returning success with
+> +	 * EXFAT_EOF_CLUSTER.  Return it as a hole instead of turning the
+> +	 * sentinel into a physical address.
+> +	 */
+> +	if (!may_alloc && cluster == EXFAT_EOF_CLUSTER) {
+> +		iomap->type = IOMAP_HOLE;
+> +		iomap->addr = IOMAP_NULL_ADDR;
+> +		iomap->offset = offset;
+> +		iomap->length = length;
+> +		goto out;
+> +	}
+> +
+>   	cluster_offset = exfat_cluster_offset(sbi, offset);
+>   	cluster_length = exfat_cluster_to_bytes(sbi, num_clusters);
+>   
+
