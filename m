@@ -1,50 +1,51 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.249
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.101
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794820071;
-	b=2XdbdZZ6QzIgnvb6O4LjsyA62PiOY/yIUyQV119npQILbfJHZdjqgYhNyDR9RYq4ebmc
-	 yQDVSv5PB0Alu2479hoR19+MJ3PzKBkaEKlXnmODpV4QuJ29RlSuZw/6jsD18AJESxtKw
-	 DJDGdoAtlonXU+I/krhv+LTMZbIcRdPUwDsYons2fwlNj4Nf80p/qalPej4MEEix9fBAh
-	 nXZXCMlPTP6r5giX17XGD+2CXRltUHiL+2W+4TTXGNdJC/HcnXbqavc74HpfMbaIfn7F4
-	 krsJj87FB+8AzlFdH4fw6SjAybVWcqqc/qRMAaraimHFCWhzf90dU4p9L6EFqy2EzXg==
+	t=1794820078;
+	b=xv1d78i9ax23s3tPrHcVFnC/irVts5pFDCQjTE0eFevXUDV9waiw10ftUKUpL2VGkH51
+	 E2KXKaDWPWiaAZt35JyKVSFUn0sacjyiLnuynjov6GvqYrPQQiNOY2mv+SSawYC11tH61
+	 wq40pQIYUYPg19erJw0n/ky29ILrppSGQIuaUJ+7D0anJIUfEnOSWvFqNXpKYQur/P57a
+	 8DSZTioMJPKgf89YjlarWTIzcUO2I20SbR3RGSf/qc4xwAqYMuqz6OpH3qs7dZeoWyiKa
+	 Z4RkHJyTpCcSBboDzppr2NBQT2EJSDwk8tT5LBcq/q7HFnvIVyB2lVvfgbJKRGHp9dw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794820071;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794820078;
 	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
 	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=9jrbGDNJwNT++I6qX/rk6BFsrLGpO+QHoClJrk4T93g=;
-	b=YBMXjv4/Q+9XlLezjZjHP6kOmkGTFiSC/Svr+rzVy175Y7N59rMG5vQgjo+SDymg6ANJ
-	 sLpeqDDnrmZm8424uWu5WtluGFGSVBE4SDjQJv0uX75yivA00bKuZC7c0urKmP9SgQm8T
-	 l5aRyc7px4WWhnAAHcJwqlAE+55wDIlU1LkBjGaCFGZqMFYHK7FZvFYjHkoIC7NSNnLni
-	 D4qx0o+4he/nVQTL60uqhqugmKD8D9s1YuTly9CJIRrQmvTVNsC0K052dgVH7iw/nUH2c
-	 dOiT1Q6ti0eCyYFcHrwf/TTtyDRUiEjELSXTnuzZrqvmJIOZO1ZDrhhW/IlhhCqa84A==
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=lsLBDj//XmwDgRWbN4qAvpmlp/uhNkBnjN9EOtUVsdI=;
+	b=R8o8vT/TVLZ+BdzvYbZWmITpBxRy5k4jrOG6ktIVS552txk4J6MlEcdtcelr6+mQs28+
+	 WGuZG1FIXhEut5MzWYaK9RVb9wn9IuXkBU9SOXVaq11pjFKl4J7+oUq0Ba0lRM5EEK1fS
+	 rVPwXrYcQCCD/rGxLG/fsOe/VT9T7yXisQoDcpRRzF5ZNVYoDYxSYU1Fp7ZwQCDdOMLrC
+	 fBaZSvAAXFXggv67uUM783PqyeyRvnZEn7YqtkeVDNSM4Ime9SXogqNaNv3Dgkng5BK5f
+	 Vw0h6AY1TtuF2zgl39+i+dXD5eM6Eu7VYQ0M2yQaepnAuVhc04bfynZogRJtn6gdm/g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linux.dev;
 	spf=pass smtp.mailfrom=linux.dev;
-	dkim=pass header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=q40nwSKh;
-	arc=none smtp.remote-ip=95.215.58.249
-Received: from mta1.migadu.com (out-249.mta1.migadu.com [95.215.58.249])
+	dkim=pass header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=QXcUhExD;
+	arc=none smtp.remote-ip=91.218.175.101
+Received: from mta0.migadu.com (out-101.mta0.migadu.com [91.218.175.101])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 637B2606A31C
-	for <exfat@lists.linux.dev>; Mon, 16 Nov 2026 09:07:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 637B2606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6B48606A323
+	for <exfat@lists.linux.dev>; Mon, 16 Nov 2026 09:07:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C6B48606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=q40nwSKh
+	dkim=pass (1024-bit key, unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=QXcUhExD
 X-Envelope-To: exfat@lists.linux.dev
-DKIM-Signature: a=rsa-sha256; bh=7xpR20acJXoOG1c4mWrSTawN3rYxNGzptKrHaq6v5no=;
+DKIM-Signature: a=rsa-sha256; bh=aoevLWXHkx8uZctzV0kkFV65ZPmznPhVte547L6bw/0=;
  c=simple/simple; d=linux.dev;
  h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794820068; v=1; x=1795424868;
- b=q40nwSKhlb1rdJw9Zts5b5d4VlVRbuXHZB3HPO1U/RnTX8eih6fn52405m+jtzG9rN7/mBF/
- SBXn9yBX2YhnhIPLdzn12SRtwsg1NSttQ7nF5yRTJqJ8O9JyMNFz5/69smVIVKGM9xLPLTzqWE4
- G9jUiK+/omchTcx3+JgLRIoE=
+ t=1794820076; v=1; x=1795424876;
+ b=QXcUhExDNc+THvFAx58pVfdQWX7rX3aEAneHuZgWcKmb7xk8Qbx1x10AF62UDrWSh2x3woTc
+ W5VNxnOPb5nGb1qk4Uqj1Qro7sJCLHRLvQhqWIN0Tm4UBziA8AcxlWOvWd8b4e44/1fYCSFD0QT
+ RTwuhWzVujGxFpIwUbJ0rMVA=
 X-Envelope-To: exfat@lists.linux.dev
-Received: by smtp.migadu.com with ESMTPS id 349bcc2b47379eb2;
-	Mon, 16 Nov 2026 09:07:48 +0000
-X-Mizu-Trace-ID: 349bcc2b47379eb2
+Received: by smtp.migadu.com with ESMTPS id 0ec6bb0f507063e0;
+	Mon, 16 Nov 2026 09:07:55 +0000
+X-Mizu-Trace-ID: 0ec6bb0f507063e0
 X-Migadu-Flow: FLOW_OUT
 From: Youling Tang <youling.tang@linux.dev>
 To: Namjae Jeon <linkinjeon@kernel.org>,
@@ -54,11 +55,15 @@ Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
 	exfat@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	youling.tang@linux.dev,
-	Youling Tang <tangyouling@kylinos.cn>
-Subject: [PATCH v2 0/2] exfat: fix iomap mapping vs truncate race
-Date: Mon, 16 Nov 2026 17:07:18 +0800
-Message-ID: <20261116090720.3226446-1-youling.tang@linux.dev>
+	Youling Tang <tangyouling@kylinos.cn>,
+	stable@vger.kernel.org,
+	Chi Zhiling <chizhiling@kylinos.cn>
+Subject: [PATCH v2 1/2] exfat: fix iomap mapping when writeback races with truncate
+Date: Mon, 16 Nov 2026 17:07:19 +0800
+Message-ID: <20261116090720.3226446-2-youling.tang@linux.dev>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261116090720.3226446-1-youling.tang@linux.dev>
+References: <20261116090720.3226446-1-youling.tang@linux.dev>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -72,34 +77,52 @@ Content-Transfer-Encoding: 8bit
 
 From: Youling Tang <tangyouling@kylinos.cn>
 
-This series fixes two related problems in the exfat iomap path.
+__exfat_iomap_begin() reads i_size twice: once to detect a range that
+starts beyond EOF, and once to clamp the mapping to EOF.  A concurrent
+truncate can shrink i_size between the two reads, so the clamp can
+produce a negative length.  The unsigned cluster index subtraction then
+underflows, making exfat_map_cluster() believe it has to allocate a huge
+number of clusters and report a hole.
 
-Patch 1 fixes a race between iomap mapping and truncate: i_size was read
-twice, and a shrink in between could make the mapping length negative,
-which underflowed the cluster count.
+Fix this by reading i_size once for both the EOF check and the
+block-aligned clamp.
 
-Patch 2 fixes the handling of the EXFAT_EOF_CLUSTER sentinel.  The iomap
-code used to convert it into a physical address; now exfat_map_cluster()
-maps only the valid prefix when a range straddles the end of the chain,
-and iomap reports the remaining range as a hole, matching the old
-buffer_head code.
+Fixes: 82a81a7352bc ("exfat: add iomap buffered I/O support")
+Cc: stable@vger.kernel.org
+Reviewed-by: Chi Zhiling <chizhiling@kylinos.cn>
+Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
+---
+ fs/exfat/iomap.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-Patch 2 relies on the non-negative length guaranteed by patch 1 for the
-hole mapping.
-
-Changes since v1:
- - Move the valid-prefix clamp into exfat_map_cluster().
-
-v1: https://lore.kernel.org/exfat/20261113080658.2440516-1-youling.tang@linux.dev/T/#t
-
-Youling Tang (2):
-  exfat: fix iomap mapping when writeback races with truncate
-  exfat: don't map EXFAT_EOF_CLUSTER as a physical cluster
-
- fs/exfat/inode.c | 15 ++++++++++++---
- fs/exfat/iomap.c | 21 +++++++++++++++++----
- 2 files changed, 29 insertions(+), 7 deletions(-)
-
+diff --git a/fs/exfat/iomap.c b/fs/exfat/iomap.c
+index 4e6f3ed9dcc8..11823591b3a8 100644
+--- a/fs/exfat/iomap.c
++++ b/fs/exfat/iomap.c
+@@ -51,8 +51,10 @@ static int __exfat_iomap_begin(struct inode *inode, loff_t offset, loff_t length
+ 	bool balloc = false;
+ 
+ 	if (!may_alloc) {
++		loff_t isize = i_size_read(inode);
++
+ 		/* Completely beyond EOF. Treat as hole */
+-		if (i_size_read(inode) <= offset) {
++		if (offset >= isize) {
+ 			iomap->type = IOMAP_HOLE;
+ 			iomap->addr = IOMAP_NULL_ADDR;
+ 			iomap->offset = offset;
+@@ -61,9 +63,8 @@ static int __exfat_iomap_begin(struct inode *inode, loff_t offset, loff_t length
+ 		}
+ 
+ 		/* Clamp length if the requested range goes beyond i_size */
+-		if (offset + length > i_size_read(inode))
+-			length = round_up(i_size_read(inode),
+-					  i_blocksize(inode)) - offset;
++		if (offset + length > isize)
++			length = round_up(isize, i_blocksize(inode)) - offset;
+ 	}
+ 
+ 	num_clusters = exfat_bytes_to_cluster_round_up(sbi,
 -- 
 2.43.0
 
