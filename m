@@ -1,55 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794913623;
-	b=me5tVnd5mFPbVaYj+mMBcamyoDoFht2d8fzxr7C18BNuP53GyDYFIOciQYtnXh6h0Nso
-	 71IJwelsrqf6ire/PrIlShr9nXqjzfO2TZDPr08elb+Mw/c7sIAos9k9dGJhL+5ZnEYG2
-	 32gx2wDVizAy7Io4WNU45FdrhAPPpl9QSBrnmSfMX9dM4lWicnvI/ih69A/F7Jgb39wii
-	 IxNHrAtPZt3bt48AMeurSaV0phh4k4sOqX0UjXQpk71uYGsEtn068ifXdbtWPK7ywJc0O
-	 wefb8fvW4hXB3HbgEiKHri5JZEMdiKi6R/5E6GrqcYe9VEx45hKz9Po9VMgAeG2oUkA==
+	t=1794914162;
+	b=RuHZwn5CY3g8pjgeg5qJbXc7QIAG11LTdrY/jPqJwaXvd0GMjkg9Ege4kF6cNAPhD6gd
+	 mvr3fnqMqr9s47uHhmcKR+zRnJqYWW/MAXvXv5V2ifcf9cDLfdbsX5aVV2ZC2r2r+wgn3
+	 h3IKR38I4L7yygnQ2Skg0l63oshKdjP8724P88rknBnn2ogMacogjq1mpOOOveM7Z2/bQ
+	 TaGb+nSaCvg/0W8oRCjKGRMXj1iOqGXElsizJav3MfAb8AneNF5F1tp/SYyZB1m/orhZd
+	 9K/WEAqRAQ7NTXVE2VNxHqT7wt9ortqVBuqh75suVsxpqMjqIo3HtaStokCoaB5HIfg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794913623;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794914162;
 	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
 	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
 	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=U7eA5LPuk4c/+S8//EtVG4Wjzn1u58voQn2J480A3+A=;
-	b=bj8DuYFnNdtBVDI/yvSz3MIviIo4yx/0WpZlwlY8Sx9zHJMsUKlTcM76XxTx5EFu8G25
-	 FBdVv+PhRspGC6l7qd3AiWDGjpZMG5kuahizrQ+6RAkrtqGsYGCON6F6owdbXc103Zk8I
-	 Cm/kxC2u5tpjLDcE5eC7u0RFvYr6YFVT5Dn8qnMLHcvYMsYQgQrxqPSYc7sGoFjfpYdky
-	 BcBQWSVoFCWJsfBKgmwO9xNIIhNhy0pjWbykbftHGe1fixdFXPMSmwJtFdZ5ZExN5mtP3
-	 AP2bIqMNWlk0x2AYISrtLfVYbYd2re7pyqV1OOqbGQYUTu7Jl8+GK+cJngfQdAWjxEg==
+	bh=bfBKw5Dqe7/QCgl28CEIM4EiUR1wvD/Rw1mMg1W1wSQ=;
+	b=U0wzgF62pE6C/WSnJZJnRnHP2yGMyYyUdM0GNWfggnY6om2zAvI2nL3Qwu9zmxP0hYEZ
+	 1OdkRheMz6r7TrNZyM2TOovg1u/N4T2rBJe4fI90uhA4LPMwo14oK+hlZqlxaD9/EhFpi
+	 2Skw6iC/IzlyhsKUiU46U1D1dwckNkUE1NhhWw8713pvEV7+eUoFtvwvJsZsdfo08slIl
+	 /PUo9r55hBfZ5wjInCvQ6LpBLkLzZvF2a9S15mmExd3SSwYK8PJ/RX7E6eUU1MJsDsH3E
+	 mCwdNJ7yNCdFqAXbz2/osMpL9Sg5fpL7FeSTu3maTsZtDXggWzRxrDXaCH1X4aNNUIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oLKINg1m;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YlkbXgUU;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C150C606A323
-	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:07:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12F26606A32F
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:16:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oLKINg1m
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 415641F000CA
-	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:07:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YlkbXgUU
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDE921F00923
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:16:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794913623;
-	bh=U7eA5LPuk4c/+S8//EtVG4Wjzn1u58voQn2J480A3+A=;
+	s=k20260515; t=1794914161;
+	bh=bfBKw5Dqe7/QCgl28CEIM4EiUR1wvD/Rw1mMg1W1wSQ=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=oLKINg1mpF97FFcv0O9QmFXoZHzZjGZGTrDEVNGAwkyBdhc6BvWinyBX26ymN+nTY
-	 8gNJV9P8rMOaGrSgL9V101D2JIZetMCQ/vF7S5hPRBcoOaSVT43ROIRtTV1IZhRMAy
-	 OdhA5Qx9bRy7t/nX5a0XTre4wdKjMo5rwgH71v3hc7BCElflyO+MhenUDSHAON5JqM
-	 IhWfGtdz/p7v5jtiQi+QNVL+jkQLsnJ3NdyRIup21KyLxWjrLGXKDzqvbW9Nm2wOIA
-	 1Ba9xrnYK/sWDs62UkPnICQdIjBak5eA0UXmjEYnjJ2V6OdfOxh2X/28orYmkctJ92
-	 12LXyhEkZS6Zg==
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c506a231b88so643371166b.3
-        for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 03:07:03 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErEBrtrleRwUg6z0ToJg7LnrgAfBGqBjO0i42Ti2tz42vpLhpRM/6Ky7Qo1TJDITiXzbZteEzg==@lists.linux.dev
-X-Gm-Message-State: APuU4Z+OksTr6ZO0N8vW5IXH47x7hAEkn/19zVtWcTaGNwFJsTOPcwSU
-	PF9s+yD2HrQTtxFLKs737AJDHMe1GnsGdXEGIHsp5JNP/4+56ArKEkicLHCJF9w2tybsyhguCrM
-	SKT2XyPygsEVYZErpKq4AqFhK9A4eKXQ=
-X-Received: by 2002:a17:907:3ea1:b0:c48:ddac:7eb1 with SMTP id
- a640c23a62f3a-c5096843bb9mr1090429366b.45.1794913621836; Tue, 17 Nov 2026
- 03:07:01 -0800 (PST)
+	b=YlkbXgUUQRhyrxgpsJ7Qvml07CSWbgUu8B9MBcv6Rb7T7SWdq8Aq1SQrmZk4EnAhp
+	 TcmeQ1ddK4h+Pu6rPK+bVxj9nTENOoMDtpxr/d7pzn6PP0stPZXXTCeTk/x9BdxWok
+	 By92sXJDNTF9T+YZxDMLuMMgthIA0MZbqwOtlsHUtiyjq7qF12Dwctp5QuSSU1oZ62
+	 3mIGTmaU9HYjlOR/Mw83mXoVkeR8viHwpqjJvVoFTQ+3NlPR3N4Vfq12juTxVu4Kvy
+	 pNy7xoR8tcMopGP9TY5NVo+AKp8eALuZYTDKFnCrTCR9bJzmyt4brkpbKPdrhEUdpo
+	 BZpOOnX6mFrCA==
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c45551fa84eso843263566b.3
+        for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 03:16:01 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErHxbGOAgJuc7NXtrjO9Dc4bCv35j1rYEoE6XpWVpMuXf3zS+Ob1rGZUnTBHW5J8lKv11mxq8g==@lists.linux.dev
+X-Gm-Message-State: APuU4Z//UryPs2qaI/gkLPAYb3DFe+E251tbz1Oep3SAFMgInSFwvsdw
+	xObhYflzaXunD44dedcDCpSBEDcuiA8HAGQCMYrgmAJVkCB7l+25lSzEhfoB8lZDDbaUCpbKujP
+	N7v2Z9ly4WQzsaRk4S/tbna9feHuzRqk=
+X-Received: by 2002:a17:907:3e9e:b0:c40:4848:f7fa with SMTP id
+ a640c23a62f3a-c50965421ebmr1168834366b.44.1794914160376; Tue, 17 Nov 2026
+ 03:16:00 -0800 (PST)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -59,49 +59,42 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261116090720.3226446-1-youling.tang@linux.dev>
-In-Reply-To: <20261116090720.3226446-1-youling.tang@linux.dev>
+References: <20261116085752.3908082-1-chizhiling@163.com> <20261116085752.3908082-2-chizhiling@163.com>
+In-Reply-To: <20261116085752.3908082-2-chizhiling@163.com>
 From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Tue, 17 Nov 2026 20:06:49 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-a4QMscwfciy9A6bup-kzJwHqyKROhKxoaJEvOkUMNeQ@mail.gmail.com>
-X-Gm-Features: AclHuK88_jDt2sIwKx414fgBd8FwyOcClLvEkKx86DnSIZvPL8c7nppncL8vBqA
-Message-ID: <CAKYAXd-a4QMscwfciy9A6bup-kzJwHqyKROhKxoaJEvOkUMNeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] exfat: fix iomap mapping vs truncate race
-To: Youling Tang <youling.tang@linux.dev>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
-	Chi Zhiling <chizhiling@163.com>, exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	Youling Tang <tangyouling@kylinos.cn>
+Date: Tue, 17 Nov 2026 20:15:47 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd_wMVWSp1OZox-dF+G9x3seF1pTe436Y5dhR8LAqjtPdA@mail.gmail.com>
+X-Gm-Features: AclHuK_g651WVLWBvZ3JkfDxJ0juXOGnsif_vLCZ2PuPoqhZPKjOh8aIm_6kPfQ
+Message-ID: <CAKYAXd_wMVWSp1OZox-dF+G9x3seF1pTe436Y5dhR8LAqjtPdA@mail.gmail.com>
+Subject: Re: [PATCH v4 1/5] iomap: export iomap_bio_read_folio_range_sync()
+To: Chi Zhiling <chizhiling@163.com>, Christian Brauner <brauner@kernel.org>
+Cc: linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
+	"Darrick J. Wong" <djwong@kernel.org>, Chi Zhiling <chizhiling@kylinos.cn>, 
+	Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 16, 2026 at 6:07=E2=80=AFPM Youling Tang <youling.tang@linux.de=
-v> wrote:
+On Mon, Nov 16, 2026 at 5:59=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wr=
+ote:
 >
-> From: Youling Tang <tangyouling@kylinos.cn>
+> From: Chi Zhiling <chizhiling@kylinos.cn>
 >
-> This series fixes two related problems in the exfat iomap path.
+> Filesystems that provide a buffered write ->read_folio_range handler
+> need to perform the same synchronous bio read as the default handler.
+> Move the declaration of iomap_bio_read_folio_range_sync() from the
+> internal header to <linux/iomap.h>, together with the !CONFIG_BLOCK
+> fallback, and export it so that modular filesystems can call it.
 >
-> Patch 1 fixes a race between iomap mapping and truncate: i_size was read
-> twice, and a shrink in between could make the mapping length negative,
-> which underflowed the cluster count.
+> exfat will call it from its own ->read_folio_range handler to zero
+> the stale bytes between valid_size and the end of the block under
+> the folio lock during buffered writes.
 >
-> Patch 2 fixes the handling of the EXFAT_EOF_CLUSTER sentinel.  The iomap
-> code used to convert it into a physical address; now exfat_map_cluster()
-> maps only the valid prefix when a range straddles the end of the chain,
-> and iomap reports the remaining range as a hole, matching the old
-> buffer_head code.
->
-> Patch 2 relies on the non-negative length guaranteed by patch 1 for the
-> hole mapping.
->
-> Changes since v1:
->  - Move the valid-prefix clamp into exfat_map_cluster().
->
-> v1: https://lore.kernel.org/exfat/20261113080658.2440516-1-youling.tang@l=
-inux.dev/T/#t
->
-> Youling Tang (2):
->   exfat: fix iomap mapping when writeback races with truncate
->   exfat: don't map EXFAT_EOF_CLUSTER as a physical cluster
-Applied them to #dev.
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Signed-off-by: Chi Zhiling <chizhiling@kylinos.cn>
+Reviewed-by: Namjae Jeon <linkinjeon@kernel.org>
+
+Christian, if you apply this patch(1/5) to the iomap tree, I will
+apply the remaining patches (2-5) into the exFAT tree.
 Thanks!
