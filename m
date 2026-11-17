@@ -1,96 +1,73 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=62.89.141.173
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794941033;
-	b=y7K/Bg6FEJhPNPgqqRf81K2tZz0Lz5PTPe7TuaJrsY4/X5x9IS6xGZu3WMvpddsR9QJL
-	 NUpnVpIkFlfqGZB1B92LqXACbaTWkt/+/inS62GMxm+tI66oqajSzL55DVrEIAVUUXdqu
-	 heiB5n8pZS4IY+AvNwfWrd7rX90X30HX63ff+p8MpYol6vrMKCE/tAH4y+b0C+grOq4Hj
-	 4QU9dIotiU8pXospRoFGOF/sjAXtBYulSF4MgcolGNMg78JpY0+Mld+onOZiyhiNJyqOO
-	 SPK8Zpz3D9s+4y4bf1r9c3labh+dxhJ01jvOPQSIkBDnqicaRzcUZD/IRFRYX3gKe0A==
+	t=1794952926;
+	b=V2UUi8zUcwixyyfm2u9NIsi34U9FKpdpC640Bz4uEUZa2NX8hZzH5u0JzjNnQtqEnY/M
+	 VbBhOtAx2itb2H+mQQ1x1R07uK9wrYRTezCyuI5oXiuyWtHuk6o5kYQLVn9mopmsrhF0a
+	 emzVuztX6OhVkUCgKiz56rCWCnD7HIzxMj8ZeotQbgsR9grrCybOpPScbfGZjFZelUYOC
+	 9+tAqE+Huw2PIeNpl5jnuu2vQ3UUcz59DvGBIr3t9/vbaf3SOWtrsoHESI8hdIBwV/2L8
+	 0cE1ANW+0YG+rjkat2jcJVnEjn/X18N1Jze092yTEX4oDv3/F3Szgik70BCNE7mv/PA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794941033;
-	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 In-Reply-To:Sender;
-	bh=4JVoFLBJ14XWuNh6XsjpGCSq0P7wm0pRAB3PoCD11nU=;
-	b=cU1yCEkiZslIXE56guOvWzi16I4/dPbOZloZ/d/O1VdB4v1ISR3ROv5fwyB4OkByag0j
-	 17ceEyZU+KYEnAwK8a9gTZvokjvJ61fIS+IPHQgsU2KIUKdZGMh2bH/CsVEZa7560NHfn
-	 RzPYf8WsctwxcfIqXM6QyTDTwd+jS4UgO13fQmkSSdhaC22u/KQaMDDcvmBnxr68mFnDs
-	 wAMMVsDvz6rTh6YF23hRwHTtxvz27ic/G0mM9pVAT6YQuDaBikWwJN3YlkMPMAFQbYTKX
-	 pTk5lC+6Th/5WDJcCMyBC1uvHXZ+dzulIoQIuPmc/KfmCJmh7zkDYK/OCdJp44oQVpQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794952926;
+	h=Received:DKIM-Signature:Received:Received:X-ME-Sender:
+	 X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
+	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
+	 References:Subject:Content-Type:Content-Transfer-Encoding;
+	bh=EsQiVnWdklcglRbIqoscQFF5X7p4jGIU+Y0OOx+78ps=;
+	b=wYmoywYVa9edac6lpGIXzxI9a0XVx3jBSVXQ/VkkY4Ar5jZbBFakWctb0TkLb7etLkBD
+	 dbQC27m2p/mcWM0A5DxJmu0zod6eaFO3PcqLiAd/X4CzprAj6dA8yb1vfRIjoF6vpNjXB
+	 dShxsGbyvz5HKV3f00YLnZFw9+YgCQ8AXvrYHxsazFUYqo9HKbFY51Mt14nTCOr+NTWhg
+	 iuGLIKp9jXxdwBuvJRZJbG01UaRq63gson3/KfCBixQCFf9cPMeyrwuQP2aPH3L21KVBm
+	 AMrD5G5D2o7MnAKjfQGZSM2FJK4duj1qKmQnACfNsyQpBzXuwgZIiqAF6BvnkWMqWaQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=zeniv.linux.org.uk;
-	spf=none smtp.mailfrom=ftp.linux.org.uk;
-	dkim=pass header.d=linux.org.uk header.i=@linux.org.uk header.a=rsa-sha256 header.s=zeniv-20220401 header.b=AWxjau5N;
-	arc=none smtp.remote-ip=62.89.141.173
-Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [62.89.141.173])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eRKKuDOC;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C565606A31C;
-	Tue, 17 Nov 2026 18:43:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5C565606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zeniv.linux.org.uk
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=ftp.linux.org.uk
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 742A1606A31C;
+	Tue, 17 Nov 2026 22:02:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linux.org.uk header.i=@linux.org.uk header.a=rsa-sha256 header.s=zeniv-20220401 header.b=AWxjau5N
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=4JVoFLBJ14XWuNh6XsjpGCSq0P7wm0pRAB3PoCD11nU=; b=AWxjau5NBnr1l/1QDGXVWlGoWa
-	Ww+3Cp9gDzrunQltGul8fKaM9mZ9YE0cBww0Y5QvNN3Io5vqYAUhHNUYnDxVVW0fKIJPL4fsPq2MI
-	EeptawwSLibpDC3BQ0bYPrCp2RNIC9Nfp3VR3VyYzpc7joMQjLfADGBCsNpmUKqO3/GRgM9wJgh2s
-	+yS9Rwh4OLTD4dZqCkSP4OsbTDklsJjnv0SqzGZtaZ91OcoSNEIsy1d5ph8FDJY8MvM5Y1HJppoeD
-	YqX+V+H3STsOY/NEAfzvzN7psGQ6T4MrVmRbXOC5WUhBvfAzysA4dcQIySD9utIVLFrpKyfwmLPW2
-	17UA+rNQ==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.100.1 #2 (Red Hat Linux))
-	id 1xTO9e-00000002Td0-1517;
-	Tue, 17 Nov 2026 18:43:42 +0000
-Date: Tue, 17 Nov 2026 18:43:42 +0000
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Cai Xinchen <caixinchen1@huawei.com>
-Cc: mic@digikod.net, gnoack@google.com, paul@paul-moore.com,
-	brauner@kernel.org, jack@suse.cz, amir73il@gmail.com,
-	andrii@kernel.org, apparmor@lists.ubuntu.com, ast@kernel.org,
-	axboe@kernel.dk, bpf@vger.kernel.org, casey@schaufler-ca.com,
-	cel@kernel.org, cem@kernel.org, chenxiaosong@chenxiaosong.com,
-	code@tyhicks.com, corbet@lwn.net, Dai.Ngo@oracle.com,
-	dakr@kernel.org, daniel@iogearbox.net, dhowells@redhat.com,
-	dlemoal@kernel.org, dmitry.kasatkin@gmail.com,
-	driver-core@lists.linux.dev, dsterba@suse.com,
-	ecryptfs@vger.kernel.org, eddyz87@gmail.com, emil@etsalapatis.com,
-	eric.snowberg@oracle.com, exfat@lists.linux.dev,
-	georgia.garcia@canonical.com, gregkh@linuxfoundation.org,
-	hch@lst.de, hirofumi@mail.parknet.co.jp, hyc.lee@gmail.com,
-	ihor.solodrai@linux.dev, jlayton@kernel.org, jmorris@namei.org,
-	johan@kernel.org, john.fastabend@gmail.com,
-	john.johansen@canonical.com, jolsa@kernel.org, kpsingh@kernel.org,
-	linkinjeon@kernel.org, linux-api@vger.kernel.org,
-	linux-block@vger.kernel.org, linux-btrfs@vger.kernel.org,
-	linux-cifs@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-integrity@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-nfs@vger.kernel.org, linux-security-module@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, linux-unionfs@vger.kernel.org,
-	linux-xfs@vger.kernel.org, liubaolin12138@163.com,
-	martin.lau@linux.dev, mason@kernel.org,
-	mathieu.desnoyers@efficios.com, matt@bobrowski.net,
-	memxor@gmail.com, mhiramat@kernel.org, miklos@szeredi.hu,
-	neil@brown.name, netfs@lists.linux.dev, ntfs@lists.linux.dev,
-	okorniev@redhat.com, omosnacek@gmail.com,
-	penguin-kernel@i-love.sakura.ne.jp, rafael@kernel.org,
-	rdunlap@infradead.org, roberto.sassu@huawei.com,
-	rostedt@goodmis.org, selinux@vger.kernel.org,
-	senozhatsky@chromium.org, serge@hallyn.com, sj1557.seo@samsung.com,
-	skhan@linuxfoundation.org, song@kernel.org,
-	stephen.smalley.work@gmail.com, takedakn@nttdata.co.jp,
-	tom@talpey.com, yonghong.song@linux.dev, yuezhang.mo@sony.com,
-	zohar@linux.ibm.com, utilityemal77@gmail.com, lujialin4@huawei.com
-Subject: Re: [PATCH -next -v4 02/17] LSM: pass struct path to the
- inode_setsecctx hook
-Message-ID: <20261117184342.GR989762@ZenIV>
-References: <20261117150542.1169451-1-caixinchen1@huawei.com>
- <20261117150542.1169451-3-caixinchen1@huawei.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eRKKuDOC
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 184F41F000CB;
+	Tue, 17 Nov 2026 22:02:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794952926;
+	bh=EsQiVnWdklcglRbIqoscQFF5X7p4jGIU+Y0OOx+78ps=;
+	h=Date:From:To:Cc:In-Reply-To:References:Subject;
+	b=eRKKuDOCG4lZI0ZtmAAIpexh5saMlRjXYGgquqnGJHw5xx0hKiSTtEpRMTU0UnEZx
+	 IcVAie3qbTbLtwat8lgNDCP6zhB7QCTVdVvmIBlqP9fuJUX+csyhPtr5Pct2KMF+dr
+	 sKEIWoHciSIaSRbPXtRwsvShsS664//k6GK3BjshzeV1onoC5SB/aS7wLmCyLKJ9K8
+	 m5LAARW1i0RM6erGJTXwnJLIbMj19kpQzxaJV5KdnARcC1GmD4YHak/fh/wBY2ukPa
+	 yhfRyDN1zjqulKDzMqoKKSTFXathlkGd8lIzu3DnyeBMJBeCEbjKT0GFxDySnJK8UV
+	 YAtD4XE3Ry5Ag==
+Received: from phl-compute-10.internal (phl-compute-10.internal [10.202.2.50])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 50504F40066;
+	Tue, 17 Nov 2026 17:02:04 -0500 (EST)
+Received: from phl-imap-15 ([10.202.2.104])
+  by phl-compute-10.internal (MEProxy); Tue, 17 Nov 2026 17:02:04 -0500
+X-ME-Sender: <xms:3M78aq1jfwU6kkpHJYfkamLb7k26diePkGr8HYaND-ZrMBjnohMrzQ>
+    <xme:3M78an6y1Y_GR0u1TwtOXDhTJSDOYemr1m9Hmyh5XEDGdsDAx71bEoAOEShnFinjM
+    69EF-AeO1bjSPJvAvqEXXhgqHUGSfFOCO013H2g38lm6F7OfmUkmU4v>
+X-ME-Proxy-Cause: dmFkZTEFWk4jFRq2Ypvh/OGGpN3RYf9yAIcrjwoio2l5SxvidVJI3djILaxgpL7LyuOL7E
+    lli1okH5QEaMWzCUMyMt49RTjdtkb7p5j8SnJ7vko/DXCHPESNoXMFqc8eAYVU7BGtrfNE
+    O8Wkt/X+eQscT/cb/kG8LbWg6SuLpK+A11UAMB+QAdy5UWJZaV2trmsj/oQjP/6lPcVVP0
+    p+nLQemqrSyF8f9utiFf/d15PjZvnAYnKe5plmCnfbGuYaAIvR4RuHbeaDv3ZwgaqwEoTc
+    O56V45wyKdQUyvAqx58jhwnrJqlfVvWKvX0EJKReKmJux7PwleYyLgjD7P44v937Li49Qw
+    3PfPZt4Tz5Ch4ICbtemCoWAFkhd9LpRHHoQMM6xH+uQv2Cf4FlSCV6BNrPskaFpbE2Gt1a
+    ss+P7AhsTRHraYWbE5wed0xL9iCm70tSnIKB//n/ZBAuWR+D7Nfc9NMkA+fe4C2g5UFBLM
+    HmApoPfgE08+h48RscbkJ1zXPfd8wMImQd71BRZR8wJOu7FYt+A09ttWsoXwQ9M7voSEdh
+    iRB9mHPKZYTCf5j5tYY9XJfVHu4mQQzGd7r79LEO7RpJ1QmejEfUCnIUQqmekcp8PP/D1n
+    CB+FZEcYdo/YsJxNiNswgtVIPlyCf6Ab0g19TFApN5j+o5xqL9Y5EgaGlC7g
+X-ME-Proxy: <xmx:3M78anU0MJ35zJ3NF5t0f4ScxkcsT3P7nBy3grYqehD-Bs0aT3fDkg>
+    <xmx:3M78ai64XGO4B10f_mx5toxFs_hI5crqdE1ZqJkyW4lQCVpizqa6Sw>
+    <xmx:3M78avOt7UDMa5ZXcad-yrMZ1xx7rDvSS6ajIf1O1pvu-h3fvDtK-Q>
+    <xmx:3M78algMt1NSKEj31TOL76bmFCAw6QHR4dwEMMeuS0i8PnqzpbVH4Q>
+    <xmx:3M78alib9v_mERwNSmE9KLKWOVL58rpYH24tW96EQor0v_frdN4CGY3f>
+Feedback-ID: ifa6e4810:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+	id 219C2780077; Tue, 17 Nov 2026 17:02:04 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -100,38 +77,91 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261117150542.1169451-3-caixinchen1@huawei.com>
-Sender: Al Viro <viro@ftp.linux.org.uk>
+X-ThreadId: AgKvhXN-CN1w
+Date: Tue, 17 Nov 2026 17:01:43 -0500
+From: "Chuck Lever" <cel@kernel.org>
+To: koraynilay <koray.fra@gmail.com>, "David Sterba" <dsterba@suse.com>,
+ "Namjae Jeon" <linkinjeon@kernel.org>,
+ "Sungjong Seo" <sj1557.seo@samsung.com>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>,
+ "Christian Brauner" <brauner@kernel.org>,
+ "Trond Myklebust" <trondmy@kernel.org>, "Anna Schumaker" <anna@kernel.org>,
+ "Jeff Layton" <jlayton@kernel.org>,
+ "Konstantin Komarov" <almaz.alexandrovich@paragon-software.com>,
+ "Paulo Alcantara" <pc@manguebit.org>
+Cc: "Chris Mason" <mason@kernel.org>, "Yuezhang Mo" <yuezhang.mo@sony.com>,
+ "Jan Kara" <jack@suse.cz>, NeilBrown <neil@brown.name>,
+ "Olga Kornievskaia" <okorniev@redhat.com>, "Dai Ngo" <Dai.Ngo@oracle.com>,
+ "Tom Talpey" <tom@talpey.com>, "Ronnie Sahlberg" <ronniesahlberg@gmail.com>,
+ "Shyam Prasad N" <sprasad@microsoft.com>,
+ "Bharath SM" <bharathsm@microsoft.com>,
+ "Sergey Senozhatsky" <senozhatsky@chromium.org>,
+ ChenXiaoSong <chenxiaosong@chenxiaosong.com>,
+ "Darrick J. Wong" <djwong@kernel.org>,
+ "Sean Smith" <defendthedisabled@gmail.com>,
+ "Andrey Albershteyn" <aalbersh@kernel.org>,
+ "Pedro Falcato" <pfalcato@suse.de>, "Amir Goldstein" <amir73il@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, linux-btrfs@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ exfat@lists.linux.dev, ntfs3@lists.linux.dev, linux-cifs@vger.kernel.org,
+ linux-nfs@vger.kernel.org, linux-api@vger.kernel.org
+Message-Id: <f297d9ea-ebd7-47f4-ab7b-de5c45980000@app.fastmail.com>
+In-Reply-To: <20261115180343.576773-8-koray.fra@gmail.com>
+References: <20261115180343.576773-1-koray.fra@gmail.com>
+ <20261115180343.576773-8-koray.fra@gmail.com>
+Subject: Re: [RFC PATCH v4 07/10] nfsd: add provenance time (ptime) via
+ FATTR4_TIME_CREATE
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 17, 2026 at 11:05:27PM +0800, Cai Xinchen wrote:
-> The inode_setsecctx hook and its security_inode_setsecctx() caller in
-> fs/nfsd operate on a dentry even though both have a struct path
-> available.  Pass a const struct path so that the coming conversion of the
-> xattr helpers can be reflected in the implementations; for now SELinux
-> and Smack keep passing path->dentry and &nop_mnt_idmap to
-> __vfs_setxattr_locked().
-> 
-> Also document in lsm_hook_defs.h what a struct path argument may be used
-> for: it can be passed to VFS helpers taking a struct path, but nothing is
-> guaranteed about path->mnt.
 
-No, with the side of Hell, No.
 
-> + * Hooks that take a struct path argument: the VFS only sanctions passing
-> + * the path to VFS helpers that take a struct path (e.g. notify_change());
-> + * it makes no guarantees with regard to path->mnt, whose layout and
-> + * implementation details are subject to change.  Implementations must
-> + * not rely on its properties.
+On Sun, Nov 15, 2026, at 1:03 PM, koraynilay wrote:
+> Implement provenance time (ptime) in NFSD, as introduced in a
+> previous commit ("vfs: add provenance time (ptime)").
+>
+> Map ptime to FATTR4_TIME_CREATE, allowing clients to set it across
+> CREATE, OPEN and SETATTR compounds.
+>
+> If the underlying filesystem supports it, use __vfs_fileattr_set_locked()
+> to set it, returning -EOPNOTSUPP in case it's not supported (i.e. when
+> __vfs_fileattr_set_locked() returns -ENOIOCTLCMD).
+>
+> When querying FATTR4_TIME_CREATE, request both STATX_PTIME and
+> STATX_BTIME, preferring ptime over btime if available, and advertise
+> FATTR4_TIME_CREATE support if either ptime or btime is available.
+>
+> Assisted-by: Gemini:3.8-flash-high antigravity-cli-1.5.7
+> Signed-off-by: koraynilay <koray.fra@gmail.com>
 
-NAKed-by: Al Viro <viro@zeniv.linux.org.uk>
+> @@ -3646,7 +3649,14 @@ static __be32 
+> nfsd4_encode_fattr4_time_access(struct xdr_stream *xdr,
+>  static __be32 nfsd4_encode_fattr4_time_create(struct xdr_stream *xdr,
+>  					      const struct nfsd4_fattr_args *args)
+>  {
+> -	return nfsd4_encode_nfstime4(xdr, &args->stat.btime);
+> +	const struct timespec64 *ts;
+> +
+> +	if (args->stat.result_mask & STATX_PTIME)
+> +		ts = &args->stat.ptime;
+> +	else
+> +		ts = &args->stat.btime;
+> +
+> +	return nfsd4_encode_nfstime4(xdr, ts);
+>  }
 
-If that kind of stuff actually does get passed to any existing hooks, we need
-to fix that ASAP.  If not, consider that a blanket NAK on any patch series
-that would introduce such.
+I have trouble with this approach.
 
-We are not going there.  At all.  "Must not rely on its properties" ==
-"must make sure that no existing functions with struct path * arguments
-ever have such malformed instances passed to them".  Which is not going
-to be feasible to enforce.  And yes, that very much includes any VFS helpers.
+We've already established that, for the Linux in-kernel NFS server
+implementation, FATTR4_TIME_CREATE reports a file's birth time and
+does not permit NFS clients to modify that.
+
+After this patch is applied, the server reports the ptime instead
+of the btime on some filesystems but not others.
+
+Essentially this changes the semantics of existing files that have
+a btime set -- technically that's a regression.
+
+
+-- 
+Chuck Lever (Come to NFS bake-a-thon! https://nfsv4bat.org)
