@@ -1,64 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.243
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794895285;
-	b=j4qHHO+YlZQfCmo3a7bGFEbP46rV7IrdKBaWdkC0RuTEnEoTki5EWa50DI5hdgrJQw9U
-	 2hPygMuPSBJAwSmnlMDy4Y4FqdQh970H6sp4CoVCKB9WyRpcbZAedW3f2KFqhrpV661iP
-	 W1VV+is7rrWaTGO9kbrEXVSKoL/enk5njsyS7DjCiMIMlx6fVCRB0R+VeQcDoy3RhuVKK
-	 +o8zNasc7PhenEXsIXyWBriKBc6h/fydEJBZ3AH61XdALw6qN5+umaJO2ODGP6dd2pl/Y
-	 3xOq8kACkg0GDS0AARyctsOQorjQNTR57bPfH/zhwwg/VaqqjJvyo2lraWwDZgHjyew==
+	t=1794913623;
+	b=me5tVnd5mFPbVaYj+mMBcamyoDoFht2d8fzxr7C18BNuP53GyDYFIOciQYtnXh6h0Nso
+	 71IJwelsrqf6ire/PrIlShr9nXqjzfO2TZDPr08elb+Mw/c7sIAos9k9dGJhL+5ZnEYG2
+	 32gx2wDVizAy7Io4WNU45FdrhAPPpl9QSBrnmSfMX9dM4lWicnvI/ih69A/F7Jgb39wii
+	 IxNHrAtPZt3bt48AMeurSaV0phh4k4sOqX0UjXQpk71uYGsEtn068ifXdbtWPK7ywJc0O
+	 wefb8fvW4hXB3HbgEiKHri5JZEMdiKi6R/5E6GrqcYe9VEx45hKz9Po9VMgAeG2oUkA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794895285;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=jpD36F91Y9IfdiFgh+/Lwnl5mIj+NvYpPUDqUPGnUgY=;
-	b=be5BLYa4bAZonSHkis9uAFPPKY6lONjUbrdu2ZT9R8YI8YtgaCt8UVlkqBpuTzwtcuDF
-	 /DEDoJmvObXmdG7Yr54SgZO8e/DrJrcL9ockD/QvXIAeLuTd1Djglisv55eNoL6EGLutz
-	 dFHxLJuvBdRelwcx11Sd7IrDVwjzhksQuWwQoKoGmfiZMDDzdJLt6b1VyCx86GkvyOeEY
-	 ViSW3mqc6IJx/DK2f6Z6/LcwRPfYtI0sfsE0kuBLqOFW33MLjf67EZP0pM4QdrhzLjhv1
-	 4QPlf+fEqJcTam7GkRfv9Q+qR2FYXpnWb1vsCcvJusrw5VRmygCnJEoA+6kyLIfL22A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794913623;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=U7eA5LPuk4c/+S8//EtVG4Wjzn1u58voQn2J480A3+A=;
+	b=bj8DuYFnNdtBVDI/yvSz3MIviIo4yx/0WpZlwlY8Sx9zHJMsUKlTcM76XxTx5EFu8G25
+	 FBdVv+PhRspGC6l7qd3AiWDGjpZMG5kuahizrQ+6RAkrtqGsYGCON6F6owdbXc103Zk8I
+	 Cm/kxC2u5tpjLDcE5eC7u0RFvYr6YFVT5Dn8qnMLHcvYMsYQgQrxqPSYc7sGoFjfpYdky
+	 BcBQWSVoFCWJsfBKgmwO9xNIIhNhy0pjWbykbftHGe1fixdFXPMSmwJtFdZ5ZExN5mtP3
+	 AP2bIqMNWlk0x2AYISrtLfVYbYd2re7pyqV1OOqbGQYUTu7Jl8+GK+cJngfQdAWjxEg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.dev;
-	spf=pass smtp.mailfrom=linux.dev;
-	dkim=pass header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=PrbgTbDz;
-	arc=none smtp.remote-ip=91.218.175.243
-Received: from mta0.migadu.com (out-243.mta0.migadu.com [91.218.175.243])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oLKINg1m;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36B12606A31C
-	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 06:01:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 36B12606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C150C606A323
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:07:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=PrbgTbDz
-X-Envelope-To: exfat@lists.linux.dev
-DKIM-Signature: a=rsa-sha256; bh=82NUFJ1X4NDA1qOTuvJUv8iUvdArPHmXkqAjokjhNOg=;
- c=simple/simple; d=linux.dev;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794895282; v=1; x=1795500082;
- b=PrbgTbDzz0ufL7DVXUrrCXunjVFpS/q23xOHAbuItacnAUkyycKj4FIbe6/e/VR0/V8MHE/z
- 1eKUeh/xeI1LkX+tEckIhz3pzky/ZJhZybY+XQ5X2sDr45as/cOXXX0PMYRN2IMB4CCSDdXWwLF
- pa0WGbAQ8iw2kk7WWQwOZGIM=
-X-Envelope-To: exfat@lists.linux.dev
-Received: by smtp.migadu.com with ESMTPS id 62e7e980c127810b;
-	Tue, 17 Nov 2026 06:01:22 +0000
-X-Mizu-Trace-ID: 62e7e980c127810b
-X-Migadu-Flow: FLOW_OUT
-From: Youling Tang <youling.tang@linux.dev>
-To: Namjae Jeon <linkinjeon@kernel.org>,
-	Sungjong Seo <sj1557.seo@samsung.com>
-Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
-	Chi Zhiling <chizhiling@163.com>,
-	exfat@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	youling.tang@linux.dev,
-	Youling Tang <tangyouling@kylinos.cn>
-Subject: [PATCH] exfat: hold s_lock for cluster-chain updates in exfat_cont_expand()
-Date: Tue, 17 Nov 2026 14:00:55 +0800
-Message-ID: <20261117060055.341277-1-youling.tang@linux.dev>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oLKINg1m
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 415641F000CA
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 11:07:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794913623;
+	bh=U7eA5LPuk4c/+S8//EtVG4Wjzn1u58voQn2J480A3+A=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=oLKINg1mpF97FFcv0O9QmFXoZHzZjGZGTrDEVNGAwkyBdhc6BvWinyBX26ymN+nTY
+	 8gNJV9P8rMOaGrSgL9V101D2JIZetMCQ/vF7S5hPRBcoOaSVT43ROIRtTV1IZhRMAy
+	 OdhA5Qx9bRy7t/nX5a0XTre4wdKjMo5rwgH71v3hc7BCElflyO+MhenUDSHAON5JqM
+	 IhWfGtdz/p7v5jtiQi+QNVL+jkQLsnJ3NdyRIup21KyLxWjrLGXKDzqvbW9Nm2wOIA
+	 1Ba9xrnYK/sWDs62UkPnICQdIjBak5eA0UXmjEYnjJ2V6OdfOxh2X/28orYmkctJ92
+	 12LXyhEkZS6Zg==
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c506a231b88so643371166b.3
+        for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 03:07:03 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErEBrtrleRwUg6z0ToJg7LnrgAfBGqBjO0i42Ti2tz42vpLhpRM/6Ky7Qo1TJDITiXzbZteEzg==@lists.linux.dev
+X-Gm-Message-State: APuU4Z+OksTr6ZO0N8vW5IXH47x7hAEkn/19zVtWcTaGNwFJsTOPcwSU
+	PF9s+yD2HrQTtxFLKs737AJDHMe1GnsGdXEGIHsp5JNP/4+56ArKEkicLHCJF9w2tybsyhguCrM
+	SKT2XyPygsEVYZErpKq4AqFhK9A4eKXQ=
+X-Received: by 2002:a17:907:3ea1:b0:c48:ddac:7eb1 with SMTP id
+ a640c23a62f3a-c5096843bb9mr1090429366b.45.1794913621836; Tue, 17 Nov 2026
+ 03:07:01 -0800 (PST)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -68,93 +59,49 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261116090720.3226446-1-youling.tang@linux.dev>
+In-Reply-To: <20261116090720.3226446-1-youling.tang@linux.dev>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Tue, 17 Nov 2026 20:06:49 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-a4QMscwfciy9A6bup-kzJwHqyKROhKxoaJEvOkUMNeQ@mail.gmail.com>
+X-Gm-Features: AclHuK88_jDt2sIwKx414fgBd8FwyOcClLvEkKx86DnSIZvPL8c7nppncL8vBqA
+Message-ID: <CAKYAXd-a4QMscwfciy9A6bup-kzJwHqyKROhKxoaJEvOkUMNeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] exfat: fix iomap mapping vs truncate race
+To: Youling Tang <youling.tang@linux.dev>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
+	Chi Zhiling <chizhiling@163.com>, exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	Youling Tang <tangyouling@kylinos.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Youling Tang <tangyouling@kylinos.cn>
-
-exfat_cont_expand() allocates clusters, appends them to the FAT chain
-and updates ei->start_clu, ei->flags and i_blocks without holding
-sbi->s_lock.  Readers such as writeback call exfat_map_cluster() with
-s_lock held but without inode_lock, so they are not serialized against
-cont_expand() and can observe the chain metadata mid-update.
-
-Hold s_lock around the cluster allocation, chain append and i_blocks
-update.  i_size is published via exfat_pagecache_isize_extended(), which
-takes the straddling folio lock; since writeback takes folio lock ->
-s_lock, this must happen after s_lock is released to avoid inverting the
-lock order.  i_blocks is therefore updated first, under s_lock, which
-also ensures a reader never sees i_size beyond the allocated chain.
-
-Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
----
- fs/exfat/file.c | 19 ++++++++++++++-----
- 1 file changed, 14 insertions(+), 5 deletions(-)
-
-diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index 435bbef288b8..de335c278caf 100644
---- a/fs/exfat/file.c
-+++ b/fs/exfat/file.c
-@@ -95,6 +95,7 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	if (ret)
- 		return ret;
- 
-+	mutex_lock(&sbi->s_lock);
- 	num_clusters = exfat_bytes_to_cluster(sbi, exfat_ondisk_size(inode));
- 	/* integer overflow is already checked in inode_newsize_ok(). */
- 	new_num_clusters = exfat_bytes_to_cluster_round_up(sbi, size);
-@@ -106,7 +107,7 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 		exfat_chain_set(&clu, ei->start_clu, num_clusters, ei->flags);
- 		ret = exfat_find_last_cluster(sb, &clu, &last_clu);
- 		if (ret)
--			return ret;
-+			goto unlock;
- 
- 		clu.dir = last_clu + 1;
- 	} else {
-@@ -120,7 +121,7 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	ret = exfat_alloc_cluster(inode, new_num_clusters - num_clusters,
- 			&clu, inode_needs_sync(inode), false);
- 	if (ret)
--		return ret;
-+		goto unlock;
- 
- 	/* Append new clusters to chain */
- 	if (num_clusters) {
-@@ -137,15 +138,20 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 	ei->flags = clu.flags;
- 
- out:
-+	/* Update i_blocks before i_size so mappings never exceed the chain. */
-+	inode->i_blocks = round_up(size, sbi->cluster_size) >> 9;
- 	inode_set_mtime_to_ts(inode, inode_set_ctime_current(inode));
-+	mutex_unlock(&sbi->s_lock);
-+
- 	/*
- 	 * When extending file size, call exfat_pagecache_isize_extended()
- 	 * to update i_size and ensure the straddling folio is properly
- 	 * marked RO so page_mkwrite() is called and post-EOF area is zeroed.
-+	 *
-+	 * It takes the folio lock; call it without s_lock (writeback uses
-+	 * folio lock -> s_lock).
- 	 */
- 	exfat_pagecache_isize_extended(inode, oldsize, size);
--
--	inode->i_blocks = round_up(size, sbi->cluster_size) >> 9;
- 	mark_inode_dirty(inode);
- 
- 	if (IS_SYNC(inode))
-@@ -155,7 +161,10 @@ static int exfat_cont_expand(struct inode *inode, loff_t size)
- 
- free_clu:
- 	exfat_free_cluster(inode, &clu);
--	return -EIO;
-+	ret = -EIO;
-+unlock:
-+	mutex_unlock(&sbi->s_lock);
-+	return ret;
- }
- 
- /*
--- 
-2.43.0
-
+On Mon, Nov 16, 2026 at 6:07=E2=80=AFPM Youling Tang <youling.tang@linux.de=
+v> wrote:
+>
+> From: Youling Tang <tangyouling@kylinos.cn>
+>
+> This series fixes two related problems in the exfat iomap path.
+>
+> Patch 1 fixes a race between iomap mapping and truncate: i_size was read
+> twice, and a shrink in between could make the mapping length negative,
+> which underflowed the cluster count.
+>
+> Patch 2 fixes the handling of the EXFAT_EOF_CLUSTER sentinel.  The iomap
+> code used to convert it into a physical address; now exfat_map_cluster()
+> maps only the valid prefix when a range straddles the end of the chain,
+> and iomap reports the remaining range as a hole, matching the old
+> buffer_head code.
+>
+> Patch 2 relies on the non-negative length guaranteed by patch 1 for the
+> hole mapping.
+>
+> Changes since v1:
+>  - Move the valid-prefix clamp into exfat_map_cluster().
+>
+> v1: https://lore.kernel.org/exfat/20261113080658.2440516-1-youling.tang@l=
+inux.dev/T/#t
+>
+> Youling Tang (2):
+>   exfat: fix iomap mapping when writeback races with truncate
+>   exfat: don't map EXFAT_EOF_CLUSTER as a physical cluster
+Applied them to #dev.
+Thanks!
