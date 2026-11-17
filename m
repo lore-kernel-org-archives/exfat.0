@@ -1,73 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794952926;
-	b=V2UUi8zUcwixyyfm2u9NIsi34U9FKpdpC640Bz4uEUZa2NX8hZzH5u0JzjNnQtqEnY/M
-	 VbBhOtAx2itb2H+mQQ1x1R07uK9wrYRTezCyuI5oXiuyWtHuk6o5kYQLVn9mopmsrhF0a
-	 emzVuztX6OhVkUCgKiz56rCWCnD7HIzxMj8ZeotQbgsR9grrCybOpPScbfGZjFZelUYOC
-	 9+tAqE+Huw2PIeNpl5jnuu2vQ3UUcz59DvGBIr3t9/vbaf3SOWtrsoHESI8hdIBwV/2L8
-	 0cE1ANW+0YG+rjkat2jcJVnEjn/X18N1Jze092yTEX4oDv3/F3Szgik70BCNE7mv/PA==
+	t=1794954596;
+	b=DQqlKl6bPdzXSCQjcDjNWGBPmX2jwk/7Z5n6ewQ3j2YUBxtgzASxtCoQ5C8a0ipodROA
+	 1GWg2Bd/HiFJSODJ3G14H99/aeoSA7XFgxQBYW2tXPCcP2YFwn0BqRGuvB5nTqAKpfSke
+	 ZIYNHcvIW+cfYgtJX1Mzj1SQQzpe+VrzAvrAozKO4BnZm0T97kDvNyR6gjaPWGBlm6AgU
+	 dLyOm45szjsY+L0u4YxYDawNmV7Y8VCk2u7LBtghGHeOowbQcA6S08pQ1UhRc8UsRsxyT
+	 qDYzrUjwMx1el8ivcm/m1jkLAJluzpZ/xJHbyIMQy28LV9eJZ3fbnn/i76qazhF4xYQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794952926;
-	h=Received:DKIM-Signature:Received:Received:X-ME-Sender:
-	 X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
-	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
-	 References:Subject:Content-Type:Content-Transfer-Encoding;
-	bh=EsQiVnWdklcglRbIqoscQFF5X7p4jGIU+Y0OOx+78ps=;
-	b=wYmoywYVa9edac6lpGIXzxI9a0XVx3jBSVXQ/VkkY4Ar5jZbBFakWctb0TkLb7etLkBD
-	 dbQC27m2p/mcWM0A5DxJmu0zod6eaFO3PcqLiAd/X4CzprAj6dA8yb1vfRIjoF6vpNjXB
-	 dShxsGbyvz5HKV3f00YLnZFw9+YgCQ8AXvrYHxsazFUYqo9HKbFY51Mt14nTCOr+NTWhg
-	 iuGLIKp9jXxdwBuvJRZJbG01UaRq63gson3/KfCBixQCFf9cPMeyrwuQP2aPH3L21KVBm
-	 AMrD5G5D2o7MnAKjfQGZSM2FJK4duj1qKmQnACfNsyQpBzXuwgZIiqAF6BvnkWMqWaQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794954596;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=QgCr0DpcBXV214M0n10zOgwhTeGtnk5rboT1ob7NYxc=;
+	b=pJntFwGJUiaPlakxnzimCqRZQdyyptilMkljezBp1ZqZsz4hqa6D/JmWrcqaPgap+9pf
+	 6ETAPfZtYRMZV8Uqw8Dhdhcqx6XXSwjxl5cROQdm9zC8l7qZprb+zIdLPv5AaD6qWR3NW
+	 Jwu/Oq7yJ+w+/DekZkxbj7kD/q9Exjf6QLYbWY7CFHx4sL5xyg6SrhtnUHNs0E8wYcorj
+	 LBKc6SQmPOUOCTuNkGlyiNhnLGdxom6+ItaU5sRJzPbANATD39sZjc6bftmF9C9GYC1Mc
+	 +bUGyzqxZ+tLW0a7ukYm6IRLaVK6YJIxqGiQGBN58WmPQOg4d7+ab89rbt1bZs5OMQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eRKKuDOC;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ue+7J1Jd;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 742A1606A31C;
-	Tue, 17 Nov 2026 22:02:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 948A8606A8A3
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 22:29:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eRKKuDOC
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 184F41F000CB;
-	Tue, 17 Nov 2026 22:02:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ue+7J1Jd
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C47D1F000C5
+	for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 22:29:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794952926;
-	bh=EsQiVnWdklcglRbIqoscQFF5X7p4jGIU+Y0OOx+78ps=;
-	h=Date:From:To:Cc:In-Reply-To:References:Subject;
-	b=eRKKuDOCG4lZI0ZtmAAIpexh5saMlRjXYGgquqnGJHw5xx0hKiSTtEpRMTU0UnEZx
-	 IcVAie3qbTbLtwat8lgNDCP6zhB7QCTVdVvmIBlqP9fuJUX+csyhPtr5Pct2KMF+dr
-	 sKEIWoHciSIaSRbPXtRwsvShsS664//k6GK3BjshzeV1onoC5SB/aS7wLmCyLKJ9K8
-	 m5LAARW1i0RM6erGJTXwnJLIbMj19kpQzxaJV5KdnARcC1GmD4YHak/fh/wBY2ukPa
-	 yhfRyDN1zjqulKDzMqoKKSTFXathlkGd8lIzu3DnyeBMJBeCEbjKT0GFxDySnJK8UV
-	 YAtD4XE3Ry5Ag==
-Received: from phl-compute-10.internal (phl-compute-10.internal [10.202.2.50])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 50504F40066;
-	Tue, 17 Nov 2026 17:02:04 -0500 (EST)
-Received: from phl-imap-15 ([10.202.2.104])
-  by phl-compute-10.internal (MEProxy); Tue, 17 Nov 2026 17:02:04 -0500
-X-ME-Sender: <xms:3M78aq1jfwU6kkpHJYfkamLb7k26diePkGr8HYaND-ZrMBjnohMrzQ>
-    <xme:3M78an6y1Y_GR0u1TwtOXDhTJSDOYemr1m9Hmyh5XEDGdsDAx71bEoAOEShnFinjM
-    69EF-AeO1bjSPJvAvqEXXhgqHUGSfFOCO013H2g38lm6F7OfmUkmU4v>
-X-ME-Proxy-Cause: dmFkZTEFWk4jFRq2Ypvh/OGGpN3RYf9yAIcrjwoio2l5SxvidVJI3djILaxgpL7LyuOL7E
-    lli1okH5QEaMWzCUMyMt49RTjdtkb7p5j8SnJ7vko/DXCHPESNoXMFqc8eAYVU7BGtrfNE
-    O8Wkt/X+eQscT/cb/kG8LbWg6SuLpK+A11UAMB+QAdy5UWJZaV2trmsj/oQjP/6lPcVVP0
-    p+nLQemqrSyF8f9utiFf/d15PjZvnAYnKe5plmCnfbGuYaAIvR4RuHbeaDv3ZwgaqwEoTc
-    O56V45wyKdQUyvAqx58jhwnrJqlfVvWKvX0EJKReKmJux7PwleYyLgjD7P44v937Li49Qw
-    3PfPZt4Tz5Ch4ICbtemCoWAFkhd9LpRHHoQMM6xH+uQv2Cf4FlSCV6BNrPskaFpbE2Gt1a
-    ss+P7AhsTRHraYWbE5wed0xL9iCm70tSnIKB//n/ZBAuWR+D7Nfc9NMkA+fe4C2g5UFBLM
-    HmApoPfgE08+h48RscbkJ1zXPfd8wMImQd71BRZR8wJOu7FYt+A09ttWsoXwQ9M7voSEdh
-    iRB9mHPKZYTCf5j5tYY9XJfVHu4mQQzGd7r79LEO7RpJ1QmejEfUCnIUQqmekcp8PP/D1n
-    CB+FZEcYdo/YsJxNiNswgtVIPlyCf6Ab0g19TFApN5j+o5xqL9Y5EgaGlC7g
-X-ME-Proxy: <xmx:3M78anU0MJ35zJ3NF5t0f4ScxkcsT3P7nBy3grYqehD-Bs0aT3fDkg>
-    <xmx:3M78ai64XGO4B10f_mx5toxFs_hI5crqdE1ZqJkyW4lQCVpizqa6Sw>
-    <xmx:3M78avOt7UDMa5ZXcad-yrMZ1xx7rDvSS6ajIf1O1pvu-h3fvDtK-Q>
-    <xmx:3M78algMt1NSKEj31TOL76bmFCAw6QHR4dwEMMeuS0i8PnqzpbVH4Q>
-    <xmx:3M78alib9v_mERwNSmE9KLKWOVL58rpYH24tW96EQor0v_frdN4CGY3f>
-Feedback-ID: ifa6e4810:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
-	id 219C2780077; Tue, 17 Nov 2026 17:02:04 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+	s=k20260515; t=1794954596;
+	bh=QgCr0DpcBXV214M0n10zOgwhTeGtnk5rboT1ob7NYxc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Ue+7J1JdQLy6J5AfwVs6ZStS30tAZoxfS3fq9QmWBk6ZL/wr0FebCEbbgS1hEKE/1
+	 yq5BaUSyMi9UiVTIurr+vjBx5XUZGmQpaDW6Hh2vLA29IDJkiMxmWjPld2XnJRhvKm
+	 QyVPIiXb13QwQ5HWZ42wce+1pDMcmiQ6F62JRGsTu9noV9WJU/0AprrPvHFkOz5ezz
+	 emsZIlutt+2VL7IfUShrCQvwAKdCSAfi5yAggijFFcr1i+C5sPtktGzIVa+dTW/v4c
+	 YJSaJEzlvIcFGZouhep9sVaSPn9ryOHUURRMlqdoQiCiJStLPJ3x1Co8xROPM59jsd
+	 p8lRM/vHt8A7Q==
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-c4d427836e9so29047066b.1
+        for <exfat@lists.linux.dev>; Tue, 17 Nov 2026 14:29:56 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErFXpgSq9gfTLNtjLS788KLX5rGHlibs1W7Uqh7pSKI05xmBtqUuYfEgh/1IgX6fIGAb7OtH7A==@lists.linux.dev
+X-Gm-Message-State: APuU4Z/Q0STi3KfpiZb1enqV4pi2sNv5H9gPTED0SAixMZ0z9Zp75U9q
+	Ai5n9QBbtD042lzOqd4nploVhlUQUyVSN488wH3/TF8b4FUM7XNnm9oZTR+glqyTtKy8joc/xmW
+	/+4XXLjuM8jZ01T9svqkyqyU/3oTSrAw=
+X-Received: by 2002:a17:907:9607:b0:c49:a235:8e0c with SMTP id
+ a640c23a62f3a-c510e1f18bfmr51977566b.22.1794954594914; Tue, 17 Nov 2026
+ 14:29:54 -0800 (PST)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -77,91 +59,72 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-X-ThreadId: AgKvhXN-CN1w
-Date: Tue, 17 Nov 2026 17:01:43 -0500
-From: "Chuck Lever" <cel@kernel.org>
-To: koraynilay <koray.fra@gmail.com>, "David Sterba" <dsterba@suse.com>,
- "Namjae Jeon" <linkinjeon@kernel.org>,
- "Sungjong Seo" <sj1557.seo@samsung.com>,
- "Alexander Viro" <viro@zeniv.linux.org.uk>,
- "Christian Brauner" <brauner@kernel.org>,
- "Trond Myklebust" <trondmy@kernel.org>, "Anna Schumaker" <anna@kernel.org>,
- "Jeff Layton" <jlayton@kernel.org>,
- "Konstantin Komarov" <almaz.alexandrovich@paragon-software.com>,
- "Paulo Alcantara" <pc@manguebit.org>
-Cc: "Chris Mason" <mason@kernel.org>, "Yuezhang Mo" <yuezhang.mo@sony.com>,
- "Jan Kara" <jack@suse.cz>, NeilBrown <neil@brown.name>,
- "Olga Kornievskaia" <okorniev@redhat.com>, "Dai Ngo" <Dai.Ngo@oracle.com>,
- "Tom Talpey" <tom@talpey.com>, "Ronnie Sahlberg" <ronniesahlberg@gmail.com>,
- "Shyam Prasad N" <sprasad@microsoft.com>,
- "Bharath SM" <bharathsm@microsoft.com>,
- "Sergey Senozhatsky" <senozhatsky@chromium.org>,
- ChenXiaoSong <chenxiaosong@chenxiaosong.com>,
- "Darrick J. Wong" <djwong@kernel.org>,
- "Sean Smith" <defendthedisabled@gmail.com>,
- "Andrey Albershteyn" <aalbersh@kernel.org>,
- "Pedro Falcato" <pfalcato@suse.de>, "Amir Goldstein" <amir73il@gmail.com>,
- =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, linux-btrfs@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- exfat@lists.linux.dev, ntfs3@lists.linux.dev, linux-cifs@vger.kernel.org,
- linux-nfs@vger.kernel.org, linux-api@vger.kernel.org
-Message-Id: <f297d9ea-ebd7-47f4-ab7b-de5c45980000@app.fastmail.com>
-In-Reply-To: <20261115180343.576773-8-koray.fra@gmail.com>
-References: <20261115180343.576773-1-koray.fra@gmail.com>
- <20261115180343.576773-8-koray.fra@gmail.com>
-Subject: Re: [RFC PATCH v4 07/10] nfsd: add provenance time (ptime) via
- FATTR4_TIME_CREATE
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+References: <20261116085752.3908082-1-chizhiling@163.com>
+In-Reply-To: <20261116085752.3908082-1-chizhiling@163.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Wed, 18 Nov 2026 07:29:42 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-R319UyMqTw5LJiuhWMYgbqe9HP_pKyH9LQXPxYaE_6Q@mail.gmail.com>
+X-Gm-Features: AclHuK8CBeUwkMopgpP3h-E5Ufv0KRH7jQ07bswOO_DvGn0S7YxPUnFSsbqmUKo
+Message-ID: <CAKYAXd-R319UyMqTw5LJiuhWMYgbqe9HP_pKyH9LQXPxYaE_6Q@mail.gmail.com>
+Subject: Re: [PATCH v4 0/5] exfat: fix valid_size update races
+To: Chi Zhiling <chizhiling@163.com>
+Cc: linux-xfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, 
+	Christian Brauner <brauner@kernel.org>, "Darrick J. Wong" <djwong@kernel.org>, 
+	Chi Zhiling <chizhiling@kylinos.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-
-
-On Sun, Nov 15, 2026, at 1:03 PM, koraynilay wrote:
-> Implement provenance time (ptime) in NFSD, as introduced in a
-> previous commit ("vfs: add provenance time (ptime)").
+On Mon, Nov 16, 2026 at 5:59=E2=80=AFPM Chi Zhiling <chizhiling@163.com> wr=
+ote:
 >
-> Map ptime to FATTR4_TIME_CREATE, allowing clients to set it across
-> CREATE, OPEN and SETATTR compounds.
+> From: Chi Zhiling <chizhiling@kylinos.cn>
 >
-> If the underlying filesystem supports it, use __vfs_fileattr_set_locked()
-> to set it, returning -EOPNOTSUPP in case it's not supported (i.e. when
-> __vfs_fileattr_set_locked() returns -ENOIOCTLCMD).
+> exFAT uses valid_size (ValidDataLength) as the on-disk boundary of
+> initialised data, but the current code advances it too late and without
+> proper serialisation.  Buffered writes can silently lose data reclaimed
+> before valid_size covers it, file expansion and page faults can
+> initialise the same range concurrently, and a failed or short direct
+> write can still grow the file on disk.
 >
-> When querying FATTR4_TIME_CREATE, request both STATX_PTIME and
-> STATX_BTIME, preferring ptime over btime if available, and advertise
-> FATTR4_TIME_CREATE support if either ptime or btime is available.
+> This series advances valid_size under the folio lock, keeps zeroed_size
+> in sync with the block tails that were actually initialised, and
+> revalidates cached iomaps for buffered writes.  File expansion holds
+> invalidate_lock across allocation, EOF cleanup and the i_size update.
+> Direct writes are prepared and written back through their destination
+> boundary folio before submission, publish i_size and valid_size only
+> from ->end_io(), and hold invalidate_lock across completion, post-write
+> invalidation, gap initialisation and rollback so that mmap faults
+> cannot interfere.
 >
-> Assisted-by: Gemini:3.8-flash-high antigravity-cli-1.5.7
-> Signed-off-by: koraynilay <koray.fra@gmail.com>
-
-> @@ -3646,7 +3649,14 @@ static __be32 
-> nfsd4_encode_fattr4_time_access(struct xdr_stream *xdr,
->  static __be32 nfsd4_encode_fattr4_time_create(struct xdr_stream *xdr,
->  					      const struct nfsd4_fattr_args *args)
->  {
-> -	return nfsd4_encode_nfstime4(xdr, &args->stat.btime);
-> +	const struct timespec64 *ts;
-> +
-> +	if (args->stat.result_mask & STATX_PTIME)
-> +		ts = &args->stat.ptime;
-> +	else
-> +		ts = &args->stat.btime;
-> +
-> +	return nfsd4_encode_nfstime4(xdr, ts);
->  }
-
-I have trouble with this approach.
-
-We've already established that, for the Linux in-kernel NFS server
-implementation, FATTR4_TIME_CREATE reports a file's birth time and
-does not permit NFS clients to modify that.
-
-After this patch is applied, the server reports the ptime instead
-of the btime on some filesystems but not others.
-
-Essentially this changes the semantics of existing files that have
-a btime set -- technically that's a regression.
-
-
--- 
-Chuck Lever (Come to NFS bake-a-thon! https://nfsv4bat.org)
+> V4:
+> - Fold the series into five patches and rebase onto current exfat/dev.
+> - Add a patch that serialises file expansion with mmap write faults.
+> - Rework direct writes: prepare and write back the invalid range through
+>   the destination boundary folio, initialise the gap after the post-write
+>   invalidation, and keep pure overwrites asynchronous.
+> - Track initialised block tails in zeroed_size instead of
+>   IOMAP_F_ZERO_TAIL, record the on-disk length in i_size, and finish
+>   short direct reads with filemap_read().
+> - Pick up the Reviewed-by on the iomap patch.
+>
+> V3: https://lore.kernel.org/exfat/20261016033349.3104509-1-chizhiling@163=
+.com/
+> V2: https://lore.kernel.org/exfat/20261013033837.2748258-1-chizhiling@163=
+.com/
+> V1: https://lore.kernel.org/exfat/59056131-e3bd-4003-8c30-0a356cf0bd82@16=
+3.com/
+> Link: https://lore.kernel.org/exfat/10029d6f-13cc-4d17-a2f9-b093a8339dde/=
+T/#t
+>
+> Chi Zhiling (3):
+>   iomap: export iomap_bio_read_folio_range_sync()
+>   exfat: increase VDL before unlocking initialized folios
+>   exfat: zero invalid VDL tails in buffered and direct reads
+>
+> Namjae Jeon (2):
+>   exfat: serialize file expansion with mmap write faults
+>   exfat: coordinate direct writes with mmap faults
+Applied 2/5 ~ 5/5 patches to #dev.
+Thanks!
