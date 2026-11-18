@@ -1,83 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794994563;
-	b=uige0oKgeJWHNoG03Q1AnC9RbaARJdL19qZ9Cg6wcaiovz6lJg0OI4jSfLdshI6pv/KA
-	 jNTbX25cpcj4qJwBTfPw+8JDoufK3Fvp/jbnvx0D+tUohfBDDtOjT6dOISs3ecs2GGbYo
-	 G5AThHr8o3ab/U7fSBbVlYmKRXC77kzPLvdQgTB7LxWQH9yN/WhNIVZugbODndFujLfNz
-	 mBMbC3/TqZPWxIx7G3SPse7KNk8zpjbUjizLLu+bDk9ihboeT//pRIrBRvxjDfgQgjgpS
-	 zYvse4vQKSHZ1TPSXiDV5BeuXCMzxHxJKoPJumVuTsxW5B82CRCALk/SKsDf13HgYPA==
+	t=1794995789;
+	b=HyxcMQgwr/4SD0d5Z0K29azIQmEE+Ypf0IBCfUUzrIc28cls/NEQnpq+ZJ2BSSIIsMVf
+	 cm8P0dzlxc94R/0hXCaAzAdLmRwHDPQ03+zzEva15Q82XmtxvtuTcN5v2V+alOGKjnJcc
+	 ondH2nLHSEEVwmGGQWJeqJzwAi15kbQmHS8HLO4mK24iSX6nuj87tnmYZ8RnJaqp3wDf4
+	 tIselGydDlJ3CvpGRVBiQHE+R/7CfJzNgA9IHTOfwuQdutIarT50Xh57/OkI73mlzf0L0
+	 IzFDclsxkM5D1sMzylYan+s1mAbUqmGJJP9V87dhRDIFy/D0zphxHQxHdhcjP3zJQRQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794994563;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=oEtrs9YN++TIvppEtfu/diqt2HKppGf1oq8L8HaJ3VE=;
-	b=JHHT6GeaZBO6zG1NBYKWec1cXinR97AX7khOViQRUydYGKs8oRGE8KnVjaK8LhOUL+ZW
-	 rYalF4yIvB1/GcW3Gh6XFeHnIQQU1RrVXzJKOiPSF/tmESHYxAltdbu8PyNrFbZKEOwoW
-	 ieHmCdmJqFi16QijcxgD4pZ7esxPiMB3xrxcFcFAMWg8QhqrDXE/hVlLi7NE9PhfQa48N
-	 m0UHIkDkylbLWRYiv7HzD98MIKFWkl4feBVjd+nwcBXkE1hu2exRzTREtQqK1NE7gs8si
-	 zlGbHK7KLZ6EWISue9p52Vro7wvl3vAtremgw33zWnDqWGo+aPs65LeSnimlleR9NSw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794995789;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=LVjYfSHFtJGzfxCKWN53IDRtrshFC2glsaaN9aRIShs=;
+	b=Yw2IcDoZ3b0YVuRpno+M3bEfgRDoz+I2KN/uLfFlqW+EagHSza+2cAzyPLiVvs6uD17g
+	 HVKUhKy0b1n6KpLRt/To+FSETSQvnODOwTzbPpLgPirIPdo9duLT5qIu/MpTzscQR+tLo
+	 c6pSi5oo9bPfAlyqZIEuv22vFAX1ZKxfvLsw7lH7wCz7nZ3DVIFKrFBTfbY2XYfS/Lmxy
+	 f89TN3ZM6h5U6pJa8pQ5VWURi7F0oHcoWqnW4NWZPQFi1XPCJGJzacEim28xa6VPMSifq
+	 BOleiB8Co0nyj0+JImlkIZAVTbPO5K3+mnusvlXYy0bvB3vkmDhmU93gtPFGYdAKYxA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nahPYjtB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n7vI7En0;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8235B606A31C;
-	Wed, 18 Nov 2026 09:36:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CC78606A31C
+	for <exfat@lists.linux.dev>; Wed, 18 Nov 2026 09:56:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nahPYjtB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48F321F000C4;
-	Wed, 18 Nov 2026 09:35:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n7vI7En0
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E39191F000C5
+	for <exfat@lists.linux.dev>; Wed, 18 Nov 2026 09:56:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794994563;
-	bh=oEtrs9YN++TIvppEtfu/diqt2HKppGf1oq8L8HaJ3VE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=nahPYjtBD1Iaas2FHy09zfnsVzzPWV2xfnaZM4o2uDixquvqwuHvQ+/o6Lx3RmcT7
-	 A5MLlaaWHi5zeDFe6Pr6Zu/1tZf365UdM7zLPXtacuahcYasmLgD5icYRCqSxPoOAQ
-	 apSPaDPnXbhT/Rjv6/c4yyGGAb3a6EIjZs+gpHbG4KtSnFEboWn87xat6LJyla++Jd
-	 yjbLXh2HQKcIglQe/QgOIjdxO0MlY4PzADbD2mLPuxiLGazQOP1N6OqiCY11zDd0cS
-	 +PtK7soRS49YQWtEbo0XhLlRb2q60FYLSeh5q1DNqhKbRWl7YpSpO779dHK9eKPFp5
-	 s/bgKJ6Xw8nfA==
-Date: Wed, 18 Nov 2026 10:35:40 +0100
-From: Christian Brauner <brauner@kernel.org>
-To: Cai Xinchen <caixinchen1@huawei.com>
-Cc: Al Viro <viro@zeniv.linux.org.uk>, mic@digikod.net, gnoack@google.com, 
-	paul@paul-moore.com, jack@suse.cz, amir73il@gmail.com, andrii@kernel.org, 
-	apparmor@lists.ubuntu.com, ast@kernel.org, axboe@kernel.dk, bpf@vger.kernel.org, 
-	casey@schaufler-ca.com, cel@kernel.org, cem@kernel.org, chenxiaosong@chenxiaosong.com, 
-	code@tyhicks.com, corbet@lwn.net, Dai.Ngo@oracle.com, dakr@kernel.org, 
-	daniel@iogearbox.net, dhowells@redhat.com, dlemoal@kernel.org, 
-	dmitry.kasatkin@gmail.com, driver-core@lists.linux.dev, dsterba@suse.com, 
-	ecryptfs@vger.kernel.org, eddyz87@gmail.com, emil@etsalapatis.com, 
-	eric.snowberg@oracle.com, exfat@lists.linux.dev, georgia.garcia@canonical.com, 
-	gregkh@linuxfoundation.org, hch@lst.de, hirofumi@mail.parknet.co.jp, hyc.lee@gmail.com, 
-	ihor.solodrai@linux.dev, jlayton@kernel.org, jmorris@namei.org, johan@kernel.org, 
-	john.fastabend@gmail.com, john.johansen@canonical.com, jolsa@kernel.org, 
-	kpsingh@kernel.org, linkinjeon@kernel.org, linux-api@vger.kernel.org, 
-	linux-block@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-cifs@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-integrity@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, linux-nfs@vger.kernel.org, 
-	linux-security-module@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
-	linux-unionfs@vger.kernel.org, linux-xfs@vger.kernel.org, liubaolin12138@163.com, 
-	martin.lau@linux.dev, mason@kernel.org, mathieu.desnoyers@efficios.com, 
-	matt@bobrowski.net, memxor@gmail.com, mhiramat@kernel.org, miklos@szeredi.hu, 
-	neil@brown.name, netfs@lists.linux.dev, ntfs@lists.linux.dev, okorniev@redhat.com, 
-	omosnacek@gmail.com, penguin-kernel@i-love.sakura.ne.jp, rafael@kernel.org, 
-	rdunlap@infradead.org, roberto.sassu@huawei.com, rostedt@goodmis.org, 
-	selinux@vger.kernel.org, senozhatsky@chromium.org, serge@hallyn.com, 
-	sj1557.seo@samsung.com, skhan@linuxfoundation.org, song@kernel.org, 
-	stephen.smalley.work@gmail.com, takedakn@nttdata.co.jp, tom@talpey.com, yonghong.song@linux.dev, 
-	yuezhang.mo@sony.com, zohar@linux.ibm.com, utilityemal77@gmail.com, 
-	lujialin4@huawei.com
-Subject: Re: [PATCH -next -v4 02/17] LSM: pass struct path to the
- inode_setsecctx hook
-Message-ID: <20261118-nordlicht-badeort-daumen-813a1e9fd0b3@brauner>
-References: <20261117150542.1169451-1-caixinchen1@huawei.com>
- <20261117150542.1169451-3-caixinchen1@huawei.com>
- <20261117184342.GR989762@ZenIV>
- <20261118001641.GA1669148@ZenIV>
- <bdc22808-9f22-46f7-b42d-e6bd8e1eeaca@huawei.com>
+	s=k20260515; t=1794995788;
+	bh=LVjYfSHFtJGzfxCKWN53IDRtrshFC2glsaaN9aRIShs=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=n7vI7En0hPQo7a9PVMecH0yexeoX2tVfG1nvVHVknJURmhrPQ02ocyrU4v58hC0IK
+	 /F4Mp1FmndSFPPWxZWreumUwXA6Wg0kkcUgxU8ddwujW7l6yzZqqhpvsp+/v0zK15Z
+	 MGOXGKLcff8EHqjS2M8GHvTzKPgCbfVy5s5XxQN1UpOE8en8+LRcWcb+Rb7xhTOXwF
+	 6+fmUdF/oCcsRyefhdDoVF8GHel8W1Aw2+YB6UEcrwssKfozmJKLu8kUHBrfLImXIu
+	 AbPVQ1PI+SH9MHwavPWMoPz/3d082oTmMi/hM54xsby0Y50YCBxp3OAwFoSvJLEpM4
+	 qeP/19Y2n9eHQ==
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6b47c1a3c74so1103459a12.3
+        for <exfat@lists.linux.dev>; Wed, 18 Nov 2026 01:56:28 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErGXU4FCv667IeFC3MazIkaJBuw7R6gD/aLaC46eWsNGseW9er/OcEd+hKiJOdTJWSd0x2sL2Q==@lists.linux.dev
+X-Gm-Message-State: APuU4Z+M+VehCi7gXavJRp22h045es07sZHx9uOHgMJYK5YzyHxSX+jQ
+	4jxx/XHmH4FYR0qzVfVYi61p5G+w5iGeNdGTTVjQVoKnTgyB75r6njfOH3iz7aXEUPbbTZsNJdR
+	Z8ZKBTTxzvGxy1ave8w4US5ojGjL+Hes=
+X-Received: by 2002:a17:907:eccc:b0:c49:bc1f:fe2d with SMTP id
+ a640c23a62f3a-c510e2bd578mr158715366b.28.1794995787589; Wed, 18 Nov 2026
+ 01:56:27 -0800 (PST)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -87,24 +59,47 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <bdc22808-9f22-46f7-b42d-e6bd8e1eeaca@huawei.com>
+References: <20261118015802.899847-1-youling.tang@linux.dev> <2df33679-680c-4fc5-a279-e0e38025f22e@163.com>
+In-Reply-To: <2df33679-680c-4fc5-a279-e0e38025f22e@163.com>
+From: Namjae Jeon <linkinjeon@kernel.org>
+Date: Wed, 18 Nov 2026 18:56:14 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-xcXFh9fxGEz9CUc7t7N_PDqNdBEfj+85nkQ1jp8M7nQ@mail.gmail.com>
+X-Gm-Features: AclHuK8r_-YDa3_7OxNEaErJr4ykB6Ed4EZ8_VOz2z-KgaiwfjiSKLanpAfgezA
+Message-ID: <CAKYAXd-xcXFh9fxGEz9CUc7t7N_PDqNdBEfj+85nkQ1jp8M7nQ@mail.gmail.com>
+Subject: Re: [PATCH v2] exfat: hold s_lock for cluster-chain updates in __exfat_cont_expand()
+To: Chi Zhiling <chizhiling@163.com>
+Cc: Youling Tang <youling.tang@linux.dev>, Sungjong Seo <sj1557.seo@samsung.com>, 
+	Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	Youling Tang <tangyouling@kylinos.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 18, 2026 at 04:59:29PM +0800, Cai Xinchen wrote:
-> There are two places that violate (1), both introduced by this series of
-> patches in ksmbd:
+On Wed, Nov 18, 2026 at 12:22=E2=80=AFPM Chi Zhiling <chizhiling@163.com> w=
+rote:
 >
-> smb2_parent_compressed() and smb_inherit_dacl() pair the directory entry
-> returned by dget_parent()
+> On 11/18/26 09:58, Youling Tang wrote:
+> > From: Youling Tang <tangyouling@kylinos.cn>
+> >
+> > __exfat_cont_expand() allocates clusters, appends them to the FAT chain
+> > and updates ei->start_clu, ei->flags and i_blocks without holding
+> > sbi->s_lock.  Readers such as writeback call exfat_map_cluster() with
+> > s_lock held but without inode_lock, so they are not serialized against
+> > the expansion and can observe the chain metadata mid-update.
+> >
+> > Hold s_lock around the cluster allocation, chain append and i_blocks
+> > update.  This nests inside the invalidate_lock held by
+> > exfat_cont_expand(), matching the order used by exfat_truncate().  i_si=
+ze
+> > is published via exfat_pagecache_isize_extended(), which takes the
+> > straddling folio lock; since writeback takes folio lock -> s_lock, this
+> > must happen after s_lock is released to avoid inverting the lock order.
+> > i_blocks is therefore updated first, under s_lock, which also ensures a
+> > reader never sees i_size beyond the allocated chain.
+> >
+> > Signed-off-by: Youling Tang <tangyouling@kylinos.cn>
 >
-> with path->mnt, and problems arise once that directory entry becomes the
-> root of its mount point.
-
-No, (1) holds there. dget_parent() never leaves the superblock so the
-parent has the same ->d_sb as path->dentry.
-
-What happens at the root of a mount is that the parent isn't below
-path->mnt->mnt_root anymore. That's a different property and struct path
-doesn't guarantee that (open_by_handle_at(), nfsd with
-no_subtree_check). So there's nothing to fix for (1) in those two.
+> Looks good to me:
+>
+> Reviewed-by: Chi Zhiling <chizhiling@kylinos.cn>
+Applied it to #dev.
+Thanks!
