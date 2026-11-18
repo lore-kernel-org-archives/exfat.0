@@ -1,58 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=113.46.200.226
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.49
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794993434;
-	b=DuOljkuICpGRohSi7aitP7JeO78KOVB/oDcyH++9Dxdio3w+cR01NBTgb7EOfmNR7Qk/
-	 HVgdoNDPqfQ8n5eCUuwklnTPRHZfKRDV5y+C3rXmDAifhMGkOJrMvlB9PUotpG9Fi1a0H
-	 YiS+xQdy1fffpmTpgBgX/+CQTWRR/AR2uakag8Ycm3tiFs8RMRm/11bShjnLq8vdCytkh
-	 ObJZOx0E7+CX+0Tgf9ClLMGYYBR/9WdFmlMduCoN8RwfVMtR7ICQHIm5qDYwuBpUmHytl
-	 /yHzqO0cK10/GD6F7/XVWNIc+49yyCB1YERUD86TTtl3A+LMAdEC+j4oUUyBBAUG8TA==
+	t=1794994466;
+	b=Xpf6sSpbFUjoAa34YzelYSYQMgGVs6cM8k5UZlnvo8vrwBT+BOrYcJT17CA71Q+BA6Zp
+	 KwCHsIwpg4I90+/m96ZkmzJ2CRYNLiti1FjKCbIeTHhBy1Yzdhl5V9K+mbL5eRojhSPYE
+	 cLlyvRoclp/00qwbcHDVkkKVpo2i/BgVyYk3w0YGejdJyygroNkRS33ZczsRGhqxWNp0k
+	 Z/x8x5LgifyRnKJi3G888EqJoHfU5sASJ+b96wRM81GB/TYC4XvLl2+8+NOrxuFwAbr+K
+	 UiCAeLK05Ld8mANO61T2uCgvddr/ABvDkC41rOE19Js9BZfrmkNe1VJXYWYay6tSdHw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794993434;
-	h=DMARC-Filter:dkim-signature:Received:Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:CC:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
-	bh=xsIsDZiCZyB7+lKhnSB47LX6hbKq7VMg+O30s3v8xU0=;
-	b=blMxYa9a8CyzqmybZfDPZJG6xWRdMr4BMfNiYxKfvabExelg6NcZaQ/pmGNVpiLeNTex
-	 pxJSrd2zMj7ZF1M50jIqBUmT/gtIprVL/lCqZDkRrR0VDi7lHd5INHCPG+dB+S0mEJRsp
-	 +6qfVRVpL18spsROkPKyN6nToGvyr3Br1tBW1BQ8whljAHX46Yxf+tcFYDyy82Tb+PRc/
-	 yaR05sSWJXIb9AejVRM+XgCPOO+IBcnDf/GlnQNW8FD/UZ8oBNVfzFF545nY/n7Dawqt3
-	 jQ3oSqhGLai+pfcyjfIVMpj6Ah/PYs5WBRLngv4uV5lDrzZsnncwriFer89067q7zJQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794994466;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:X-Mailer:
+	 References:In-Reply-To;
+	bh=rNa0vN78D0akbQFcdNqhv/WUiqgfa1Av3KtBFrChCIY=;
+	b=WzuKXERr9/xkquWjlGMrL55d9F5wXXkZHHST/6B6vNYriRYkW9g3lY+6Vyq8gKjpYXiM
+	 9h9zhhLVy14PO7ThqRYkP38Ws7cwwdt3nZt4YDayoxk0ijA6Jyko134Oa1pQUEsgZRH3K
+	 24hcb8TYSnXG2IjGIOMjSteiwQ/6Wsxf15G1J/7FGCov+1eOLYp/CR+dcQ1HYN3yfKnZI
+	 B4aQMedysJ38z9ufm+vOZUy4ZRrCv9tQcSUiViMOkXhC+i9ISVcee1cJ+GyzcsuLu/Q1O
+	 GlPpE4euZd5WzcbKh/Ng2luw95mxddZ1tQ9Jee1p/tofeO3/dkRwUkSHOIyO/6FLqpA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=huawei.com;
-	spf=pass smtp.mailfrom=huawei.com;
-	dkim=pass header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=PV3E+oEf;
-	arc=none smtp.remote-ip=113.46.200.226
-Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FFnChId7;
+	arc=none smtp.remote-ip=209.85.128.49
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03ED8606A320;
-	Wed, 18 Nov 2026 09:17:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 03ED8606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE6C7606A32C
+	for <exfat@lists.linux.dev>; Wed, 18 Nov 2026 09:34:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE6C7606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.a=rsa-sha256 header.s=dkim header.b=PV3E+oEf
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=xsIsDZiCZyB7+lKhnSB47LX6hbKq7VMg+O30s3v8xU0=;
-	b=PV3E+oEfe6GWTlN7IzcOZNtMuGokpGaMaE5HT+w5Vk98jOWnb53YzhdAAkTed93AvGp6D+ngZ
-	ftGk2P047j6/rbz8Ke0Kewk86yZLKYBKuM/FH/uksdfAvh6qdTvxfoyU41EsmNujsw5oLc+20hb
-	oGEWnwe8RZuneZEt42a2+8c=
-Received: from mail.maildlp.com (unknown [172.19.162.92])
-	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4jTww76jtyzKm8G;
-	Wed, 18 Nov 2026 17:16:55 +0800 (CST)
-Received: from whupemk100010.china.huawei.com (unknown [7.152.184.41])
-	by mail.maildlp.com (Postfix) with ESMTPS id 41D7540586;
-	Wed, 18 Nov 2026 17:17:10 +0800 (CST)
-Received: from [10.67.110.140] (10.67.110.140) by
- whupemk100010.china.huawei.com (7.152.184.41) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.45; Wed, 18 Nov 2026 17:17:02 +0800
-Message-ID: <61823b38-032d-4e4c-bcbb-82fe83c34ade@huawei.com>
-Date: Wed, 18 Nov 2026 17:17:01 +0800
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FFnChId7
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4bb72b44a97so5814175e9.0
+        for <exfat@lists.linux.dev>; Wed, 18 Nov 2026 01:34:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794994464; x=1795599264; darn=lists.linux.dev;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:mime-version:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=rNa0vN78D0akbQFcdNqhv/WUiqgfa1Av3KtBFrChCIY=;
+        b=FFnChId7bdIdxo+BgcNIJIIoNGj+gGLZy4+AfO4hli5R6RW/YBwSZvdluL/ujpcCci
+         yi/ELzS44PpbffQ7Bizfr7IwTUp08M2zrX5hXP/9XjefcRPRVAFsTAi5YFm4C8JsjX8H
+         egF11mnlmLqQQPHL7pDNldk8FJ4VwC+TVe3TcSijIpSEIItXCaca3zqCZef92lZq/jrt
+         DCVZfmMG+HSrdPzF61ukxecT/kiHejT7kVO/TGia6qmPMRVExqePDiILU0IJGaOQiFRJ
+         XPbx5Ez3MBKfedCALfCFEDYVXBsOD0N9YWsLy3k9A2+vvEB7lOMc6Y0jdVAqEoLXBtZJ
+         h6yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794994464; x=1795599264;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=rNa0vN78D0akbQFcdNqhv/WUiqgfa1Av3KtBFrChCIY=;
+        b=seQKartDnwpQErz98Ty4nIHOxWlwpijHqHVvQucXP61LAoC7T2iz2p/ux3en/c7uDt
+         +k1A5umSMUMg0Fojz051o9UQYLh6FRLOaE0MdwiFdWb+ZtJ3K25s6QvKdg6g38Y002nb
+         BuPqXAGALsahmaHk3rv2KLxKCkvEK8u5JJ10BK4b2UFv4WC01J0g9LCFB44EE2Nrston
+         dGAXXEcO+xkTVvkUjk3BjsgCB/+V6gzVaMqK/i+u/zGNQpYtMquJzbSunHb+lnJA3QDq
+         Q5LGcSjyhhu8zm+UMdaBFtbNWev9w5GO+ZrpaYILVVbMVHfi8KBuKdOuV27CzCnqIpQo
+         u0PQ==
+X-Forwarded-Encrypted: i=1; AL+hErFeXjP8k5Pu7SeIu+qrOoeX76d/sNILNcAU7j8KB/2ZpZVBIv0Biat29Dm6cZ7rV49xvbOUTg==@lists.linux.dev
+X-Gm-Message-State: APuU4Z9meNsTFUmCm3mWmCmYDMP7Z5IzM5TA/QzjXtRiZjopyw7S14Nc
+	FjcxvO6U7rvdoWikBUG1VUcfFeeD7ddVHhG4QzP8fO4oWQXpOOz9a22S
+X-Gm-Gg: AYBFou1lXtQC0b3xMD6PDHohee3wLAmoDcKSebQpSMXPwmOELTjjGU1X6tjY4U2+qYc
+	fgjwOGXcgLfo6toGM+0AblLh4QHivSO6wjxFe60tgzEWHaKcYZDhqxbUUbCbCY5MveyruXV54Yc
+	lBXhndEduHdr0hC6MYz6GowaVyyHvQiNHlxJb6S74A3eM9dXqJwi6KC701wcdDHdVVLaikH2hpX
+	rDYm1JYt8Fx811tGw6PXL5F9ooDtmWp1AXOG2IZyj6vGRhXjFPq9UOHw2ELYRTuO1Wdu9UCGUln
+	qRp79a9JuQVDoQ1pOMzGCiqXiA1jsggA6GY4ic7vB8eZw67G/zhuMXRME9hawEqOIhQGuoaHwBD
+	76wigE2X8COREkM5BATKtGzeaaLF/XqdmuTsaf1FjkZdmpsdHIChwKH7HvwmHl11qDjkGEiubv1
+	RhAS8Ukkq+No+wRVxn1lTlX0KW8wHf/KN7Uw+uCrqzczp2WgHzlXVDzl4DXMuGPDtKNtgxZHb/d
+	Xz3wPN+hrttD/PzmOsEwuSOZJ/CXkaduDRFcWUULmL4aBYYXip/uz9SJfk2iIDI2p1RqRWbGROd
+	CSJymUEru6qPMZEUfCBpRPipuoFxqi1Wx7R0Nxg73KfadA+QuEQo5kObFnSovwctlg==
+X-Received: by 2002:a05:600c:c167:b0:4a8:9a2f:d27 with SMTP id 5b1f17b1804b1-4bb7da390b9mr35026975e9.25.1794994463991;
+        Wed, 18 Nov 2026 01:34:23 -0800 (PST)
+Received: from localhost (mob-176-246-251-118.net.vodafone.it. [176.246.251.118])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb7d2b74d6sm52272335e9.9.2026.11.18.01.34.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 18 Nov 2026 01:34:23 -0800 (PST)
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -61,64 +86,387 @@ List-Subscribe: <mailto:exfat+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH -next -v4 01/17] fs: pass struct path to notify_change()
-To: Al Viro <viro@zeniv.linux.org.uk>
-CC: <mic@digikod.net>, <gnoack@google.com>, <paul@paul-moore.com>,
-	<brauner@kernel.org>, <jack@suse.cz>, <amir73il@gmail.com>,
-	<andrii@kernel.org>, <apparmor@lists.ubuntu.com>, <ast@kernel.org>,
-	<axboe@kernel.dk>, <bpf@vger.kernel.org>, <casey@schaufler-ca.com>,
-	<cel@kernel.org>, <cem@kernel.org>, <chenxiaosong@chenxiaosong.com>,
-	<code@tyhicks.com>, <corbet@lwn.net>, <Dai.Ngo@oracle.com>,
-	<dakr@kernel.org>, <daniel@iogearbox.net>, <dhowells@redhat.com>,
-	<dlemoal@kernel.org>, <dmitry.kasatkin@gmail.com>,
-	<driver-core@lists.linux.dev>, <dsterba@suse.com>,
-	<ecryptfs@vger.kernel.org>, <eddyz87@gmail.com>, <emil@etsalapatis.com>,
-	<eric.snowberg@oracle.com>, <exfat@lists.linux.dev>,
-	<georgia.garcia@canonical.com>, <gregkh@linuxfoundation.org>, <hch@lst.de>,
-	<hirofumi@mail.parknet.co.jp>, <hyc.lee@gmail.com>,
-	<ihor.solodrai@linux.dev>, <jlayton@kernel.org>, <jmorris@namei.org>,
-	<johan@kernel.org>, <john.fastabend@gmail.com>,
-	<john.johansen@canonical.com>, <jolsa@kernel.org>, <kpsingh@kernel.org>,
-	<linkinjeon@kernel.org>, <linux-api@vger.kernel.org>,
-	<linux-block@vger.kernel.org>, <linux-btrfs@vger.kernel.org>,
-	<linux-cifs@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>, <linux-integrity@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-	<linux-nfs@vger.kernel.org>, <linux-security-module@vger.kernel.org>,
-	<linux-trace-kernel@vger.kernel.org>, <linux-unionfs@vger.kernel.org>,
-	<linux-xfs@vger.kernel.org>, <liubaolin12138@163.com>,
-	<martin.lau@linux.dev>, <mason@kernel.org>, <mathieu.desnoyers@efficios.com>,
-	<matt@bobrowski.net>, <memxor@gmail.com>, <mhiramat@kernel.org>,
-	<miklos@szeredi.hu>, <neil@brown.name>, <netfs@lists.linux.dev>,
-	<ntfs@lists.linux.dev>, <okorniev@redhat.com>, <omosnacek@gmail.com>,
-	<penguin-kernel@i-love.sakura.ne.jp>, <rafael@kernel.org>,
-	<rdunlap@infradead.org>, <roberto.sassu@huawei.com>, <rostedt@goodmis.org>,
-	<selinux@vger.kernel.org>, <senozhatsky@chromium.org>, <serge@hallyn.com>,
-	<sj1557.seo@samsung.com>, <skhan@linuxfoundation.org>, <song@kernel.org>,
-	<stephen.smalley.work@gmail.com>, <takedakn@nttdata.co.jp>, <tom@talpey.com>,
-	<yonghong.song@linux.dev>, <yuezhang.mo@sony.com>, <zohar@linux.ibm.com>,
-	<utilityemal77@gmail.com>, <lujialin4@huawei.com>
-References: <20261117150542.1169451-1-caixinchen1@huawei.com>
- <20261117150542.1169451-2-caixinchen1@huawei.com>
- <20261117183059.GP989762@ZenIV> <20261117183440.GQ989762@ZenIV>
-Content-Language: en-US
-From: Cai Xinchen <caixinchen1@huawei.com>
-In-Reply-To: <20261117183440.GQ989762@ZenIV>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
- whupemk100010.china.huawei.com (7.152.184.41)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=044bdd0a4a47942c271d04e37cdfe5ff13f45bd18be64b399c47a4223d1a;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Wed, 18 Nov 2026 10:34:10 +0100
+Message-Id: <DMY8FEXBRS0L.2X0W5NIFG56C7@gmail.com>
+Cc: "David Sterba" <dsterba@suse.com>, "Namjae Jeon"
+ <linkinjeon@kernel.org>, "Sungjong Seo" <sj1557.seo@samsung.com>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>, "Christian Brauner"
+ <brauner@kernel.org>, "Trond Myklebust" <trondmy@kernel.org>, "Anna
+ Schumaker" <anna@kernel.org>, "Chuck Lever" <cel@kernel.org>, "Konstantin
+ Komarov" <almaz.alexandrovich@paragon-software.com>, "Paulo Alcantara"
+ <pc@manguebit.org>, "Chris Mason" <mason@kernel.org>, "Yuezhang Mo"
+ <yuezhang.mo@sony.com>, "Jan Kara" <jack@suse.cz>, "NeilBrown"
+ <neil@brown.name>, "Olga Kornievskaia" <okorniev@redhat.com>, "Dai Ngo"
+ <Dai.Ngo@oracle.com>, "Tom Talpey" <tom@talpey.com>, "Ronnie Sahlberg"
+ <ronniesahlberg@gmail.com>, "Shyam Prasad N" <sprasad@microsoft.com>,
+ "Bharath SM" <bharathsm@microsoft.com>, "Sergey Senozhatsky"
+ <senozhatsky@chromium.org>, "ChenXiaoSong" <chenxiaosong@chenxiaosong.com>,
+ "Darrick J . Wong" <djwong@kernel.org>, "Sean Smith"
+ <defendthedisabled@gmail.com>, "Andrey Albershteyn" <aalbersh@kernel.org>,
+ "Pedro Falcato" <pfalcato@suse.de>, =?utf-8?q?Pali_Roh=C3=A1r?=
+ <pali@kernel.org>, <linux-btrfs@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+ <exfat@lists.linux.dev>, <ntfs3@lists.linux.dev>,
+ <linux-cifs@vger.kernel.org>, <linux-nfs@vger.kernel.org>,
+ <linux-api@vger.kernel.org>
+Subject: Re: [RFC PATCH v4 00/10] add provenance time (ptime)
+From: "koraynilay" <koray.fra@gmail.com>
+To: "Amir Goldstein" <amir73il@gmail.com>, "koraynilay"
+ <koray.fra@gmail.com>, "Jeff Layton" <jlayton@kernel.org>
+X-Mailer: aerc 0.22.0-0-gc2f86b7abde3
+References: <20261115180343.576773-1-koray.fra@gmail.com>
+ <fc53ec55d315a4b96ec1e6f250ad3763f2189755.camel@kernel.org>
+ <DMXXOPD9UDNP.2YP9ROMHFLM9E@gmail.com>
+ <CAOQ4uxjcvAKTaGXO0=BpbtgoEPmN7GKieVbX1ZpZR38H1Z3j9g@mail.gmail.com>
+In-Reply-To: <CAOQ4uxjcvAKTaGXO0=BpbtgoEPmN7GKieVbX1ZpZR38H1Z3j9g@mail.gmail.com>
 
-Yes.  ovl_do_notify_change() passes
-ovl_upper_mnt(ofs) together with the real upperdentry, so the sb matches,
-and the idmap handed down is ovl_upper_mnt_idmap(ofs), i.e. taken from
-that very mount.  It runs under with_ovl_creds(), like the other ovl_do_*
-forwards, so an LSM sees a genuine upper-layer path instead of a merged
-dentry whose mount we cannot name - which is the point of converting the
-metadata helpers.
+--044bdd0a4a47942c271d04e37cdfe5ff13f45bd18be64b399c47a4223d1a
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On 11/18/2026 2:34 AM, Al Viro wrote:
-> Incidentally, will the mount reference you are supplying in case of overlayfs
-> upper layer be any good for LSM users?
+On Wed Nov 18, 2026 at 9:14 AM CET, Amir Goldstein wrote:
+> On Wed, Nov 18, 2026 at 2:09=E2=80=AFAM koraynilay <koray.fra@gmail.com> =
+wrote:
+>>
+>> Hello and thanks for replying,
+>>
+>> On Wed Nov 18, 2026 at 12:53 AM CET, Jeff Layton wrote:
+>> > On Sun, 2026-11-15 at 19:03 +0100, koraynilay wrote:
+>> >> This is an initial implementation of a new timestamp to indicate the
+>> >> time when a file/directory was initially created.
+>> >>
+>> >> This patch series takes inspiration from the one by Sean Smith
+>> >> <defendthedisabled@gmail.com> [1], but using
+>> >> file_setattr()/file_getattr() as suggested by Darrick J. Wong
+>> >> <djwong@kernel.org> in [2].
+>> >>
+>> >> The semantics of this new timestamp should be at least these:
+>> >> - it should be the same as btime on a newly created file
+>> >> - it's user-settable, so it can be preserved for backups, filesystem
+>> >>   conversions, archives and any similar operation
+>> >> - it should be preserved every time mtime gets preserved
+>> >>
+>> >> and the correspondence with the other timestamps is as follows:
+>> >>
+>> >> ctime <-> btime
+>> >> mtime <-> ptime
+>> >>
+>> >
+>> > I'm not sure how to interpret the correspondence above.
+>>
+>>   |-----\_-----------------|-----------|
+>>   |       \_      change/  |   birth/  |
+>>   |         \_ modification|  creation |
+>>   |           \------------|-----------|
+>>   | inode time |   ctime   |   btime   |
+>>   |------------|-----------|-----------|
+>>   | file time  |   mtime   |   ptime   |
+>>   |------------|-----------|-----------|
+>>
+>> ("file" as in "the concept of this file", I'd say "file content" but
+>> that would be incorrect for symlinks)
+>>
+>> so ctime is "inode change time", btime is "inode birth/creation time",
+>> while mtime is "file content change/modification time" and ptime would
+>> be "file content creation time" (same as Window's or MacOS's creation
+>> time).
+>>
+>> Does this make more sense?
+>>
+>> >
+>> >> Examples:
+>> >> 1) a .zsh_history file created in 2019, then after a few years the us=
+er
+>> >>    decides to switch to another filesystem, copying the .zsh_history =
+to
+>> >>    the new home, in that case btime would have the timestamp of the c=
+opy
+>> >>    and ptime would have the 2019 timestamp (just like mtime would hav=
+e
+>> >>    been preserved)
+>> >> 2) a symlink created in 2020 from the home directory to a /path going
+>> >>    through the same process as the .zsh_history, in this case it woul=
+d
+>> >>    also make sense to sync the ptime to the 2020 timestamp instead of
+>> >>    keeping only the btime (so the inode creation time).
+>> >>
+>> >> The proof-of-concept code (for testing) for stat(1) and cp(1) is
+>> >> available at https://github.com/koraynilay/coreutils (master branch)
+>> >> (Note: these coreutils code changes are a prototype and won't be
+>> >> submitted upstream as-is, but they work as expected in simple stat an=
+d
+>> >> cp -a/--preserve=3Dptime tests)
+>> >>
+>> >> Lastly, the name "provenance" and "ptime" are not final, I personally
+>> >> don't have a strong opinion on any name, but while testing with stat(=
+1)
+>> >> I noticed that "Provenance" is definitely too long for the normal
+>> >> output, so another option which would fit well is "Origin time",
+>> >> abbreviated as "ntime" (OrigiN time) and not as "otime", as that woul=
+d
+>> >> conflict with btrfs' internal naming and create confusion.
+>> >>
+>> >> v2 changes:
+>> >> - fix permission bypass leading to ptime update on immutable and
+>> >>   append-only files (found by sashiko[3])
+>> >> - normalize ptime timestamp as done in fs/attr.c:notify_change() (fou=
+nd
+>> >>   by sashiko[3])
+>> >> - fix wording in vfs patch to be like the cover-letter
+>> >>
+>> >> v3 changes:
+>> >> - vfs: reject setting ptime with -EOPNOTSUPP on filesystems that do n=
+ot
+>> >>   support it instead of silently ignoring it (found by sashiko[4])
+>> >> - vfs: fix not being able to clear immutable and append-only on files
+>> >>   with ptime, and allow updating immutable/append-only atomically alo=
+ng
+>> >>   with ptime (found by sashiko[4])
+>> >> - btrfs: validate on-disk ptime nanoseconds and reset to otime if
+>> >>   invalid (found by sashiko[4])
+>> >> - btrfs: avoid re-assigning ptime on unrelated chattr calls (found by
+>> >>   sashiko[4])
+>> >> - add ntfs3 and exfat support as suggested by Amir Goldstein[5], but =
+no
+>> >>   vfat, smb, or nfs4 yet as they are a bit more complex
+>> >> - move the introduction of fileattr_has_fsx_mask() from the btrfs pat=
+ch
+>> >>   to a standalone patch in the series
+>> >> - btrfs: add fileattr_[gs]et to symlink and special file operations
+>> >>
+>> >> v4 changes:
+>> >> - vfs: implement fsx_xflags_mask as suggested by Amir Goldstein[6];
+>> >> - add SMB (ksmbd/cifs) and nfs (nfsd/nfs) support as requested in
+>> >>   previous threads;
+>> >>
+>> >> Note:
+>> >> to apply this patch 2 previous patches[7][8] from the ksmbd/cifs
+>> >> subsystem are needed.
+>> >>
+>> >> New Question:
+>> >> should I rename fileattr_has_fsx_mask() to something like
+>> >> fileattr_has_unsupported_fsx() and keep its code as-is, or should I a=
+dd
+>> >> the fsx_xflags_mask & ~allowed check in it and keep the name as-is? (=
+or
+>> >> both?)
+>> >>
+>> >> Thanks.
+>> >>
+>> >> [1]: https://lore.kernel.org/20260405195007.1306-2-DefendTheDisabled@=
+gmail.com
+>> >> [2]: https://lore.kernel.org/20260407014129.GC6192@frogsfrogsfrogs
+>> >> [3]: https://sashiko.dev/#/patchset/20261027220532.736352-1-koray.fra=
+%40gmail.com
+>> >> [4]: https://sashiko.dev/#/patchset/20261028134728.294127-1-koray.fra=
+%40gmail.com
+>> >> [5]: https://lore.kernel.org/CAOQ4uxiuy0VwZj+3M-zRqQ49WTpHZpiaQ+6MZ8z=
+8WdLjyQM_zA@mail.gmail.com/
+>> >> [6]: https://lore.kernel.org/CAOQ4uxjtuTDT63vJdYaq+RHQEQFLTksp66e46OM=
+N99WhJz3SbA@mail.gmail.com/
+>> >> [7]: https://lore.kernel.org/linux-cifs/20261112111637.184045-2-koray=
+.fra@gmail.com/
+>> >> [8]: https://lore.kernel.org/linux-cifs/20261115155308.415734-1-koray=
+.fra@gmail.com/
+>> >>
+>> >>
+>> >> koraynilay (10):
+>> >>   vfs: add provenance time (ptime)
+>> >>   vfs: add fileattr_has_fsx_mask()
+>> >>   ntfs3: make crtime user-settable using ptime
+>> >>   exfat: make crtime user-settable using ptime
+>> >>   btrfs: add provenance time (ptime)
+>> >>   vfs: add __vfs_fileattr_set_locked() for inode_lock()'d callers
+>> >>   nfsd: add provenance time (ptime) via FATTR4_TIME_CREATE
+>> >>   nfs: add provenance time (ptime) via FATTR4_TIME_CREATE
+>> >>   ksmbd: add provenance time (ptime) and map it to CreationTime
+>> >>   cifs: add provenance time (ptime) and map it to SMB's CreationTime
+>> >>
+>> >>  fs/btrfs/btrfs_inode.h          |   4 +
+>> >>  fs/btrfs/delayed-inode.c        |   6 ++
+>> >>  fs/btrfs/inode.c                |  29 +++++-
+>> >>  fs/btrfs/ioctl.c                |  24 ++++-
+>> >>  fs/btrfs/print-tree.c           |   1 +
+>> >>  fs/btrfs/tree-log.c             |   3 +
+>> >>  fs/exfat/exfat_fs.h             |   2 +
+>> >>  fs/exfat/file.c                 |  42 ++++++++-
+>> >>  fs/exfat/namei.c                |   1 +
+>> >>  fs/file_attr.c                  | 156 ++++++++++++++++++++++++++----=
+--
+>> >>  fs/nfs/inode.c                  |  27 +++++-
+>> >>  fs/nfs/internal.h               |   2 +
+>> >>  fs/nfs/nfs4proc.c               |  56 +++++++++++-
+>> >>  fs/nfs/nfs4xdr.c                |  19 ++--
+>> >>  fs/nfs/symlink.c                |   1 +
+>> >>  fs/nfsd/nfs4proc.c              |   9 ++
+>> >>  fs/nfsd/nfs4xdr.c               |  40 +++++---
+>> >>  fs/nfsd/vfs.c                   |  17 ++++
+>> >>  fs/nfsd/vfs.h                   |   4 +-
+>> >>  fs/nfsd/xdr4.h                  |   3 +
+>> >>  fs/ntfs3/file.c                 |  20 +++-
+>> >>  fs/ntfs3/frecord.c              |   8 +-
+>> >>  fs/smb/client/cifsfs.c          |   8 ++
+>> >>  fs/smb/client/inode.c           |   7 +-
+>> >>  fs/smb/client/ioctl.c           | 109 ++++++++++++++++------
+>> >>  fs/smb/server/smb2pdu.c         |  37 +++++---
+>> >>  fs/smb/server/vfs.c             |  43 ++++++++-
+>> >>  fs/smb/server/vfs.h             |   1 +
+>> >>  fs/stat.c                       |   2 +
+>> >>  include/linux/fileattr.h        |  29 +++++-
+>> >>  include/linux/nfs_xdr.h         |   3 +
+>> >>  include/linux/stat.h            |   1 +
+>> >>  include/uapi/linux/btrfs_tree.h |   3 +-
+>> >>  include/uapi/linux/fs.h         |   9 +-
+>> >>  include/uapi/linux/stat.h       |   7 +-
+>> >>  35 files changed, 614 insertions(+), 119 deletions(-)
+>> >>
+>> >>
+>> >> base-commit: 3bc1fb9c3b20cd478c83496ab16addecb401770d
+>> >> prerequisite-patch-id: 049ae0eba275b5be35a238833107e0b251a55aa2
+>> >> prerequisite-patch-id: 614f0bc9411391403d4e9702bafeb31b0ec04ec1
+>> >> prerequisite-patch-id: ddf636b9d33d82ea206ce265d817371350bf8858
+>> >
+>> > I think this is going to be very hard to do properly, because the
+>> > kernel can't really manage this on its own. Something in userland is
+>> > going to have to set this value if you want to update it to something
+>> > other than the original inode instantiation time (aka btime).
+>> >
+>> > It really sounds like what you want is the ability to make the btime
+>> > settable. Personally I think the decision to forbid that was wrong-
+>> > headed and that it should have been settable from userland from the
+>> > beginning. Maybe we should just revisit that decision.
+>>
+>
+> Frankly, I don't think this decision was made at all.
+>
+> There are only 2 types of filesystems in Linux today:
+> 1. btime is constant (xfs, etx4, btrfs,...)
+> 2. crtime is settable in principle but not via a standardized Linux
+> API (ntfs, cifs, ...)
+>
+> AFAIK, btrfs in this series is the only filesystem which is going to
+> have two deviated copies of btime and ptime.
+> For all the rest, the deviation is artificial in statx.
+
+Well, my objective with this series would be having ptime just as
+supported as a/c/m/btime, especially from userspace in the 90% of
+setups,
+
+> So the questions to ask are:
+> 1. Do btrfs developers prefer to store a new settable ptime or
+>     making otime/btime settable with this new API?
+> 2. Will any other fs in the future want to store settable ptime along
+>     side the legacy immutable btime?
+>
+> My take on these question is:
+> - Personally I would love to see ptime support in xfs in the future and w=
+ould
+>   willing to contribute to this work, because I have hard evidence from t=
+he
+>   performance benefits that it brings to smb server workloads
+> - Judging by past experience with i_version bump interpretation on xfs,
+>   I find it hard to believe that xfs developer would agree to making the
+>   legacy btime settable
+
+so I guess for v5 or v6 I'll also draft a patch for at least ext4 and
+xfs.
+
+> Hence the distinction in statx API is needed, but for most filesystems
+> it is a pure semantic way of saying "I do/don't have settable birth time"=
+.
+>
+>> Originally I just wanted to have btime settable, yes, and if btime was
+>> settable I wouldn't have made this RFC PATCH either, but after reading
+>> the already existing discussions about it, I can understand having an
+>> "immutable inode creation time", like ctime exists, so even after making
+>> btime settable, a new timestamp would be necessary anyway (e.g. for the
+>> people who want btime to exist as a forensics timestamp).
+>>
+>
+> Right, but every filesystem (e.g. btrfs) can still make an independent
+> choice whether storing one or two copies is desired.
+> The API does not limit those choices.
+>
+>> > Failing that, why not just track this in an xattr of some sort, since
+>> > this is really just an opaque blob once you allow it to be settable. I=
+f
+>> > the xattr isn't present, then you can just use the value of the btime
+>> > as-is. FWIW, I think samba does this today, so you could try to sync
+>> > with its behavior here.
+>>
+>> (This is copied and adapted from [2])
+>>
+>> I actually have been using fully userspace xattrs[1] for a few months,
+>> mostly for backups, and it "works"; but last month I wanted to merge 2
+>> FSs (and have another merge I have to do), so I ran [1] on all files and
+>> then compared all metadata/data between source and destination and
+>> noticed there were quite a lot of files that didn't have the xattr set.
+>> So I looked online and learned that xattrs only work on regular
+>> files/directories, not on symlinks or anything else (and the missing
+>> ones were of symlinks).
+>> This is what prompted me to search more if anyone had already proposed a
+>> new timestamp (instead of making btime settable) and found the email
+>> thread from april linked in the cover letter, which gave me the excuse
+>> to finally work on a proper patch.
+>>
+>
+> I am tired of repeating my arguments (and finding my own quotes)
+> about why using xattrs is a poor replacement for in-inode ptime.
+> AI agents can easily find those quotes for those who are interested
+> so I won't bother, I just say that smbd already uses xattr to store
+> the creation time - it's just bad for performance and disk usage in
+> metadata intensive workloads.
+
+(I really need to remember to add the xattr explanation in the cover
+letter, it's been 3 version since I wanted to but forgot lol)
+
+>> > That seems a lot simpler than adding an entirely new inode timestamp
+>> > that is always going to be a copy of the btime, except in rare cases.
+>> > Having to patch all of the on-disk filesystems with a new per-inode
+>> > field is a lot more work.
+>>
+>> > This patch is quite simple, but changing btrfs, then ext4, xfs, etc is=
+ a
+>> > mess, and inevitably you can't get these timestamps until you upgrade =
+your
+>> > filesystems.
+>>
+>
+> Jeff, this is standard "how to make progress".
+> I completely don't agree with this argument.
+> We cannot use this argument to block progress.
+> Is it already a long standing practice for userspace file servers (samba)
+> to probe the host filesystem for specific features and fall back to
+> alternative implementation if they are not supported.
+>
+> There will be nothing new in this case, that's the only way to
+> make forward progress - define the API, make support queryable,
+> implement the feature in some filesystems, implement consumers, repeat.
+>
+> Also for nfsd, that's the only way to ever implement settable
+> FATTR4_TIME_CREATE which is the protocol allows.
+> This is never going to be possible with custom xattrs.
+> So I must say that I don't understand the objection from you and Chuck
+
+Thanks,
+koraynilay
+
+> Thanks,
+> Amir.
+
+--044bdd0a4a47942c271d04e37cdfe5ff13f45bd18be64b399c47a4223d1a
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRJ2XvJtXGwULYEerQ0bnTtJTDoOAUCav1xEwAKCRA0bnTtJTDo
+ONy4AQDh8MSZrQYCROH1/V+zXLEsO4Ud8LKqbexCE1SH8y22aAD/S0syn6cnANKL
+b7slZW9g7lq9P8km1xNXs/wJv/FqsQk=
+=RUOk
+-----END PGP SIGNATURE-----
+
+--044bdd0a4a47942c271d04e37cdfe5ff13f45bd18be64b399c47a4223d1a--
