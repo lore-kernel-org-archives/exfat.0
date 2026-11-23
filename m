@@ -1,55 +1,53 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.71
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795364894;
-	b=ZfTQvOo0BdcCH8U2Joz4oHjN9Hu7/N5538krCK/B0iDmKuptSYWyePF6f0LoNvohhvlu
-	 AmWch+bopq28oDK192FAk/o44qeb/4j333M97CNRXXPg3h3cKb+NEgrIzxqrCO4FPhUFl
-	 w2bruIrTxGEu455NVToqU0gD3ifHfmObJQI9x1YVhHjQfxvgeURelBmn79PhgIcUUDUMb
-	 WhIdPd5JnYU8HjarMnYS7oU+V72gFOtUdRKUeCUAxJVgqdUyGeds0sFlB2WFW9XdZwGG6
-	 2nGECZ8O0uwtkf3Dpy7XP8LHTumoW2CpV78hWOoTAn3Vw0MZtqcsSPco5vpzm+OhTPA==
+	t=1795398988;
+	b=UCEz7TJ3FDh48jlJp/kNwha2W0tSwvcwVSW/Tt2ZpByTCV45NcaXzS7WI8c3VWonEU2l
+	 jWORTsByR5NFICA3dvYXJJPlB12aJNwZm/gL5PrxFaovvPP8eg0KytKIE2l2Nvl9qgpRX
+	 zAzYIhhozdsy8QSZepSSfcQlBh18Qca2aMKMsN3mQjzQ7+crOiaDNWF8Bx5PoN+iQ8p8F
+	 9fqkDPVsLKd0Gr9fK4OTVmFC6gPP4SX3z72qpnkDsT52a3w2jTdMkUVShmz2VQ9ez9Mb/
+	 EX4lF9klBT7z5wWuenPMvK1i9WC8+qUns1CCiYx/ZrfxEFbdtA6boiWNWHDJUrWMMXg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795364894;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 Mail-Followup-To:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=iliHa2JYx8K6gmU8uBB+hP4z50snkbYVmYuatp7ZD3M=;
-	b=G7MYWZ6xz9QG/+mVJaFoh37ZL8GkvoYY4rDNe5GlcuOs8wjc4Yz7E8jr6rJ+ejju4+6b
-	 GJfwj7ifUTdUFWxZQtXbFgjhl4Vw5ae+eKNESdtZ/urw/s/4DUypQlNAUDdbzaf3m+iM3
-	 AFYJkwameoDLuw3Ac884oXywhuscaD1GLNIN3SB8uCDqCpSHfam1uh+Q4H4X57MnS1Dcj
-	 wczDeyv4KsAMO1zXTDSl7oj/014gvFruWcPbts+53a9C4m5XMz4e9dh0TcqJeyPcJcUOn
-	 gImWdhEP+IAnpJ8mt0VKDJtmVMxbT5YUiHFP0a3gUEKF/t2YG1OBz7hcQfmn0mtA7PQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795398988;
+	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 MIME-Version:X-Received:Date:X-Google-Appengine-App-Id:
+	 X-Google-Appengine-App-Id-Alias:Message-ID:Subject:From:To:
+	 Content-Type;
+	bh=SlyZxZgV2CPF6b52Gh9ylOu+uEyo7tAUBf4kSjBUq8w=;
+	b=jegwWXexccYIwSWjmGPS/gKhqtFPfhWjwP/csntONMJeWz79PrYnOz2BppP43WmihuJC
+	 R5p4/C2xrh3k+Ceoo9oEqFuNbmfN7ov6EzLyLAmDAim3hZNyJs/447y1n2wPy017BQ/KB
+	 4SdLIOBGQ+HXO2A2G+CgYFBs2X2mGffEnpCkgz2NL8ZPI4Sql0mCxkA632YhMnPAw337/
+	 sMNNxWFcztvD6FPv2jHeAXdOdA3xGZQWDsGYJk6AiGHWicsV4m3+X82yycxwZrDZnSK8R
+	 hF939nM3n/7dVXlopZE7gjlSr87jr3F1oUjompIOytZUyQtj93L6UsbUYNtjuZa4vmg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f12MIUMt;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=fail header.from=syzkaller.appspotmail.com;
+	spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	arc=none smtp.remote-ip=209.85.210.71
+Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com [209.85.210.71])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AD24606A320;
-	Sun, 22 Nov 2026 16:28:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f12MIUMt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C5181F000D2;
-	Sun, 22 Nov 2026 16:28:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795364893;
-	bh=iliHa2JYx8K6gmU8uBB+hP4z50snkbYVmYuatp7ZD3M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=f12MIUMtFt78eE6xd0aG0ZBpom6YJe7xS0KBePw5qkBsuA5yAgYi+MsPXS1jEZpbm
-	 cetjsUR4VHgffloXkbwhgW4yp9Ctx988z+GBvvuJo+ELgvuy+gEcI5PkDUG9F8JrWy
-	 /rWTO1gBFyYVzXpjFzDQMO2U/dUg0gAmODkQ/UvE8j+Jzyy5a7XBsdyYXVafuEcPAM
-	 SkZvgRf0R6maHgmwDRQGp+wTaLRWMmEmkgtZp/nQKQo2hT+kT19teHAekWvYuuc0Tl
-	 Z6X5hsJrZZVzTuAh0ZOLm3AELaQ0IuvmifVsPuLnuu9aqggW5pRVOU9lEMIe5tjfg5
-	 gbBS/WQ4c9gBg==
-Date: Mon, 23 Nov 2026 00:28:04 +0800
-From: Zorro Lang <zlang@kernel.org>
-To: Shaopei Zhu <shaopei_1012@163.com>
-Cc: fstests@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>, 
-	exfat@lists.linux.dev
-Subject: Re: [PATCH] exfat: test EXFAT_IOC_COMBINE
-Message-ID: <awMH-NYHb-k_3N9v@zlang-mailbox>
-Mail-Followup-To: Shaopei Zhu <shaopei_1012@163.com>, 
-	fstests@vger.kernel.org, Namjae Jeon <linkinjeon@kernel.org>, exfat@lists.linux.dev
-References: <20261122125634.624942-1-shaopei_1012@163.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF01D606A31E
+	for <exfat@lists.linux.dev>; Mon, 23 Nov 2026 01:56:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DF01D606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+Received: by mail-ot1-f71.google.com with SMTP id 46e09a7af769-8632a144987so1232445a34.2
+        for <exfat@lists.linux.dev>; Sun, 22 Nov 2026 17:56:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795398987; x=1796003787;
+        h=content-type:to:from:subject:message-id:date:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SlyZxZgV2CPF6b52Gh9ylOu+uEyo7tAUBf4kSjBUq8w=;
+        b=zoeWeQ9sjCeGSLc5APEI2GO8fwWtjdWTUFDvQ2VX5btlXHj+oc3wIrpYA1t8owT+em
+         atS8Ti7LtP6MF7uAzDRvMP5gY2Svg+BlIjOw2M0duJS2UHRo+128dyYwKh4/1VmNanRr
+         Y295OIgT5Ag4uIRx8FJjaY4rMdZt4eZtA+BxHd0jeHhpmj5bq4kGePdCX7KIGOSb5cJ+
+         BFOFY9GnS4y5M8MY6CN+x2j3LxzpPSXsBbWDcodqSPAvQ0MZ+fN+8Rm3rs9Q08v6Tuce
+         WaE8Wb0Hq+I3BhFEhJAupkyilgj4ERE7qfDEnZsBbEpLKyvkZOvyOFdb5UEMsDGjW79g
+         Y8cg==
+X-Gm-Message-State: APuU4Z+aSgZ4IZI7g/INHXrp7kEo/MadZAZ4e1B2KdJLpAqCFhDKDm+s
+	zrxtuS39cHzakXhXzWO7HDD3fsrUPSFbhlvmk1BaSxsKNxr0pdRfBsFW4mPfc0WFcVAB+4Lf1in
+	Ic6x2QibvTbChGb05o2G7VqENajKfmewyAeziXQnI/Z0VJ9jKN+gcfOEsezQ=
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -59,387 +57,166 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261122125634.624942-1-shaopei_1012@163.com>
+X-Received: by 2002:a05:6808:130a:b0:573:7a6b:f32c with SMTP id
+ 5614622812f47-57a0c4b923bmr9672777b6e.50.1795398986911; Sun, 22 Nov 2026
+ 17:56:26 -0800 (PST)
+Date: Sun, 22 Nov 2026 17:56:26 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <6b039d4a.a481e175.27cf24.0013.GAE@google.com>
+Subject: [syzbot] [exfat?] KCSAN: data-race in copy_folio_from_iter_atomic /
+ fat12_ent_put (6)
+From: syzbot <syzbot+c1b4f0f31099fb2324e2@syzkaller.appspotmail.com>
+To: exfat@lists.linux.dev, hirofumi@mail.parknet.co.jp, linkinjeon@kernel.org, 
+	linux-kernel@vger.kernel.org, sj1557.seo@samsung.com, 
+	syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Nov 22, 2026 at 08:56:34PM +0800, Shaopei Zhu wrote:
-> Add a test for EXFAT_IOC_COMBINE, which appends the clusters of one
-> file to another without copying data, zero-filling the destination up
-> to the next cluster boundary first, and then unlinks the source.
-> 
-> The test covers an aligned and an unaligned destination, empty
-> destination and source, a fragmented source appended to a contiguous
-> destination, a destination extended by truncate and by fallocate, a
-> source unlinked before the call, and invalid requests, and checks that
-> the source is unlinked.  The contents are compared with the expected
-> result before and after a remount.
-> 
-> It is skipped on kernels without the ioctl.
-> 
-> This was written with the help of an AI coding assistant (Claude Code,
-> Opus 5.5) and reviewed and tested by me.
-> 
-> Signed-off-by: Shaopei Zhu <shaopei_1012@163.com>
-> ---
-> 
-> Notes:
->     The ioctl is added by this kernel patch, under review:
->     https://lore.kernel.org/all/20261122124029.609636-1-shaopei_1012@163.com/
+Hello,
 
-Hi,
+syzbot found the following issue on:
 
-Thanks for this new feature test case.
+HEAD commit:    f802b6558eb8 Merge tag 'xfs-fixes-7.4-rc4' of git://git.ke..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=17d97cd5580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=886d2ddd2d6b664e
+dashboard link: https://syzkaller.appspot.com/bug?extid=c1b4f0f31099fb2324e2
+compiler:       Debian clang version 22.1.8 (1~deb13u4), Debian LLD 22.1.8
 
-For a new feature, we usually wait until it has enough review and is confirmed
-to be accepted by the subsystem before merging its test cases. Just in case
-the patch gets nacked or its behavior changes during review. Please ping this
-thread once it's ready :)
+Unfortunately, I don't have any reproducer for this issue yet.
 
-A few of initial review points below ...
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/2b34daaac71e/disk-f802b655.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/1e58ec148c51/vmlinux-f802b655.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/465e72cdcb06/bzImage-f802b655.xz
 
->     
->     The test is skipped on kernels without it.  Based on for-next.
->
->  .gitignore          |   1 +
->  src/Makefile        |   2 +-
->  src/exfat_combine.c |  91 +++++++++++++++++++++++++
->  tests/exfat/002     | 158 ++++++++++++++++++++++++++++++++++++++++++++
->  tests/exfat/002.out |  15 +++++
->  5 files changed, 266 insertions(+), 1 deletion(-)
->  create mode 100644 src/exfat_combine.c
->  create mode 100755 tests/exfat/002
->  create mode 100644 tests/exfat/002.out
-> 
-> diff --git a/.gitignore b/.gitignore
-> index cdcfa06..0876aee 100644
-> --- a/.gitignore
-> +++ b/.gitignore
-> @@ -82,6 +82,7 @@ tags
->  /src/dirperf
->  /src/dirstress
->  /src/e4compact
-> +/src/exfat_combine
->  /src/ext4_resize
->  /src/fake-dump-rootino
->  /src/fault
-> diff --git a/src/Makefile b/src/Makefile
-> index a1fc38d..b42d7d7 100644
-> --- a/src/Makefile
-> +++ b/src/Makefile
-> @@ -38,7 +38,7 @@ LINUX_TARGETS = dirstress fill fill2 getpagesize holes lstat64 \
->  	detached_mounts_propagation ext4_resize t_readdir_3 splice2pipe \
->  	uuid_ioctl t_snapshot_deleted_subvolume fiemap-fault min_dio_alignment \
->  	rw_hint btrfs_ioctl refluxfs xfs-exchange-to-eof \
-> -	xfs-exchange-to-dirty-eof xfs-swapext-reflink
-> +	xfs-exchange-to-dirty-eof xfs-swapext-reflink exfat_combine
->  
->  EXTRA_EXECS = dmerror fill2attr fill2fs fill2fs_check scaleread.sh \
->  	      btrfs_crc32c_forged_name.py popdir.pl popattr.py \
-> diff --git a/src/exfat_combine.c b/src/exfat_combine.c
-> new file mode 100644
-> index 0000000..2b0b795
-> --- /dev/null
-> +++ b/src/exfat_combine.c
-> @@ -0,0 +1,91 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2026 Shaopei Zhu.  All Rights Reserved.
-> + *
-> + * Call EXFAT_IOC_COMBINE to append the clusters of src to dst.
-> + *
-> + * Exits with 0 on success, 2 if the ioctl is not supported and 1 on any
-> + * other error.
-> + */
-> +#include <errno.h>
-> +#include <fcntl.h>
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <string.h>
-> +#include <unistd.h>
-> +#include <sys/ioctl.h>
-> +#include <linux/types.h>
-> +#include <linux/ioctl.h>
-> +
-> +#ifndef EXFAT_IOC_COMBINE
-> +struct exfat_combine_args {
-> +	__s32 src_fd;
-> +	__u32 flags;
-> +};
-> +#define EXFAT_IOC_COMBINE	_IOW('r', 0x20, struct exfat_combine_args)
-> +#endif
-> +
-> +static void usage(const char *prog)
-> +{
-> +	fprintf(stderr,
-> +		"usage: %s [-f flags] [-r|-w] [-U] dst src\n"
-> +		"  -f flags  value of exfat_combine_args.flags\n"
-> +		"  -r        open src read-only\n"
-> +		"  -w        open src write-only\n"
-> +		"  -U        unlink src before combining (use the open fd)\n",
-> +		prog);
-> +	exit(1);
-> +}
-> +
-> +int main(int argc, char **argv)
-> +{
-> +	struct exfat_combine_args args = { 0 };
-> +	int src_mode = O_RDWR, unlink_first = 0;
-> +	int c, dst, src;
-> +
-> +	while ((c = getopt(argc, argv, "f:rwU")) != -1) {
-> +		switch (c) {
-> +		case 'f':
-> +			args.flags = strtoul(optarg, NULL, 0);
-> +			break;
-> +		case 'r':
-> +			src_mode = O_RDONLY;
-> +			break;
-> +		case 'w':
-> +			src_mode = O_WRONLY;
-> +			break;
-> +		case 'U':
-> +			unlink_first = 1;
-> +			break;
-> +		default:
-> +			usage(argv[0]);
-> +		}
-> +	}
-> +	if (argc - optind != 2)
-> +		usage(argv[0]);
-> +
-> +	dst = open(argv[optind], O_RDWR);
-> +	if (dst < 0) {
-> +		perror(argv[optind]);
-> +		return 1;
-> +	}
-> +	src = open(argv[optind + 1], src_mode);
-> +	if (src < 0) {
-> +		perror(argv[optind + 1]);
-> +		return 1;
-> +	}
-> +	if (unlink_first && unlink(argv[optind + 1])) {
-> +		perror("unlink");
-> +		return 1;
-> +	}
-> +
-> +	args.src_fd = src;
-> +	if (ioctl(dst, EXFAT_IOC_COMBINE, &args)) {
-> +		fprintf(stderr, "EXFAT_IOC_COMBINE: %s\n", strerror(errno));
-> +		return errno == ENOTTY ? 2 : 1;
-> +	}
+AI-generated root cause summary:
+fat12_ent_put() in fs/fat/fatent.c modifies FAT table buffer_head data
+(fatent->bhs[0]->b_data and, for block-spanning entries, fatent->bhs[1]->b_data)
+without acquiring lock_buffer(). Because block device writeback
+(blkdev_writepages() -> block_write_full_folio() / write_dirty_buffer()) relies
+on lock_buffer() to synchronize buffer modifications against in-flight write
+bios, fat12_ent_put() can overwrite bh->b_data concurrently while the block
+driver (here loop1 via lo_rw_aio() -> shmem_file_write_iter() ->
+copy_folio_from_iter_atomic()) is reading the buffer for an ongoing writeback
+I/O.
 
-Your patch mentions that "Open file descriptors of the source refer to an empty
-file afterwards." Given that, shouldn't we also verify here that fstat(src)
-reports st_size == 0, and that pread(src) returns 0 to ensure the page cache
-has been invalidated?
+full analysis:  https://syzkaller.appspot.com/x/ai_root_cause?x=c1b4f0f31099fb2324e2
 
-> +
-> +	close(src);
-> +	close(dst);
-> +	return 0;
-> +}
-> diff --git a/tests/exfat/002 b/tests/exfat/002
-> new file mode 100755
-> index 0000000..c2c0d26
-> --- /dev/null
-> +++ b/tests/exfat/002
-> @@ -0,0 +1,158 @@
-> +#! /bin/bash
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) 2026 Shaopei Zhu.  All Rights Reserved.
-> +#
-> +# FS QA Test No. exfat/002
-                    ^^^^^^^^^
-                    002
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+c1b4f0f31099fb2324e2@syzkaller.appspotmail.com
 
-> +#
-> +# Test EXFAT_IOC_COMBINE, which appends the clusters of one file to
-> +# another without copying any data and then unlinks the source.  A
-> +# destination that is not cluster aligned is zero-filled up to the next
-> +# cluster boundary first, so the appended data always starts at a cluster
-> +# boundary.  Check the result before and after a remount, covering
-> +# contiguous and fragmented files, a destination extended by truncate and
-> +# fallocate, an already unlinked source, and the error cases, in which the
-> +# source must be left alone.
-> +#
-> +. ./common/preamble
-> +_begin_fstest auto quick rw
-                               ^^^^^
-                               ioctl
+==================================================================
+BUG: KCSAN: data-race in copy_folio_from_iter_atomic / fat12_ent_put
 
-> +
-> +. ./common/filter
+write to 0xffff8881074bf418 of 1 bytes by task 4984 on cpu 0:
+ fat12_ent_put+0x74/0x180 fs/fat/fatent.c:168
+ __fat_alloc_clusters+0x571/0xdc0 fs/fat/fatent.c:542
+ fat_alloc_chain+0x25/0x30 fs/fat/fatent.c:610
+ fat_add_clusters fs/fat/inode.c:109 [inline]
+ __fat_get_block fs/fat/inode.c:156 [inline]
+ fat_get_block+0x276/0x650 fs/fat/inode.c:191
+ __block_write_begin_int+0x459/0x1070 fs/buffer.c:2043
+ block_write_begin fs/buffer.c:2157 [inline]
+ cont_write_begin+0x4af/0x6c0 fs/buffer.c:2519
+ fat_write_begin+0x52/0xf0 fs/fat/inode.c:233
+ generic_perform_write+0x198/0x510 mm/filemap.c:4407
+ __generic_file_write_iter+0x9e/0x120 mm/filemap.c:4524
+ generic_file_write_iter+0x77/0x1f0 mm/filemap.c:4550
+ new_sync_write fs/read_write.c:575 [inline]
+ vfs_write+0x57a/0x9b0 fs/read_write.c:667
+ ksys_write+0xdc/0x1a0 fs/read_write.c:719
+ __do_sys_write fs/read_write.c:730 [inline]
+ __se_sys_write fs/read_write.c:727 [inline]
+ __x64_sys_write+0x40/0x50 fs/read_write.c:727
+ x64_sys_call+0x154e/0x2550 arch/x86/include/generated/asm/syscalls_64.h:2
+ do_syscall_x64 arch/x86/entry/syscall_64.c:61 [inline]
+ do_syscall_64+0x11e/0x3a0 arch/x86/entry/syscall_64.c:89
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
 
-Feel free to remove this if it's unused.
+read to 0xffff8881074bf400 of 1024 bytes by task 33 on cpu 1:
+ memcpy_from_iter lib/iov_iter.c:85 [inline]
+ iterate_bvec include/linux/iov_iter.h:123 [inline]
+ iterate_and_advance2 include/linux/iov_iter.h:306 [inline]
+ iterate_and_advance include/linux/iov_iter.h:332 [inline]
+ __copy_from_iter lib/iov_iter.c:261 [inline]
+ copy_folio_from_iter_atomic+0x73a/0x1050 lib/iov_iter.c:491
+ generic_perform_write+0x34b/0x510 mm/filemap.c:4425
+ shmem_file_write_iter+0xc5/0xf0 mm/shmem.c:3701
+ lo_rw_aio+0x6e9/0x7a0 drivers/block/loop.c:-1
+ do_req_filebacked drivers/block/loop.c:-1 [inline]
+ loop_handle_cmd drivers/block/loop.c:1847 [inline]
+ loop_process_work+0x569/0xb00 drivers/block/loop.c:1882
+ loop_workfn+0x31/0x40 drivers/block/loop.c:1906
+ process_one_work kernel/workqueue.c:3495 [inline]
+ process_scheduled_works+0x582/0xab0 kernel/workqueue.c:3578
+ worker_thread+0x56c/0x770 kernel/workqueue.c:3659
+ kthread+0x248/0x2a0 kernel/kthread.c:436
+ ret_from_fork+0x146/0x330 arch/x86/kernel/process.c:158
+ ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
 
-> +
-> +_require_scratch
-> +_require_test_program "exfat_combine"
-> +_require_xfs_io_command "falloc"
-> +
-> +_scratch_mkfs >> $seqres.full 2>&1
-> +_scratch_mount
-> +
-> +combine=$here/src/exfat_combine
-> +mnt=$SCRATCH_MNT
-> +
-> +touch $mnt/probe_dst $mnt/probe_src
-> +$combine $mnt/probe_dst $mnt/probe_src >> $seqres.full 2>&1
-> +[ $? -eq 2 ] && _notrun "kernel does not support EXFAT_IOC_COMBINE"
+Reported by Kernel Concurrency Sanitizer on:
+CPU: 1 UID: 0 PID: 33 Comm: kworker/u8:1 Not tainted syzkaller #0 PREEMPT(lazy) 
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 11/06/2026
+Workqueue: loop1 loop_workfn
+==================================================================
+netdevsim netdevsim1 netdevsim3 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim1 netdevsim2 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim1 netdevsim1 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim1 netdevsim0 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+bond0 (unregistering): Released all slaves
+hsr_slave_0: left promiscuous mode
+hsr_slave_1: left promiscuous mode
+veth1_macvtap: left promiscuous mode
+veth0_macvtap: left promiscuous mode
+veth1_vlan: left promiscuous mode
+veth0_vlan: left promiscuous mode
+netdevsim netdevsim4 netdevsim3 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim4 netdevsim2 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim4 netdevsim1 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+netdevsim netdevsim4 netdevsim0 (unregistering): unset [1, 0] type 2 family 0 port 6081 - 0
+bridge_slave_1: left allmulticast mode
+bridge_slave_1: left promiscuous mode
+bridge0: port 2(bridge_slave_1) entered disabled state
+bridge_slave_0: left allmulticast mode
+bridge_slave_0: left promiscuous mode
+bridge0: port 1(bridge_slave_0) entered disabled state
+bond0 (unregistering): (slave bond_slave_0): Releasing backup interface
+bond_slave_0: left promiscuous mode
+bond0 (unregistering): (slave bond_slave_1): Releasing backup interface
+bond_slave_1: left promiscuous mode
+bond0 (unregistering): Released all slaves
+hsr_slave_0: left promiscuous mode
+hsr_slave_1: left promiscuous mode
+batman_adv: batadv0: Interface deactivated: batadv_slave_0
+batman_adv: batadv0: Removing interface: batadv_slave_0
+batman_adv: batadv0: Interface deactivated: batadv_slave_1
+batman_adv: batadv0: Removing interface: batadv_slave_1
+veth1_macvtap: left promiscuous mode
+veth0_macvtap: left promiscuous mode
+veth1_vlan: left promiscuous mode
+veth0_vlan: left promiscuous mode
+team0 (unregistering): Port device team_slave_1 removed
+team0 (unregistering): Port device team_slave_0 removed
 
-You're currently ignoring other errors and keep running, shouldn't
-we _fail directly?
 
-Thanks,
-Zorro
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-> +rm -f $mnt/probe_dst $mnt/probe_src
-> +
-> +# st_blksize is the cluster size on exFAT
-> +clu=$(stat -c %o $mnt)
-> +echo "cluster size $clu" >> $seqres.full
-> +
-> +# write <file> <pattern> <offset> <length>, to a scratch file and to the
-> +# file holding its expected contents
-> +write()
-> +{
-> +	$XFS_IO_PROG -f -c "pwrite -S $2 $3 $4" $mnt/$1 >> $seqres.full
-> +	$XFS_IO_PROG -f -c "pwrite -S $2 $3 $4" $tmp.$1 >> $seqres.full
-> +}
-> +
-> +# what the kernel does to <dst>: zero-fill to a cluster boundary and
-> +# append the contents of <src>, which is then unlinked
-> +expect_combine()
-> +{
-> +	local size=$(stat -c %s $tmp.$1)
-> +	local src_size=$(stat -c %s $tmp.$2)
-> +
-> +	[ $src_size -eq 0 ] && { rm -f $tmp.$2; return; }
-> +	size=$(( (size + clu - 1) / clu * clu ))
-> +	$XFS_IO_PROG -c "truncate $size" $tmp.$1
-> +	cat $tmp.$2 >> $tmp.$1
-> +}
-> +
-> +do_combine()
-> +{
-> +	$combine "$@" $mnt/$dst $mnt/$src || echo "combine $dst $src failed"
-> +	[ -e $mnt/$src ] && echo "$src still exists"
-> +	expect_combine $dst $src
-> +	rm -f $tmp.$src
-> +}
-> +
-> +check()
-> +{
-> +	local f
-> +
-> +	for f in "$@"; do
-> +		cmp $mnt/$f $tmp.$f || echo "$f: wrong contents"
-> +	done
-> +}
-> +
-> +echo "aligned destination, source still in the page cache"
-> +dst=a src=b
-> +write $dst 0x61 0 $((4 * clu))
-> +$XFS_IO_PROG -c fsync $mnt/$dst
-> +write $src 0x62 0 $((3 * clu + 123))
-> +do_combine
-> +
-> +echo "unaligned destination"
-> +dst=c src=d
-> +write $dst 0x63 0 $((clu + 1))
-> +write $src 0x64 0 $clu
-> +do_combine
-> +
-> +echo "empty destination"
-> +dst=e src=f
-> +touch $mnt/$dst $tmp.$dst
-> +write $src 0x65 0 $clu
-> +do_combine
-> +
-> +echo "empty source does not pad the destination"
-> +dst=g src=h
-> +write $dst 0x66 0 100
-> +touch $mnt/$src $tmp.$src
-> +do_combine
-> +
-> +echo "fragmented source, contiguous destination"
-> +dst=i src=j
-> +write $dst 0x67 0 $((2 * clu))
-> +$XFS_IO_PROG -c fsync $mnt/$dst
-> +for n in 0 1 2; do
-> +	write $src 0x68 $((n * clu)) $clu
-> +	$XFS_IO_PROG -c fsync $mnt/$src
-> +	write spacer 0x78 $((n * clu)) $clu
-> +	$XFS_IO_PROG -c fsync $mnt/spacer
-> +done
-> +write $src 0x68 $((3 * clu)) 100
-> +do_combine
-> +
-> +echo "destination extended by truncate"
-> +dst=k src=l
-> +write $dst 0x69 0 1000
-> +$XFS_IO_PROG -c fsync -c "truncate $((3 * clu + 10))" $mnt/$dst
-> +$XFS_IO_PROG -c "truncate $((3 * clu + 10))" $tmp.$dst
-> +write $src 0x6a 0 $clu
-> +do_combine
-> +
-> +echo "destination extended by fallocate"
-> +dst=m src=n
-> +write $dst 0x6b 0 10
-> +$XFS_IO_PROG -c "falloc 0 $((2 * clu + 5))" $mnt/$dst
-> +$XFS_IO_PROG -c "truncate $((2 * clu + 5))" $tmp.$dst
-> +write $src 0x6c 0 $((clu + 7))
-> +do_combine
-> +
-> +echo "source unlinked before combining"
-> +dst=o src=p
-> +write $dst 0x6d 0 $((3 * clu))
-> +write $src 0x6e 0 $((2 * clu + 77))
-> +do_combine -U
-> +
-> +echo "invalid requests"
-> +dst=q src=r
-> +write $dst 0x6f 0 $clu
-> +write $src 0x70 0 $clu
-> +$combine $mnt/$dst $mnt/$dst 2>&1
-> +$combine -f 1 $mnt/$dst $mnt/$src 2>&1
-> +$combine -r $mnt/$dst $mnt/$src 2>&1
-> +$combine -w $mnt/$dst $mnt/$src 2>&1
-> +
-> +check a c e g i k m o q r
-> +
-> +echo "after remount"
-> +_scratch_cycle_mount
-> +check a c e g i k m o q r
-> +for f in b d f h j l n p; do
-> +	[ -e $mnt/$f ] && echo "$f exists after remount"
-> +done
-> +
-> +# success, all done
-> +status=0
-> +exit
-> diff --git a/tests/exfat/002.out b/tests/exfat/002.out
-> new file mode 100644
-> index 0000000..f061ae8
-> --- /dev/null
-> +++ b/tests/exfat/002.out
-> @@ -0,0 +1,15 @@
-> +QA output created by 002
-> +aligned destination, source still in the page cache
-> +unaligned destination
-> +empty destination
-> +empty source does not pad the destination
-> +fragmented source, contiguous destination
-> +destination extended by truncate
-> +destination extended by fallocate
-> +source unlinked before combining
-> +invalid requests
-> +EXFAT_IOC_COMBINE: Invalid argument
-> +EXFAT_IOC_COMBINE: Invalid argument
-> +EXFAT_IOC_COMBINE: Bad file descriptor
-> +EXFAT_IOC_COMBINE: Bad file descriptor
-> +after remount
-> -- 
-> 2.53.0
-> 
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
