@@ -1,47 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.5
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795551941;
-	b=2DCtPmRyz//rnL//F/IYhUyY0PTPOVyk2NbC35aV7e6vJq6AdGjO4zIvQPWvQbIZy8Wf
-	 0ELY1tLZqwTUC82AePvMA1HZmdQcOkxMlIgUjHTttV/LrGI0MFHMgiWLB4609BNMzx2Gz
-	 3VKmJrZ2DHtL+kr4GH6Y0OopWcH1yYRzntae9DJp++G21gXntIsg2nMXx/rG36FBjsuMC
-	 bFUo1rIAHexmup7SjXTwCoGXGXWbfZjK54xWZj6tIRisS1ekcdzi/lN+cT7txQlBRzLoN
-	 56Yi/jnTtIZSWPweh+Mzyq1uRoIizmhnQP31pCsi0Z6I8w1cBcu68VZYGPf6ErUR9IA==
+	t=1795555401;
+	b=exHClH4vF4dQp5mtGucfXSBSUvtXrJOfYiusM7u1dGdlWAN5KjVEtWbqySWIoiOJQD/A
+	 ykC/aQucAIX0BFCU5EwxrnRpRnOup/BjX/FQDhpvuZvb/tS0Tdqr1W26GkhGEB5Lyrlpl
+	 Z7Sj922ov/2/3ZT0rGHhSu+3yQtQxXlJp22hR4FU1Oj/J0iYmCiLnHFaLkvOUrt50UK9M
+	 amdFapT9nRUs0YJiNEORi9K5dwqKDz8Mt68TRUpphUlbaaumIwPcGci4Df4xgKq+jdQT8
+	 KpYcYTft7EkpZTWfFIfdaQ5PXrVfv7rNa2J6Dfj2I8ixRq2bCaWG/a7K9aHe5R2SR0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795551941;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795555401;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
 	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=CxA39VfLiEjtTTp9Aii488xshShED2FJfNlpma0DY2s=;
-	b=uXzu6WQfmXXCyxASWkMQueJwtreB3OilpBwjNmmR5ajbhzi0il+nnEE/UhJYa9qqd4jP
-	 WrZf+H5//gQgN0jq49Em5idrptRcZ5DEPsiodxd7+8GqhHyZ9t/0btUZIKzkPNfSO5mq2
-	 6f5SGvHv6+BN3cp1VLtnWatwxzY++8uJgz4PMrztUZuKKMA/PgSBaO5Hhzjescm8vn/2l
-	 CgoQ6UgVSUjo5vCg+noyZHA7k2GoO6cSv8X7uEoovZSYX9P2lc/ME3u8ahDa4wFf3ht0r
-	 MZ4hQwREEz9QRQtwRb7FzqU8vNJeUjFrmr+PeZxoxLZgRC5Qe/kIz+ZmaK8ToFHYatA==
+	bh=3NN7Uwrgfn9AgWRsUFpzDQrvnjAeOvsAT+xPoD7zc2w=;
+	b=XP7swBbDRTXtfptOIKWXcRbWBfcsLXAD7smbso3YGT9QcU/NhEBIB8xs8K8QFJgOIWAO
+	 P6q3JWqh1HKJvyKnkQTeKE4uU8UMnxexeGkWYvVQXQhcpr43LA9C3XZ+NHkRd3ta8cvhc
+	 g0rK47w5qGUXKsqHsABEUeHrtLXrsURwHP0IxRuqROJJmdknJapVSJcz+mVmD8j3FKZ1S
+	 JkPHMT4NBoEmOs0jyphX5uHtih7G4D1N1HL7/bviWgC+L0WZdjXAjyFcUtwPBUAiZITEB
+	 fbTmVPG0/Q0tkvS9M5RyiWQm9XLoksQPe2rcRNVT7T9xIScH0dKMXE8L8YAsaWKHPYA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=163.com;
 	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=ZIfJ0ezT;
-	arc=none smtp.remote-ip=117.135.210.3
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=E5VtfIs6;
+	arc=none smtp.remote-ip=117.135.210.5
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4FDC606A32E
-	for <exfat@lists.linux.dev>; Tue, 24 Nov 2026 20:25:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4FDC606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10794606A31E
+	for <exfat@lists.linux.dev>; Tue, 24 Nov 2026 21:23:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 10794606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=ZIfJ0ezT
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=E5VtfIs6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Cx
-	A39VfLiEjtTTp9Aii488xshShED2FJfNlpma0DY2s=; b=ZIfJ0ezTbw+kiYog85
-	4EStJkIHdbGEebRR2pBsv5Tm11xk7etQQMJvz2+kIN7kZdtdaZxsPVONgizL3cxL
-	0xzPSbrahxqW9YBSxCTuB1BWxSpNvXM1O5vvWcYh+LUgK49IH6mGnreer+sgppEO
-	+jf0K4rQ7J3kc28xEYoK9uU20=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=3N
+	N7Uwrgfn9AgWRsUFpzDQrvnjAeOvsAT+xPoD7zc2w=; b=E5VtfIs6A2g3r1lNX9
+	q+WMpozw5Xxnxqg+pdA703Y6IbYyyjcjainS9eLbRE1DAqEVTbJSeVvHq7awGUlw
+	si5EQUQ4q3rDz1/7z4MpcK+dfP0U6inbaIR4YK+x5ZkGlFwpm8WT7JSo3gf0qaUh
+	1wf3PAFkABoNs9Ozs3+VjzQME=
 Received: from ubuntu (unknown [])
-	by gzga-smtp-mtada-g1-4 (Coremail) with SMTP id _____wA3_s2Z8gVryorWJg--.35239S2;
-	Wed, 25 Nov 2026 04:25:07 +0800 (CST)
+	by gzsmtp5 (Coremail) with SMTP id QCgvCgBH1JceAAZr3k2uHw--.61405S2;
+	Wed, 25 Nov 2026 05:22:49 +0800 (CST)
 From: Shaopei Zhu <shaopei_1012@163.com>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Sungjong Seo <sj1557.seo@samsung.com>
@@ -52,9 +52,9 @@ Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Matthew Wilcox <willy@infradead.org>
-Subject: [PATCH v5] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
-Date: Wed, 25 Nov 2026 04:24:55 +0800
-Message-ID: <20261124202455.817408-1-shaopei_1012@163.com>
+Subject: [PATCH v6] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
+Date: Wed, 25 Nov 2026 05:22:36 +0800
+Message-ID: <20261124212236.830224-1-shaopei_1012@163.com>
 X-Mailer: git-send-email 2.53.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -66,12 +66,12 @@ List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wA3_s2Z8gVryorWJg--.35239S2
-X-Coremail-Antispam: 1Uf129KBjvAXoWfZr1Dtr15tF4fJF18CF1Dtrb_yoWrJF1kCo
-	WfZws7Xw1rtrn3trW8GF17Gry5WaykC3WxJr1YgFWqvF10q34UWa1jy3s8ZaySqw1v9rZ5
-	X34Iqw43JFWavrn3n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxUcGNtUUUUU
-X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6QQCkGsF8qTvQgAA3q
+X-CM-TRANSID:QCgvCgBH1JceAAZr3k2uHw--.61405S2
+X-Coremail-Antispam: 1Uf129KBjvAXoWfZr1Dtr15tF1ftw1DXF4DCFg_yoW5KF1UZo
+	WfZws7Ww1rtrn3trW8CF17GFy5WaykC3WfJr1Y9FWqvF18t34UGa1jy345Za1Sqw1v9rZ3
+	X3yxtw43JFWSvrn3n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxUcM5lUUUUU
+X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6gpm9GsGACqg9wAA3i
 
 Cameras and dashcams recording to exFAT SD cards often write the video
 stream and auxiliary data (e.g. IMU samples) to separate files and merge
@@ -156,31 +156,18 @@ Signed-off-by: Shaopei Zhu <shaopei_1012@163.com>
 ---
 
 Notes:
-    Changes in v5, following Matthew's comment [1] and the Sashiko review
-    of v4 [2]:
+    Changes in v6, following the Sashiko review of v5 [1]:
     
-    - Reword the paragraph that named EXT4_IOC_MOVE_EXT and
-      F2FS_IOC_MOVE_RANGE: only their permission rules were followed, the
-      operation is not related to them.
-    - Refuse files that share clusters on a corrupt volume by comparing the
-      destination with the whole contiguous range of the source, not only
-      its first cluster, and by checking that both files together do not
-      own more clusters than are in use, as exfat_find() does.  Both checks
-      now run before the destination is zero-filled, which could otherwise
-      write zeroes into a cluster shared with the source before the call
-      failed.  A source chain that runs through the destination is only
-      caught by the second check.
-    - Write nothing more once the volume is in an emergency state: before
-      zero-filling the destination, before writing its entry in Step 2 and
-      when cutting its chain again on failure.  Return the error of Step 1
-      instead of always -EIO.
-    - Tell whether the source and the destination were written back by the
-      errseq of their mappings sampled before zero-filling, not only by the
-      return value of the writeback: the error flags are consumed by
-      whoever checks them first, the first writeback of a failed call or a
-      concurrent fsync(), after which a further writeback returns 0.  v4
-      could then keep the padding initialized although it never reached
-      the disk, or move clusters whose new data had failed to reach them.
+    - When the destination cannot be written back after a failed call,
+      lower its zeroed_size to the restored valid_size, not only to its
+      value before the call.  The failed writeback also cleans a folio that
+      was dirty before the call without writing it, so its block tail past
+      valid_size is not initialized on disk.  With zeroed_size left above
+      it, extending valid_size later did not prepare that folio again: the
+      tail showed stale data and the data written before the call was lost.
+      exfat has the same issue whenever the writeback of such a folio fails
+      (a failed sync instead of the call gives the same result); this only
+      avoids it on this path.
     
     This applies to linux-next (tested on next-20261118).  It uses
     exfat_emergency_state(), which comes with "exfat: don't set SB_RDONLY
@@ -190,50 +177,34 @@ Notes:
     
     Testing (linux-next 20261118 + this patch, arm64):
     
-    - Each change was first reproduced on v4 and then checked on v5, with
-      images edited offline and test-only knobs that are not part of the
-      patch:
-      - a destination starting inside a contiguous source, a destination
-        chain running through a contiguous source, and a source chain
-        running through the destination: v4 made a loop in the FAT, and the
-        last one left a destination that exfat_find() refuses; v5 -EIO with
-        both files unchanged, also with an unaligned destination, whose
-        zero-filling would write into a cluster shared with the source;
-      - an emergency state entered after Step 1, or by an error while
-        writing the entry of the destination: v4 still wrote the entry or
-        the FAT, v5 writes nothing; after a forced shutdown v4 wrote the
-        entry of the destination;
-      - real I/O errors injected with fail_make_request: when the write
-        back of the padding fails, or its error is taken by a concurrent
-        fsync() of the destination, v4 exposed stale data (the second case
-        reporting success); when the error for new data of the source is
-        taken by a concurrent fsync() of the source, v4 reported success
-        and the destination got the old data; v5 fails with -EIO and
-        exposes nothing.
-    - Functional tests on 4 KiB clusters, Landlock, permission, dead parent
-      and mount point tests, the crash states of v3 and v4, and fstests
-      exfat/001 and exfat/002 pass.
+    - Reproduced on v5 and checked on v6 with real I/O errors injected with
+      fail_make_request: an unaligned buffered write ending in the last
+      block of a folio, then a call whose writeback of the destination
+      fails, then a write that extends valid_size.  v5 left the written
+      data and the block tail stale on disk, v6 writes both.
+    - All tests reported for v5 were rerun and pass, including the cases
+      that use test-only knobs, and fstests exfat/001 and exfat/002.
     - Builds without warnings with W=1 for arm64 (gcc, clang), arm and
       i386, built-in and as a module; no new sparse warnings.
-    - Not rerun for v5: the long-running tests reported for v2.
-    - Known limits: a source chain running through the destination is not
-      found if the volume has enough other clusters in use; after a forced
-      shutdown, unmounting still clears the dirty flag (an existing exfat
-      behaviour), so a volume left with only the FAT updated is not
-      refused afterwards.
+    - Not rerun for v6: the long-running tests reported for v2.
+    - Known limits, as for v5: a source chain running through the
+      destination is not found if the volume has enough other clusters in
+      use; after a forced shutdown, unmounting still clears the dirty flag
+      (an existing exfat behaviour), so a volume left with only the FAT
+      updated is not refused afterwards.
     
-    [1] https://lore.kernel.org/all/awXMJaZ58iS3K2N0@casper.infradead.org/
-    [2] https://sashiko.dev/#/patchset/20261124142807.773299-1-shaopei_1012%40163.com
+    [1] https://sashiko.dev/#/patchset/20261124202455.817408-1-shaopei_1012%40163.com
     
+    v5: https://lore.kernel.org/all/20261124202455.817408-1-shaopei_1012@163.com/
     v4: https://lore.kernel.org/all/20261124142807.773299-1-shaopei_1012@163.com/
     v3: https://lore.kernel.org/all/20261123132742.743416-1-shaopei_1012@163.com/
     v2: https://lore.kernel.org/all/20261122124029.609636-1-shaopei_1012@163.com/
     v1: https://lore.kernel.org/all/20261121174315.500249-1-shaopei_1012@163.com/
 
  .../userspace-api/ioctl/ioctl-number.rst      |   1 +
- fs/exfat/file.c                               | 719 ++++++++++++++++++
+ fs/exfat/file.c                               | 728 ++++++++++++++++++
  include/uapi/linux/exfat.h                    |  48 ++
- 3 files changed, 768 insertions(+)
+ 3 files changed, 777 insertions(+)
 
 diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
 index dbe4620..e9b4c13 100644
@@ -248,7 +219,7 @@ index dbe4620..e9b4c13 100644
  't'   00-7F  linux/ppp-ioctl.h
  't'   80-8F  linux/isdn_ppp.h
 diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index c7991e9..fb44e5a 100644
+index c7991e9..f89c059 100644
 --- a/fs/exfat/file.c
 +++ b/fs/exfat/file.c
 @@ -13,8 +13,10 @@
@@ -262,7 +233,7 @@ index c7991e9..fb44e5a 100644
  #include <linux/pagemap.h>
  #include <linux/rmap.h>
  #include <linux/uio.h>
-@@ -690,6 +692,721 @@ static int exfat_ioctl_set_volume_label(struct super_block *sb,
+@@ -690,6 +692,730 @@ static int exfat_ioctl_set_volume_label(struct super_block *sb,
  	return exfat_write_volume_label(sb, &uniname);
  }
  
@@ -670,9 +641,10 @@ index c7991e9..fb44e5a 100644
 + * stores through mmap below @old_size are on disk, so keep them, as
 + * exfat_extend_valid_size() does, after flushing them to the medium
 + * ahead of the entry that covers them.  Only if @dst cannot be written
-+ * back, drop its valid and zeroed size back to @old_valid and
-+ * @old_zeroed, and unmap that range so that further stores through mmap
-+ * fault again and extend valid_size.  The entry is written right away.
++ * back, drop its valid size back to @old_valid and its zeroed size to
++ * no more than that, and unmap that range so that further stores through
++ * mmap fault again and extend valid_size.  The entry is written right
++ * away.
 + * Called with the inode and invalidate locks of @dst held.
 + */
 +static void exfat_combine_unpad(struct inode *dst, loff_t old_size,
@@ -682,6 +654,7 @@ index c7991e9..fb44e5a 100644
 +	struct exfat_sb_info *sbi = EXFAT_SB(dst->i_sb);
 +	struct exfat_inode_info *ei = EXFAT_I(dst);
 +	bool shrink = i_size_read(dst) > old_size;
++	loff_t zeroed;
 +
 +	if (shrink)
 +		truncate_setsize(dst, old_size);
@@ -709,8 +682,15 @@ index c7991e9..fb44e5a 100644
 +						    old_size - old_valid, 0);
 +			exfat_set_valid_size(ei, old_valid);
 +		}
-+		if (exfat_get_zeroed_size(ei) > old_zeroed)
-+			exfat_set_zeroed_size(ei, old_zeroed);
++		/*
++		 * The failed writeback also cleaned a folio that was dirty
++		 * before the call, without its blocks reaching the disk: do
++		 * not count its tail past @old_valid as initialized, so that
++		 * extending valid_size prepares and dirties it again.
++		 */
++		zeroed = min(old_zeroed, old_valid);
++		if (exfat_get_zeroed_size(ei) > zeroed)
++			exfat_set_zeroed_size(ei, zeroed);
 +	}
 +
 +	if (shrink) {
@@ -984,7 +964,7 @@ index c7991e9..fb44e5a 100644
  long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
  {
  	struct inode *inode = file_inode(filp);
-@@ -702,6 +1419,8 @@ long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+@@ -702,6 +1428,8 @@ long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
  		return exfat_ioctl_set_attributes(filp, user_attr);
  	case EXFAT_IOC_SHUTDOWN:
  		return exfat_ioctl_shutdown(inode->i_sb, arg);
