@@ -1,48 +1,48 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.2
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795706829;
-	b=aOSyjI+He/ErCZHbg/lCrDNX2SThZdZgHOil2YyntFG8+WIydX8a091x8nvGiziqEzup
-	 UzPSHNp0TIRjmNn6znDddR6WFgZD5tqW435HIEQBne5OREqqeTJ0fUCzFwVKo/m4qSx62
-	 2HjdMV2MWNmHTAkNuT6wjcyYRfPYu9VHd20uGlde4Gj4N5AhaCmpm5LKxgkyQ3ihC+tCy
-	 rzSj5iE6uycz9hUgnH7eNt6IdUtJ/lq2nnrRSl0svaynxKOfTTCy5bNeDBWfoDUcRr9r5
-	 wApweCfI0ZqQ3gVWrD7fveawqS2ZZw7VgP2yEuXR4ISAkkZ/extIPkCce87finl/QmA==
+	t=1795720091;
+	b=iMm5K33mnju5HEXl77UmdBf7X9m1+LKWebOmrTqCms29wV0hixqizRLxxn0psFhhTs8y
+	 vWKAJF+Is3x5TS5X1ctBtZrCZkTatWAlDrwG7GxUqt+/VXy3fxUoI6BIvBxyQk3K6liFz
+	 TKQ0hlL3rjBeDrGmowvYdr7oXWjyli3e85eGCFFE7Vtik7o52TNi3p8RsH+sOCEwLLroz
+	 GDO7iR8W37daUUNnMZaiiXl7rouCCLXBFeiooAAyiOxCYv+oziKgIqPoGp4Kx4uphYOX8
+	 A0yKy6scPFzS0jpGkcpqYsDzD8yWVQfjJwmqzegxYEInscdporGI9nw/fhcjUOgTysg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795706829;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795720091;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
 	 X-CM-SenderInfo;
-	bh=OEHmps0eUNKGl/kt8l21tfZRtQlqHVz3052EVcNzTEM=;
-	b=WEbDfnWo4cK6HBMPydBsfg40Sx10XvdWblh0OZzYqEMc9d3nl+hedoK4gzWbLgXeMs31
-	 e6Jt/J5CF5PGqNNcGr+eFR1Gh2ihVL9bU7K6IlJDvbyuCrcJZjvCInLOhlYZl1j1bz/b+
-	 q8mvvdWo4XLcIak0YlsGB2WRBudiSg9XMZ389SzFU1xqd8Tqk3+ahbu0HzvWaEKhqlSey
-	 wbgadcrfyneFaS7WoqHcJGTBOCjO36PlpKWpXBx5wD6uQDusFZLkgrToJndPSOVScH56s
-	 j6D9DBvUkmP50A7sOP25/MRg5q8HELA0TENw3bbMYLTEymI9JkKlJyXJTS98wWeKf1Q==
+	bh=cv1PjWbliwWDxpQYP6jMCVTrYQljEwKTbdBA+qxv+VA=;
+	b=Pnk4CI2YjOIbEGWCd1o0DD778VmEByeyTlWIAO8vJSVTbP4UFlA0Q5GZjQ7dNvHTJTi3
+	 N5ZtwHCfwPzrrDJY0kAoo5eFr/mdYzNlYZj2/Hl1mpjXVXfqKVxd7lmrHcnAin4n/H7CU
+	 UomVoCxmGBoMa1t4sFZTjObq3PMp/6+DqUHDFWcD/E1Bfl5TUsx8WE5nOulnysWZUSCtp
+	 T10a1xXcuFqjufn12In0Bf72C1k/H2Ps053uurVMDtuPnosW3vIsEHikrkKYEG9V5P/sL
+	 4kw5/kv0J3yVDVO7hGGA4F2iLmTugJv8ivD7O/O/3RCle+STSGELXBjwUDGWrMDr2xg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=163.com;
 	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=TtYvNF20;
-	arc=none smtp.remote-ip=220.197.31.2
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=cze8X9ZU;
+	arc=none smtp.remote-ip=117.135.210.2
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87C22606A31E
-	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 15:27:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 87C22606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDE4F606A31C
+	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 19:08:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDE4F606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=TtYvNF20
+	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=cze8X9ZU
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=OE
-	Hmps0eUNKGl/kt8l21tfZRtQlqHVz3052EVcNzTEM=; b=TtYvNF20wS4epGsE6I
-	FcaotzxaZkYKtre7I/C/pBS6y4nznJo7BPoMFfgpSLnY3ta5JO2JvkKumzWZUh2V
-	jJk2BQeVnoRfQHZhCxi7Gt8+VwXdaz9HPkJm02Ub6KBMo8MWaJsTfM+Gfzd5LfPh
-	8LdWL9JPI9oQ/905Lbf1ClKzg=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=cv
+	1PjWbliwWDxpQYP6jMCVTrYQljEwKTbdBA+qxv+VA=; b=cze8X9ZU5xnY8h0Lyb
+	+kZr/53Q6NHE26jc9TSstipQi1a0FIPYSJeyeNk1It3qwl3KZhsWyDV7GXCWME2w
+	RdXbBG/1G5pScX8SYzz+WJ+luD5HOBFhp6qGPoOR9pLoCK4VBbi/yu71N8DCWnJb
+	j1iL1NXoJL2wq9LtdEMBiMYDU=
 Received: from ubuntu (unknown [])
-	by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id _____wDnD72RTwhrvq_gJw--.40930S2;
-	Thu, 26 Nov 2026 23:26:23 +0800 (CST)
+	by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id _____wD3H0ZagwhrZ21_Kg--.8439S2;
+	Fri, 27 Nov 2026 03:07:21 +0800 (CST)
 From: Shaopei Zhu <shaopei_1012@163.com>
 To: David Timber <dxdt@dev.snart.me>
 Cc: Namjae Jeon <linkinjeon@kernel.org>,
@@ -53,8 +53,8 @@ Cc: Namjae Jeon <linkinjeon@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Matthew Wilcox <willy@infradead.org>
 Subject: Re: [PATCH v7] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
-Date: Thu, 26 Nov 2026 23:26:07 +0800
-Message-ID: <20261126152607.933070-1-shaopei_1012@163.com>
+Date: Fri, 27 Nov 2026 03:07:04 +0800
+Message-ID: <20261126190704.935716-1-shaopei_1012@163.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <dcd27d38-60a2-4c1a-81ff-4a82e99520ab@dev.snart.me>
 References: <20261124230746.850528-1-shaopei_1012@163.com> <CAKYAXd_ap120uprmarov-GuO0fb1eXEgw-U8G08L1xRJ9bv18A@mail.gmail.com> <20261126075247.850895-1-shaopei_1012@163.com> <dcd27d38-60a2-4c1a-81ff-4a82e99520ab@dev.snart.me>
@@ -68,12 +68,12 @@ List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wDnD72RTwhrvq_gJw--.40930S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW3JF45Zr1fGFWUur1DGF4fAFb_yoWxGr4Upa
-	y5trnxt3WDGw17Cr1kZw18XFyYkrZ3JFW3Jrn0gry0kws8Wr4Syr4xK398u3srC3yrA3WY
-	yw4j9a43uF98AaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UHuWLUUUUU=
-X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6h-XZmsIT5+70AAA3c
+X-CM-TRANSID:_____wD3H0ZagwhrZ21_Kg--.8439S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JF45Zr1fJw1rGrW8CrWfKrg_yoWxuw4rpa
+	y5trsxt3WDJ347Cw1kZw48XFy5CrZ3JFW3Jrn0gry0yws0gr4Syry7Kws8ua47Cw4rAa1Y
+	yr4jg347urZ8AaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UHMKtUUUUU=
+X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6grXZmsIg2o2igAA3n
 
 Hi Davo,
 
@@ -87,36 +87,52 @@ On 11/26/26 14:26, David Timber wrote:
 > something to the kernel to solve that particular user error sounds like
 > a lot of trouble to go through...
 
-The remark about sidecar files in my previous mail was part of the
-discussion with Namjae about whether the kernel or user space should
-unlink the source: it explained why the sensor file should not be left
-next to the video.  Following Namjae's suggestion, v8 [1] leaves the
-unlink to user space, so that point is settled, and it was never the
-reason for the ioctl itself.
+The remark about sidecar files in my previous mail gave the wrong
+impression, so let me explain the case properly.  It was meant to say
+why the data has to end up in the video file rather than next to it,
+not to have the kernel make up for a user error.
 
-The reason for merging is that the camera records more than the video:
-custom data such as GPS and per-frame exposure data, which is used in
-post-processing.  It is written to separate files while recording, but
-the product has to hand the user a single file, so when recording stops
-these files are merged into the main MP4 file.  They grow with the
-length of the recording, from tens to hundreds of MiB.
+The camera records more than the video: custom data such as GPS and
+per-frame exposure data, which is used in post-processing.  While
+recording, that data comes from other writers than the muxer and is
+written to separate files; when recording stops, these files are merged
+into the main MP4 file.  They grow with the length of the recording,
+from tens to hundreds of MiB.
 
-On an SD card, merging them by copying takes time proportional to their
-size.  With the write speed dropping to around 10 MB/s under jitter, a
-few hundred MiB take tens of seconds, which users waiting for the
-camera do not accept.  Relinking the clusters makes the time depend on
-the length of the FAT chain instead of the amount of data.  Measured on
-a disk throttled to SD card speeds (30 MiB/s write), appending to a
-300 MiB file with 128 KiB clusters:
+Keeping the recording as a single file is part of the product
+definition: the companion app that plays and edits the recordings, and
+the later processing, all work on that one file.  That lets the product
+define its own data alongside the video; it is more robust, as there is
+no second file that can get out of step with the video; and the custom
+data stays inside the recording rather than lying around as separate
+files.  Whether to have one file is the product's decision, not the
+ioctl's; the ioctl is for the merge that follows from it.
+
+That merge is where the cost lies.  Copying the data takes time
+proportional to its size, and on an SD card, whose write speed drops to
+around 10 MB/s under jitter, a few hundred MiB take tens of seconds,
+during which the user waits for the camera.  Relinking the clusters
+instead makes the time depend on the length of the FAT chain rather
+than on the amount of data.  Measured on a disk throttled to SD card
+speeds (30 MiB/s write), appending to a 300 MiB file with 128 KiB
+clusters:
 
   source     EXFAT_IOC_COMBINE   copy_file_range() + fsync()
-  50 MiB          13.7 ms                 2.2 s
-  500 MiB         14.3 ms                22.3 s
-  1 GiB           13.6 ms                45.7 s
+  50 MiB          12.3 ms                 2.2 s
+  500 MiB         13.3 ms                22.3 s
+  1 GiB           13.0 ms                45.7 s
 
-The ioctl stays at 12 to 15 ms whatever the size; the time to build a
-FAT chain for a contiguous file grows with its number of clusters, but
-stays far below that of copying the data.
+The ioctl stays at 12 to 16 ms whatever the size; building a FAT chain
+for a contiguous file takes time that grows with its number of
+clusters, but far less than copying the data.
+
+The time matters for more than the wait.  A camera runs on a battery
+and records to a removable card, so a copy that takes tens of seconds
+is also a window in which the card can be pulled or the battery can run
+out, leaving the video file with a partial trailer.  The ioctl takes a
+few milliseconds, and its updates are written in an order that leaves
+all data reachable from one of the two files if it is interrupted at
+any point.
 
 > Also, there's issue of block alignment: Windows formats exfat volumes up
 > to 32MB cluster size(I myself unsure of this MS's decision, but it is
@@ -191,7 +207,7 @@ maintainers' call to make.  To keep it small, the change is
 self-contained in fs/exfat/file.c: it touches neither the VFS nor the
 on-disk format, and only uses structures exFAT already has.  The
 interface is a single ioctl with an 8-byte argument, whose flags field
-is reserved for later extensions.  v8 dropped the unlink from the
+is reserved for later extensions.  v8 [1] dropped the unlink from the
 kernel, as Namjae suggested, which removed about 170 lines.  It is
 covered by a test for fstests (exfat/002), and exfatcombine exercises
 it from user space.
