@@ -1,55 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.2
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795683296;
-	b=S/G+GQCmjuIvEQgt6HT/oUCWTTzUq3EgQ+BJLU0r+ElQYXbTKXWoKfpqnj30TwQ/KQCC
-	 SE99p1Lf0Ma7HTvgz+/coJH0BQ5UxiAYwnTqBjm+0WOgBUWQPtfseq+UrwyzvWtPkblBj
-	 BX3bE0oEiMN5uRFa3RexS10xuT8Jq2RuTyj2gS1xKu8aBm8l//ks0pYoqvJ+IDdPbotlE
-	 l4+XxfGuHB30P0Y34d+JDOZB5AxBCTZlgxNZ+I3EShVF7CR7BPogAwHrdBQhZ63qPR8lw
-	 eVBisQbuj+coBJQ2DtMAX7vIeF7iP8SHqc0wbWfzxeYl38Stp5ROhCVZd6IED4BDYyQ==
+	t=1795695942;
+	b=RUcerfSr1C2UqiF46f0CY7NUjYzQQKzfNYgsGZew0F3BQfe0fdDzP1jgh0ACbFud1QdL
+	 4+jYQJq85hqq4YZ9TVQ8oiiMmY/VdRNi0v8nIKOi0o/vR3zeUfQ1fsE6789MDNp/mpiaM
+	 KUbWwIJ6gYhgOD/JM5I3X6DkWFUtvQqOGBNjIJuLzVB2eKIyM7u/Jb4iXLyPA9AYpPW4Y
+	 SnadPT1Ub4C9zV8fh0QWEAOw9q9c9xtroMNfIH3tXr/p3kI8/dYN5OguVrvkBjuvJt9rh
+	 jmRxAaWUXtDoz4M0s6L+/Az3+jKIZt/EI+dWp1n/W/1G8pdXWo4PQV6zvsRoAS6Kr5w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795683296;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=XD2aXTSUuiCiLHpGAugxfZVXZCiLEmjgR9QKZY9m6mI=;
-	b=xukmzYuu+EMXXYYImvy0S4KFTsYqSps4HGwF8oN3AdmMCrAPyWRVC0gMNzRFn2E4kKAx
-	 95S/dCtnXFFkTKfnCv2HdM11TCNG2MR7glaeHcUuVIUbJ1uxGqnbhYeugLA0AHa+1BW2U
-	 cfZZMNhc4qjiEyM6P/i8y2pCt+wqR5/ad31RMf4eGsLXJc5QOoVjQDk7XEOU23B2Fw8dk
-	 aUFD/U5nlpIszvscGCWncC+B0voA2ddRIDHLpElnz6QRl1VbDL9WL6W1hHJk59LIAzWZa
-	 i81Yk+nEbzPlhUVh3KzcEM6u/OpDJGCUYV7nFwgMug34wcgkLny/Uv/QE4J1TI6CqvA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795695942;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=3wOnEFtR2BvaWD5aTM6QC7QGxUmtIiOljLpZRC0G0Pw=;
+	b=HwGli1E3ZKTtlElWHqHv8HJv3qKOBEtRTTTKIFH+xDURcqsOU7TwXr/mNSuUd3PKEN0L
+	 3KI/ja1Rb++nFjqOM8kRrsOtaxl7JpTYzVHITcQxjxcyo2cZ1jfvzPymR0fzXTl3sqUTT
+	 B16hnchXec2cDdcV1PgLDecZVK7VKF9GailfwHht3VRvsrV+166nlgKwEnaNOKe7A2+LK
+	 LM+cDFsWKk/U/cl4D/mStI0+HflnWtc7dmSeJ0rD8eLBudl7nlTN35JOavFHrsPoEjAf5
+	 cFfobhI9lyXTz6FDYDnqAZMPuIIvm4fIvQvwWjWmzso3EC8bYNZEKHF4LkLar9ib2bg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NKZKjXt6;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=BhohUmQE;
+	arc=none smtp.remote-ip=220.197.31.2
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE029606A321
-	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 08:54:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E82D6606A31C
+	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 12:25:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E82D6606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NKZKjXt6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D50A1F000C6
-	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 08:54:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795683295;
-	bh=XD2aXTSUuiCiLHpGAugxfZVXZCiLEmjgR9QKZY9m6mI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=NKZKjXt60ggmjgkQWJs7L/z9sR6LDbN6c5x8VpKkLZDQE53ha1ofDe/J6yl0UZS32
-	 qzJaM4+wzGcmjm4PZRwDqFWYQD3EKl45jX2orGnelqnE8eYqfoHH7dytYIpYBkndMJ
-	 12B/SyZJnYFxj5CVxNehviesZLrza16sIOOMpM7lxscw0ntUIVaH/GFRgpnbQ9JlNQ
-	 V3VoRoKZ03LBCJjWduez4ImuY8wxZu/j/RF8Ot8LbprOmcOgzcnyItyBoN6DfJ5jpw
-	 7Ufd0tfHZr7iRU1FmGH6YOTfnUaeGK4YCMlOQVoRoYobzTHkSGmeu7IAfFqi8J/fhR
-	 ZIochXIzrnusQ==
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c505b2e1cb9so1231114166b.2
-        for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 00:54:55 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErFW9dz2YCxuukyz3oXMLQTb2cDJQNSnAXCGmV9Uxj2ZfDcQv0OrcPTFNE3Pkifdzxttin+VvA==@lists.linux.dev
-X-Gm-Message-State: APuU4Z8mqYZonOfQTKvAiHO7nhhvx01zzmv9v7PiLUgI2z9RH02WXLzY
-	bXMG4Y9AvHlvFcDZeuyjps5Iks7VOZDvZqS5lSayyiZFG2npVrWT2oBn8Bao6uYMPvsN1yuvRLv
-	dqNK8XHRHhQZN3/Cbars678Z+rRApDhk=
-X-Received: by 2002:a17:906:c102:b0:c51:373e:d6a9 with SMTP id
- a640c23a62f3a-c513aace989mr1575933166b.15.1795683293890; Thu, 26 Nov 2026
- 00:54:53 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=BhohUmQE
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=3w
+	OnEFtR2BvaWD5aTM6QC7QGxUmtIiOljLpZRC0G0Pw=; b=BhohUmQEUGklsLlvCV
+	QnPe5iaZ0EAA9jlQ6Valq0RttKSOZygxsCvTADjkCnZIJ1BYze21dhhNxRMYwmyD
+	ay+WEtcv8ECFwFWJeZvWxcS7qGkevHukWYohJ3Sm7wUjlghLmaI7I1Y0tKRMLXJj
+	p2jHAnxkVr/OK6wn17nWG5I6g=
+Received: from ubuntu (unknown [])
+	by gzsmtp2 (Coremail) with SMTP id PSgvCgCnJhILJQhro1cxHw--.5768S2;
+	Thu, 26 Nov 2026 20:25:04 +0800 (CST)
+From: Shaopei Zhu <shaopei_1012@163.com>
+To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	exfat@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org,
+	linux-api@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Matthew Wilcox <willy@infradead.org>
+Subject: Re: [PATCH v7] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
+Date: Thu, 26 Nov 2026 20:24:41 +0800
+Message-ID: <20261126122441.912162-1-shaopei_1012@163.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <CAKYAXd_Xc0XbehABVUOncbcDYxvfFg037+FxDivkM0NZMg29qQ@mail.gmail.com>
+References: <20261124230746.850528-1-shaopei_1012@163.com> <CAKYAXd_ap120uprmarov-GuO0fb1eXEgw-U8G08L1xRJ9bv18A@mail.gmail.com> <20261126075247.850895-1-shaopei_1012@163.com> <CAKYAXd_Xc0XbehABVUOncbcDYxvfFg037+FxDivkM0NZMg29qQ@mail.gmail.com>
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
 List-Post: <mailto:exfat@lists.linux.dev>
@@ -59,104 +68,53 @@ List-Unsubscribe: <mailto:exfat+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261124230746.850528-1-shaopei_1012@163.com> <CAKYAXd_ap120uprmarov-GuO0fb1eXEgw-U8G08L1xRJ9bv18A@mail.gmail.com>
- <20261126075247.850895-1-shaopei_1012@163.com>
-In-Reply-To: <20261126075247.850895-1-shaopei_1012@163.com>
-From: Namjae Jeon <linkinjeon@kernel.org>
-Date: Thu, 26 Nov 2026 17:54:42 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_Xc0XbehABVUOncbcDYxvfFg037+FxDivkM0NZMg29qQ@mail.gmail.com>
-X-Gm-Features: Aa3M54rKxK2yysLAQ3KYIgf-px-qmHSK27mnhAx20UoLmih8jMhUz2_ENxHtKqY
-Message-ID: <CAKYAXd_Xc0XbehABVUOncbcDYxvfFg037+FxDivkM0NZMg29qQ@mail.gmail.com>
-Subject: Re: [PATCH v7] exfat: add EXFAT_IOC_COMBINE to append a file's
- clusters to another
-To: Shaopei Zhu <shaopei_1012@163.com>
-Cc: Sungjong Seo <sj1557.seo@samsung.com>, Yuezhang Mo <yuezhang.mo@sony.com>, exfat@lists.linux.dev, 
-	linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Matthew Wilcox <willy@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PSgvCgCnJhILJQhro1cxHw--.5768S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxJryDJr4fZr1rtF48GrWDCFg_yoW8uFW8p3
+	yfGr1DKr1DJ3sIgwn7XF4UXa4Svr4Syr45AwnxJ343uws8Wr1xKr13Kay7Xrn8Gr4vqFWj
+	qr4j93yDG3s8AFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07USQ6JUUUUU=
+X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6QAuvGsIJSDm0wAA3o
 
-On Thu, Nov 26, 2026 at 4:53=E2=80=AFPM Shaopei Zhu <shaopei_1012@163.com> =
-wrote:
->
-> On Wed, Nov 25, 2026 at 11:18 AM Namjae Jeon <linkinjeon@kernel.org> wrot=
-e:
-> > Is there a specific device or product expected to use this feature, or
-> > is it being added as a potentially useful capability without a
-> > concrete use case? If there is a target device or workflow, could you
-> > share some details?
->
-> Hi Namjae,
-Hi Shaopei,
+On Thu, Nov 26, 2026 at 5:54 PM Namjae Jeon <linkinjeon@kernel.org> wrote:
+> Unlinking in the ioctl does not make the operation atomic against
+> power loss. It only avoids the interval between a successful ioctl and
+> a later userspace unlink. I don't think that is a reason for the
+> kernel to perform the unlink. exfatcombine already has the source path
+> and opens the file to pass its file descriptor to the ioctl. It can
+> unlink the source file after the ioctl succeeds and report an error if
+> that fails. The ioctl should only append the source file's cluster
+> chain to the destination file. Callers must prevent concurrent renames
+> or replacements if they need the pathname to continue referring to the
+> same file.
 
->
-> Thanks for the review.  Yes, it is going to be used in camera products
-> that record to exFAT SD cards.  The open source user is exfatcombine,
-> posted for exfatprogs [1], and a test for fstests (exfat/002) is posted
-> as well.
->
-> The workflow: cameras and dashcams keep motion or position data with
-> the video, e.g. gyroscope and accelerometer samples for stabilization,
-> or GPS.
->
-> The products on the market keep that data in one of three ways:
->
-> - as a timed metadata track inside the MP4, e.g. GoPro's GPMF, muxed
->   while recording, so that the samples are interleaved with the video
->   in the mdat box and indexed in the moov box;
-> - as a separate sidecar file next to the video, e.g. the GPS logs of
->   dashcams;
-> - as a trailer appended after the MP4 boxes when recording stops,
->   which players ignore and stabilization tools read.
->
-> A sidecar file is lost in practice: users copy, share or import only
-> the video file, and matching the two by name breaks once either is
-> renamed or moved.  A track needs the muxer to take the samples in real
-> time along with the video.  Where the sensor data comes from another
-> writer, at a few hundred samples per second, it cannot go into the file
-> the muxer is writing, so it is written to a separate file in the same
-> directory during recording and appended as a trailer when recording
-> stops.
->
-> That last step is what this ioctl is for.  Today the sensor file is
-> copied into the video file, up to tens of MiB per recording, while the
-> user waits for the camera to be ready again, with flash wear and free
-> space needed for the copy.  With this ioctl its clusters are appended
-> to the video file instead, and the sensor file is removed.
-Okay.
+Hi Namjae,
 
->
-> > I suggest changing EXFAT_IOC_COMBINE to transfer only the source's
-> > cluster chain to the destination, leaving the source linked as an
-> > empty file. Userspace can unlink it afterward if desired.
->
-> The sensor file is only a temporary part of the recording.  With the
-> unlink in the same call, a power loss, e.g. the battery being pulled
-> right after recording stops, leaves one of the two states the
-> recording application already handles: not combined yet, or combined.
-> With the unlink in user space there is a third one, the combined video
-> next to an empty sensor file, which looks like the first one unless
-> every application also checks the size of the file.  It would be easy
-> to append the sensor data a second time, or to leave an empty file on
-> a card that users read directly.
->
-> Doing it in the same call also refuses the whole call before anything
-> is changed if the source may not be removed, instead of leaving an
-> emptied file that cannot be deleted, and it removes the file that was
-> passed in, not whatever its name refers to by the time user space gets
-> to unlink it.  The unlink goes through start_removing_dentry(),
-> security_path_unlink() and vfs_unlink(), so it gets the same checks as
-> unlink(2).
->
-> Does this address your concern?
-Unlinking in the ioctl does not make the operation atomic against
-power loss. It only avoids the interval between a successful ioctl and
-a later userspace unlink. I don't think that is a reason for the
-kernel to perform the unlink. exfatcombine already has the source path
-and opens the file to pass its file descriptor to the ioctl. It can
-unlink the source file after the ioctl succeeds and report an error if
-that fails. The ioctl should only append the source file's cluster
-chain to the destination file. Callers must prevent concurrent renames
-or replacements if they need the pathname to continue referring to the
-same file.
+Thank you, that is a fair point and a valuable suggestion.  I will
+rework the interface as you suggest in the next version.
+
+I went through it again.  You are right that the unlink does not make
+the operation atomic: a power loss in the middle can still leave both
+entries referencing the clusters until fsck.exfat has run, so it only
+removed the interval after the ioctl.  The state user space has to
+handle instead, an empty source next to a destination that already
+holds its data, is harmless and easy to recognize.  I also looked at
+the existing interfaces that move or share data between files,
+FICLONERANGE, copy_file_range(), F2FS_IOC_MOVE_RANGE, EXT4_IOC_MOVE_EXT
+and XFS_IOC_EXCHANGE_RANGE, and none of them removes the source; that
+is left to the caller, which already has the path and the permission
+checks of unlink(2).
+
+So in v8 the ioctl only appends the cluster chain of the source and
+leaves it as an empty file, written to disk after the destination.
+The unlink code in the kernel goes away, and with it the bind mount,
+dead parent and failed-unlink handling it needed.  exfatcombine
+unlinks the source after the ioctl succeeds and reports an error if
+that fails, and the uapi header documents that the caller unlinks the
+source and has to prevent concurrent renames if it relies on the name.
+The fstests case and the exfatprogs PR will be updated to match.
+
+Thanks again for the review.
+
+Shaopei
+
