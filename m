@@ -1,47 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.2
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795723688;
-	b=i0HNMS18nII8oQKmMRLrmEvQaYuL1p861iId/RENfloJK7v2BhA1fPKM4i4VATphN2WQ
-	 /j4NBJ+ou90agxEqpsTl3ieUSve2bVpz1oKTFaX1HIxJXYkeN7BhYO9re5PdpAHDKdhqs
-	 paWyUl+ow0RKgWdX3XcYbimYGUjQJnRpREjU6tbkeMg5FT60jFeSrs4gmk9eUdIVVXJQD
-	 sroFeMEywgq/6/PvOnUJA4dETLi5QZDOhrQadzMp9PdU/yDWunQ9Owlfze1uLF45v4kSZ
-	 DbgeCNkDXNzi3xP20GdmgtAAql9RVOiAL4pH1JoUTdIXD90PnJBf4gPt0XUPBcZnf5g==
+	t=1795736977;
+	b=XI0WjAJCUkoeHABO8m9RjFX2HOyoDjgECFJF/BnQ9SbnD9ONpQ7i5TLxfYnlm2x30X3B
+	 52mWqUfBUJydb81A2HjHM37GH0/j1rOx+5I21mmrhLNgaPPG8DMf6apt939DbJ1DFWjBc
+	 IKUZGG8VBfpIECMSOMWVORajH7EhXqoHqgwJLmQUptZINSaHpkoCdIITND7wcyBOW0h+C
+	 iqa5Z3k4afgSkgjkTWdWJnX8CIUnBCrHtJT2bJdlwMKlC0b2rX4X2EoBnZ2uM8aa1v9Sr
+	 OrpjaBmVHLOULqZxAIu6GarU/TXPrbtQN4ux4/9ELgJWkwCwfULok4DcjGv8BPgi3wQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795723688;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795736977;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
 	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=a/VFJIs5JkgTdi2/O3EhKQtXRXCoFYvWToxQM7ZajQw=;
-	b=qvZSjjNFna7IFnIkXqTULYzEowp8lyZM5cfHL1okP5AS1j1/8HrU9L0uOUa4gf1fWIop
-	 GZPumLm+m9syVARNm91JnkuRKo7sKLOLVhAhs665ju/SHw10Bj79I2UJhxJ0EydiXPMso
-	 eTI1dVt+fMqX85lay08k1QkpdXtKPyJ3jlmFBJkP/6Zxgis/u94qtxQyifeT/KxrRRsZr
-	 O+3WvjLxxhflQJDlhyYUhBHcf/57Ima3cIkkc/J+nVSBdzLlHpeCfKtKs3IVXzvM8Mhfk
-	 Oe8tyCXMO+MR/jAJUk5X29ow3XqPc284Ag0ig327uYpmubfwkNtpHEAfJpZNwarnzfg==
+	bh=s0cHhkhVkcyMmHeklem0mV/oIOZAkpaU1gLlvGn/cN0=;
+	b=iWq8k0G3yTPM8N5+bhKHeK8uKfcRJL1ZQnN3MLgiHA/86Q+93PKom0rxaXirSI1ROD4f
+	 uubuwQDvdZlHmDNmOXxmsoXZ1f/L+2Ymrk3fMvCOJ8klWQydMI+fugvCXzyjyCbVtC+cl
+	 JUS9wYdf6OZ7/9hbA3QOtbmeUm1/nubho+6ZsmOmjBdwiw62fc49j5f/C9TJHzWJ7JbEk
+	 qoa8QUEwHSYKj7RCh6ySVvX+rb7qD7x2i5BjVuyHfQ8uEtLOH8U195RAtKh5aHfCH7z//
+	 kdnMu+a/EJxGop1Op4H4YbBZrCRvx3pfRpZV5Dg8l8Xd60ivAs1NA1QMzAPV2+wrtxQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=163.com;
 	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=AbZlmHSs;
-	arc=none smtp.remote-ip=117.135.210.2
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=G1SdJ2f9;
+	arc=none smtp.remote-ip=220.197.31.4
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5B4F606A321
-	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 20:08:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D5B4F606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69EDA606A31C
+	for <exfat@lists.linux.dev>; Thu, 26 Nov 2026 23:49:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69EDA606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=AbZlmHSs
+	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=G1SdJ2f9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=a/
-	VFJIs5JkgTdi2/O3EhKQtXRXCoFYvWToxQM7ZajQw=; b=AbZlmHSseOCUUYdVA7
-	/PbL8O9kwKJVJTw/1iuBn7ccmT+G7vCeJiTba3llY/Tj/CR4tC3mqVIjynjEpJxf
-	kNth2Lrlqao7wOL2DcJ2MakXDbWiJWGLIRSC+Y+akGmEUWaR2iaZMdX7PJw8CF0W
-	wkajMtXUf/sQWW1SkeXiz5k50=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=s0
+	cHhkhVkcyMmHeklem0mV/oIOZAkpaU1gLlvGn/cN0=; b=G1SdJ2f9T8cU6EYrl+
+	cBvX4ahFw/t14lVK10wPWVkHD+LXD6pGrEjAZIUosWWqi9q1xSnntsNjCIX3GSJh
+	CDdTFBl1mXZ2MrSPf9/AQ0S4OWzh2TCl+DF1LD3g9ZlHs7tFBOk1EQndNXbFS2ln
+	zyzum9+EOmr0Tx5zl1/gyphUY=
 Received: from ubuntu (unknown [])
-	by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id _____wD3H4h3kQhrbhVfKg--.12298S2;
-	Fri, 27 Nov 2026 04:07:28 +0800 (CST)
+	by gzga-smtp-mtada-g0-1 (Coremail) with SMTP id _____wD3fxVgxQhrMs_9KQ--.57815S2;
+	Fri, 27 Nov 2026 07:48:59 +0800 (CST)
 From: Shaopei Zhu <shaopei_1012@163.com>
 To: Namjae Jeon <linkinjeon@kernel.org>,
 	Sungjong Seo <sj1557.seo@samsung.com>
@@ -52,9 +52,9 @@ Cc: Yuezhang Mo <yuezhang.mo@sony.com>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Matthew Wilcox <willy@infradead.org>
-Subject: [PATCH v10] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
-Date: Fri, 27 Nov 2026 04:07:17 +0800
-Message-ID: <20261126200717.939328-1-shaopei_1012@163.com>
+Subject: [PATCH v11] exfat: add EXFAT_IOC_COMBINE to append a file's clusters to another
+Date: Fri, 27 Nov 2026 07:48:46 +0800
+Message-ID: <20261126234846.940461-1-shaopei_1012@163.com>
 X-Mailer: git-send-email 2.53.0
 X-Mailing-List: exfat@lists.linux.dev
 List-Id: <exfat.lists.linux.dev>
@@ -66,12 +66,12 @@ List-Owner: <mailto:exfat+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wD3H4h3kQhrbhVfKg--.12298S2
-X-Coremail-Antispam: 1Uf129KBjvAXoWfZr1Dtr15tF4kGr4rWr1DGFg_yoW5uF43to
-	WfZws7Xw1rtFnxtrW8GF47Jry5XaykuF1fJF4YqF4qvF18t34UWa1Fy345Za1Iqw1vkrZ5
-	X3yIq3yfJFWayrn3n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxU4s2-UUUUU
-X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6QFh72sIkYEb7wAA3h
+X-CM-TRANSID:_____wD3fxVgxQhrMs_9KQ--.57815S2
+X-Coremail-Antispam: 1Uf129KBjvAXoWfZr1Dtr15tF4kJw1DtrW5Jrb_yoW5tF13Jo
+	WfZws3Xw1rtrnxtrW8Gr17Gry5XaykuF1fJr4YgF4qvF18t34UWa1Fyw15Za1Sqw1vkrZ5
+	X3yIq3y3JFWaqrn3n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxU7L0eDUUUU
+X-CM-SenderInfo: pvkd01phlbiiirs6il2tof0z/xtbC6g5p92sIxW7M9AAA3K
 
 Cameras recording to exFAT SD cards often write auxiliary data, such as
 GPS, motion or per-frame exposure data, to separate files next to the
@@ -125,24 +125,30 @@ documented in the uapi header.  The gap lies in the last cluster, which
 is already allocated to the destination, so it takes no extra space.
 
 exFAT has no journal, so the data and the FAT, then the destination
-entry, then the source entry as an empty file are written and flushed
-to the device in that order, as recommended by section 8.1 of the exFAT
+entry, then the source entry as an empty file are written and flushed to
+the device in that order, as recommended by section 8.1 of the exFAT
 specification; the allocation bitmap is not touched.  A crash at any
 point leaves all data reachable from at least one entry.  In the worst
 case both entries share the appended clusters; fsck.exfat keeps them in
 the file it checks first and truncates the other one, so either the
-combine has completed or the source still holds its data.  On a volume
-that was not cleanly unmounted, the call fails with -EUCLEAN until
-fsck.exfat has run, so that it never works on clusters that two files
-may already share or that may already be linked.  Once the volume is in
-an emergency state, nothing more is written, which leaves what a crash
-at that point would.  If the call fails before the clusters are moved,
-the padding is removed again; what was already written back is kept
-initialized, as exfat_extend_valid_size() does on failure.  Write back
-errors are checked through the errseq of the mappings, as their error
-flags may be taken by a concurrent fsync().  s_lock is only held while
-updating the FAT and the entries, not while waiting for the device, so
-that writers to other files on the volume are not stalled.
+combine has completed or the source still holds its data.  A crash
+between the first two writes leaves the chain of the destination linked
+to the clusters of the source while its size does not cover them, which
+fsck.exfat cuts off again.  In both cases neither file may be truncated
+or removed before fsck.exfat has run, as freeing the clusters of one
+would free clusters the other still uses; the volume is marked dirty
+before the FAT is changed.  On a volume that was not cleanly unmounted,
+the call fails with -EUCLEAN until fsck.exfat has run, so that it never
+works on clusters that two files may already share or that may already
+be linked.  Once the volume is in an emergency state, nothing more is
+written, which leaves what a crash at that point would.  If the call
+fails before the clusters are moved, the padding is removed again; what
+was already written back is kept initialized, as
+exfat_extend_valid_size() does on failure.  Write back errors are
+checked through the errseq of the mappings, as their error flags may be
+taken by a concurrent fsync().  s_lock is only held while updating the
+FAT and the entries, not while waiting for the device, so that writers
+to other files on the volume are not stalled.
 
 No file data is copied, so the cost depends on the number of clusters
 (when a FAT chain has to be built for a contiguous file) rather than on
@@ -170,12 +176,50 @@ Signed-off-by: Shaopei Zhu <shaopei_1012@163.com>
 ---
 
 Notes:
-    Changes in v10:
+    Changes in v11, comments and commit message only, no functional change:
     
-    No change to the code or the commit message since v9.  The v9 changelog
-    did not say what the patch applies to, and Sashiko reviewed it on
-    mainline, where it does not build [1].  This version states the base
-    again and carries a base-commit.
+    - Document that after a crash neither file, not only the source, may be
+      truncated or removed before fsck.exfat has run, and describe the
+      state a crash between the FAT update and the destination entry
+      leaves, in the uapi header, the comment of __exfat_combine() and the
+      commit message.
+    
+    This follows the review of v10 by Sashiko [1], which pointed out that
+    the chain of the destination can be left linked to the clusters of the
+    source.  I reproduced it with images edited offline (4 KiB clusters,
+    destination with a FAT chain of 3 clusters, source of 3 clusters,
+    volume dirty), mounted without running fsck, doing one operation and
+    then writing a new file:
+    
+      state on disk     operation        result
+      A                 rm dst           src loses its clusters
+      A                 truncate dst     src silently corrupted
+      A                 append to dst    both files intact
+      A                 rm src           dst intact, but its chain runs
+                                         into the new file
+      B                 rm dst           src corrupted
+      B                 rm src           dst silently corrupted
+      A, contiguous dst rm dst           src intact
+    
+      A: the FAT links the destination to the source, both entries are
+         still the old ones (crash between the first two writes)
+      B: both entries own the clusters (crash before the source entry
+         is written)
+    
+    fsck.exfat run before the operation repairs both states without losing
+    data, and the call itself fails with -EUCLEAN on a dirty volume, so the
+    rule is the one that already applies to a dirty exFAT volume; v11 only
+    states it for both files.
+    
+    The cause is that __exfat_free_cluster() follows a FAT chain to its end
+    rather than for the number of clusters of the file.  If you would
+    rather have the kernel cope with the first state than rely on fsck, I
+    can add a patch that makes it stop after the size of the chain; please
+    let me know.
+    
+    Sashiko's other comment, about a source opened with O_APPEND, is
+    unchanged from v10: not addressed, and I can refuse such a source if
+    you prefer that.
     
     This applies to linux-next (next-20261118).  It uses
     exfat_emergency_state(), which comes with "exfat: don't set SB_RDONLY
@@ -183,36 +227,13 @@ Notes:
     not build on mainline or on the exfat dev branch until that is merged
     there.  I can rebase it onto exfat dev then.
     
-    Of the comments Sashiko made on v9, those about exfat_truncate()
-    skipping the emergency state check, an extending direct write being
-    seen half done, and exfat_extend_valid_size() truncating below the old
-    size describe the mainline code and do not hold on linux-next.  Its
-    comment that a source opened with O_APPEND can be emptied, and is only
-    verified for writing, is not addressed in this version; I can refuse
-    such a source if you prefer that.
+    All tests reported for v8 apply unchanged.  v10 was a resend of v9 with
+    the base stated; v9 only changed the commit message (use case, the gap
+    taking no space, measurements).
     
-    Changes in v9, commit message only, following the discussion of v7 [2]:
+    [1] https://sashiko.dev/#/patchset/20261126200717.939328-1-shaopei_1012%40163.com
     
-    - Describe the use case more precisely: what data is merged and why,
-      how large it gets, and that a long copy is also a window for the card
-      to be pulled or the power to be lost.
-    - Note that the zero-filled gap lies in the last cluster, which is
-      already allocated to the destination, so it uses no space.
-    - Add measurements of the cost against copying.
-    
-    The measurements were taken with this patch on linux-next 20261118
-    (arm64 VM, 4 vCPUs, 4 GiB), on a disk image throttled with cgroup
-    io.max to 90 MiB/s read and 30 MiB/s write, 128 KiB clusters.  The
-    destination is 300 MiB plus 4321 bytes, so the ioctl also zero-fills
-    it.  Each method is timed until the result is on disk, including the
-    unlink of the source, from cold caches; median of 3 runs.  The ioctl
-    took 11.8 to 15.6 ms in all 12 runs, from 5 MiB to 1 GiB.
-    
-    All tests reported for v8 apply unchanged.
-    
-    [1] https://sashiko.dev/#/patchset/20261126191955.935845-1-shaopei_1012%40163.com
-    [2] https://lore.kernel.org/all/dcd27d38-60a2-4c1a-81ff-4a82e99520ab@dev.snart.me/
-    
+    v10: https://lore.kernel.org/all/20261126200717.939328-1-shaopei_1012@163.com/
     v9: https://lore.kernel.org/all/20261126191955.935845-1-shaopei_1012@163.com/
     v8: https://lore.kernel.org/all/20261126125216.927053-1-shaopei_1012@163.com/
     v7: https://lore.kernel.org/all/20261124230746.850528-1-shaopei_1012@163.com/
@@ -224,9 +245,9 @@ Notes:
     v1: https://lore.kernel.org/all/20261121174315.500249-1-shaopei_1012@163.com/
 
  .../userspace-api/ioctl/ioctl-number.rst      |   1 +
- fs/exfat/file.c                               | 614 ++++++++++++++++++
- include/uapi/linux/exfat.h                    |  45 ++
- 3 files changed, 660 insertions(+)
+ fs/exfat/file.c                               | 616 ++++++++++++++++++
+ include/uapi/linux/exfat.h                    |  47 ++
+ 3 files changed, 664 insertions(+)
 
 diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
 index dbe462040..e9b4c13d8 100644
@@ -241,7 +262,7 @@ index dbe462040..e9b4c13d8 100644
  't'   00-7F  linux/ppp-ioctl.h
  't'   80-8F  linux/isdn_ppp.h
 diff --git a/fs/exfat/file.c b/fs/exfat/file.c
-index 7ca26e3f1..7a807bf85 100644
+index 7ca26e3f1..855593d61 100644
 --- a/fs/exfat/file.c
 +++ b/fs/exfat/file.c
 @@ -13,6 +13,7 @@
@@ -252,7 +273,7 @@ index 7ca26e3f1..7a807bf85 100644
  #include <linux/fileattr.h>
  #include <linux/iomap.h>
  #include <linux/pagemap.h>
-@@ -710,6 +711,617 @@ static int exfat_ioctl_set_volume_label(struct super_block *sb,
+@@ -710,6 +711,619 @@ static int exfat_ioctl_set_volume_label(struct super_block *sb,
  	return exfat_write_volume_label(sb, &uniname);
  }
  
@@ -353,7 +374,9 @@ index 7ca26e3f1..7a807bf85 100644
 + * crash at any point leaves all data reachable:
 + *
 + * 1. the data of both files and the FAT, so that the new chain of @dst
-+ *    is complete before any entry refers to it;
++ *    is complete before any entry refers to it; until step 2, the chain
++ *    of @dst runs into the clusters of @src beyond its size, which
++ *    fsck.exfat cuts off again;
 + * 2. the entry of @dst, after which both entries reference the clusters
 + *    of @src; fsck.exfat keeps them in whichever file it checks first and
 + *    truncates the other one;
@@ -870,7 +893,7 @@ index 7ca26e3f1..7a807bf85 100644
  long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
  {
  	struct inode *inode = file_inode(filp);
-@@ -722,6 +1334,8 @@ long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+@@ -722,6 +1336,8 @@ long exfat_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
  		return exfat_ioctl_set_attributes(filp, user_attr);
  	case EXFAT_IOC_SHUTDOWN:
  		return exfat_ioctl_shutdown(inode->i_sb, arg);
@@ -880,7 +903,7 @@ index 7ca26e3f1..7a807bf85 100644
  		return exfat_ioctl_fitrim(inode, arg);
  	case FS_IOC_GETFSLABEL:
 diff --git a/include/uapi/linux/exfat.h b/include/uapi/linux/exfat.h
-index 46d95b16f..40e21c622 100644
+index 46d95b16f..e5c19ad6d 100644
 --- a/include/uapi/linux/exfat.h
 +++ b/include/uapi/linux/exfat.h
 @@ -13,6 +13,7 @@
@@ -891,7 +914,7 @@ index 46d95b16f..40e21c622 100644
  
  /*
   * Flags used by EXFAT_IOC_SHUTDOWN
-@@ -22,4 +23,48 @@
+@@ -22,4 +23,50 @@
  #define EXFAT_GOING_DOWN_FULLSYNC	0x1     /* going down with full sync*/
  #define EXFAT_GOING_DOWN_NOSYNC         0x2     /* going down */
  
@@ -927,12 +950,14 @@ index 46d95b16f..40e21c622 100644
 + * call leaves both files unchanged.
 + *
 + * A crash during the call may leave both files referencing the appended
-+ * clusters.  fsck.exfat resolves this without losing data, but the source
-+ * must not be truncated or removed before fsck has run.  On a volume that
-+ * was not cleanly unmounted, the call fails with EUCLEAN until fsck.exfat
-+ * has run.  After a crash, an empty source next to a destination that
-+ * already contains its data means that the call completed and only the
-+ * unlink is left.
++ * clusters, or the cluster chain of the destination linked to them while
++ * its size does not cover them yet.  fsck.exfat resolves this without
++ * losing data, but neither file may be truncated or removed before fsck
++ * has run: that can free clusters the other file still uses.  On a volume
++ * that was not cleanly unmounted, the call fails with EUCLEAN until
++ * fsck.exfat has run.  After a crash, an empty source next to a
++ * destination that already contains its data means that the call
++ * completed and only the unlink is left.
 + */
 +struct exfat_combine_args {
 +	__s32 src_fd;	/* file whose clusters are moved */
